@@ -64,13 +64,13 @@ v_{\mathbf e} = \sum_i^n{(v_{\mathbf a})_i {\mathbf a}_{\mathbf e}^{*i}}
 
 where ${\mathbf a}\_{\mathbf e}^{*i}$ is the $i^{th}$ column vector of ${\mathbf a}\_{\mathbf e}$.
 
-In effect, we are multiplying each coordinate in $v_{\mathbf a}$ with the corresponding representation of its component in ${\mathbf a}_{\mathbf e}$, and taking the sum of all such products.
+In effect, we are summing over the vectors representing ${\mathbf a}$ with respect to ${\mathbf e}$, each scaled by the corresponding component of $v_{\mathbf a}$.
 
 Thereby we construct the representation of $v$ as $v_{\mathbf e}$ from:
 - its representation as $v_{\mathbf a}$
 - and the representation of ${\mathbf a}$ as ${\mathbf a}_{\mathbf e}$
 
-We can also easily obtain the following, ommitting the ${\mathbf e}$ subscript from now on for brevity, and adopting an enhanced notation to conform with existing standards:
+We can also easily obtain the following, from now on ommitting the ${\mathbf e}$ subscript for brevity, and adopting an enhanced notation to conform with existing standards:
 
 ```math
 v_{\mathbf a} = A^{-1}v \\
@@ -81,7 +81,7 @@ A_{\mathbf a}^{*i} = A^{-1}A^{*i}
 ```math
 A_{\mathbf a} = I
 ```
-where $A = {\mathbf a}\_{\mathbf e}$ and $A_{\mathbf a} = {\mathbf a}\_{\mathbf a}$
+where $A$ by itself is taken to be a shorthand for ${\mathbf a}\_{\mathbf e}$, whereas in $A_{\mathbf s}$ for any ${\mathbf s}$ $A$ is taken to be ${\mathbf a}$.
 
 This proves the aforementioned.
 
