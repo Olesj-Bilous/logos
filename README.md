@@ -16,9 +16,9 @@ A vector is a geometric entity on the basis of which other vectors may be define
 
 A column vector is merely one such definition, which has no inherent meaning unless it is known which vectors form its basis.
 
-# Coordinate transformations
+# Linear transformations
 
-## Vector coordinate transformations
+## Vector transformations
 
 Generally speaking, it is tacitly assumed that any column vector refers to a well-known unit basis, unless otherwise specified. That's why we see expressions of the kind:
 
@@ -50,9 +50,13 @@ We can interpret ${\mathbf a}_{\mathbf e}$ as the column vectors *of* an alterna
 
 In other words, ${\mathbf a}_{\mathbf e}$ is the way the vectors of the alternative basis look to us, from our unit basis.
 
-From the perspective of that alternative basis, however, their basis vectors look to them the way the unit basis looks to us from our perspective (${\mathbf a}\_{\mathbf a} = {\mathbf e}\_{\mathbf e}$, as we shall show later, where ${\mathbf e}_{\mathbf e} = I$ is the identity matrix).
+From that alternative basis, however, their basis vectors look to them the way the unit basis looks to us (${\mathbf a}\_{\mathbf a} = {\mathbf e}\_{\mathbf e}$, as we shall show later, where ${\mathbf e}_{\mathbf e} = I$ is the identity matrix).
 
-$v_{\mathbf a}$ is the way $v$ looks from the perspective of basis ${\mathbf a}$, whereas $v_{\mathbf e}$ is the way it looks to us. 
+$v_{\mathbf a}$ is the way $v$ looks from basis ${\mathbf a}$, whereas $v_{\mathbf e}$ is the way it looks to us.
+
+We derive the way $v$ looks to us, from:
+- the way the vectors of basis $\mathbf a$ look to us
+- the way $v$ looks from basis $\mathbf a$.
 
 We could also have written our expression as follows:
 
@@ -60,9 +64,7 @@ We could also have written our expression as follows:
 v_{\mathbf e} = \sum_i^n{v_{{\mathbf a}, i}{\mathbf a}_{{\mathbf e}, i}}
 ```
 
-In effect, we are summing over the vectors representing ${\mathbf a}$ with respect to ${\mathbf e}$, each scaled by the corresponding component of $v_{\mathbf a}$.
-
-We derive the way $v$ looks to us, from the way the vectors of the basis $\mathbf a$ look to us, and the way $v$ looks from the basis $\mathbf a$.
+In effect, we are vector summing over the vectors representing ${\mathbf a}$ with respect to ${\mathbf e}$, each scaled by the corresponding component of $v_{\mathbf a}$ (this amounts to a linear combination of ${\mathbf a}$).
 
 This approach allows us to re-interpret the initial product formula in a more intuitive manner:
 
@@ -70,9 +72,9 @@ This approach allows us to re-interpret the initial product formula in a more in
 {\mathbf a}_{\mathbf e}v_{\mathbf e} = v'_{\mathbf e}
 ```
 
-We transform $v$ by substituting the unit basis for basis ${\mathbf a}$ when evaluating $v_{\mathbf e}$.
+We transform $v$ to $v'$ by substituting the unit basis $e$ for basis ${\mathbf a}$ when evaluating $v_{\mathbf e}$. We may consider $A$ as the transformation by substitution from $\mathbf e$ to $\mathbf a$.
 
-We can also easily obtain the following, adopting an enhanced notation where $v_M$ is taken to be $v_{f(M)}$, and $M\_N$ to be ${f(M)}\_{f(N)}$, with $f(M) = {\mathbf m}$ such that $M = {\mathbf m}_{\mathbf e}$ for any $M$, $N$, ommitting $I$ subscripts for brevity:
+Adopting an enhanced notation where $v_M$ is taken to be $v_{f(M)}$, and $M\_N$ to be ${f(M)}\_{f(N)}$, with $f(M) = {\mathbf m}$ such that $M = {\mathbf m}_{\mathbf e}$ for any $M$, $N$, ommitting $I$ subscripts for brevity, we can also easily obtain the following:
 
 ```math
 A v_A = v
@@ -81,7 +83,7 @@ A v_A = v
 v_A = A^{-1}v
 ```
 
-A consequence proves the aforementioned.
+for invertible matrices. A consequence proves the aforementioned.
 
 ```math
 A_A^{*i} = A^{-1}A^{*i}
@@ -89,6 +91,16 @@ A_A^{*i} = A^{-1}A^{*i}
 ```math
 A_A = I
 ```
+
+Taking advantage of the new notation, we can also refine our notion of $A$ as a transformation by substitution.
+
+```math
+Av = v' = v_{A^{-1}}
+```
+
+Clearly, substituting $\mathbf a$ for $\mathbf e$ is equivalent to coordinate transforming from $\mathbf e$ to ${\mathbf a}^{-1}$.
+
+How we interpret the $Av$ depends on the base we choose for its resultant column vector.
 
 ## Matrix transformations
 
@@ -98,15 +110,4 @@ We can take our scheme a step further:
 v_B = B^{-1}v = B^{-1}A v_A
 ```
 
-This allows us to transform vectors between arbitrary bases given their representations with respect to the unit base.
-
-Taking advantage of the new notation, we can also refine our notion of the matrix product as a transformation.
-
-```math
-Av = v_{A^{-1}}
-```
-```math
-BAv = Bv_{A^{-1}} = v_{A^{-1}B^{-1}}
-```
-
-Further abstracting, we may consider $A$ as the transformation from $\mathbf e$ to $\mathbf a$. On the other hand, $B$ transforms $A$ to a transformation from $\mathbf e$ to $\mathbf p$ where $BA = \mathbf p_e$
+This allows us to transform vectors between arbitrary bases given their representations with respect to the unit basis.
