@@ -72,7 +72,7 @@ This approach allows us to re-interpret the initial product formula in a more in
 {\mathbf a}_{\mathbf e}v_{\mathbf e} = v'_{\mathbf e}
 ```
 
-We transform $v$ to $v'$ by substituting the unit basis $e$ for basis ${\mathbf a}$ when evaluating $v_{\mathbf e}$. We may consider $A$ as the transformation by substitution from $\mathbf e$ to $\mathbf a$.
+We transform $v$ to $v'$ by substituting basis ${\mathbf a}$ for the unit basis $e$ when evaluating $v_{\mathbf e}$. We may consider $A$ as the transformation by substitution from $\mathbf e$ to $\mathbf a$.
 
 Adopting an enhanced notation where $v_M$ is taken to be $v_{f(M)}$, and $M\_N$ to be ${f(M)}\_{f(N)}$, with $f(M) = {\mathbf m}$ such that $M = {\mathbf m}_{\mathbf e}$ for any $M$, $N$, ommitting $I$ subscripts for brevity, we can also easily obtain the following:
 
@@ -98,9 +98,9 @@ Taking advantage of the new notation, we can also refine our notion of $A$ as a 
 Av = v' = v_{A^{-1}}
 ```
 
-Clearly, substituting $\mathbf a$ for $\mathbf e$ is equivalent to coordinate transforming from $\mathbf e$ to ${\mathbf a}^{-1}$.
+Clearly, substituting $\mathbf a$ for $\mathbf e$ is equivalent to coordinate transforming from $\mathbf e$ to ${\mathbf a}^{-1} = f(A^{-1})$.
 
-How we interpret the $Av$ depends on the base we choose for its resultant column vector.
+How we interpret $Av$ depends on the base we choose for its resultant column vector.
 
 ## Matrix transformations
 
