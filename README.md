@@ -4,23 +4,23 @@ Now I can see that it is simple and purposeful, and I believe I can share this i
 
 # The basis
 
-Whenever you are evaluating a *column* vector, you must always consider the *basis* in respect to which it *represents* a vector.
+Whenever we evaluate a *column* vector, we must always consider the *basis* in respect to which it *represents* a vector.
 
 We must also understand that a column vector is *not* an actual vector, in the strict sense! It is only the ordered set of *coordinates* of a vector with respect to a *specified* basis.
 
-A vector does *not* have any inherent coordinates. Depending on choice of basis, it will have different coordinates, yet it may also be the entity in regard to which coordinates are defined.
+A vector does *not* have any inherent coordinates. Depending on choice of basis, it will have different coordinates, yet it may also become an entity in respect to which a coordinate is defined.
 
 A vector does not change upon changing basis, only its coordinates do.
 
-A vector is a static geometric entity in terms of which other vectors may be defined.
+A vector is a geometric entity on the basis of which other vectors may be defined.
 
-A column vector is merely one such description of a single vector on the basis of multiple other vectors, which has no inherent meaning unless it is known which vectors form the basis of that description.
+A column vector is merely one such definition, which has no inherent meaning unless it is known which vectors form its basis.
 
 # Coordinate transformations
 
-## vector transformations
+## Vector coordinate transformations
 
-Generally speaking, it is assumed that any column vector refers to a well-known unit basis, unless otherwise specified. That's why we see expressions of the kind:
+Generally speaking, it is tacitly assumed that any column vector refers to a well-known unit basis, unless otherwise specified. That's why we see expressions of the kind:
 
 ```math
 Av = v'
@@ -32,9 +32,11 @@ which are taken to mean:
 {\mathbf a}_{{\mathbf e}}v_{{\mathbf e}} = v'_{{\mathbf e}}
 ```
 
-where ${\mathbf e}$ is taken to be the unit basis and $A$ is rewritten as a set of vectors ${\mathbf a}$ represented with respect to ${\mathbf e}$.
+where ${\mathbf e}$ is taken to be the unit basis, and $A$ is rewritten as an ordered set of vectors ${\mathbf a} = (a\_i)\_i$ represented with respect to ${\mathbf e}$: $A = {\mathbf a}\_{\mathbf e} = ( A^{*i} = a_{i, \mathbf e} )\_i$, where $A^{*i}$ is the $i^{th}$ column vector of $A$.
 
-However, the meaning of the formula above is not immediately evident. We are transforming a vector represented with respect to the unit basis into another vector within the same basis, yet how are we to motivate or interpret this?
+We denote by $v_{\mathbf s}$ the column vector consisting of the coordinates of vector $v$ with respect to any basis ${\mathbf s}$.
+
+However, the meaning of the product formula above is not immediately evident. We transform a vector with respect to an invariant basis, yet how are we to motivate or interpret the structure of this operation?
 
 An expression more closely related to the prior discussion would be the following:
 
@@ -44,50 +46,67 @@ An expression more closely related to the prior discussion would be the followin
 
 Here we can really appreciate the definition of matrix multiplication.
 
-We can interpret ${\mathbf a}_{\mathbf e}$ as the column vectors *of* the basis of an alternative coordinate system ${\mathbf a}$, *with respect to* the unit basis ${\mathbf e}$.
+We can interpret ${\mathbf a}_{\mathbf e}$ as the column vectors *of* an alternative basis ${\mathbf a}$, *with respect to* the unit basis ${\mathbf e}$.
 
-In other words, ${\mathbf a}_{\mathbf e}$ is the way the vectors of the alternative coordinate system look to us, from our unit basis.
+In other words, ${\mathbf a}_{\mathbf e}$ is the way the vectors of the alternative basis look to us, from our unit basis.
 
-From the perspective of that alternative coordinate system, however, their basis vectors look to them the way the unit basis looks to us from our perspective (${\mathbf a}\_{\mathbf a} = {\mathbf e}\_{\mathbf e}$, as we shall show later, where ${\mathbf e}_{\mathbf e} = I$ is the identity matrix).
+From the perspective of that alternative basis, however, their basis vectors look to them the way the unit basis looks to us from our perspective (${\mathbf a}\_{\mathbf a} = {\mathbf e}\_{\mathbf e}$, as we shall show later, where ${\mathbf e}_{\mathbf e} = I$ is the identity matrix).
 
-We denote by $v_{\mathbf a}$ the column vector consisting of the coordinates of a vector $v$ with respect to the alternative basis ${\mathbf a}$.
-
-That is to say, $v_{\mathbf a}$ is the way $v$ looks from the basis ${\mathbf a}$.
-
-For clarity, a distinction is made between the column vector $v_{\mathbf e}$ with regard to the unit basis, and the vector $v$ which has no inherent coordinates.
+$v_{\mathbf a}$ is the way $v$ looks from the perspective of basis ${\mathbf a}$, whereas $v_{\mathbf e}$ is the way it looks to us. 
 
 We could also have written our expression as follows:
 
 ```math
-v_{\mathbf e} = \sum_i^n{(v_{\mathbf a})_i {\mathbf a}_{\mathbf e}^{*i}}
+v_{\mathbf e} = \sum_i^n{v_{{\mathbf a}, i}{\mathbf a}_{{\mathbf e}, i}}
 ```
-
-where ${\mathbf a}\_{\mathbf e}^{*i}$ is the $i^{th}$ column vector of ${\mathbf a}\_{\mathbf e}$.
 
 In effect, we are summing over the vectors representing ${\mathbf a}$ with respect to ${\mathbf e}$, each scaled by the corresponding component of $v_{\mathbf a}$.
 
-Thereby we construct the representation of $v$ as $v_{\mathbf e}$ from:
-- its representation as $v_{\mathbf a}$
-- and the representation of ${\mathbf a}$ as ${\mathbf a}_{\mathbf e}$
+We derive the way $v$ looks to us, from the way the vectors of the basis $\mathbf a$ look to us, and the way $v$ looks from the basis $\mathbf a$.
 
-We can also easily obtain the following, from now on ommitting the ${\mathbf e}$ subscript for brevity, and adopting an enhanced notation to conform with existing standards:
+This approach allows us to re-interpret the initial product formula in a more intuitive manner:
 
 ```math
-v_{\mathbf a} = A^{-1}v \\
+{\mathbf a}_{\mathbf e}v_{\mathbf e} = v'_{\mathbf e}
+```
+
+We transform $v$ by substituting the unit basis for basis ${\mathbf a}$ when evaluating $v_{\mathbf e}$.
+
+We can also easily obtain the following, adopting an enhanced notation where $v_M$ is taken to be $v_{f(M)}$, and $M\_N$ to be ${f(M)}\_{f(N)}$, with $f(M) = {\mathbf m}$ such that $M = {\mathbf m}_{\mathbf e}$ for any $M$, $N$, ommitting $I$ subscripts for brevity:
+
+```math
+A v_A = v
 ```
 ```math
-A_{\mathbf a}^{*i} = A^{-1}A^{*i}
+v_A = A^{-1}v
+```
+
+A consequence proves the aforementioned.
+
+```math
+A_A^{*i} = A^{-1}A^{*i}
 ```
 ```math
-A_{\mathbf a} = I
+A_A = I
 ```
-where $A$ by itself is taken to be a shorthand for ${\mathbf a}\_{\mathbf e}$, whereas in $A_{\mathbf s}$ for any ${\mathbf s}$ $A$ is taken to be ${\mathbf a}$.
 
-This proves the aforementioned.
-
-## matrix transformations
+## Matrix transformations
 
 We can take our scheme a step further:
 
 ```math
+v_B = B^{-1}v = B^{-1}A v_A
 ```
+
+This allows us to transform vectors between arbitrary bases given their representations with respect to the unit base.
+
+Taking advantage of the new notation, we can also refine our notion of the matrix product as a transformation.
+
+```math
+Av = v_{A^{-1}}
+```
+```math
+BAv = Bv_{A^{-1}} = v_{A^{-1}B^{-1}}
+```
+
+Further abstracting, we may consider $A$ as the transformation from $\mathbf e$ to $\mathbf a$. On the other hand, $B$ transforms $A$ to a transformation from $\mathbf e$ to $\mathbf p$ where $AB = \mathbf p_e$
