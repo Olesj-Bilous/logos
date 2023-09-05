@@ -109,4 +109,4 @@ Av = v_{A^{-1}}
 BAv = Bv_{A^{-1}} = v_{A^{-1}B^{-1}}
 ```
 
-Further abstracting, we may consider $A$ as the transformation from $\mathbf e$ to $\mathbf a$. On the other hand, $B$ transforms $A$ to a transformation from $\mathbf e$ to $\mathbf p$ where $AB = \mathbf p_e$
+Further abstracting, we may consider $A$ as the transformation from $\mathbf e$ to $\mathbf a$. On the other hand, $B$ transforms $A$ to a transformation from $\mathbf e$ to $\mathbf p$ where $BA = \mathbf p_e$
