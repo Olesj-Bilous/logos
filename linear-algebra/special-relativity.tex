@@ -1,46 +1,375 @@
 \documentclass{amsart}
 \usepackage{mathtools}
+\usepackage[dutch]{babel}
+\usepackage[T1]{fontenc}
 
-\newtheorem{axm}{Axiom}[section]
-\newtheorem{thm}{Theorem}[section]
+\theoremstyle{definition}
+\newtheorem{axm}{Axioma}[section]
+\newtheorem{thm}{Theorema}[section]
+\newtheorem{lmm}{Lemma}[section]
+\newtheorem{dfn}{Definitie}[section]
+\newtheorem{csq}{Gevolg}[section]
+
+\newcommand{\realnums}{\mathbb{R}}
+\newcommand{\realn}[1][n]{\realnums^{#1}}
+\newcommand{\realmx}[2][n]{\realn[#2 \times #1]}
+\newcommand{\realnxn}{\realmx{n}}
+\newcommand{\realmxn}{\realmx{m}}
+
+\newcommand{\zerovec}{\mathbf{0}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+\newcommand{\without}[1]{\setminus\{#1\}}
+\newcommand{\with}[1]{\cup\{#1\}}
+
+\newenvironment{bewijs}{\begin{proof}[Bewijs]}{\end{proof}}
 
 \begin{document}
-	\title{Special relativity}
-	\author{Olesj V. Bilous}
-	%\begin{abstract}
-	%\end{abstract}
-	\maketitle
+\title{Special relativity}
+\author{Olesj V. Bilous}
+%\begin{abstract}
+%\end{abstract}
+\maketitle
 
-	\section{Introduction}
-	\begin{axm}
-		Contravariance
+\section{Vectorruimtes}
+
+\begin{dfn}
+	Een vectorruimte $V$ bevat van elke vector $v \in V$ een unieke schaal $\lambda v$ voor elke scalair $\lambda \in \realnums$. Het bevat ook de unieke som $v + w$ van elk paar vectoren $v, w \in V$.
+\end{dfn}
+
+\begin{axm}
+	De vectorsom is associatief.
+	\begin{equation*}
+		(u + v) + w = u + (v + w)
+	\end{equation*}
+\end{axm}
+
+\begin{axm}
+	De vectorsom is commutatief.
+	\begin{equation*}
+		v + w = w + v
+	\end{equation*}
+\end{axm}
+
+\begin{axm}
+	De vectorschaal is distributief over de vectorsom.
+	\begin{equation*}
+		\lambda(v + w) = \lambda v + \lambda w
+	\end{equation*}
+\end{axm}
+
+\begin{axm}
+	De vectorschaal is distributief over de scalaire som.
+	\begin{equation*}
+		(\lambda + \mu)v = \lambda v + \mu v
+	\end{equation*}
+\end{axm}
+
+\begin{axm}
+	Er bestaat een unieke nulvector $\zerovec$ die de nulschaal $0v$ is van elke vector $v \in V$.
+\end{axm}
+
+\begin{axm}
+	$1$ is de identiteitsschaal: 1v = v.
+\end{axm}
+
+\begin{thm}
+	Een lineaire ruimte is een commutatieve groep over de vectorsom.
+	\begin{bewijs}
 		\begin{align*}
-			z' = \mu(z - vt)
+			v + 0v    & = (1+0)v \\
+			v + (-1)v & = (1-1)v
 		\end{align*}
-	\end{axm}
-	\begin{axm}
-		Linearity
+	\end{bewijs}
+\end{thm}
+
+\begin{dfn}
+	Een lineaire combinatie van vectoren is het lineair product van een rij vectoren $\alpha \in V^n$ en een kolom coëfficiënten $v^\alpha \in \mathbb{R}^n$.
+	\begin{align*}
+		\alpha v^\alpha & = \sum_i^n v^\alpha_i \alpha_i
+		\\
+		& = v^\alpha_1 \alpha_1 + \ldots + v^\alpha_n \alpha_n 
+		\\
+		& =
+		\begin{pmatrix}
+			\alpha_1, \ldots, \alpha_n
+		\end{pmatrix}
+		\begin{pmatrix}
+			v^\alpha_1 \\
+			\vdots       \\
+			v^\alpha_n
+		\end{pmatrix}
+		\\
+	\end{align*}
+\end{dfn}
+Zo is elke lineaire combinatie van vectoren $\alpha \in V^n$ ook een vector $v \in V$.
+
+\begin{dfn}
+	De schaal $\lambda v$ van een kolom coëfficiënten $v \in \realn$ is de kolom $w \in \realn$ met de schalen van de respectieve coëfficiënten.
+	\begin{equation*}
+		{w}_i = \lambda {v}_i
+	\end{equation*}
+\end{dfn}
+
+\begin{dfn}
+	De som $u + v$ van coëfficiëntkolommen $u, v \in \realn$ is de kolom $w \in \realn$ met de sommen van de respectieve coëfficiënten.
+	\begin{equation*}
+		{w}_i = {u}_i + {v}_i
+	\end{equation*}
+\end{dfn}
+
+\begin{thm}
+	$\realn$ is een vectorruimte met nulvector $0_n$.
+\end{thm}
+
+Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. De coëfficiënten heten dan componenten.
+
+\begin{dfn}
+	De vectorrij $A \in \realn[m \times n]$ met $n$ kolomvectoren $A_{j} \in \realn[m]$ noemt men een matrix.
+	Componenten van $A_j$ schrijft men als $a_{ij}$, rijvectoren als $A^i$.
+\end{dfn}
+
+\begin{dfn}
+	Transpositie spiegelt een matrix om de diagonaal: $a^T_{ij} = a_{ji}$ voor $a^T \in A^T$.
+\end{dfn}
+
+\begin{csq}
+	Het lineair product van een matrix $A \in \realmxn$ met een kolomvector $v \in \realn$ is een lineaire combinatie van $n$ kolomvectoren $A_i \in \realn[m]$.
+\end{csq}
+
+\begin{csq}
+	Evenwel is vanwege de structuur van de vectorsom elke component van $w = Av$ ook een lineaire combinatie van de componenten van $v$: $w^T = v^TA^T$.
+\end{csq}
+
+\begin{csq}
+	Het herhaald lineair product van een vectorrij $\alpha \in V^m$ met de kolomvectoren $A_i$ van de matrix $A \in \realmxn$ vormt een vectorrij $\beta \in V^n$.
+\end{csq}
+
+\begin{dfn}
+	Bovenstaande operatie noemen we het herhaald product van $\alpha$ en $A$.
+	\begin{equation*}
+		\alpha A = \beta
+	\end{equation*}
+\end{dfn}
+
+\begin{dfn}
+	De matrix die een vectorrij op zichzelf afbeeldt noemen we de identiteitsmatrix $I_n \in \realnxn$.
+\end{dfn}
+
+\begin{csq}
+	Het herhaald product van $A \in \realmxn$ met $B \in \realn[n \times p]$ is $C \in \realn[m \times p]$.
+	Dit zijn $p$ lineaire combinaties van $n$ kolomvectoren $A_i \in \realn[m]$ volgens $v$.
+\end{csq}
+
+\begin{dfn}
+	Dit staat ook simpelweg als het matrixproduct bekend.
+	\begin{equation*}
+		AB = C
+	\end{equation*}
+\end{dfn}
+
+\begin{csq}
+	Het matrixproduct $AB$ bestaat anderzijds ook uit $m$ lineaire combinaties van $n$ rijvectoren $B^j \in \realn[p]$, oftewel $AB = B^TA^T$.
+\end{csq}
+
+\begin{csq}
+	Het matrixproduct is associatief.
+	\begin{bewijs}
+		De vectorschaal is distributief over de vectorsom en bovendien associatief.
+		Vandaar dat het in $ABC$ niet uitmaakt of een $C_i$ zijn coëfficiënten verdeelt over $AB$ of een $(BC)_j$ de zijne over $A$.
+	\end{bewijs}
+\end{csq}
+
+\begin{csq}
+	Inverteerbare vierkante matrices zijn commutatief inverteerbaar.
+	\begin{bewijs}
+		Weze $AA^{-1}_r = I_n$ in $(AA^{-1}_r)A = A(A^{-1}_rA)$. Hierbij moet $A^{-1}_rA$ echter ook de identiteitsmatrix zijn.
+	\end{bewijs}
+\end{csq}
+
+\begin{dfn}
+	De spanruimte $span(\alpha)$ van een vectorrij $\alpha$ bevat alle linaire combinaties van $\alpha$.
+	Men zegt dat $\alpha$ haar spanruimte voortbrengt.
+\end{dfn}
+
+\begin{csq}
+	Een matrix $A \in \realmxn$ die als vectorrij voortbrengend is voor $\realn[m]$ is rechts inverteerbaar.
+	Als haar rijvectoren $\realn$ voortbrengen is ze links inverteerbaar.
+	\begin{bewijs}
+		De identiteitsmatrices bestaan uit vectoren in de respectieve ruimtes.
+	\end{bewijs}
+\end{csq}
+
+\begin{thm}
+	De spanruimte van een vectorrij is een vectorruimte.
+	\begin{bewijs}
+		Uit $\alpha A = \beta$ en $\beta v^\beta = v$ volgt $\alpha A v^\beta = v$.
+		Hieruit mag blijken dat herhaalde lineaire combinaties de spanruimte niet verlaten.
+	\end{bewijs}
+\end{thm}
+
+Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineaire combinatie van elke vectorrij $\alpha \in V^n$ is.
+
+\begin{dfn}
+	Een vectorrij $\alpha$ is lineair onafhankelijk of vrij als geen enkele van de vectoren $\alpha_i \in \alpha$ een lineaire combinatie is van de overige $\alpha_{j\neq i} \in \alpha$.
+\end{dfn}
+
+\begin{lmm}
+	Het lineair product van een vrije vectorrij met een kolomvector is enkel de nulvector $\alpha 0^\alpha = \zerovec$ als de kolomvector dat ook is in zijn respectieve ruimte: $0^\alpha = 0_n$.
+	\begin{bewijs}
+		$-0^\alpha_i \alpha_i = \left(\alpha \without{\alpha_i}\right)\left(0^\alpha \without{0^\alpha_i}\right)$
+	\end{bewijs}
+\end{lmm}
+
+\begin{csq}
+	Het herhaald product van een vrije vectorrij met een matrix is vrij als de matrix dat ook is. Als het product vrij is, is de matrix dat ook.
+	\begin{bewijs}
+		Stel dat $\beta = \alpha A$ lineair afhankelijk is voor $\alpha \in V^m$ vrij.
+		Dan is er een $0^\beta \neq 0_n$ waar $\beta0^\beta = \zerovec$, zodanig dat $A 0^\beta = 0_n$ betekent dat ook $A$ lineair afhankelijk is.
+		Anderzijds is voor $Cc = 0_k$ elke $\gamma Cc = \zerovec$.
+	\end{bewijs}
+\end{csq}
+
+\begin{csq}
+	Het product van vrije matrices is vrij. Als het product vrij is, is de rechtermatrix vrij.
+\end{csq}
+
+\begin{csq}
+	Een vrije vectorrij heeft voor elke vector in zijn spanruimte slechts één kolom coëfficiënten.
+	\begin{bewijs}
 		\begin{align*}
-			\lambda
-			\begin{pmatrix}
-				a_{11} a_{12} \\
-				a_{21} a_{22}
-			\end{pmatrix}
-			\begin{pmatrix}
-				z \\
-				ct
-			\end{pmatrix}
-			& =
-			\begin{pmatrix}
-				z' \\
-				ct'
-			\end{pmatrix}
+			\alpha v^{\alpha 1}                  & = \alpha v^{\alpha 2} \\
+			\alpha (v^{\alpha 1} - v^{\alpha 2}) & = \zerovec
 		\end{align*}
-	\end{axm}
-	\begin{axm}
-		Invariance
+	\end{bewijs}
+\end{csq}
+
+\begin{dfn}
+	Vanwege het unieke karakter van deze coëfficiënten noemen we ze de coördinaten van een vector met betrekking tot de vrije vectorrij.
+\end{dfn}
+
+\begin{dfn}
+	Een vrije vectorrij staat gekend als de basis van haar spanruimte.
+\end{dfn}
+
+\begin{dfn}
+	De coördinaten van een alternatieve basis ten aanzien van een oorspronkelijke vormen een matrix.
+	Deze heet een basistransformatie.
+\end{dfn}
+
+\begin{lmm}
+	Een basispaar van dezelfde vectorruimte $span(\alpha) = span(\beta)$ is wederzijds lineair afhankelijk: $\alpha A = \beta$ en $\alpha = \beta B$.
+\end{lmm}
+
+\begin{thm}
+	Als $\beta$ meer vectoren bevat $\abs\alpha < \abs\beta$ dan brengt $\beta$ meer voort $span(\alpha) \subset span(\beta)$ of $\beta$ is lineair afhankelijk.
+	\begin{bewijs}
+		We bewijzen eerst het geval waar $\alpha$ vrij is. Het voorgaande volgt daaruit eens we die eis laten vallen.
+
+		Elke $\beta_j$ heeft minstens één definiete coördinaat $b_{ij} \in B$ voor een zekere $\alpha_i$.
 		\begin{align*}
-			\lambda^2(z^2 - c^2t^2) & = ({z'}^2 - c^2{t'}^2)
+			\beta_j = b_{ij}\alpha_i + (\alpha \without{\alpha_i})(B_j  \without{b_{ij}}) 
 		\end{align*}
-	\end{axm}
+		Hieruit blijkt echter dat ook deze $\alpha_i$ afhangt van  $\alpha^{(1)} = (\alpha \cup \beta_j) \without{\alpha_i}$.
+		Vandaar dat ook $\alpha^{(1)}$ voortbrengend is gezien $\alpha \subseteq span(\alpha^{(1)})$.
+
+		Verder waren de coördinaten van $\beta_j$ uniek, dus $\beta_j$ kan niet gevormd worden uit $\alpha \without {\alpha_i}$.
+		Anderzijds draagt ook voor $k \neq i$ de uniciteit van coördinaten over op de combinatie van $(\alpha \cup \beta_j) \without{\alpha_k} $ tot $\alpha_k$,
+		waarbij de coördinaat naar $\alpha_i$ definiet blijft.
+		Zo kan ook $\alpha_k$ niet gevormd worden uit $\alpha^{(1)} \without{\alpha_k} = (\alpha \cup \beta_j) \without{\alpha_k, \alpha_i}$.
+		Dus is $\alpha^{(1)}$ eveneens vrij.
+
+		Daar $\beta$ vrij en $\alpha^{(m)}$ voortbrengend is heeft $\beta_l$ telkens $\alpha^{(m)}$-coördinaten buiten $\beta \without{\beta_l}$ en is deze procedure voor herhaling vatbaar tot we 
+		$\beta$ of $\alpha$ uitputten.
+
+		Gebeurt dit tegelijk dan is ook $\beta$ voortbrengend. Weze $\abs{\beta} < \abs{\alpha}$ dan resten er nog $\alpha_k \in \alpha^{(\abs{\beta})} \without{\beta}$ waarvoor $\alpha_k \notin span(\beta)$.
+		Blijft er anderzijds nog enige $\beta_h \notin \alpha^{(\abs{\alpha})}$ over, dan is deze afhankelijk van $\alpha^{(\abs\alpha)} \subset \beta$ en ware $\beta$ nimmer vrij.
+	\end{bewijs}
+\end{thm}
+
+\begin{csq}
+	Enkel vierkante matrices kunnen commutatief inverteerbaar zijn.
+	\begin{bewijs}
+		Weze $A \in \realmxn$ met $m < n$ doch $\realn[m]$ voortbrengend.
+		Dan kan $B \in \realmx[m]{n}$ weliswaar $I_m$ vormen uit $A$, maar $B$ kan $\realn$ niet voortbrengen om tot $I_n$ te komen.
+	\end{bewijs}
+\end{csq}
+
+\begin{csq}
+	De volgende zijn gelijkwaardig voor vierkante matrices $A \in \realnxn$:
+
+	- lineaire onafhankelijkheid
+
+	- voortbrenging van $\realn$
+
+	- inverteerbaarheid
+	\begin{bewijs}
+		Wegens rechtse inversie komt de identiteitsmatrix en daaruit $\realn$ voort uit de kolomruimte van $A$ maar ook uit de rijruimte van $A^{-1}$. Daarom is ook de rijruimte van $A$ vrij.
+	\end{bewijs}
+\end{csq}
+
+\begin{thm}
+	Basistransformaties vormen een commutatieve groep over de matrixvermenigvuldiging met de identiteitsmatrix als identiteit: $AA^{-1} = I_n = A^{-1}A$.
+\end{thm}
+
+\begin{dfn}
+	Men noemt deze de algemene lineaire groep.
+\end{dfn}
+
+\begin{csq}
+	Een basistransformatie is contravariant aan de ge\"{i}mpliceerde co\"{o}rdinatentransformatie. 
+	\begin{bewijs}
+		Uit $\alpha A = \beta$ en $\alpha v^\alpha = v$ volgt $\beta A^{-1} v^\alpha = v$.
+	\end{bewijs}
+\end{csq}
+
+Nu wensen we een begrip van afstand in te voeren, gekend als de norm $\norm{v}$ van een vector $v \in V$.
+
+Hiertoe nemen we een willekeurige basis $\alpha$ van $V$ en schrijven er enkele bijzondere eigenschappen aan toe.
+
+Vooreerst is telkens $\norm{\alpha_i} = 1$.
+
+Verder geldt voor elke coördinaat $v^\alpha_i$ van elke vector $\alpha v^\alpha = v$ volgende verhouding, waar $\alpha_i^v$ de coördinaat is van $\alpha_i$ naar $v$ in $(\alpha \without{\alpha_i})\with{v}$, gekend als de projectie van $\alpha_i$ op $v$.
+\begin{equation*}
+	\frac{v^\alpha_i}{\norm{v}} = \frac{\alpha_i^v}{v^\alpha_i}
+\end{equation*}
+Dit komt erop neer dat de verhouding tussen een paar zijden van een driehoek onafhankelijk is van schaal. Dat wordt duidelijk wanneer men beschouwt dat het vlak tussen $\alpha_i$ en $v$ mede wordt voortgebracht uit $\alpha$ door een zekere $\alpha_{j\neq i}$, die de richting van de derde zijde levert.
+
+Nu stellen we echter ook dat $\norm{v} = \sum_i \alpha_i^v$. Dit is de bepaling van de basis $\alpha$ als rechthoekig, zodat de projecties van de aanliggende zijden van de rechte hoek elkaar wederom raken op de tegenliggende zijde.
+
+\newpage
+
+\section{Special relativity}
+\begin{axm}
+	Linearity
+	\begin{align*}
+		\lambda
+		\begin{pmatrix}
+			a_{11} a_{12} \\
+			a_{21} a_{22}
+		\end{pmatrix}
+		\begin{pmatrix}
+			z \\
+			ct
+		\end{pmatrix}
+		 & =
+		\begin{pmatrix}
+			z' \\
+			ct'
+		\end{pmatrix}
+	\end{align*}
+\end{axm}
+\begin{axm}
+	Scaled kinetic translation
+	\begin{align*}
+		z' = \mu(z - vt)
+	\end{align*}
+\end{axm}
+\begin{axm}
+	Invariance
+	\begin{align*}
+		\lambda^2(z^2 - c^2t^2) & = ({z'}^2 - c^2{t'}^2)
+	\end{align*}
+\end{axm}
 \end{document}
