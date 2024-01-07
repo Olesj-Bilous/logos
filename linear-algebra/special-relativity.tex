@@ -5,10 +5,12 @@
 
 \theoremstyle{definition}
 \newtheorem{axm}{Axioma}[section]
-\newtheorem{thm}{Theorema}[section]
+\newtheorem{thm}{Stelling}[section]
 \newtheorem{lmm}{Lemma}[section]
 \newtheorem{dfn}{Definitie}[section]
 \newtheorem{csq}{Gevolg}[section]
+
+\newenvironment{bewijs}{\begin{proof}[Bewijs]}{\end{proof}}
 
 \newcommand{\realnums}{\mathbb{R}}
 \newcommand{\realn}[1][n]{\realnums^{#1}}
@@ -20,13 +22,12 @@
 \newcommand{\norm}[1]{\lVert#1\rVert}
 \newcommand{\abs}[1]{\lvert#1\rvert}
 
-\newcommand{\without}[1]{\setminus\{#1\}}
-\newcommand{\with}[1]{\cup\{#1\}}
-
-\newenvironment{bewijs}{\begin{proof}[Bewijs]}{\end{proof}}
+\newcommand{\setsm}[1]{\{#1\}}
+\newcommand{\without}[1]{\setminus\setsm#1}
+\newcommand{\with}[1]{\cup\setsm#1}
 
 \begin{document}
-\title{Special relativity}
+\title{Lineaire algebra}
 \author{Olesj V. Bilous}
 %\begin{abstract}
 %\end{abstract}
@@ -37,6 +38,21 @@
 \begin{dfn}
 	Een vectorruimte $V$ bevat van elke vector $v \in V$ een unieke schaal $\lambda v$ voor elke scalair $\lambda \in \realnums$. Het bevat ook de unieke som $v + w$ van elk paar vectoren $v, w \in V$.
 \end{dfn}
+
+\begin{axm}
+	De vectorschaal is associatief.
+	\begin{equation*}
+		\lambda (\mu v) = (\lambda\mu)v
+	\end{equation*}
+\end{axm}
+
+\begin{axm}
+	Er bestaat een unieke nulvector $\zerovec$ die de nulschaal $0v$ is van elke vector $v \in V$.
+\end{axm}
+
+\begin{axm}
+	$1$ is de identiteitsschaal: 1v = v.
+\end{axm}
 
 \begin{axm}
 	De vectorsom is associatief.
@@ -66,21 +82,10 @@
 	\end{equation*}
 \end{axm}
 
-\begin{axm}
-	Er bestaat een unieke nulvector $\zerovec$ die de nulschaal $0v$ is van elke vector $v \in V$.
-\end{axm}
-
-\begin{axm}
-	$1$ is de identiteitsschaal: 1v = v.
-\end{axm}
-
 \begin{thm}
 	Een lineaire ruimte is een commutatieve groep over de vectorsom.
 	\begin{bewijs}
-		\begin{align*}
-			v + 0v    & = (1+0)v \\
-			v + (-1)v & = (1-1)v
-		\end{align*}
+		$v + (-1)v & = (1-1)v$
 	\end{bewijs}
 \end{thm}
 
@@ -139,7 +144,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{csq}
 
 \begin{csq}
-	Evenwel is vanwege de structuur van de vectorsom elke component van $w = Av$ ook een lineaire combinatie van de componenten van $v$: $w^T = v^TA^T$.
+	Evenwel is vanwege de structuur van de kolomvectorsom elke component van $w = Av$ ook een lineaire combinatie van de componenten van $v$: $w^T = v^TA^T$.
 \end{csq}
 
 \begin{csq}
@@ -170,7 +175,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{dfn}
 
 \begin{csq}
-	Het matrixproduct $AB$ bestaat anderzijds ook uit $m$ lineaire combinaties van $n$ rijvectoren $B^j \in \realn[p]$, oftewel $AB = B^TA^T$.
+	Het matrixproduct $AB$ bestaat anderzijds ook uit $m$ lineaire combinaties van $n$ rijvectoren $B^j \in \realn[p]$, oftewel $(AB)^T = B^TA^T$.
 \end{csq}
 
 \begin{csq}
@@ -184,7 +189,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \begin{csq}
 	Inverteerbare vierkante matrices zijn commutatief inverteerbaar.
 	\begin{bewijs}
-		Weze $AA^{-1}_r = I_n$ in $(AA^{-1}_r)A = A(A^{-1}_rA)$. Hierbij moet $A^{-1}_rA$ echter ook de identiteitsmatrix zijn.
+		Weze $AA^{-1}_r = I_n$ in $(AA^{-1}_r)A = A(A^{-1}_rA)$. Hierbij moet $A^{-1}_rA$ echter ook dezelfde identiteitsmatrix $I_n$ zijn.
 	\end{bewijs}
 \end{csq}
 
@@ -208,6 +213,8 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 		Hieruit mag blijken dat herhaalde lineaire combinaties de spanruimte niet verlaten.
 	\end{bewijs}
 \end{thm}
+
+\section{Vrije ruimtes}
 
 Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineaire combinatie van elke vectorrij $\alpha \in V^n$ is.
 
@@ -258,41 +265,36 @@ Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineair
 	Deze heet een basistransformatie.
 \end{dfn}
 
-\begin{lmm}
-	Een basispaar van dezelfde vectorruimte $span(\alpha) = span(\beta)$ is wederzijds lineair afhankelijk: $\alpha A = \beta$ en $\alpha = \beta B$.
-\end{lmm}
-
 \begin{thm}
-	Als $\beta$ meer vectoren bevat $\abs\alpha < \abs\beta$ dan brengt $\beta$ meer voort $span(\alpha) \subset span(\beta)$ of $\beta$ is lineair afhankelijk.
+	Als $\beta$ vrij wordt voortgebracht $span(\beta) \subseteq span(\alpha)$ uit $\alpha$ dan bevat $\beta$ ten hoogste een gelijk aantal vectoren $\abs\beta \leq \abs\alpha$.
+	Als $\abs\beta = \abs\alpha$ dan is $\beta$ voortbrengend $span(\beta) = span(\alpha)$. 
 	\begin{bewijs}
-		We bewijzen eerst het geval waar $\alpha$ vrij is. Het voorgaande volgt daaruit eens we die eis laten vallen.
-
 		Elke $\beta_j$ heeft minstens één definiete coördinaat $b_{ij} \in B$ voor een zekere $\alpha_i$.
 		\begin{align*}
 			\beta_j = b_{ij}\alpha_i + (\alpha \without{\alpha_i})(B_j  \without{b_{ij}}) 
 		\end{align*}
-		Hieruit blijkt echter dat ook deze $\alpha_i$ afhangt van  $\alpha^{(1)} = (\alpha \cup \beta_j) \without{\alpha_i}$.
+		Hieruit blijkt echter dat ook deze $\alpha_i$ afhangt van  $\alpha^{(1)} = (\alpha \without{\alpha_i}) \cup \beta_j$.
 		Vandaar dat ook $\alpha^{(1)}$ voortbrengend is gezien $\alpha \subseteq span(\alpha^{(1)})$.
 
-		Verder waren de coördinaten van $\beta_j$ uniek, dus $\beta_j$ kan niet gevormd worden uit $\alpha \without {\alpha_i}$.
-		Anderzijds draagt ook voor $k \neq i$ de uniciteit van coördinaten over op de combinatie van $(\alpha \cup \beta_j) \without{\alpha_k} $ tot $\alpha_k$,
-		waarbij de coördinaat naar $\alpha_i$ definiet blijft.
-		Zo kan ook $\alpha_k$ niet gevormd worden uit $\alpha^{(1)} \without{\alpha_k} = (\alpha \cup \beta_j) \without{\alpha_k, \alpha_i}$.
-		Dus is $\alpha^{(1)}$ eveneens vrij.
-
-		Daar $\beta$ vrij en $\alpha^{(m)}$ voortbrengend is heeft $\beta_l$ telkens $\alpha^{(m)}$-coördinaten buiten $\beta \without{\beta_l}$ en is deze procedure voor herhaling vatbaar tot we 
-		$\beta$ of $\alpha$ uitputten.
-
-		Gebeurt dit tegelijk dan is ook $\beta$ voortbrengend. Weze $\abs{\beta} < \abs{\alpha}$ dan resten er nog $\alpha_k \in \alpha^{(\abs{\beta})} \without{\beta}$ waarvoor $\alpha_k \notin span(\beta)$.
-		Blijft er anderzijds nog enige $\beta_h \notin \alpha^{(\abs{\alpha})}$ over, dan is deze afhankelijk van $\alpha^{(\abs\alpha)} \subset \beta$ en ware $\beta$ nimmer vrij.
+		Daar $\beta$ vrij en $\alpha^{(m)}$ voortbrengend is heeft $\beta_k$ telkens $\alpha^{(m)}$-coördinaten buiten $\beta \without{\beta_k}$ en is deze procedure voor herhaling vatbaar tot we $\alpha$ uitputten.
+		Blijft er nog enige $\beta_l \notin \alpha^{(\abs{\alpha})}$ over, dan is deze afhankelijk van $\alpha^{(\abs\alpha)} \subset \beta$ en ware $\beta$ nimmer vrij.
+		Geldt evenwel $\alpha^{(\abs{\alpha})} = \beta$ dan is $\beta$ voortbrengend.
 	\end{bewijs}
 \end{thm}
+
+\begin{csq}
+	Elk basispaar dat dezelfde ruimte voortbrengt $span(\alpha) = span(\beta)$ heeft gelijke orde.
+\end{csq}
+
+\begin{csq}
+	Een vectorrij van lagere orde dan een basis is niet voortbrengend voor de spanruimte van de basis.
+\end{csq}
 
 \begin{csq}
 	Enkel vierkante matrices kunnen commutatief inverteerbaar zijn.
 	\begin{bewijs}
 		Weze $A \in \realmxn$ met $m < n$ doch $\realn[m]$ voortbrengend.
-		Dan kan $B \in \realmx[m]{n}$ weliswaar $I_m$ vormen uit $A$, maar $B$ kan $\realn$ niet voortbrengen om tot $I_n$ te komen.
+		Dan kan $B \in \realmx[m]{n}$ weliswaar $I_m$ vormen uit $A$, maar $A$ kan $\realn$ niet voortbrengen uit $B$ om tot $I_n$ te komen.
 	\end{bewijs}
 \end{csq}
 
@@ -304,13 +306,10 @@ Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineair
 	- voortbrenging van $\realn$
 
 	- inverteerbaarheid
-	\begin{bewijs}
-		Wegens rechtse inversie komt de identiteitsmatrix en daaruit $\realn$ voort uit de kolomruimte van $A$ maar ook uit de rijruimte van $A^{-1}$. Daarom is ook de rijruimte van $A$ vrij.
-	\end{bewijs}
 \end{csq}
 
 \begin{thm}
-	Basistransformaties vormen een commutatieve groep over de matrixvermenigvuldiging met de identiteitsmatrix als identiteit: $AA^{-1} = I_n = A^{-1}A$.
+	Basistransformaties vormen een groep over de matrixvermenigvuldiging met de identiteitsmatrix als identiteit: $AA^{-1} = I_n = A^{-1}A$.
 \end{thm}
 
 \begin{dfn}
@@ -324,19 +323,83 @@ Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineair
 	\end{bewijs}
 \end{csq}
 
-Nu wensen we een begrip van afstand in te voeren, gekend als de norm $\norm{v}$ van een vector $v \in V$.
+\section{Genormeerde ruimtes}
 
-Hiertoe nemen we een willekeurige basis $\alpha$ van $V$ en schrijven er enkele bijzondere eigenschappen aan toe.
+Nu wensen we een begrip van afstand in te voeren, gekend als de norm $\norm{v}$ van een vector $v \in V$. Hiertoe nemen we een willekeurige basis $\alpha$ van $V$ en schrijven er enkele bijzondere eigenschappen aan toe.
+\begin{axm}
+	Vooreerst is telkens $\norm{\alpha_i} = 1$.
+\end{axm}
 
-Vooreerst is telkens $\norm{\alpha_i} = 1$.
+\begin{axm}
+	Vervolgens is de schaal associatief met de norm: $\norm{\lambda v} = \lambda\norm v$.
+\end{axm}
 
-Verder geldt voor elke coördinaat $v^\alpha_i$ van elke vector $\alpha v^\alpha = v$ volgende verhouding, waar $\alpha_i^v$ de coördinaat is van $\alpha_i$ naar $v$ in $(\alpha \without{\alpha_i})\with{v}$, gekend als de projectie van $\alpha_i$ op $v$.
-\begin{equation*}
-	\frac{v^\alpha_i}{\norm{v}} = \frac{\alpha_i^v}{v^\alpha_i}
-\end{equation*}
-Dit komt erop neer dat de verhouding tussen een paar zijden van een driehoek onafhankelijk is van schaal. Dat wordt duidelijk wanneer men beschouwt dat het vlak tussen $\alpha_i$ en $v$ mede wordt voortgebracht uit $\alpha$ door een zekere $\alpha_{j\neq i}$, die de richting van de derde zijde levert.
+\begin{csq}
+	Hieruit mag blijken dat er voor elke $v \in V$ een vector $v_e = {\norm v}^{-1}v$ waarvan de norm $\norm e = 1$.
+\end{csq}
 
-Nu stellen we echter ook dat $\norm{v} = \sum_i \alpha_i^v$. Dit is de bepaling van de basis $\alpha$ als rechthoekig, zodat de projecties van de aanliggende zijden van de rechte hoek elkaar wederom raken op de tegenliggende zijde.
+Beschouw een vrij paar vectoren $v, w$ dat een derde vector $c$ voortbrengt zodat $c = c^v v + c^w w$.
+
+\begin{dfn}
+	We noemen $c^v v$ de parallele projectie van $c$ op de richting van $v$ volgens de richting van $w$ geschreven $c^v v = proj_{w}(c, v)$.
+\end{dfn}
+
+Stel voortaan $a = proj_w(c, v)$.
+
+\begin{csq}
+	Merk op dat $\norm a$ de coördinaat is van $c$ naar $a_e$ in het basispaar $a_e, w$.
+	Vandaar dat we $a$ ook de component van $c$ naar $a^e$ langs $w$ noemen.
+\end{csq}
+
+
+Evenwel kunnen we nu ook volgende vectoren beschouwen, $c' = \norm a c_e$ en $a' = \norm c a_e$.
+Hierbij spiegelen we de driehoek gevormd door $a, c$ om de bissectrice en voltooien die met $b' = c' - a'$.
+
+\begin{dfn}
+	Evenwel wensen wij nu $a$ volgens $b'$ te projecteren op $c$, hetgeen we de terugkerende projectie van $c$ naar $v$ langs $w$ noemen $reproj_w(c, v) = proj_{b'}(a, c)$.
+\end{dfn}
+
+Blijkt evenwel dat projecties langs $b'$ coördinaten naar $a^e$ op $c^e$ schalen met een factor van $\frac{\norm a}{\norm c}$.
+
+\begin{csq}
+	\begin{equation*}
+		\norm{reproj_w(c, v)} = \frac{\norm{proj_w(c, v)}^2}{\norm c}
+	\end{equation*}
+\end{csq}
+
+\begin{dfn}
+	Weze $\norm c$ = $\norm{reproj_w(c, v)} + \norm{reproj_v(c, w)}$ dan noemt men $v$ en $w$ onderling rechthoekig $v \perp w$.
+\end{dfn}
+
+De projecties van de aanliggende componenten raken elkaar wederom op de tegenliggende zijde.
+
+\begin{axm}
+	De vectoren van de gekozen basis $\alpha$ zijn onderling rechthoekig.
+\end{axm}
+
+\begin{dfn}
+	Samen met de bepaling dat de basisvectoren eenheidsvectoren zijn heet dit een orthonormale basis.
+\end{dfn}
+
+\begin{dfn}
+	Gegeven een orthonormale basis bepaalt een vrij paar vectoren $v, w$ in beide projectiezinnen een rechte hoek om langs te projecteren.
+	Vandaar dat men spreekt van een rechthoekige projectie $proj_\perp(v, w)$.
+\end{dfn}
+
+\begin{dfn}
+	Het scalair product van vectoren $v \cdot w$ is gedefinieerd als het lineair product $(v^\alpha)^T w^\alpha$ van een rijvector coördinaten en een coördinaatvector.
+\end{dfn}
+
+\begin{csq}
+	De rechthoekige projectie van $v$ op $w$ is het scalair product mits schaalcorrectie voor de norm $proj_\perp(v, w) = {\norm w}^{-1}v \cdot w$.
+	\begin{bewijs}
+		De coördinaat $v^\alpha_i$ is de norm van de component van $v$ naar de basisvector $\alpha_i$. Evenwel schaalt de overeenkomstige component van de vector waar we op projecteren met een factor van $\norm w^{-1}w^\alpha_i$ in de terugkerende projectie.
+	\end{bewijs}
+\end{csq}
+
+\begin{csq}
+	De norm van een vector is de wortel van het scalair product met zichzelf $\norm v = \sqrt{v\cdot v}$.
+\end{csq}
 
 \newpage
 

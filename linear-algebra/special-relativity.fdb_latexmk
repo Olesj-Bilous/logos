@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1704575670 "c:/Users/olesj/source/repos/logos/linear-algebra/special-relativity.tex" "special-relativity.pdf" "special-relativity" 1704575671 0
+["pdflatex"] 1704664511 "c:/Users/olesj/source/repos/logos/linear-algebra/special-relativity.tex" "special-relativity.pdf" "special-relativity" 1704664512 2
   "C:/Users/olesj/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1704474726 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/olesj/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk" 1704474491 25420 9e15fdc2fa55aea2cc4592e8c67bf8c0 ""
   "C:/Users/olesj/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/eccc1000.pk" 1704474487 25100 ddabbf873f864e6bb94b765aafc69500 ""
@@ -38,6 +38,7 @@
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1247596667 32762 7fee39e011c23b3589931effd97b9702 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb" 1247596666 32915 7bf7720c61a5b3a7ff25b0964421c9b6 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1247596666 32716 08e384dc442464e7285e891af9f45947 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1247596673 31764 459c573c03a4949a528c2cc7f557e217 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1247596673 34694 870c211f62cb72718a00e353f14f254d ""
@@ -70,9 +71,9 @@
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/mathtools/mathtools.sty" 1656514886 62269 5c1837a5bc5db4c0d255eedc225ca44b ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/mathtools/mhsetup.sty" 1656514886 5582 a43dedf8e5ec418356f1e9dfe5d29fc3 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1686255640 10214 75bcd28386d4b4b9f28b2aff3cea7b24 ""
-  "c:/Users/olesj/source/repos/logos/linear-algebra/special-relativity.tex" 1704575670 13434 774d9d3bfb4a1fe81d5d3d41d29bdb60 ""
-  "special-relativity.aux" 1704575671 488 1277d458d2df30fac99b8ce7e99349b0 "pdflatex"
-  "special-relativity.tex" 1704575670 13434 774d9d3bfb4a1fe81d5d3d41d29bdb60 ""
+  "c:/Users/olesj/source/repos/logos/linear-algebra/special-relativity.tex" 1704664509 14834 67be54cfdaba5d65c614ba166297c926 ""
+  "special-relativity.aux" 1704664512 704 296723938c6c0cf0b920968b569b15a4 "pdflatex"
+  "special-relativity.tex" 1704664509 14834 67be54cfdaba5d65c614ba166297c926 ""
   (generated)
   "special-relativity.aux"
   "special-relativity.log"
