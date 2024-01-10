@@ -3,6 +3,8 @@
 \usepackage[dutch]{babel}
 \usepackage[T1]{fontenc}
 
+%%% ENV
+
 \theoremstyle{definition}
 \newtheorem{axm}{Axioma}[section]
 \newtheorem{thm}{Stelling}[section]
@@ -12,19 +14,71 @@
 
 \newenvironment{bewijs}{\begin{proof}[Bewijs]}{\end{proof}}
 
+
+
+%%% CMD
+
+%% sets
+
+\newcommand{\setsm}[1]{\{{#1}\}}
+\newcommand{\without}[1]{\setminus\setsm{#1}}
+\newcommand{\with}[1]{\cup\setsm{#1}}
+
 \newcommand{\realnums}{\mathbb{R}}
 \newcommand{\realn}[1][n]{\realnums^{#1}}
 \newcommand{\realmx}[2][n]{\realn[#2 \times #1]}
 \newcommand{\realnxn}{\realmx{n}}
 \newcommand{\realmxn}{\realmx{m}}
 
-\newcommand{\zerovec}{\mathbf{0}}
-\newcommand{\norm}[1]{\lVert#1\rVert}
-\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\vecspace}[1][v]{\mathrm{\mathbf{\MakeUppercase#1}}}
+\newcommand{\vecspacen}[1][n]{\vecspace^#1}
 
-\newcommand{\setsm}[1]{\{#1\}}
-\newcommand{\without}[1]{\setminus\setsm#1}
-\newcommand{\with}[1]{\cup\setsm#1}
+
+%% numbers
+
+\newcommand{\norm}[1]{\lVert{#1}\rVert}
+\newcommand{\abs}[1]{\lvert{#1}\rvert}
+
+
+%% vectors
+
+% bold vectors
+\newcommand{\vvec}[1][v]{\mathbf{#1}}
+\newcommand{\uvec}[1][v]{\vvec[#1]_\mathbf{e}}
+
+\newcommand{\vnorm}[1]{\norm{\vvec[#1]}}
+\newcommand{\zerovec}{\vvec[0]}
+
+% vector rows and their vectors
+\newcommand{\vecrow}[1][a]{\mathcal{\MakeUppercase{#1}}}
+
+\newcommand{\rvec}[2][i]{{#2}_#1}
+\newcommand{\rvecr}[2][i]{\rvec[#1]{\vecrow[#2]}}
+\newcommand{\rveci}[1][i]{\rvecr[#1]{a}}
+
+% coordinate vectors
+\newcommand{\cvec}[2]{{#1}^{#2}}
+
+\newcommand{\cveca}[2][a]{\cvec{#2}{\vecrow[#1]}}
+
+\newcommand{\cvecv}[2][v]{\cvec{\vvec[#1]}{#2}}
+\newcommand{\cvecva}[1][a]{\cvecv{\vecrow[#1]}}
+\newcommand{\cvecc}[2][a]{\cvecv[#2]{\vecrow[#1]}}
+\newcommand{\cvecvv}[1][v]{\cvecc{#1}}
+
+% coordinates
+\newcommand{\vcord}[3]{{#1}_{#2}^{#3}}
+
+\newcommand{\vcorda}[3][a]{\vcord{#2}{#3}{\vecrow[#1]}}
+\newcommand{\vcordai}[2][i]{\vcorda{#2}{#1}}
+
+\newcommand{\vcordv}[3][v]{\vcord{#1}{#2}{\vecrow[#3]}}
+\newcommand{\vcordvi}[2][i]{\vcordv{#1}{#2}}
+
+\newcommand{\vcordvia}[1][i]{\vcordvi[#1]{a}}
+
+
+%%% DOC
 
 \begin{document}
 \title{Lineaire algebra}
@@ -35,126 +89,182 @@
 
 \section{Vectorruimtes}
 
+
 \begin{dfn}
-	Een vectorruimte $V$ bevat van elke vector $v \in V$ een unieke schaal $\lambda v$ voor elke scalair $\lambda \in \realnums$. Het bevat ook de unieke som $v + w$ van elk paar vectoren $v, w \in V$.
+	Een vectorruimte $\vecspace$ bevat van elke vector $\vvec \in \vecspace$ een unieke schaal $\lambda \vvec$ voor elke scalair $\lambda \in \realnums$. Het bevat ook de unieke som $\vvec + \vvec[w]$ van elk paar vectoren $\vvec, \vvec[w] \in \vecspace$.
 \end{dfn}
 
 \begin{axm}
 	De vectorschaal is associatief.
 	\begin{equation*}
-		\lambda (\mu v) = (\lambda\mu)v
+		\lambda (\mu \vvec) = (\lambda\mu)\vvec
 	\end{equation*}
 \end{axm}
 
 \begin{axm}
-	Er bestaat een unieke nulvector $\zerovec$ die de nulschaal $0v$ is van elke vector $v \in V$.
+	$1\vvec$ is de identiteitsschaal.
+	\begin{equation*}
+		1\vvec=\vvec
+	\end{equation*}
 \end{axm}
 
 \begin{axm}
-	$1$ is de identiteitsschaal: 1v = v.
+	Er bestaat een unieke nulvector $\zerovec$ die de nulschaal is van elke vector $\vvec \in \vecspace$.
+	\begin{equation*}
+		0\vvec=\zerovec
+	\end{equation*}
 \end{axm}
 
 \begin{axm}
 	De vectorsom is associatief.
 	\begin{equation*}
-		(u + v) + w = u + (v + w)
+		(\vvec[u] + \vvec) + \vvec[w] = \vvec[u] + (\vvec + \vvec[w])
 	\end{equation*}
 \end{axm}
 
 \begin{axm}
 	De vectorsom is commutatief.
 	\begin{equation*}
-		v + w = w + v
+		\vvec + \vvec[w] = \vvec[w] + \vvec
 	\end{equation*}
 \end{axm}
 
 \begin{axm}
 	De vectorschaal is distributief over de vectorsom.
 	\begin{equation*}
-		\lambda(v + w) = \lambda v + \lambda w
+		\lambda(\vvec + \vvec[w]) = \lambda \vvec + \lambda \vvec[w]
 	\end{equation*}
 \end{axm}
 
 \begin{axm}
 	De vectorschaal is distributief over de scalaire som.
 	\begin{equation*}
-		(\lambda + \mu)v = \lambda v + \mu v
+		(\lambda + \mu)\vvec = \lambda \vvec + \mu \vvec
 	\end{equation*}
 \end{axm}
 
 \begin{thm}
-	Een lineaire ruimte is een commutatieve groep over de vectorsom.
+	Een vectorruimte is een commutatieve groep over de vectorsom.
 	\begin{bewijs}
-		$v + (-1)v & = (1-1)v$
+		\begin{align*}
+			\vvec + 0\vvec &= (1+0)\vvec \\
+			\vvec + (-1)\vvec &= (1-1)\vvec
+		\end{align*}
 	\end{bewijs}
 \end{thm}
 
 \begin{dfn}
-	Een lineaire combinatie van vectoren is het lineair product van een rij vectoren $\alpha \in V^n$ en een kolom coëfficiënten $v^\alpha \in \mathbb{R}^n$.
+	De nulruimte van een vectorruimte $\vecspace$ bepaald als $\vecspacen[0] = \setsm\zerovec$ bevat enkel de nulvector.
+\end{dfn}
+
+\begin{csq}
+	De nulruimte is een triviale vectorruimte.
+\end{csq}
+
+\begin{csq}
+	Een eindige deelverzameling van een vectorruimte is enkel een vectorruimte als het de triviale vectorruimte is.
+\end{csq}
+
+\begin{dfn}
+	Het lineair product van een rij vectoren $\rveci \in \vecrow \in \vecspacen$ en een kolom coëfficiënten $v_i \in \cvecva \in \mathbb{R}^n$
+	schaalt elke vector in de rij met de respectieve coëfficiënt in de kolom en somt over deze schalen.
 	\begin{align*}
-		\alpha v^\alpha & = \sum_i^n v^\alpha_i \alpha_i
-		\\
-		& = v^\alpha_1 \alpha_1 + \ldots + v^\alpha_n \alpha_n 
-		\\
-		& =
+		\vecrow \cvecva &= \sum_i^n \vcordvia \rveci
+		\\ & = \vcordvia[1] \rveci[1] + \ldots + \vcordvia[n] \rveci[n] 
+		\\ & =
 		\begin{pmatrix}
-			\alpha_1, \ldots, \alpha_n
+			\rveci[1], \ldots, \rveci[n]
 		\end{pmatrix}
 		\begin{pmatrix}
-			v^\alpha_1 \\
+			\vcordvia[1] \\
 			\vdots       \\
-			v^\alpha_n
+			\vcordvia[n]
 		\end{pmatrix}
-		\\
+	\end{align*}
+	Dit heet een lineaire combinatie van de vectoren in de rij $\vecrow$.
+\end{dfn}
+
+\begin{csq}
+	Zo is elke lineaire combinatie van vectoren $\rveci \in \vecspace$ ook een vector $\vvec \in \vecspace$.
+\end{csq}
+
+\begin{dfn}
+	De schaal van een kolom coëfficiënten $v_i \in \vvec \in \realn$ is de kolom $\vvec[w] \in \realn$ met de schalen van de respectieve coëfficiënten ${w}_i = \lambda {v}_i$.
+	\begin{align*}
+		\lambda \vvec =
+		\lambda 
+		\begin{pmatrix}
+			v_1 \\
+			\vdots \\
+			v_n
+		\end{pmatrix}
+		= 
+		\begin{pmatrix}
+			\lambda v_1 \\
+			\vdots \\
+			\lambda v_n
+		\end{pmatrix}
 	\end{align*}
 \end{dfn}
-Zo is elke lineaire combinatie van vectoren $\alpha \in V^n$ ook een vector $v \in V$.
 
 \begin{dfn}
-	De schaal $\lambda v$ van een kolom coëfficiënten $v \in \realn$ is de kolom $w \in \realn$ met de schalen van de respectieve coëfficiënten.
-	\begin{equation*}
-		{w}_i = \lambda {v}_i
-	\end{equation*}
-\end{dfn}
-
-\begin{dfn}
-	De som $u + v$ van coëfficiëntkolommen $u, v \in \realn$ is de kolom $w \in \realn$ met de sommen van de respectieve coëfficiënten.
-	\begin{equation*}
-		{w}_i = {u}_i + {v}_i
-	\end{equation*}
+	De som van coëfficiëntkolommen $\vvec[u], \vvec \in \realn$ is de kolom $\vvec[w] \in \realn$ met de sommen van de respectieve coëfficiënten ${w}_i = {u}_i + {v}_i$.
+	\begin{align*}
+		\vvec[u] + \vvec =
+		\begin{pmatrix}
+			u_1 \\
+			\vdots \\
+			u_n
+		\end{pmatrix}
+		+
+		\begin{pmatrix}
+			v_1 \\
+			\vdots \\
+			v_n
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			u_1 + v_1 \\
+			\vdots \\
+			u_1 + v_n
+		\end{pmatrix}
+	\end{align*}
 \end{dfn}
 
 \begin{thm}
-	$\realn$ is een vectorruimte met nulvector $0_n$.
+	$\realn$ is een vectorruimte met nulvector $0_n$ waar elke coëfficiënt nul is.
 \end{thm}
 
 Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. De coëfficiënten heten dan componenten.
 
 \begin{dfn}
 	De vectorrij $A \in \realn[m \times n]$ met $n$ kolomvectoren $A_{j} \in \realn[m]$ noemt men een matrix.
-	Componenten van $A_j$ schrijft men als $a_{ij}$, rijvectoren als $A^i$.
+
+	Evenwel vormt de matrix $A$ ook een vectorkolom met $m$ rijvectoren $A^i \in \realn$. 
+
+	De gemene component tussen $A_j$ en $A^i$ noemt men een element van de matrix, geschreven $a_{ij}$.
 \end{dfn}
 
 \begin{dfn}
-	Transpositie spiegelt een matrix om de diagonaal: $a^T_{ij} = a_{ji}$ voor $a^T \in A^T$.
+	Transpositie $A^T$ spiegelt een matrix $A$ om de diagonaal $A^T_j = A^i$ zodat $a^T_{ij} = a_{ji}$.
 \end{dfn}
 
 \begin{csq}
-	Het lineair product van een matrix $A \in \realmxn$ met een kolomvector $v \in \realn$ is een lineaire combinatie van $n$ kolomvectoren $A_i \in \realn[m]$.
+	Het lineair product $A\vvec$ van een matrix $A \in \realmxn$ met een kolomvector $\vvec \in \realn$ is een lineaire combinatie van $n$ kolomvectoren $A_i \in \realn[m]$.
 \end{csq}
 
 \begin{csq}
-	Evenwel is vanwege de structuur van de kolomvectorsom elke component van $w = Av$ ook een lineaire combinatie van de componenten van $v$: $w^T = v^TA^T$.
+	Evenwel is vanwege de structuur van het lineair product en de kolomvectorsom elke component van $\vvec[w] = A\vvec$ ook een lineaire combinatie van de componenten van $\vvec$, zodat $\vvec[w]^T = \vvec^TA^T$.
 \end{csq}
 
 \begin{csq}
-	Het herhaald lineair product van een vectorrij $\alpha \in V^m$ met de kolomvectoren $A_i$ van de matrix $A \in \realmxn$ vormt een vectorrij $\beta \in V^n$.
+	Het herhaald lineair product van een vectorrij $\vecrow \in \vecspacen[m]$ met de kolomvectoren $B_i$ van de matrix $B \in \realmxn$ vormt een vectorrij $\vecrow[b] \in \vecspacen$.
 \end{csq}
 
 \begin{dfn}
-	Bovenstaande operatie noemen we het herhaald product van $\alpha$ en $A$.
+	Bovenstaande operatie noemen we het herhaald product van $\vecrow$ en $B$.
 	\begin{equation*}
-		\alpha A = \beta
+		\vecrow B = \vecrow[b]
 	\end{equation*}
 \end{dfn}
 
@@ -163,8 +273,8 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{dfn}
 
 \begin{csq}
-	Het herhaald product van $A \in \realmxn$ met $B \in \realn[n \times p]$ is $C \in \realn[m \times p]$.
-	Dit zijn $p$ lineaire combinaties van $n$ kolomvectoren $A_i \in \realn[m]$ volgens $v$.
+	Het herhaald product van $A \in \realmx[m]{k}$ met $B \in \realmxn$ is $C \in \realmx[n]{k}$.
+	Dit zijn $n$ lineaire combinaties van $m$ kolomvectoren $A_i \in \realn[k]$ volgens $v$.
 \end{csq}
 
 \begin{dfn}
@@ -175,7 +285,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{dfn}
 
 \begin{csq}
-	Het matrixproduct $AB$ bestaat anderzijds ook uit $m$ lineaire combinaties van $n$ rijvectoren $B^j \in \realn[p]$, oftewel $(AB)^T = B^TA^T$.
+	Het matrixproduct $AB$ bestaat anderzijds ook uit $k$ lineaire combinaties van $m$ rijvectoren $B^j \in \realn[n]$, oftewel $(AB)^T = B^TA^T$.
 \end{csq}
 
 \begin{csq}
@@ -194,8 +304,8 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{csq}
 
 \begin{dfn}
-	De spanruimte $span(\alpha)$ van een vectorrij $\alpha$ bevat alle linaire combinaties van $\alpha$.
-	Men zegt dat $\alpha$ haar spanruimte voortbrengt.
+	De spanruimte $span(\vecrow)$ van een vectorrij $\vecrow$ bevat alle linaire combinaties van $\vecrow$.
+	Men zegt dat $\vecrow$ haar spanruimte voortbrengt.
 \end{dfn}
 
 \begin{csq}
@@ -209,32 +319,32 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \begin{thm}
 	De spanruimte van een vectorrij is een vectorruimte.
 	\begin{bewijs}
-		Uit $\alpha A = \beta$ en $\beta v^\beta = v$ volgt $\alpha A v^\beta = v$.
+		Uit $\vecrow B = \vecrow[b]$ en $\vecrow[b] v^{\vecrow[b]}= v$ volgt $\vecrow B v^{\vecrow[b]}= v$.
 		Hieruit mag blijken dat herhaalde lineaire combinaties de spanruimte niet verlaten.
 	\end{bewijs}
 \end{thm}
 
 \section{Vrije ruimtes}
 
-Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineaire combinatie van elke vectorrij $\alpha \in V^n$ is.
+Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \vecspace$ een lineaire combinatie van elke vectorrij $\vecrow \in \vecspacen$ is.
 
 \begin{dfn}
-	Een vectorrij $\alpha$ is lineair onafhankelijk of vrij als geen enkele van de vectoren $\alpha_i \in \alpha$ een lineaire combinatie is van de overige $\alpha_{j\neq i} \in \alpha$.
+	Een vectorrij $\vecrow$ is lineair onafhankelijk of vrij als geen enkele van de vectoren $\vecrow_i \in \vecrow$ een lineaire combinatie is van de overige $\vecrow_{j\neq i} \in \vecrow$.
 \end{dfn}
 
 \begin{lmm}
-	Het lineair product van een vrije vectorrij met een kolomvector is enkel de nulvector $\alpha 0^\alpha = \zerovec$ als de kolomvector dat ook is in zijn respectieve ruimte: $0^\alpha = 0_n$.
+	Het lineair product van een vrije vectorrij met een kolomvector is enkel de nulvector $\vecrow \cvecvv[0] = \zerovec$ als de kolomvector dat ook is in zijn respectieve ruimte: $\cvecvv[0] = 0_n$.
 	\begin{bewijs}
-		$-0^\alpha_i \alpha_i = \left(\alpha \without{\alpha_i}\right)\left(0^\alpha \without{0^\alpha_i}\right)$
+		$-\vcordai 0 \vecrow_i = \left(\vecrow \without{\rveci}\right)\left(\cvecvv[0] \without{\vcordai 0}\right)$
 	\end{bewijs}
 \end{lmm}
 
 \begin{csq}
 	Het herhaald product van een vrije vectorrij met een matrix is vrij als de matrix dat ook is. Als het product vrij is, is de matrix dat ook.
 	\begin{bewijs}
-		Stel dat $\beta = \alpha A$ lineair afhankelijk is voor $\alpha \in V^m$ vrij.
-		Dan is er een $0^\beta \neq 0_n$ waar $\beta0^\beta = \zerovec$, zodanig dat $A 0^\beta = 0_n$ betekent dat ook $A$ lineair afhankelijk is.
-		Anderzijds is voor $Cc = 0_k$ elke $\gamma Cc = \zerovec$.
+		Stel dat $\vecrow[b] = \vecrow B$ lineair afhankelijk is voor $\vecrow \in \vecspacen[m]$ vrij.
+		Dan is er een $\cvecc[b]{0} \neq 0_n$ waar $\vecrow[b] \cvecc[b]{0} = \zerovec$, waaruit $A \cvecc[b]{0} = 0_n$ zodat ook $A$ lineair afhankelijk is.
+		Anderzijds is voor $D\vvec = 0_k$ elke $\vecrow[c] D\vvec = \zerovec$.
 	\end{bewijs}
 \end{csq}
 
@@ -246,8 +356,8 @@ Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineair
 	Een vrije vectorrij heeft voor elke vector in zijn spanruimte slechts één kolom coëfficiënten.
 	\begin{bewijs}
 		\begin{align*}
-			\alpha v^{\alpha 1}                  & = \alpha v^{\alpha 2} \\
-			\alpha (v^{\alpha 1} - v^{\alpha 2}) & = \zerovec
+			\vecrow \vvec                 & = \vecrow \vvec[w] \\
+			\vecrow (\vvec - \vvec[w]) & = \zerovec
 		\end{align*}
 	\end{bewijs}
 \end{csq}
@@ -266,28 +376,35 @@ Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineair
 \end{dfn}
 
 \begin{thm}
-	Als $\beta$ vrij wordt voortgebracht $span(\beta) \subseteq span(\alpha)$ uit $\alpha$ dan bevat $\beta$ ten hoogste een gelijk aantal vectoren $\abs\beta \leq \abs\alpha$.
-	Als $\abs\beta = \abs\alpha$ dan is $\beta$ voortbrengend $span(\beta) = span(\alpha)$. 
+	Als $\vecrow[b]$ vrij wordt voortgebracht $span(\vecrow[b]) \subseteq span(\vecrow)$ uit $\vecrow$ dan bevat $\vecrow[b]$ ten hoogste een gelijk aantal vectoren $\abs{\vecrow[b]} \leq \abs\vecrow$.
+	Als $\abs{\vecrow[b]} = \abs\vecrow$ dan is $\vecrow[b]$ voortbrengend $span(\vecrow[b]) = span(\vecrow)$ en $\vecrow$ vrij. 
 	\begin{bewijs}
-		Elke $\beta_j$ heeft minstens één definiete coördinaat $b_{ij} \in B$ voor een zekere $\alpha_i$.
+		Elke $\vecrow[b]_j$ heeft minstens één definiete coëfficiënt $b_{ij} \in B$ voor een zekere $\vecrow_i$.
 		\begin{align*}
-			\beta_j = b_{ij}\alpha_i + (\alpha \without{\alpha_i})(B_j  \without{b_{ij}}) 
+			\vecrow[b]_j = b_{ij}\vecrow_i + (\vecrow \without{\vecrow_i})(B_j  \without{b_{ij}}) 
 		\end{align*}
-		Hieruit blijkt echter dat ook deze $\alpha_i$ afhangt van  $\alpha^{(1)} = (\alpha \without{\alpha_i}) \cup \beta_j$.
-		Vandaar dat ook $\alpha^{(1)}$ voortbrengend is gezien $\alpha \subseteq span(\alpha^{(1)})$.
+		Hieruit blijkt echter dat ook deze $\vecrow_i$ afhangt van  $\vecrow^{(1)} = \left(\vecrow \without{\vecrow_i}\right) \cup \rvecr[j]{b}$.
+		Vandaar dat $\vecrow^{(1)}$ voortbrengend blijft gezien $span(\vecrow) \subseteq span(\vecrow^{(1)})$.
 
-		Daar $\beta$ vrij en $\alpha^{(m)}$ voortbrengend is heeft $\beta_k$ telkens $\alpha^{(m)}$-coördinaten buiten $\beta \without{\beta_k}$ en is deze procedure voor herhaling vatbaar tot we $\alpha$ uitputten.
-		Blijft er nog enige $\beta_l \notin \alpha^{(\abs{\alpha})}$ over, dan is deze afhankelijk van $\alpha^{(\abs\alpha)} \subset \beta$ en ware $\beta$ nimmer vrij.
-		Geldt evenwel $\alpha^{(\abs{\alpha})} = \beta$ dan is $\beta$ voortbrengend.
+		Daar $\vecrow[b]$ vrij is en voortgebracht door $\vecrow^{(m)}$ heeft elke $\rvecr[k]{b}$ telkens definiete $\vecrow^{(m)}$-coëfficiënten buiten $\vecrow[b] \without{\rvecr[k]{b}}$
+		en is deze procedure voor herhaling vatbaar tot we $\vecrow$ uitputten.
+
+		Blijft er nog enige $\vecrow[b]_l \notin \vecrow^{(\abs{\vecrow})}$ over,
+		dan is deze lineair afhankelijk van $\vecrow^{(\abs\vecrow)} \subset \vecrow[b]$ en ware $\vecrow[b]$ nimmer vrij.
+
+		Geldt evenwel $\vecrow^{(\abs{\vecrow})} = \vecrow[b]$ dan is $\vecrow[b]$ voortbrengend.
+		Ware $\vecrow$ nu niet vrij, dan kon ze ingeperkt worden zonder aan de voortbrengendheid te schaden.
+		We toonden evenwel juist aan dat een vrij voorgebracht deel niet groter kan zijn dan het voortbrengende.
 	\end{bewijs}
 \end{thm}
 
 \begin{csq}
-	Elk basispaar dat dezelfde ruimte voortbrengt $span(\alpha) = span(\beta)$ heeft gelijke orde.
+	Elk basispaar dat dezelfde vectorruimte voortbrengt $span(\vecrow) = span(\vecrow[b])$ heeft gelijke orde $\abs\vecrow = \abs{\vecrow[b]}$.
+	We noemen deze orde de dimensie van de vectorruimte.
 \end{csq}
 
 \begin{csq}
-	Een vectorrij van lagere orde dan een basis is niet voortbrengend voor de spanruimte van de basis.
+	Een vectorrij $\vecrow$ van lagere orde $\abs\vecrow < \abs{\vecrow[b]}$ dan een basis $\vecrow[b]$ is niet voortbrengend voor de spanruimte van de basis $span(\vecrow) \subset span(\vecrow[b])$.
 \end{csq}
 
 \begin{csq}
@@ -301,9 +418,9 @@ Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineair
 \begin{csq}
 	De volgende zijn gelijkwaardig voor vierkante matrices $A \in \realnxn$:
 
-	- lineaire onafhankelijkheid
+	- lineaire onafhankelijkheid van zowel de vectorrij als de vectorkolom
 
-	- voortbrenging van $\realn$
+	- voortbrenging van $\realn$ uit zowel de vectorrij als de vectorkolom
 
 	- inverteerbaarheid
 \end{csq}
@@ -317,64 +434,84 @@ Evenwel bestaan er vectorruimtes $V$ waar niet elke vector $v \in V$ een lineair
 \end{dfn}
 
 \begin{csq}
-	Een basistransformatie is contravariant aan de ge\"{i}mpliceerde co\"{o}rdinatentransformatie. 
+	Een basistransformatie is contravariant aan de ge\"{i}mpliceerde co\"{o}rdinatentransformatie.
 	\begin{bewijs}
-		Uit $\alpha A = \beta$ en $\alpha v^\alpha = v$ volgt $\beta A^{-1} v^\alpha = v$.
+		Uit $\vecrow A = \vecrow[b]$ en $\vecrow v^{\vecrow}= v$ volgt $\vecrow[b] A^{-1} v^{\vecrow}= v$. 
 	\end{bewijs}
 \end{csq}
 
+Evenwel betekent dit slechts dat de overeenkomstige matrices elkaars inverse zijn.
+De wijze waarop een matrix inwerkt op een vectorrij verschilt immers van de werking op een kolom coördinaten, waarbij commutativiteit niet gegarandeerd is.
+
 \section{Genormeerde ruimtes}
 
-Nu wensen we een begrip van afstand in te voeren, gekend als de norm $\norm{v}$ van een vector $v \in V$. Hiertoe nemen we een willekeurige basis $\alpha$ van $V$ en schrijven er enkele bijzondere eigenschappen aan toe.
+Nu wensen we een begrip van afstand in te voeren, gekend als de norm $\vnorm v$ van een vector $\vvec \in \vecspace$.
+Hiertoe nemen we een willekeurige basis $\vecrow[t]$ van $\vecspace$ en schrijven er enkele bijzondere eigenschappen aan toe.
 \begin{axm}
-	Vooreerst is telkens $\norm{\alpha_i} = 1$.
+	Vooreerst is telkens $\norm{\rvecr{t}} = 1$.
 \end{axm}
 
 \begin{axm}
-	Vervolgens is de schaal associatief met de norm: $\norm{\lambda v} = \lambda\norm v$.
+	Vervolgens is de schaal associatief met de norm: $\norm{\lambda \vvec} = \lambda\vnorm v$.
 \end{axm}
 
 \begin{csq}
-	Hieruit mag blijken dat er voor elke $v \in V$ een vector $v_e = {\norm v}^{-1}v$ waarvan de norm $\norm e = 1$.
+	Hieruit mag blijken dat er voor elke $\vvec \in \vecspace$ een vector $\uvec = {\vnorm v}^{-1}\vvec$ bestaat waarvan de norm $\vnorm \uvec = 1$.
 \end{csq}
 
-Beschouw een vrij paar vectoren $v, w$ dat een derde vector $c$ voortbrengt zodat $c = c^v v + c^w w$.
+Beschouw een vrij paar vectoren $\vvec, \vvec[w]$ dat een derde vector $\vvec[c]$ voortbrengt zodat $\vvec[c] = \lambda \vvec + \mu \vvec[w]$.
 
 \begin{dfn}
-	We noemen $c^v v$ de parallele projectie van $c$ op de richting van $v$ volgens de richting van $w$ geschreven $c^v v = proj_{w}(c, v)$.
+	We noemen $\lambda\vvec$ de parallele projectie van $\vvec[c]$ op de richting van $\vvec$ volgens de richting van $\vvec[w]$ geschreven $proj_{\vvec[w]}(\vvec[c], \vvec)$.
 \end{dfn}
 
-Stel voortaan $a = proj_w(c, v)$.
+Stel voortaan $\vvec[a] = proj_{\vvec[w]}(\vvec[c], \vvec)$.
 
 \begin{csq}
-	Merk op dat $\norm a$ de coördinaat is van $c$ naar $a_e$ in het basispaar $a_e, w$.
-	Vandaar dat we $a$ ook de component van $c$ naar $a^e$ langs $w$ noemen.
+	Merk op dat $\vnorm{a}$ de coördinaat is van $\vvec[c]$ naar $\uvec[a]$ in het basispaar $\uvec[a], \vvec[w]$.
+	Vandaar dat we $\vvec[a]$ ook de component van $\vvec[c]$ naar $\uvec[a]$ langs $\vvec[w]$ noemen.
 \end{csq}
 
+\begin{csq}
+	Als $\vvec[a] = \zerovec$ dan ligt $\vvec[c]$ in de richting van projectie.
+	\begin{bewijs}
+		Daar $\lambda$ nul blijkt is $\vvec[c] = \mu\vvec[w]$ een schaal van $\vvec[w]$.
+	\end{bewijs}
+\end{csq}
 
-Evenwel kunnen we nu ook volgende vectoren beschouwen, $c' = \norm a c_e$ en $a' = \norm c a_e$.
-Hierbij spiegelen we de driehoek gevormd door $a, c$ om de bissectrice en voltooien die met $b' = c' - a'$.
+\begin{csq}
+	De parallelle projectie van een vector is gelijk aan de som van de parallele projecties van de componenten van die vector.
+	\begin{bewijs}
+		Weze $\vvec[c] = \sum_{i} \nu_i{\vvec[u]}_i$ voor willekeurige vectoren $\vvec[u]_i$.
+		Elke ${\vvec[u]}_i$ kan geschreven worden als een lineaire combinatie van een basis die $\vvec$, $\vvec[w]$ bevat, waarbij ze dus een coördinaat $\omega_i$ hebben naar $\vvec$.
+		Dan is de coördinaat van $\vvec[c]$ naar $\vvec$ in die basis gelijk aan $\sum_i \nu_i\omega_i$.
+	\end{bewijs}
+\end{csq}
+
+Evenwel kunnen we nu ook volgende vectoren beschouwen, $\vvec[c'] = \vnorm a \uvec[c]$ en $\vvec[a'] = \vnorm c \uvec[a]$.
+Hierbij spiegelen we de driehoek gevormd door $\vvec[a], \vvec[c]$ om de bissectrice en voltooien die met $\vvec[b'] = \vvec[c'] - \vvec[a']$.
 
 \begin{dfn}
-	Evenwel wensen wij nu $a$ volgens $b'$ te projecteren op $c$, hetgeen we de terugkerende projectie van $c$ naar $v$ langs $w$ noemen $reproj_w(c, v) = proj_{b'}(a, c)$.
+	Evenwel wensen wij nu $\vvec[a]$ volgens $\vvec[b']$ te projecteren op $\vvec[c]$, hetgeen we de terugkerende projectie van $\vvec[c]$ naar $\vvec$ langs $\vvec[w]$ noemen $reproj_{\vvec[w]}(\vvec[c], \vvec) = proj_{\vvec[b']}(\vvec[a], \vvec[c])$.
 \end{dfn}
 
-Blijkt evenwel dat projecties langs $b'$ coördinaten naar $a^e$ op $c^e$ schalen met een factor van $\frac{\norm a}{\norm c}$.
+Blijkt evenwel uit de definitie van $\vvec[b']$ dat projecties langs $\vvec[b']$ op $\vvec[c]$ van een component naar $\uvec[a]$ schalen met een factor van $\frac{\vnorm a}{\vnorm c}$.
 
 \begin{csq}
 	\begin{equation*}
-		\norm{reproj_w(c, v)} = \frac{\norm{proj_w(c, v)}^2}{\norm c}
+		\norm{reproj_{\vvec[w]}(\vvec[c], \vvec)} = \frac{\norm{proj_{\vvec[w]}(\vvec[c], \vvec)}^2}{\vnorm c}
 	\end{equation*}
 \end{csq}
 
 \begin{dfn}
-	Weze $\norm c$ = $\norm{reproj_w(c, v)} + \norm{reproj_v(c, w)}$ dan noemt men $v$ en $w$ onderling rechthoekig $v \perp w$.
+	Weze $\vnorm c$ = $\norm{reproj_{\vvec[w]}(\vvec[c], \vvec)} + \norm{reproj_{\vvec}(\vvec[c], \vvec[w])}$ dan noemt men $\vvec$ en $\vvec[w]$ onderling rechthoekig $\vvec \perp \vvec[w]$.
 \end{dfn}
 
-De projecties van de aanliggende componenten raken elkaar wederom op de tegenliggende zijde.
+Merk op dat $\vvec[c] = reproj_{\vvec[w]}(\vvec[c], \vvec) + reproj_{\vvec}(\vvec[c], \vvec[w])$ rechthoekigheid even goed definieert.
+Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen, vandaar dat we de definitie in zijn relevante vorm geven.
 
 \begin{axm}
-	De vectoren van de gekozen basis $\alpha$ zijn onderling rechthoekig.
+	De vectoren van de gekozen basis $\vecrow[t]$ zijn onderling rechthoekig.
 \end{axm}
 
 \begin{dfn}
@@ -382,23 +519,37 @@ De projecties van de aanliggende componenten raken elkaar wederom op de tegenlig
 \end{dfn}
 
 \begin{dfn}
-	Gegeven een orthonormale basis bepaalt een vrij paar vectoren $v, w$ in beide projectiezinnen een rechte hoek om langs te projecteren.
-	Vandaar dat men spreekt van een rechthoekige projectie $proj_\perp(v, w)$.
+	Gegeven een orthonormale basis bepaalt een vrij paar vectoren $\vvec, \vvec[w]$ in beide projectiezinnen een rechte hoek om langs te projecteren.
+	Vandaar dat men spreekt van een rechthoekige projectie $proj_\perp(\vvec, \vvec[w])$.
 \end{dfn}
 
 \begin{dfn}
-	Het scalair product van vectoren $v \cdot w$ is gedefinieerd als het lineair product $(v^\alpha)^T w^\alpha$ van een rijvector coördinaten en een coördinaatvector.
+	Het scalair product van vectoren $\vvec$, $\vvec[w]$ is gedefinieerd als het lineair product $\vvec \cdot \vvec[w] = (\cvecva[t])^T \cvecc[t]{w}$ van de rijvector met coördinaten van $\vvec$ en een kolomvector met coördinaten van $\vvec[w]$.
 \end{dfn}
 
 \begin{csq}
-	De rechthoekige projectie van $v$ op $w$ is het scalair product mits schaalcorrectie voor de norm $proj_\perp(v, w) = {\norm w}^{-1}v \cdot w$.
+	De rechthoekige projectie van $\vvec$ op $\vvec[w]$ is het scalair product mits schaalcorrectie voor de norm van het projectiedoel $proj_\perp(\vvec, \vvec[w]) = {\vnorm w}^{-1}\vvec \cdot \vvec[w]$.
 	\begin{bewijs}
-		De coördinaat $v^\alpha_i$ is de norm van de component van $v$ naar de basisvector $\alpha_i$. Evenwel schaalt de overeenkomstige component van de vector waar we op projecteren met een factor van $\norm w^{-1}w^\alpha_i$ in de terugkerende projectie.
+		De component van $\vvec$ naar $\rvecr{t}$ is $\vcordvi{t}\rvecr{t}$. Evenwel is $\vcordv[w]{i}{t}{\vnorm w}^{-1}$ de norm van de rechthoekige projectie van $\rvecr{t}$ op $\vvec[w]$.
 	\end{bewijs}
 \end{csq}
 
 \begin{csq}
-	De norm van een vector is de wortel van het scalair product met zichzelf $\norm v = \sqrt{v\cdot v}$.
+	Indien het scalair product nul is $\vvec \cdot\vvec[w] = 0$ zijn $\vvec$ en $\vvec[w]$ onderling rechthoekig $\vvec\perp\vvec[w]$.
+	\begin{bewijs}
+		De rechthoekige projectie van $\vvec$ naar $\vvec[w]$ is de nulvector zodanig dat $\vvec$ in de richting van projectie ligt.
+	\end{bewijs}
+\end{csq}
+
+\begin{dfn}
+	De rechthoekige projectie van $\uvec$ op $\vvec[w]$ heet de cosinus van de hoek $\theta$ tussen $\vvec[w]$ en $\vvec$.
+	\begin{equation*}
+		cos(\theta) = \frac{\vvec \cdot \vvec[w]}{\vnorm v\vnorm w}
+	\end{equation*}
+\end{dfn}
+
+\begin{csq}
+	De norm van een vector is de wortel van het scalair product met zichzelf $\vnorm v = \sqrt{\vvec\cdot\vvec}$.
 \end{csq}
 
 \newpage
