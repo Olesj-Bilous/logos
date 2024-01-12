@@ -1,0 +1,26 @@
+Beschouw nu een eindige verzameling $\varGamma \subset \mathbb{N}$ en een bijectie $f: \varGamma \longleftrightarrow \vecrow$ waar $\vecrow$ een basis is voor de vectorruimte $\vecspace$.
+
+Weze $\Phi = \{ \phi \subset \mathbb{N}\times\realnums \ |\ \phi: \varGamma \longrightarrow \realnums \}$.
+Men kan de coördinaten van elke vector $\vvec\in\vecspace$ als een functie $\phi\in\Phi$ beschouwen waar $\phi(x)$ de coördinaat is van $\vvec$ naar $f(x)$.
+Anderzijds bestaat voor elke vector $\vvec$ een functie $\phi$ volgens zijn coördinaten naar $\vecrow$.
+Dus definieert $f$ een bijectie $F: \Phi \longleftrightarrow \vecspace$ tussen reële functies van $\varGamma$ en de vectoren $\vvec\in\vecspace$.
+
+De selectiefuncties $s_x: \varGamma \longrightarrow \setsm{0, 1}$ waar $s_x(t) = 1$ enkel als $t = x$ vormen de deelbijectie met de basis waar $F(s_x) = f(x)$ voor elke $x \in \varGamma$.
+Evenwel beschouwt men dit doorgaans vanuit de injectie $i: \varGamma \longrightarrow U(\vecrow)$ .
+Hier vervult $f^{-1}$ deze rol, waarbij $U(\vecrow) = \varGamma$.
+
+Nu zouden wij door functies $\phi, \gamma \in \Phi$ wensen te navigeren mits schaal en som, waarbij we $r\phi + \gamma = \eta$ voor $r \in \realnums$ definiëren als $\eta(x) = r\phi(x) + \gamma(x)$.
+Evenwel navigeren wij daarbij slechts door vectoren $\vvec\in\vecspace$ middels de overeenkomstige operaties op de coördinaten ten aanzien van $\vecrow$.
+
+Wensen wij nu een andere bijectie te definiëren $g: \varGamma \longleftrightarrow \vecrow[b]$ waar $\vecrow[b] = \vecrow B$ een willekeurige basis is van $\vecspace$.
+Dan definieert deze $g$ ook een bijectie $G: \Phi\longleftrightarrow\vecspace$ waar $G(s_x) = g(x) = \vecrow B_i$ voor een zekere $i$.
+Daarbij geldt evenzeer $G(\phi)^{\vecrow[b]} = F(\phi)^{\vecrow}$ zodat $G(\phi) = \vecrow BF(\phi)^{\vecrow}$ en dus $G(\phi)^{\vecrow} = BF(\phi)^{\vecrow}$.
+Zo transformeren de vectorrepresentaties van elke functie $\phi\in\Phi$ lineair en covariant met de basistransformatie geïmpliceerd door de overgang van $f$ naar $g$.
+
+Beperk $\vecrow[b]$ tot een vrij deel, vervolgens naar believen uitgebreid met lineair afhankelijke vectoren, schrijvend $\vecrow[b]' = \vecrow B'$.
+Dan kunnen we een functie beschouwen $g': \varLambda \longrightarrow \vecrow[b]'$.
+Voor een willekeurige $U: \vecspace^{\mathbf\omega} \longrightarrow \mathbb{N}^{\mathbf\omega}$ die een zekere injectie definieert $i: \varGamma \longrightarrow U(\vecrow)$ geldt $U(\vecrow[b]') = U(\vecrow B')$ zodat voor $i': \varLambda\longrightarrow U(\vecrow[b]')$ ook geldt $i': \varLambda\longrightarrow U(\vecrow B')$.
+
+Daar een willekeurige basis een lineair gelijkwaardige representatie van $\Phi$ levert noemt men $\vecspace$ een vrije ruimte over $\varGamma$.
+Dit is evenwel slechts een concreet geval van een algemener begrip waarvan de definitie buiten het huidig bestek valt.
+Daarbij wordt de transformatie van de ruimte volledig bepaald door die van de basis, zoals hier in het geval van vectorruimtes nogmaals mag blijken.

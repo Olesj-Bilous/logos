@@ -52,7 +52,7 @@
 % vector rows and their vectors
 \newcommand{\vecrow}[1][a]{\mathcal{\MakeUppercase{#1}}}
 
-\newcommand{\rvec}[2][i]{{#2}_#1}
+\newcommand{\rvec}[2][i]{{#2}_{#1}}
 \newcommand{\rvecr}[2][i]{\rvec[#1]{\vecrow[#2]}}
 \newcommand{\rveci}[1][i]{\rvecr[#1]{a}}
 
@@ -83,6 +83,7 @@
 \begin{document}
 \title{Lineaire algebra}
 \author{Olesj V. Bilous}
+\dedicatory{toegewijd aan Ganna}
 %\begin{abstract}
 %\end{abstract}
 \maketitle
@@ -154,7 +155,7 @@
 \end{thm}
 
 \begin{dfn}
-	De nulruimte van een vectorruimte $\vecspace$ bepaald als $\vecspacen[0] = \setsm\zerovec$ bevat enkel de nulvector.
+	De nulruimte van een vectorruimte $\vecspace_0 = \setsm\zerovec \subseteq \vecspace$ bevat enkel de nulvector.
 \end{dfn}
 
 \begin{csq}
@@ -166,7 +167,7 @@
 \end{csq}
 
 \begin{dfn}
-	Het lineair product van een rij vectoren $\rveci \in \vecrow \in \vecspacen$ en een kolom coëfficiënten $v_i \in \cvecva \in \mathbb{R}^n$
+	Het lineair product van een rij vectoren $\rveci \in \vecrow \in \vecspacen$ en een kolom coëfficiënten $\vcordvia \in \cvecva \in \mathbb{R}^n$
 	schaalt elke vector in de rij met de respectieve coëfficiënt in de kolom en somt over deze schalen.
 	\begin{align*}
 		\vecrow \cvecva &= \sum_i^n \vcordvia \rveci
@@ -340,16 +341,16 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \end{lmm}
 
 \begin{csq}
-	Het herhaald product van een vrije vectorrij met een matrix is vrij als de matrix dat ook is. Als het product vrij is, is de matrix dat ook.
+	Het herhaald product van een vrije vectorrij met een matrix is vrij als de matrix dat ook is. Als het product van een willekeurige vectorrij met een matrix vrij is, is de matrix dat ook.
 	\begin{bewijs}
-		Stel dat $\vecrow[b] = \vecrow B$ lineair afhankelijk is voor $\vecrow \in \vecspacen[m]$ vrij.
-		Dan is er een $\cvecc[b]{0} \neq 0_n$ waar $\vecrow[b] \cvecc[b]{0} = \zerovec$, waaruit $A \cvecc[b]{0} = 0_n$ zodat ook $A$ lineair afhankelijk is.
+		Stel dat $\vecrow[b] = \vecrow B$ lineair afhankelijk is voor $\vecrow \in \vecspacen[m]$ en $B \in \realmxn$ vrij.
+		Dan is er een $\cvecc[b]{0} \neq 0_n$ waar $\vecrow[b] \cvecc[b]{0} = \zerovec$, waaruit $B \cvecc[b]{0} = 0_n$ zodat ook $B$ lineair afhankelijk blijkt, een tegenstrijdigheid.
 		Anderzijds is voor $D\vvec = 0_k$ elke $\vecrow[c] D\vvec = \zerovec$.
 	\end{bewijs}
 \end{csq}
 
 \begin{csq}
-	Het product van vrije matrices is vrij. Als het product vrij is, is de rechtermatrix vrij.
+	Het product van vrije matrices is vrij. Als het product van willekeurige matrices vrij is, is de rechtermatrix dat ook.
 \end{csq}
 
 \begin{csq}
@@ -399,13 +400,16 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \end{thm}
 
 \begin{csq}
-	Elk basispaar dat dezelfde vectorruimte voortbrengt $span(\vecrow) = span(\vecrow[b])$ heeft gelijke orde $\abs\vecrow = \abs{\vecrow[b]}$.
-	We noemen deze orde de dimensie van de vectorruimte.
+	Een vectorrij $\vecrow$ van lagere orde $\abs\vecrow < \abs{\vecrow[b]}$ dan een basis $\vecrow[b]$ is niet voortbrengend voor de spanruimte van de basis $span(\vecrow) \subset span(\vecrow[b])$.
 \end{csq}
 
 \begin{csq}
-	Een vectorrij $\vecrow$ van lagere orde $\abs\vecrow < \abs{\vecrow[b]}$ dan een basis $\vecrow[b]$ is niet voortbrengend voor de spanruimte van de basis $span(\vecrow) \subset span(\vecrow[b])$.
+	Elk basispaar dat dezelfde vectorruimte voortbrengt $span(\vecrow) = span(\vecrow[b])$ heeft gelijke orde $\abs\vecrow = \abs{\vecrow[b]}$.
 \end{csq}
+
+\begin{dfn}
+	We noemen deze orde de dimensie van de vectorruimte $dim(\vecspace)$.
+\end{dfn}
 
 \begin{csq}
 	Enkel vierkante matrices kunnen commutatief inverteerbaar zijn.
@@ -418,9 +422,9 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \begin{csq}
 	De volgende zijn gelijkwaardig voor vierkante matrices $A \in \realnxn$:
 
-	- lineaire onafhankelijkheid van zowel de vectorrij als de vectorkolom
+	- lineaire onafhankelijkheid van de vectorrij
 
-	- voortbrenging van $\realn$ uit zowel de vectorrij als de vectorkolom
+	- voortbrenging van $\realn$ uit de vectorrij
 
 	- inverteerbaarheid
 \end{csq}
@@ -436,12 +440,11 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \begin{csq}
 	Een basistransformatie is contravariant aan de ge\"{i}mpliceerde co\"{o}rdinatentransformatie.
 	\begin{bewijs}
-		Uit $\vecrow A = \vecrow[b]$ en $\vecrow v^{\vecrow}= v$ volgt $\vecrow[b] A^{-1} v^{\vecrow}= v$. 
+		Uit $\vecrow B = \vecrow[b]$ en $\vecrow v^{\vecrow}= v$ volgt $\vecrow[b] B^{-1} v^{\vecrow}= v$. 
 	\end{bewijs}
+	Evenwel betekent dit slechts dat de overeenkomstige matrices elkaars inverse zijn.
+	De wijze waarop een matrix inwerkt op een vectorrij verschilt immers van de werking op een kolom coördinaten, waarbij commutativiteit niet gegarandeerd is.
 \end{csq}
-
-Evenwel betekent dit slechts dat de overeenkomstige matrices elkaars inverse zijn.
-De wijze waarop een matrix inwerkt op een vectorrij verschilt immers van de werking op een kolom coördinaten, waarbij commutativiteit niet gegarandeerd is.
 
 \section{Genormeerde ruimtes}
 
@@ -465,6 +468,13 @@ Beschouw een vrij paar vectoren $\vvec, \vvec[w]$ dat een derde vector $\vvec[c]
 	We noemen $\lambda\vvec$ de parallele projectie van $\vvec[c]$ op de richting van $\vvec$ volgens de richting van $\vvec[w]$ geschreven $proj_{\vvec[w]}(\vvec[c], \vvec)$.
 \end{dfn}
 
+\begin{csq}
+	Als $proj_{\vvec[w]}(\vvec[c], \vvec) = \zerovec$ dan ligt $\vvec[c]$ in de richting van projectie.
+	\begin{bewijs}
+		Daar $\lambda\vvec$ de nulvector blijkt is $\vvec[c] = \mu\vvec[w]$ een schaal van $\vvec[w]$.
+	\end{bewijs}
+\end{csq}
+
 Stel voortaan $\vvec[a] = proj_{\vvec[w]}(\vvec[c], \vvec)$.
 
 \begin{csq}
@@ -473,18 +483,11 @@ Stel voortaan $\vvec[a] = proj_{\vvec[w]}(\vvec[c], \vvec)$.
 \end{csq}
 
 \begin{csq}
-	Als $\vvec[a] = \zerovec$ dan ligt $\vvec[c]$ in de richting van projectie.
+	De parallelle projectie van een vector is gelijk aan de som van de parallele projecties van de samenstellende componenten.
 	\begin{bewijs}
-		Daar $\lambda$ nul blijkt is $\vvec[c] = \mu\vvec[w]$ een schaal van $\vvec[w]$.
-	\end{bewijs}
-\end{csq}
-
-\begin{csq}
-	De parallelle projectie van een vector is gelijk aan de som van de parallele projecties van de componenten van die vector.
-	\begin{bewijs}
-		Weze $\vvec[c] = \sum_{i} \nu_i{\vvec[u]}_i$ voor willekeurige vectoren $\vvec[u]_i$.
-		Elke ${\vvec[u]}_i$ kan geschreven worden als een lineaire combinatie van een basis die $\vvec$, $\vvec[w]$ bevat, waarbij ze dus een coördinaat $\omega_i$ hebben naar $\vvec$.
-		Dan is de coördinaat van $\vvec[c]$ naar $\vvec$ in die basis gelijk aan $\sum_i \nu_i\omega_i$.
+		Weze $\vvec[c] = \sum_{i} {\vvec[u]}_i$ voor willekeurige vectoren $\vvec[u]_i$.
+		Elke ${\vvec[u]}_i$ kan geschreven worden als een lineaire combinatie van een basis die $\vvec$, $\vvec[w]$ bevat, waarbij ze dus een coördinaat $\nu_i$ hebben naar $\vvec$.
+		Dan is de coördinaat van $\vvec[c]$ naar $\vvec$ in die basis gelijk aan $\lambda = \sum_i \nu_i$.
 	\end{bewijs}
 \end{csq}
 
@@ -519,18 +522,18 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 \end{dfn}
 
 \begin{dfn}
-	Gegeven een orthonormale basis bepaalt een vrij paar vectoren $\vvec, \vvec[w]$ in beide projectiezinnen een rechte hoek om langs te projecteren.
-	Vandaar dat men spreekt van een rechthoekige projectie $proj_\perp(\vvec, \vvec[w])$.
+	Gegeven een orthonormale basis $\vecrow[t]$ bepaalt een vrij paar vectoren $\vvec, \vvec[w]$ in beide projectiezinnen een rechte hoek om langs te projecteren.
+	Men spreekt van een rechthoekige projectie $proj_\perp(\vvec, \vvec[w])$, of ook wel de rechthoekige component of simpelweg de component van $\vvec$ naar $\uvec[w]$.
 \end{dfn}
 
 \begin{dfn}
-	Het scalair product van vectoren $\vvec$, $\vvec[w]$ is gedefinieerd als het lineair product $\vvec \cdot \vvec[w] = (\cvecva[t])^T \cvecc[t]{w}$ van de rijvector met coördinaten van $\vvec$ en een kolomvector met coördinaten van $\vvec[w]$.
+	Het scalair product van vectoren $\vvec$, $\vvec[w]$ ten aanzien van basis $\vecrow[t]$ is gedefinieerd als het lineair product $\vvec \cdot \vvec[w] = (\cvecva[t])^T \cvecc[t]{w}$ van de rijvector met coördinaten van $\vvec$ en een kolomvector met coördinaten van $\vvec[w]$.
 \end{dfn}
 
 \begin{csq}
-	De rechthoekige projectie van $\vvec$ op $\vvec[w]$ is het scalair product mits schaalcorrectie voor de norm van het projectiedoel $proj_\perp(\vvec, \vvec[w]) = {\vnorm w}^{-1}\vvec \cdot \vvec[w]$.
+	De norm van de rechthoekige projectie van $\vvec$ op $\vvec[w]$ is het scalair product mits schaalcorrectie voor de norm van het projectiedoel $\norm{proj_\perp(\vvec, \vvec[w])} = {\vnorm w}^{-1}\vvec \cdot \vvec[w]$.
 	\begin{bewijs}
-		De component van $\vvec$ naar $\rvecr{t}$ is $\vcordvi{t}\rvecr{t}$. Evenwel is $\vcordv[w]{i}{t}{\vnorm w}^{-1}$ de norm van de rechthoekige projectie van $\rvecr{t}$ op $\vvec[w]$.
+		De component van $\vvec$ naar $\rvecr{t}$ is $\vcordvi{t}\rvecr{t}$. Evenwel is ${\vnorm w}^{-1}\vcordv[w]{i}{t}$ de norm van de rechthoekige projectie van $\rvecr{t}$ op $\vvec[w]$.
 	\end{bewijs}
 \end{csq}
 
@@ -553,37 +556,4 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 \end{csq}
 
 \newpage
-
-\section{Special relativity}
-\begin{axm}
-	Linearity
-	\begin{align*}
-		\lambda
-		\begin{pmatrix}
-			a_{11} a_{12} \\
-			a_{21} a_{22}
-		\end{pmatrix}
-		\begin{pmatrix}
-			z \\
-			ct
-		\end{pmatrix}
-		 & =
-		\begin{pmatrix}
-			z' \\
-			ct'
-		\end{pmatrix}
-	\end{align*}
-\end{axm}
-\begin{axm}
-	Scaled kinetic translation
-	\begin{align*}
-		z' = \mu(z - vt)
-	\end{align*}
-\end{axm}
-\begin{axm}
-	Invariance
-	\begin{align*}
-		\lambda^2(z^2 - c^2t^2) & = ({z'}^2 - c^2{t'}^2)
-	\end{align*}
-\end{axm}
 \end{document}
