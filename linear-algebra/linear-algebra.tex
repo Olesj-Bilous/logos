@@ -247,7 +247,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{dfn}
 
 \begin{dfn}
-	Transpositie $A^T$ spiegelt een matrix $A$ om de diagonaal $A^T_j = A^i$ zodat $a^T_{ij} = a_{ji}$.
+	Transpositie $A^T$ spiegelt een matrix $A$ om de diagonaal $A^T_j = A^j$ zodat $a^T_{ij} = a_{ji}$.
 \end{dfn}
 
 \begin{csq}
@@ -270,12 +270,12 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{dfn}
 
 \begin{dfn}
-	De matrix die een vectorrij op zichzelf afbeeldt noemen we de identiteitsmatrix $I_n \in \realnxn$.
+	De matrix die een vectorrij op zichzelf afbeeldt noemen we de identiteitsmatrix $I_n \in \realnxn$ zodat $\vecrow I_n = \vecrow$.
 \end{dfn}
 
 \begin{csq}
 	Het herhaald product van $A \in \realmx[m]{k}$ met $B \in \realmxn$ is $C \in \realmx[n]{k}$.
-	Dit zijn $n$ lineaire combinaties van $m$ kolomvectoren $A_i \in \realn[k]$ volgens $v$.
+	Dit zijn $n$ lineaire combinaties van $m$ kolomvectoren $A_i \in \realn[k]$.
 \end{csq}
 
 \begin{dfn}
@@ -290,7 +290,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{csq}
 
 \begin{csq}
-	Het matrixproduct is associatief.
+	Het matrixproduct is associatief $(AB)C = A(BC)$.
 	\begin{bewijs}
 		De vectorschaal is distributief over de vectorsom en bovendien associatief.
 		Vandaar dat het in $ABC$ niet uitmaakt of een $C_i$ zijn coëfficiënten verdeelt over $AB$ of een $(BC)_j$ de zijne over $A$.
@@ -298,7 +298,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{csq}
 
 \begin{csq}
-	Inverteerbare vierkante matrices zijn commutatief inverteerbaar.
+	Inverteerbare vierkante matrices $A \in \realnxn$ zijn commutatief inverteerbaar.
 	\begin{bewijs}
 		Weze $AA^{-1}_r = I_n$ in $(AA^{-1}_r)A = A(A^{-1}_rA)$. Hierbij moet $A^{-1}_rA$ echter ook dezelfde identiteitsmatrix $I_n$ zijn.
 	\end{bewijs}
@@ -306,12 +306,17 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 
 \begin{dfn}
 	De spanruimte $span(\vecrow)$ van een vectorrij $\vecrow$ bevat alle linaire combinaties van $\vecrow$.
-	Men zegt dat $\vecrow$ haar spanruimte voortbrengt.
+	Men zegt dat $\vecrow$ haar spanruimte voortbrengt, of een voortbrengend deel is.
+\end{dfn}
+
+\begin{dfn}
+	De spanruimte van de kolomvectoren $A_j$ in een matrix $A$ noemt men de kolomruimte van de matrix.
+	De spanruimte van de rijvectoren $A^i$ heet de rijruimte.
 \end{dfn}
 
 \begin{csq}
-	Een matrix $A \in \realmxn$ die als vectorrij voortbrengend is voor $\realn[m]$ is rechts inverteerbaar.
-	Als haar rijvectoren $\realn$ voortbrengen is ze links inverteerbaar.
+	Een matrix $A \in \realmxn$ met kolomruimte $\realn[m]$ is rechts inverteerbaar.
+	Met rijruimte $\realn$ is ze links inverteerbaar.
 	\begin{bewijs}
 		De identiteitsmatrices bestaan uit vectoren in de respectieve ruimtes.
 	\end{bewijs}
@@ -325,12 +330,13 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 	\end{bewijs}
 \end{thm}
 
-\section{Vrije ruimtes}
+\section{Vrije delen}
 
 Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \vecspace$ een lineaire combinatie van elke vectorrij $\vecrow \in \vecspacen$ is.
 
 \begin{dfn}
 	Een vectorrij $\vecrow$ is lineair onafhankelijk of vrij als geen enkele van de vectoren $\vecrow_i \in \vecrow$ een lineaire combinatie is van de overige $\vecrow_{j\neq i} \in \vecrow$.
+	Een dergelijke rij staat ook gekend als een vrij deel.
 \end{dfn}
 
 \begin{lmm}
@@ -364,11 +370,11 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \end{csq}
 
 \begin{dfn}
-	Vanwege het unieke karakter van deze coëfficiënten noemen we ze de coördinaten van een vector met betrekking tot de vrije vectorrij.
+	Vanwege het unieke karakter van deze coëfficiënten noemen we ze de coördinaten van een vector in de spanruimte met betrekking tot de vrije vectorrij.
 \end{dfn}
 
 \begin{dfn}
-	Een vrije vectorrij staat gekend als de basis van haar spanruimte.
+	Een vrije vectorrij staat gekend als een basis van haar spanruimte.
 \end{dfn}
 
 \begin{dfn}
@@ -387,7 +393,7 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 		Hieruit blijkt echter dat ook deze $\vecrow_i$ afhangt van  $\vecrow^{(1)} = \left(\vecrow \without{\vecrow_i}\right) \cup \rvecr[j]{b}$.
 		Vandaar dat $\vecrow^{(1)}$ voortbrengend blijft gezien $span(\vecrow) \subseteq span(\vecrow^{(1)})$.
 
-		Daar $\vecrow[b]$ vrij is en voortgebracht door $\vecrow^{(m)}$ heeft elke $\rvecr[k]{b}$ telkens definiete $\vecrow^{(m)}$-coëfficiënten buiten $\vecrow[b] \without{\rvecr[k]{b}}$
+		Daar $\vecrow[b]$ vrij is en voortgebracht door $\vecrow^{(m)}$ heeft elke $\rvecr[k]{b}$ telkens een definiete coëfficiënt naar een vector in $\vecrow^{(m)}\without{\vecrow[b]}$
 		en is deze procedure voor herhaling vatbaar tot we $\vecrow$ uitputten.
 
 		Blijft er nog enige $\vecrow[b]_l \notin \vecrow^{(\abs{\vecrow})}$ over,
@@ -422,9 +428,13 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \begin{csq}
 	De volgende zijn gelijkwaardig voor vierkante matrices $A \in \realnxn$:
 
-	- lineaire onafhankelijkheid van de vectorrij
+	- vrijheid van de kolomvectoren
 
-	- voortbrenging van $\realn$ uit de vectorrij
+	- vrijheid van de rijvectoren
+
+	- de kolomruimte is $\realn$
+
+	- de rijruimte is $\realn$
 
 	- inverteerbaarheid
 \end{csq}
@@ -434,7 +444,7 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \end{thm}
 
 \begin{dfn}
-	Men noemt deze de algemene lineaire groep.
+	Men noemt deze de algemene lineaire groep $GL_n(\realnums)$ met dimensie $n$ over het reële veld.
 \end{dfn}
 
 \begin{csq}
@@ -469,36 +479,38 @@ Beschouw een vrij paar vectoren $\vvec, \vvec[w]$ dat een derde vector $\vvec[c]
 \end{dfn}
 
 \begin{csq}
+	De parallelle projectie van een vector is gelijk aan de som van de parallele projecties van de samenstellende componenten.
+	\begin{bewijs}
+		Weze $\vvec[c] = \sum_{i} {\vvec[u]}_i$ voor willekeurige vectoren $\vvec[u]_i$.
+		Elke ${\vvec[u]}_i$ kan geschreven worden als een lineaire combinatie van een basis die $\vvec$, $\vvec[w]$ bevat, waarbij ze dus een coördinaat $\nu_i$ hebben naar $\vvec$.
+		De coördinaat van $\vvec[c]$ naar $\vvec$ blijft $\lambda = \sum_i \nu_i$.
+	\end{bewijs}
+\end{csq}
+
+\begin{csq}
 	Als $proj_{\vvec[w]}(\vvec[c], \vvec) = \zerovec$ dan ligt $\vvec[c]$ in de richting van projectie.
 	\begin{bewijs}
 		Daar $\lambda\vvec$ de nulvector blijkt is $\vvec[c] = \mu\vvec[w]$ een schaal van $\vvec[w]$.
 	\end{bewijs}
 \end{csq}
 
-Stel voortaan $\vvec[a] = proj_{\vvec[w]}(\vvec[c], \vvec)$.
+Stel voortaan $\vvec[a] = proj_{\vvec[w]}(\vvec[c], \vvec)$ en $\vvec[b] = proj_{\vvec}(\vvec[c], \vvec[w])$.
 
 \begin{csq}
 	Merk op dat $\vnorm{a}$ de coördinaat is van $\vvec[c]$ naar $\uvec[a]$ in het basispaar $\uvec[a], \vvec[w]$.
 	Vandaar dat we $\vvec[a]$ ook de component van $\vvec[c]$ naar $\uvec[a]$ langs $\vvec[w]$ noemen.
 \end{csq}
 
-\begin{csq}
-	De parallelle projectie van een vector is gelijk aan de som van de parallele projecties van de samenstellende componenten.
-	\begin{bewijs}
-		Weze $\vvec[c] = \sum_{i} {\vvec[u]}_i$ voor willekeurige vectoren $\vvec[u]_i$.
-		Elke ${\vvec[u]}_i$ kan geschreven worden als een lineaire combinatie van een basis die $\vvec$, $\vvec[w]$ bevat, waarbij ze dus een coördinaat $\nu_i$ hebben naar $\vvec$.
-		Dan is de coördinaat van $\vvec[c]$ naar $\vvec$ in die basis gelijk aan $\lambda = \sum_i \nu_i$.
-	\end{bewijs}
-\end{csq}
+Evenwel kunnen we nu ook volgende vectoren beschouwen, $\vvec[c_a] = \vnorm a \uvec[c]$ en $\vvec[a_c] = \vnorm c \uvec[a]$.
+Hierbij spiegelen we de driehoek gevormd door $\vvec[a], \vvec[c]$ om de bissectrice en voltooien die met $\vvec[b'] = \vvec[c_a] - \vvec[a_c]$.
 
-Evenwel kunnen we nu ook volgende vectoren beschouwen, $\vvec[c'] = \vnorm a \uvec[c]$ en $\vvec[a'] = \vnorm c \uvec[a]$.
-Hierbij spiegelen we de driehoek gevormd door $\vvec[a], \vvec[c]$ om de bissectrice en voltooien die met $\vvec[b'] = \vvec[c'] - \vvec[a']$.
+Analoog vormen we $\vvec[a'] = \vnorm b\uvec[c] - \vnorm c\uvec[b]$.
 
 \begin{dfn}
 	Evenwel wensen wij nu $\vvec[a]$ volgens $\vvec[b']$ te projecteren op $\vvec[c]$, hetgeen we de terugkerende projectie van $\vvec[c]$ naar $\vvec$ langs $\vvec[w]$ noemen $reproj_{\vvec[w]}(\vvec[c], \vvec) = proj_{\vvec[b']}(\vvec[a], \vvec[c])$.
 \end{dfn}
 
-Blijkt evenwel uit de definitie van $\vvec[b']$ dat projecties langs $\vvec[b']$ op $\vvec[c]$ van een component naar $\uvec[a]$ schalen met een factor van $\frac{\vnorm a}{\vnorm c}$.
+Blijkt evenwel uit de definitie van $\vvec[b']$ dat projecties langs $\vvec[b']$ op $\vvec[c]$ van vectoren langs $\uvec[a]$ schalen met een factor van $\frac{\vnorm a}{\vnorm c}$.
 
 \begin{csq}
 	\begin{equation*}
@@ -510,8 +522,28 @@ Blijkt evenwel uit de definitie van $\vvec[b']$ dat projecties langs $\vvec[b']$
 	Weze $\vnorm c$ = $\norm{reproj_{\vvec[w]}(\vvec[c], \vvec)} + \norm{reproj_{\vvec}(\vvec[c], \vvec[w])}$ dan noemt men $\vvec$ en $\vvec[w]$ onderling rechthoekig $\vvec \perp \vvec[w]$.
 \end{dfn}
 
-Merk op dat $\vvec[c] = reproj_{\vvec[w]}(\vvec[c], \vvec) + reproj_{\vvec}(\vvec[c], \vvec[w])$ rechthoekigheid even goed definieert.
+Merk op dat $\vvec[c] = reproj_{\vvec[w]}(\vvec[c], \vvec) + reproj_{\vvec}(\vvec[c], \vvec[w])$, hetgeen ook uit het bovenstaande volgt, rechthoekigheid even goed definieert.
 Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen, vandaar dat we de definitie in zijn relevante vorm geven.
+
+\begin{csq}
+	Als de richting van projectie rechthoekig was, is de richting van de terugkerende projectie ook rechthoekig.
+	\begin{bewijs}
+		Blijkt dat $\vnorm a^2\uvec[c] + \vnorm b^2\uvec[c] = \vnorm a\vnorm c\uvec[a] + \vnorm b\vnorm c\uvec[b]$ waaruit $\vnorm a\vvec[b'] = -\vnorm b\vvec[a']$ zodat alvast beide terugkerende projectierichtingen gelijk zijn.
+		
+		Voor $\vvec[r] = \vnorm a^2\vnorm c^{-2}(\vvec[a]+\vvec[b])$ geldt
+		\begin{align*}
+			\vnorm r^2 
+			&= \vnorm a^4\vnorm c^{-4}\left(\vnorm a^2 + \vnorm b^2\right)\\
+			&= \vnorm a^4\vnorm c^{-2}
+		\end{align*}
+		terwijl $\vvec[p] = -\vnorm c^{-1}\vnorm a\vvec[b'] = \vvec[a] - \vvec[r]$ zodat 
+		\begin{align*}
+			\vnorm p^2 
+			&= (1 - \vnorm a^2\vnorm c^{-2})^2\vnorm a^2 + \vnorm a^4\vnorm c^{-4}\vnorm b^2\\
+			&= \vnorm a^2 - \vnorm a^4\vnorm c^{-2}
+		\end{align*}
+	\end{bewijs}
+\end{csq}
 
 \begin{axm}
 	De vectoren van de gekozen basis $\vecrow[t]$ zijn onderling rechthoekig.
@@ -521,17 +553,29 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 	Samen met de bepaling dat de basisvectoren eenheidsvectoren zijn heet dit een orthonormale basis.
 \end{dfn}
 
+\begin{csq}
+	Gegeven een orthonormale basis $\vecrow[t]$ bepaalt een paar vectoren $\vvec, \vvec[w]$ in beide projectiezinnen een rechte hoek om langs te projecteren.
+	\begin{bewijs}
+		De componenten naar de basisvectoren projecteren rechthoekig terug op een willekeurige vector.
+	\end{bewijs}
+\end{csq}
+
 \begin{dfn}
-	Gegeven een orthonormale basis $\vecrow[t]$ bepaalt een vrij paar vectoren $\vvec, \vvec[w]$ in beide projectiezinnen een rechte hoek om langs te projecteren.
 	Men spreekt van een rechthoekige projectie $proj_\perp(\vvec, \vvec[w])$, of ook wel de rechthoekige component of simpelweg de component van $\vvec$ naar $\uvec[w]$.
 \end{dfn}
 
 \begin{dfn}
-	Het scalair product van vectoren $\vvec$, $\vvec[w]$ ten aanzien van basis $\vecrow[t]$ is gedefinieerd als het lineair product $\vvec \cdot \vvec[w] = (\cvecva[t])^T \cvecc[t]{w}$ van de rijvector met coördinaten van $\vvec$ en een kolomvector met coördinaten van $\vvec[w]$.
+	Het scalair product van vectoren $\vvec$, $\vvec[w]$ ten aanzien van basis $\vecrow[t]$ is gedefinieerd als het lineair product van de rijvector met coördinaten van $\vvec$ en een kolomvector met coördinaten van $\vvec[w]$.
+	\begin{equation*}
+		\vvec \cdot \vvec[w] = (\cvecva[t])^T \cvecc[t]{w}
+	\end{equation*}
 \end{dfn}
 
 \begin{csq}
-	De norm van de rechthoekige projectie van $\vvec$ op $\vvec[w]$ is het scalair product mits schaalcorrectie voor de norm van het projectiedoel $\norm{proj_\perp(\vvec, \vvec[w])} = {\vnorm w}^{-1}\vvec \cdot \vvec[w]$.
+	De norm van de rechthoekige projectie van $\vvec$ op $\vvec[w]$ is het scalair product mits schaalcorrectie voor de norm van het projectiedoel.
+	\begin{equation*}
+		\norm{proj_\perp(\vvec, \vvec[w])} = {\vnorm w}^{-1}\vvec \cdot \vvec[w]
+	\end{equation*}
 	\begin{bewijs}
 		De component van $\vvec$ naar $\rvecr{t}$ is $\vcordvi{t}\rvecr{t}$. Evenwel is ${\vnorm w}^{-1}\vcordv[w]{i}{t}$ de norm van de rechthoekige projectie van $\rvecr{t}$ op $\vvec[w]$.
 	\end{bewijs}
@@ -540,20 +584,38 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 \begin{csq}
 	Indien het scalair product nul is $\vvec \cdot\vvec[w] = 0$ zijn $\vvec$ en $\vvec[w]$ onderling rechthoekig $\vvec\perp\vvec[w]$.
 	\begin{bewijs}
-		De rechthoekige projectie van $\vvec$ naar $\vvec[w]$ is de nulvector zodanig dat $\vvec$ in de richting van projectie ligt.
+		De rechthoekige projectie van $\vvec$ op $\vvec[w]$ is de nulvector zodanig dat $\vvec$ in de richting van projectie ligt.
 	\end{bewijs}
 \end{csq}
 
-\begin{dfn}
-	De rechthoekige projectie van $\uvec$ op $\vvec[w]$ heet de cosinus van de hoek $\theta$ tussen $\vvec[w]$ en $\vvec$.
+\begin{csq}
+	De vector rechthoekig aan het projectiedoel kan als volgt bepaald worden.
+	\begin{equation*}
+		\vvec[w]_\perp = \vvec - \frac{\vvec\cdot\vvec[w]}{\vnorm w^2}\vvec[w]
+	\end{equation*}
+	Dit volgt uit eerdere theoretische overwegingen doch kan ook rekentechnisch nagegaan worden uit $\vvec[w]_\perp\cdot\vvec[w]$.
+	Merk op dat men hier desgewenst over een coördinatenrepresentatie beschikt.
+\end{csq}
+
+\begin{csq}
+	De rechthoekige projectie van $\uvec$ op $\vvec[w]$ is de cosinus van de hoek $\theta$ tussen $\vvec[w]$ en $\vvec$.
 	\begin{equation*}
 		cos(\theta) = \frac{\vvec \cdot \vvec[w]}{\vnorm v\vnorm w}
 	\end{equation*}
-\end{dfn}
-
-\begin{csq}
-	De norm van een vector is de wortel van het scalair product met zichzelf $\vnorm v = \sqrt{\vvec\cdot\vvec}$.
+	Dit wordt aangetoond in het deel over affiene ruimtes. 
 \end{csq}
+
+\newtheorem*{pyth}{Uitgebreide Stelling van Pythagoras}
+\begin{pyth}
+	Het scalair product van een vector met zichzelf is de gekwadrateerde norm $\vnorm v^2 = \vvec\cdot\vvec$.
+\end{pyth}
+
+\begin{thm}
+	Het scalair product is invariant onder basistransformaties $B$ waar $B^TB=I_n$. Deze noemt men orthonormaal.
+	\begin{bewijs}
+		Waren $\vvec$, $\vvec[w]$ de coördinaten ten aanzien van de oorspronkelijke basis dan is het scalair product $\vvec^T B\cdot B^T\vvec[w]$ na de coördinatentransformatie.
+	\end{bewijs}
+\end{thm}
 
 \newpage
 \end{document}
