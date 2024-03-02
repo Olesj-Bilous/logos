@@ -50,7 +50,7 @@
 \newcommand{\zerovec}{\vvec[0]}
 
 % vector rows and their vectors
-\newcommand{\vecrow}[1][a]{\mathcal{\MakeUppercase{#1}}}
+\newcommand{\vecrow}[1][a]{\mathfrak{\MakeUppercase{#1}}}
 
 \newcommand{\rvec}[2][i]{{#2}_{#1}}
 \newcommand{\rvecr}[2][i]{\rvec[#1]{\vecrow[#2]}}
@@ -148,8 +148,8 @@
 	Een vectorruimte is een commutatieve groep over de vectorsom.
 	\begin{bewijs}
 		\begin{align*}
-			\vvec + 0\vvec &= (1+0)\vvec \\
-			\vvec + (-1)\vvec &= (1-1)\vvec
+			\vvec + 0\vvec    & = (1+0)\vvec \\
+			\vvec + (-1)\vvec & = (1-1)\vvec
 		\end{align*}
 	\end{bewijs}
 \end{thm}
@@ -167,11 +167,11 @@
 \end{csq}
 
 \begin{dfn}
-	Het lineair product van een rij vectoren $\rveci \in \vecrow \in \vecspacen$ en een kolom coëfficiënten $\vcordvia \in \cvecva \in \mathbb{R}^n$
+	De lineaire combinatie van een rij vectoren $\rveci \in \vecrow \in \vecspacen$ volgens een kolom coëfficiënten $\vcordvia \in \cvecva \in \mathbb{R}^n$
 	schaalt elke vector in de rij met de respectieve coëfficiënt in de kolom en somt over deze schalen.
 	\begin{align*}
-		\vecrow \cvecva &= \sum_i^n \vcordvia \rveci
-		\\ & = \vcordvia[1] \rveci[1] + \ldots + \vcordvia[n] \rveci[n] 
+		\vecrow \cvecva & = \sum_i^n \vcordvia \rveci
+		\\ & = \vcordvia[1] \rveci[1] + \ldots + \vcordvia[n] \rveci[n]
 		\\ & =
 		\begin{pmatrix}
 			\rveci[1], \ldots, \rveci[n]
@@ -182,27 +182,26 @@
 			\vcordvia[n]
 		\end{pmatrix}
 	\end{align*}
-	Dit heet een lineaire combinatie van de vectoren in de rij $\vecrow$.
 \end{dfn}
 
 \begin{csq}
-	Zo is elke lineaire combinatie van vectoren $\rveci \in \vecspace$ ook een vector $\vvec \in \vecspace$.
+	Zo is elke lineaire combinatie van vectoren $\rveci \in \vecspace$ ook een vector $\vecrow \cvecva = \vvec \in \vecspace$.
 \end{csq}
 
 \begin{dfn}
 	De schaal van een kolom coëfficiënten $v_i \in \vvec \in \realn$ is de kolom $\vvec[w] \in \realn$ met de schalen van de respectieve coëfficiënten ${w}_i = \lambda {v}_i$.
 	\begin{align*}
 		\lambda \vvec =
-		\lambda 
+		\lambda
 		\begin{pmatrix}
-			v_1 \\
+			v_1    \\
 			\vdots \\
 			v_n
 		\end{pmatrix}
-		= 
+		=
 		\begin{pmatrix}
 			\lambda v_1 \\
-			\vdots \\
+			\vdots      \\
 			\lambda v_n
 		\end{pmatrix}
 	\end{align*}
@@ -213,20 +212,20 @@
 	\begin{align*}
 		\vvec[u] + \vvec =
 		\begin{pmatrix}
-			u_1 \\
+			u_1    \\
 			\vdots \\
 			u_n
 		\end{pmatrix}
 		+
 		\begin{pmatrix}
-			v_1 \\
+			v_1    \\
 			\vdots \\
 			v_n
 		\end{pmatrix}
 		=
 		\begin{pmatrix}
 			u_1 + v_1 \\
-			\vdots \\
+			\vdots    \\
 			u_1 + v_n
 		\end{pmatrix}
 	\end{align*}
@@ -241,29 +240,21 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \begin{dfn}
 	De vectorrij $A \in \realn[m \times n]$ met $n$ kolomvectoren $A_{j} \in \realn[m]$ noemt men een matrix.
 
-	Evenwel vormt de matrix $A$ ook een vectorkolom met $m$ rijvectoren $A^i \in \realn$. 
+	Evenwel vormt de matrix $A$ ook een vectorkolom met $m$ rijvectoren $A^i \in \realn$.
 
 	De gemene component tussen $A_j$ en $A^i$ noemt men een element van de matrix, geschreven $a_{ij}$.
 \end{dfn}
 
 \begin{dfn}
-	Transpositie $A^T$ spiegelt een matrix $A$ om de diagonaal $A^T_j = A^j$ zodat $a^T_{ij} = a_{ji}$.
+	Transpositie $A^T \in \realmx[m]{n}$ spiegelt een matrix $A \in \realmxn$ om de diagonaal $a^T_{ij} = a_{ji}$ zodat rijen kolommen worden $(A^T)_j = (A^j)^T$ en vice versa.
 \end{dfn}
 
 \begin{csq}
-	Het lineair product $A\vvec$ van een matrix $A \in \realmxn$ met een kolomvector $\vvec \in \realn$ is een lineaire combinatie van $n$ kolomvectoren $A_i \in \realn[m]$.
-\end{csq}
-
-\begin{csq}
-	Evenwel is vanwege de structuur van het lineair product en de kolomvectorsom elke component van $\vvec[w] = A\vvec$ ook een lineaire combinatie van de componenten van $\vvec$, zodat $\vvec[w]^T = \vvec^TA^T$.
-\end{csq}
-
-\begin{csq}
-	Het herhaald lineair product van een vectorrij $\vecrow \in \vecspacen[m]$ met de kolomvectoren $B_i$ van de matrix $B \in \realmxn$ vormt een vectorrij $\vecrow[b] \in \vecspacen$.
+	Herhaalde lineaire combinaties van een vectorrij $\vecrow \in \vecspacen[m]$ volgens de kolomvectoren $B_i$ van een matrix $B \in \realmxn$ vormen een vectorrij $\vecrow[b] \in \vecspacen$.
 \end{csq}
 
 \begin{dfn}
-	Bovenstaande operatie noemen we het herhaald product van $\vecrow$ en $B$.
+	Bovenstaande operatie noemen we de lineaire transformatie van $\vecrow$ volgens $B$.
 	\begin{equation*}
 		\vecrow B = \vecrow[b]
 	\end{equation*}
@@ -274,8 +265,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{dfn}
 
 \begin{csq}
-	Het herhaald product van $A \in \realmx[m]{k}$ met $B \in \realmxn$ is $C \in \realmx[n]{k}$.
-	Dit zijn $n$ lineaire combinaties van $m$ kolomvectoren $A_i \in \realn[k]$.
+	De lineaire transformatie van de $m$ kolomvectoren $A_i \in \realn[k]$ van de matrix $A \in \realmx[m]{k}$ volgens de matrix $B \in \realmxn$ bestaat uit de $n$ kolomvectoren $C_j \in \realn[k]$ van de matrix $C \in \realmx[n]{k}$.
 \end{csq}
 
 \begin{dfn}
@@ -286,7 +276,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{dfn}
 
 \begin{csq}
-	Het matrixproduct $AB$ bestaat anderzijds ook uit $k$ lineaire combinaties van $m$ rijvectoren $B^j \in \realn[n]$, oftewel $(AB)^T = B^TA^T$.
+	Elk van de $k$ rijvectoren $C^h \in \realn$ bestaat anderzijds uit een lineaire combinatie van $m$ rijvectoren $B^i \in \realn$ volgens de rijvector $A^h \in \realn[m]$, oftewel $(AB)^T = B^TA^T$.
 \end{csq}
 
 \begin{csq}
@@ -325,7 +315,7 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \begin{thm}
 	De spanruimte van een vectorrij is een vectorruimte.
 	\begin{bewijs}
-		Uit $\vecrow B = \vecrow[b]$ en $\vecrow[b] v^{\vecrow[b]}= v$ volgt $\vecrow B v^{\vecrow[b]}= v$.
+		Uit $\vecrow B = \vecrow[b]$ en $\vecrow[b] v^{\vecrow[b]}= \vvec$ volgt $\vecrow B v^{\vecrow[b]}= \vvec$.
 		Hieruit mag blijken dat herhaalde lineaire combinaties de spanruimte niet verlaten.
 	\end{bewijs}
 \end{thm}
@@ -340,30 +330,30 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \end{dfn}
 
 \begin{lmm}
-	Het lineair product van een vrije vectorrij met een kolomvector is enkel de nulvector $\vecrow \cvecvv[0] = \zerovec$ als de kolomvector dat ook is in zijn respectieve ruimte: $\cvecvv[0] = 0_n$.
+	De lineaire combinatie van een vrij deel volgens een kolomvector is enkel de nulvector $\vecrow \cvecvv = \zerovec$ als de kolomvector dat ook is in zijn respectieve ruimte $\cvecvv = 0_n$.
 	\begin{bewijs}
-		$-\vcordai 0 \vecrow_i = \left(\vecrow \without{\rveci}\right)\left(\cvecvv[0] \without{\vcordai 0}\right)$
+		$-\vcordvia \vecrow_i = \left(\vecrow \without{\rveci}\right)\left(\cvecvv \without{\vcordvia}\right)$.
 	\end{bewijs}
 \end{lmm}
 
 \begin{csq}
-	Het herhaald product van een vrije vectorrij met een matrix is vrij als de matrix dat ook is. Als het product van een willekeurige vectorrij met een matrix vrij is, is de matrix dat ook.
+	De transformatie van een vrije vectorrij volgens een matrix is vrij als de kolommen van de matrix dat ook zijn. Als de transformatie van een willekeurige vectorrij volgens een matrix vrij is, zijn de kolommen van de matrix dat ook.
 	\begin{bewijs}
-		Stel dat $\vecrow[b] = \vecrow B$ lineair afhankelijk is voor $\vecrow \in \vecspacen[m]$ en $B \in \realmxn$ vrij.
-		Dan is er een $\cvecc[b]{0} \neq 0_n$ waar $\vecrow[b] \cvecc[b]{0} = \zerovec$, waaruit $B \cvecc[b]{0} = 0_n$ zodat ook $B$ lineair afhankelijk blijkt, een tegenstrijdigheid.
+		Stel dat $\vecrow[b] = \vecrow B$ lineair afhankelijk is waar $B \in \realmxn$ en $\vecrow \in \vecspacen[m]$ vrij.
+		Dan is er een $\cvecc[b]{0} \neq 0_n$ waaruit $B \cvecc[b]{0} = 0_n$ gezien de vrijheid van $\vecrow$, zodat ook $B$ lineair afhankelijk blijkt.
 		Anderzijds is voor $D\vvec = 0_k$ elke $\vecrow[c] D\vvec = \zerovec$.
 	\end{bewijs}
 \end{csq}
 
 \begin{csq}
-	Het product van vrije matrices is vrij. Als het product van willekeurige matrices vrij is, is de rechtermatrix dat ook.
+	Het product van matrices met vrije kolommen heeft vrije kolommen. Als het product van willekeurige matrices vrije kolommen heeft, heeft de rechtermatrix dat ook.
 \end{csq}
 
 \begin{csq}
 	Een vrije vectorrij heeft voor elke vector in zijn spanruimte slechts één kolom coëfficiënten.
 	\begin{bewijs}
 		\begin{align*}
-			\vecrow \vvec                 & = \vecrow \vvec[w] \\
+			\vecrow \vvec              & = \vecrow \vvec[w] \\
 			\vecrow (\vvec - \vvec[w]) & = \zerovec
 		\end{align*}
 	\end{bewijs}
@@ -384,16 +374,16 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 
 \begin{thm}
 	Als $\vecrow[b]$ vrij wordt voortgebracht $span(\vecrow[b]) \subseteq span(\vecrow)$ uit $\vecrow$ dan bevat $\vecrow[b]$ ten hoogste een gelijk aantal vectoren $\abs{\vecrow[b]} \leq \abs\vecrow$.
-	Als $\abs{\vecrow[b]} = \abs\vecrow$ dan is $\vecrow[b]$ voortbrengend $span(\vecrow[b]) = span(\vecrow)$ en $\vecrow$ vrij. 
+	Als $\abs{\vecrow[b]} = \abs\vecrow$ dan is $\vecrow[b]$ voortbrengend $span(\vecrow[b]) = span(\vecrow)$ en $\vecrow$ vrij.
 	\begin{bewijs}
 		Elke $\vecrow[b]_j$ heeft minstens één definiete coëfficiënt $b_{ij} \in B$ voor een zekere $\vecrow_i$.
 		\begin{align*}
-			\vecrow[b]_j = b_{ij}\vecrow_i + (\vecrow \without{\vecrow_i})(B_j  \without{b_{ij}}) 
+			\vecrow[b]_j = b_{ij}\vecrow_i + (\vecrow \without{\vecrow_i})(B_j  \without{b_{ij}})
 		\end{align*}
 		Hieruit blijkt echter dat ook deze $\vecrow_i$ afhangt van  $\vecrow^{(1)} = \left(\vecrow \without{\vecrow_i}\right) \cup \rvecr[j]{b}$.
 		Vandaar dat $\vecrow^{(1)}$ voortbrengend blijft gezien $span(\vecrow) \subseteq span(\vecrow^{(1)})$.
 
-		Daar $\vecrow[b]$ vrij is en voortgebracht door $\vecrow^{(m)}$ heeft elke $\rvecr[k]{b}$ telkens een definiete coëfficiënt naar een vector in $\vecrow^{(m)}\without{\vecrow[b]}$
+		Daar $\vecrow[b]$ vrij is en voortgebracht door $\vecrow^{(m)}$ heeft elke $\rvecr[k]{b} \notin \vecrow^{(m)}$ telkens een definiete coëfficiënt naar een vector in $\vecrow^{(m)}\without{\vecrow[b]}$
 		en is deze procedure voor herhaling vatbaar tot we $\vecrow$ uitputten.
 
 		Blijft er nog enige $\vecrow[b]_l \notin \vecrow^{(\abs{\vecrow})}$ over,
@@ -401,7 +391,7 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 
 		Geldt evenwel $\vecrow^{(\abs{\vecrow})} = \vecrow[b]$ dan is $\vecrow[b]$ voortbrengend.
 		Ware $\vecrow$ nu niet vrij, dan kon ze ingeperkt worden zonder aan de voortbrengendheid te schaden.
-		We toonden evenwel juist aan dat een vrij voorgebracht deel niet groter kan zijn dan het voortbrengende.
+		We toonden evenwel juist aan dat een voortbrengend deel niet kleiner kan zijn dan het vrij voortgebrachte.
 	\end{bewijs}
 \end{thm}
 
@@ -450,7 +440,7 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \begin{csq}
 	Een basistransformatie is contravariant aan de ge\"{i}mpliceerde co\"{o}rdinatentransformatie.
 	\begin{bewijs}
-		Uit $\vecrow B = \vecrow[b]$ en $\vecrow v^{\vecrow}= v$ volgt $\vecrow[b] B^{-1} v^{\vecrow}= v$. 
+		Uit $\vecrow B = \vecrow[b]$ en $\vecrow \cvecva= \vvec$ volgt $\vecrow[b] B^{-1} \cvecva = \vvec$ zodat $B^{-1} \cvecva = \cvecva[b]$.
 	\end{bewijs}
 	Evenwel betekent dit slechts dat de overeenkomstige matrices elkaars inverse zijn.
 	De wijze waarop een matrix inwerkt op een vectorrij verschilt immers van de werking op een kolom coördinaten, waarbij commutativiteit niet gegarandeerd is.
@@ -529,18 +519,18 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 	Als de richting van projectie rechthoekig was, is de richting van de terugkerende projectie ook rechthoekig.
 	\begin{bewijs}
 		Blijkt dat $\vnorm a^2\uvec[c] + \vnorm b^2\uvec[c] = \vnorm a\vnorm c\uvec[a] + \vnorm b\vnorm c\uvec[b]$ waaruit $\vnorm a\vvec[b'] = -\vnorm b\vvec[a']$ zodat alvast beide terugkerende projectierichtingen gelijk zijn.
-		
+
 		Voor $\vvec[r] = \vnorm a^2\vnorm c^{-2}(\vvec[a]+\vvec[b])$ geldt
 		\begin{align*}
-			\vnorm r^2 
-			&= \vnorm a^4\vnorm c^{-4}\left(\vnorm a^2 + \vnorm b^2\right)\\
-			&= \vnorm a^4\vnorm c^{-2}
+			\vnorm r^2
+			 & = \vnorm a^4\vnorm c^{-4}\left(\vnorm a^2 + \vnorm b^2\right) \\
+			 & = \vnorm a^4\vnorm c^{-2}
 		\end{align*}
-		terwijl $\vvec[p] = -\vnorm c^{-1}\vnorm a\vvec[b'] = \vvec[a] - \vvec[r]$ zodat 
+		terwijl $\vvec[p] = -\vnorm c^{-1}\vnorm a\vvec[b'] = \vvec[a] - \vvec[r]$ zodat
 		\begin{align*}
-			\vnorm p^2 
-			&= (1 - \vnorm a^2\vnorm c^{-2})^2\vnorm a^2 + \vnorm a^4\vnorm c^{-4}\vnorm b^2\\
-			&= \vnorm a^2 - \vnorm a^4\vnorm c^{-2}
+			\vnorm p^2
+			 & = (1 - \vnorm a^2\vnorm c^{-2})^2\vnorm a^2 + \vnorm a^4\vnorm c^{-4}\vnorm b^2 \\
+			 & = \vnorm a^2 - \vnorm a^4\vnorm c^{-2}
 		\end{align*}
 	\end{bewijs}
 \end{csq}
@@ -602,7 +592,7 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 	\begin{equation*}
 		cos(\theta) = \frac{\vvec \cdot \vvec[w]}{\vnorm v\vnorm w}
 	\end{equation*}
-	Dit wordt aangetoond in het deel over affiene ruimtes. 
+	Dit wordt aangetoond in het deel over affiene ruimtes.
 \end{csq}
 
 \newtheorem*{pyth}{Uitgebreide Stelling van Pythagoras}
