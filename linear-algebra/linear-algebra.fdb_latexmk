@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1709396788.70378 "c:/Users/olesj/source/repos/logos/linear-algebra/linear-algebra.tex" "linear-algebra.pdf" "linear-algebra" 1709396789.35924 0
+["pdflatex"] 1709397585.48857 "c:/Users/olesj/source/repos/logos/linear-algebra/linear-algebra.tex" "linear-algebra.pdf" "linear-algebra" 1709397586.3098 0
   "C:/Users/olesj/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1709384470 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/olesj/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk" 1709384499 25420 be91044bc0d2128bf9b35859f0e825f1 ""
   "C:/Users/olesj/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/eccc1000.pk" 1709384488 25100 a89ae0e21de4c0314171793913de89a0 ""
@@ -80,9 +80,9 @@
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/mathtools/mathtools.sty" 1656514886 62269 5c1837a5bc5db4c0d255eedc225ca44b ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/mathtools/mhsetup.sty" 1656514886 5582 a43dedf8e5ec418356f1e9dfe5d29fc3 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1700599895 10214 547fd4d29642cb7c80bf54b49d447f01 ""
-  "c:/Users/olesj/source/repos/logos/linear-algebra/linear-algebra.tex" 1709396788 24807 fea9d33ddadd48cc994166defebac728 ""
-  "linear-algebra.aux" 1709396789 592 fcfb7c31d015b17d9a02199b6fe3b2b5 "pdflatex"
-  "linear-algebra.tex" 1709396788 24807 fea9d33ddadd48cc994166defebac728 ""
+  "c:/Users/olesj/source/repos/logos/linear-algebra/linear-algebra.tex" 1709397584 24800 516a4caa99cb3450835313ffe7b614ec ""
+  "linear-algebra.aux" 1709397586 592 fcfb7c31d015b17d9a02199b6fe3b2b5 "pdflatex"
+  "linear-algebra.tex" 1709397584 24800 516a4caa99cb3450835313ffe7b614ec ""
   (generated)
   "linear-algebra.aux"
   "linear-algebra.log"
