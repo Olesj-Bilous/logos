@@ -1,9 +1,15 @@
 \documentclass{amsart}
 \usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{subcaption}
 \usepackage[dutch]{babel}
 \usepackage[T1]{fontenc}
+\usetikzlibrary{arrows.meta}
 
 %%% ENV
+
+\tikzset{>=Stealth}
+\tikzstyle{vector}=[->,thick,black]
 
 \theoremstyle{definition}
 \newtheorem{axm}{Axioma}[section]
@@ -13,8 +19,6 @@
 \newtheorem{csq}{Gevolg}[section]
 
 \newenvironment{bewijs}{\begin{proof}[Bewijs]}{\end{proof}}
-
-
 
 %%% CMD
 
@@ -154,6 +158,106 @@
 	\end{bewijs}
 \end{thm}
 
+\begin{figure}
+	\def\vx {3}
+	\def\vy {0}
+	\def\wx {-1.5}
+	\def\wy {2.2}
+	\centering
+	\begin{subcaptionblock}{.4\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\def\vscale{1.7}
+			\def\vsmall{1.7}
+			\def\dxsmall{0.3}
+			\def\dysmall{1}
+			\def\circum{2pt}
+			\def\lower{-0.7}
+			\def\sol{0}
+			\def\ooscale
+			{
+				-\lower
+			}
+
+			\coordinate (O) at (0,0);
+			\coordinate (P) at (\vsmall,0);
+			\coordinate (M) at (-\vsmall, 0);
+			\coordinate (Q) at (\vscale*\vsmall, 0);
+			\coordinate (D) at (\dxsmall,\dysmall);
+			\coordinate (OO) at (-\ooscale*\dysmall, \ooscale*\dxsmall);
+			\coordinate (DD) at (-\ooscale*\dysmall + \dxsmall, \ooscale*\dxsmall + \dysmall);
+			\filldraw[black] (O) circle (\circum) node[below]{$\mathbf 0$};
+			\draw[vector] (O)--(P) node[midway, below]{$\mathbf v$};
+			\draw[vector] (O)--(D) node[midway, left]{$\mathbf w$};
+			\draw[vector, dashed] (O)--(M) node[midway, below]{$-\mathbf v$};
+			\draw[vector, dashed] (P)--(Q) node[midway, below]{$\lambda\mathbf v$};
+			\draw[|-|] (0, \lower)--(\vsmall,\lower) node[midway, below]{$1$} ;
+			\node[below] (a) at (0, \lower) {$0$};
+			\draw[|-|] (0, \lower)--(-\vsmall,\lower) node[midway, below]{$-1$};
+			\draw[|-|] (0, 2*\lower)--(\vscale*\vsmall, 2*\lower) node[midway, below]{$\lambda$};
+			\draw[|-|] (OO)--(DD) node[midway, left]{$1$};
+		\end{tikzpicture}
+		\caption{Begrensde rechtlijnige paden in dezelfde richting kunnen naar willekeur geschaald worden. Een negatief teken wijst op de terugkerende zin, de nulschaal op het pad dat nergens heen gaat.}
+		\label{fig:rlpscale}
+	\end{subcaptionblock}\hspace{1em}%
+	\begin{subcaptionblock}{.4\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\coordinate (O) at (0,0);
+			\coordinate (P) at (\vx, \vy);
+			\coordinate (R) at (\vx+\wx,\vy+\wy);
+			\draw[vector]
+			(O)--(P) node[midway, below]{$\mathbf v$};
+			\draw[vector]
+			(P)--(R) node[midway, right]{$\mathbf w$};
+			\draw[vector,dashed]
+			(O)--(R) node[midway, left]{$\mathbf{v + w}$};
+		\end{tikzpicture}
+		\caption{Een reis langs een rechtlijnig pad kan verdergezet worden langs een ander rechtlijnig pad. Er is telkens een rechtlijnig pad van de eerste oorsprong naar de laatste bestemming.}
+		\label{fig:rlpcomp}
+	\end{subcaptionblock}
+
+	\begin{subcaptionblock}{.4\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\coordinate (O) at (0,0);
+			\coordinate (P) at (\vx,\vy);
+			\coordinate (Q) at (\wx, \wy);
+			\coordinate (R) at (\vx+\wx,\vy+\wy);
+			\draw[vector] (O)--(P) node[midway, below]{$\mathbf v$};
+			\draw[vector] (Q)--(R) node[midway, above]{$\mathbf v$};
+			\draw[vector] (P)--(R) node[midway, right]{$\mathbf w$};
+			\draw[vector] (O)--(Q) node[midway, left]{$\mathbf w$};
+			\draw[vector, dashed] (O)--(R) node[midway, left]{$\mathbf{v + w}$};
+		\end{tikzpicture}
+		\caption{De samenstelling van rechtlijnige paden is commutatief.}
+		\label{fig:rlpcomm}
+	\end{subcaptionblock}\hspace{1em}%
+	\begin{subcaptionblock}{.4\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\def\scale{1.7}
+			\def\vxs{2.2}
+			\def\wxs{-0.4}
+			\def\wys{1.6}
+			\coordinate (O) at (0,0);
+			\coordinate (P) at (\vxs,0);
+			\coordinate (R) at (\vxs+\wxs,\wys);
+			\coordinate (PP) at (\scale*\vxs,0);
+			\coordinate (RR) at (\scale*\vxs+\scale*\wxs,\scale*\wys);
+			\draw[vector] (O)--(P) node[midway, below]{$\mathbf v$};
+			\draw[vector] (P)--(R) node[midway, right]{$\mathbf w$};
+			\draw[vector] (O)--(R) node[midway, left]{$\mathbf{v+w}$};
+			\draw[vector, dashed] (P)--(PP) node[midway, below]{$\lambda\mathbf v$};
+			\draw[vector, dashed] (PP)--(RR) node[midway, right]{$\lambda\mathbf w$};
+			\draw[vector, dashed] (R)--(RR) node[midway, left]{$\lambda\mathbf{(v + w)}$};
+		\end{tikzpicture}
+		\caption{De schaal verdeelt over de samenstellende delen.}
+		\label{fig:rlpdist}
+	\end{subcaptionblock}
+	\caption{De ruimte der rechtlijnige paden is een vectorruimte.}
+\end{figure}
+
 \begin{dfn}
 	De nulruimte van een vectorruimte $\vecspace_0 = \setsm\zerovec \subseteq \vecspace$ bevat enkel de nulvector.
 \end{dfn}
@@ -170,9 +274,8 @@
 	De lineaire combinatie van een rij vectoren $\rveci \in \vecrow \in \vecspacen$ volgens een kolom coëfficiënten $\vcordvia \in \cvecva \in \mathbb{R}^n$
 	schaalt elke vector in de rij met de respectieve coëfficiënt in de kolom en somt over deze schalen.
 	\begin{align*}
-		\vecrow \cvecva & = \sum_i^n \vcordvia \rveci
-		\\ & = \vcordvia[1] \rveci[1] + \ldots + \vcordvia[n] \rveci[n]
-		\\ & =
+		\vecrow \cvecva
+		 & =
 		\begin{pmatrix}
 			\rveci[1], \ldots, \rveci[n]
 		\end{pmatrix}
@@ -181,6 +284,8 @@
 			\vdots       \\
 			\vcordvia[n]
 		\end{pmatrix}
+		\\ & = \sum_i^n \vcordvia \rveci
+		\\ & = \vcordvia[1] \rveci[1] + \ldots + \vcordvia[n] \rveci[n]
 	\end{align*}
 \end{dfn}
 
@@ -262,6 +367,8 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 
 \begin{dfn}
 	De matrix die een vectorrij op zichzelf afbeeldt noemen we de identiteitsmatrix $I_n \in \realnxn$ zodat $\vecrow I_n = \vecrow$.
+
+	Een kolom van deze matrix $s_j: \{i \in \mathbb N|i\leq n\}\longrightarrow\{0,1\}$ selecteert de respectieve vector uit de rij $\rveci[j]$ omdat het element $s_j(i) = 1$ enkel als $i = j$.
 \end{dfn}
 
 \begin{csq}
@@ -442,20 +549,14 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 	\begin{bewijs}
 		Uit $\vecrow B = \vecrow[b]$ en $\vecrow \cvecva= \vvec$ volgt $\vecrow[b] B^{-1} \cvecva = \vvec$ zodat $B^{-1} \cvecva = \cvecva[b]$.
 	\end{bewijs}
-	Evenwel betekent dit slechts dat de overeenkomstige matrices elkaars inverse zijn.
-	De wijze waarop een matrix inwerkt op een vectorrij verschilt immers van de werking op een kolom coördinaten, waarbij commutativiteit niet gegarandeerd is.
 \end{csq}
+
+Anderzijds kan een lineaire transformatie bekomen worden door de matrix in te laten werken op de coördinaten.
 
 \section{Genormeerde ruimtes}
 
-Nu wensen we een begrip van afstand in te voeren, gekend als de norm $\vnorm v$ van een vector $\vvec \in \vecspace$.
-Hiertoe nemen we een willekeurige basis $\vecrow[t]$ van $\vecspace$ en schrijven er enkele bijzondere eigenschappen aan toe.
 \begin{axm}
-	Vooreerst is telkens $\norm{\rvecr{t}} = 1$.
-\end{axm}
-
-\begin{axm}
-	Vervolgens is de schaal associatief met de norm: $\norm{\lambda \vvec} = \lambda\vnorm v$.
+	De schaal is associatief met de norm: $\norm{\lambda \vvec} = \lambda\vnorm v$.
 \end{axm}
 
 \begin{csq}
@@ -535,12 +636,8 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 	\end{bewijs}
 \end{csq}
 
-\begin{axm}
-	De vectoren van de gekozen basis $\vecrow[t]$ zijn onderling rechthoekig.
-\end{axm}
-
 \begin{dfn}
-	Samen met de bepaling dat de basisvectoren eenheidsvectoren zijn heet dit een orthonormale basis.
+	Een orthonormale basis bestaat uit eenheidsvectoren die onderling rechthoekig zijn. Een vectorruimte die beschikt over zo'n basis heet orthonormaal.
 \end{dfn}
 
 \begin{csq}
@@ -551,11 +648,11 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 \end{csq}
 
 \begin{dfn}
-	Men spreekt van een rechthoekige projectie $proj_\perp(\vvec, \vvec[w])$, of ook wel de rechthoekige component of simpelweg de component van $\vvec$ naar $\uvec[w]$.
+	Men spreekt van een rechthoekige projectie $proj_\perp(\vvec, \vvec[w])$, of ook wel de parallele component $\vvec_\|$ aan $\uvec[w]$.
 \end{dfn}
 
 \begin{dfn}
-	Het scalair product van vectoren $\vvec$, $\vvec[w]$ ten aanzien van basis $\vecrow[t]$ is gedefinieerd als het lineair product van de rijvector met coördinaten van $\vvec$ en een kolomvector met coördinaten van $\vvec[w]$.
+	Het scalair product van vectoren $\vvec$, $\vvec[w]$ ten aanzien van basis $\vecrow[t]$ is de lineaire combinatie van de coördinaten van $\vvec$ volgens de coördinaten van $\vvec[w]$.
 	\begin{equation*}
 		\vvec \cdot \vvec[w] = (\cvecva[t])^T \cvecc[t]{w}
 	\end{equation*}
@@ -601,7 +698,11 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 \end{pyth}
 
 \begin{thm}
-	Het scalair product is invariant onder basistransformaties $B$ waar $B^TB=I_n$. Deze noemt men orthonormaal.
+	De ruimte der rechtlijnige paden uitgerust met afstand als normbegrip is een orthonormale vectorruimte.
+\end{thm}
+
+\begin{thm}
+	Het scalair product is enkel invariant onder basistransformaties $B$ waar $BB^T=I_n$. Deze noemt men orthonormaal.
 	\begin{bewijs}
 		Waren $\vvec$, $\vvec[w]$ de coördinaten ten aanzien van de oorspronkelijke basis dan is het scalair product $\vvec^T B\cdot B^T\vvec[w]$ na de coördinatentransformatie.
 	\end{bewijs}
@@ -610,20 +711,16 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 We bouwden ons projectiebegrip op vanuit een gekend basispaar dat de richting van projectie en die van het projectiedoel bepaalt.
 We breidden het uit met een orthonormaliteitsbegrip dat ons toestaat een willekeurige vector rechthoekig op een andere te projecteren middels de basisvectoren.
 
-Nu wensen we een vector te projecteren op een willekeurig vrij deel dat niet voortbrengend is, genaamd de projectieruimte, langs een richting vrij aan die ruimte.
-Dit is simpelweg de som van de componenten naar de projectieruimte langs de projectierichting.
-Merk op dat dit impliceert dat het projectieonderwerp lineair afhangt van de projectieruimte samen met de projectierichting.
+De inperking van een basis tot een deel dat niet voortbrengend is kan beschouwd worden als doelbasis van een projectieruimte.
+Het weggelaten deel heet de richtingsbasis, daar de som van de componenten naar dit deel voor elke vector een projectierichting vormt.
+De projectie langs die richting op de projectieruimte is de som van de componenten naar de doelbasis.
 
-Gezien deze definitie verwachten we dat vectoren in de projectieruimte, en dus ook de coördinaten daarvan naar de oorspronkelijke basis, onveranderd blijven onder een dergelijke transformatie.
+De combinatie van doel- en richtingsbasis heet de projectiebasis, die doorgaans vanuit coördinaten $B$ ten aanzien van een oorspronkelijke basis wordt beschouwd.
 
-Samen met een vrij deel dat de projectierichting voortbrengt doch ook vrij is van de projectieruimte, genaamd de projecterende ruimte, vormt de projectieruimte dus een basis voor de volledige ruimte.
-We kunnen de basisvectoren van de projecterende ruimte zo kiezen dat het projectieonderwerp een schaal blijft van hun ongeschaalde som, zodat in de samengestelde basis de gewenste projectie af te lezen blijft van de coördinaten ten aanzien van de projectieruimte.
+Indien we de coördinaten van een projectieonderwerp ten aanzien van de oorspronkelijke basis naar de projectiebasis transformeren $B^{-1}\vvec$ kunnen we in de terugkerende transformatie de componenten naar de richtingsbasis laten vallen $P = BS(m)B^{-1}$ waar $S(m)_i = s_i$ voor $i\leq m$ en $S(m)_i = 0_n$ als $m<i\leq n$.
+Blijkt dus zowel $PB = BS(m)$ als de idempotentie van de projectie $P^2=P$.
 
-Indien we de coördinaten naar de samengestelde basis transformeren $B^{-1}\vvec$ kunnen we in de terugkerende transformatie de componenten naar de projecterende ruimte laten vallen $P = BI_{(n-m)+0m}B^{-1}$.
-Blijkt dus zowel $PB = BI_{(n-m)+0m}$ als de idempotentie van de projectie $P^2=P$.
-Uit basisvectoren voor de kolomruimte van idempotente $P$ kan anderzijds telkens een projectieruimte gevormd worden.
-
-Hierbij is de projectierichting enkel orthogonaal als $P^T=P$.
+Anderzijds is er voor elke $P$ een paar $B, A$ waar $PB = AS(m)$ voor een zekere $m$. Uit ${(AS(m)B^{-1})}^2 = AS(m)B^{-1}$ volgt $A = B$.
 
 \newpage
 \end{document}
