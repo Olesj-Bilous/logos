@@ -2,7 +2,7 @@
 
 #### Mean value theorem
 
-Given $f$ differentiable over $I = [a,b]$ there is an $x\in I$ such that $$
+Given $f$ continuously differentiable over $I = [a,b]$ there is an $x\in I$ such that $$
     \frac {f(b)-f(a)}{b-a} = f'(x).
 $$ In the light of the fundamental theorem this can also be expressed as $$
     \int_a^b f'(t)dt = (b-a)f'(x).
