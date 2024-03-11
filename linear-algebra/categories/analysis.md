@@ -1,11 +1,19 @@
 # Analysis
 
+Given $f$ continuously differentiable over $I = [a,b]$.
+
+#### Rolle's theorem
+
+If $f(a) = f(b)$ there is an $x\in I$ for which $f'(x)=0$.
+
+The values of $f$ are bounded and closed over $I$. Moreover $f$ is either constant or locally extreme there.
+
 #### Mean value theorem
 
-Given $f$ continuously differentiable over $I = [a,b]$ there is an $x\in I$ such that $$
+ There is an $x\in I$ such that $$
     \frac {f(b)-f(a)}{b-a} = f'(x).
 $$ In the light of the fundamental theorem this can also be expressed as $$
-    \int_a^b f'(t)dt = (b-a)f'(x).
+    \int_a^b f'(t)dt = f'(x)(b-a).
 $$ Consider $$g(x)=f(x)-f(a) - \frac {x-a}{b-a}(f(b)-f(a)).$$ Then $g(a) = g(b) = 0 = g'(x)$ for some $x$.
 ___
 We traverse $f^{(i<n)}$ for $f \in C^n$ over $[c,x]$ along parameter $t\in[0,1]$ and differentiate. $$
@@ -20,23 +28,23 @@ $$
 \begin{aligned}
     t\mu_{i}(t)
         &= \int_0^t g_{i+1}(s)ds\\ 
-        &= f^{(i+1)}(c)t + (x-c)\frac{t^2}{2}\mu_{i+1}(t).
+        &= f^{(i+1)}(c)t + (x-c)\int_0^tt\mu_{i+1}(t).
 \end{aligned}
 $$
 
 ##### Taylor polynomial
 
 $$
-    P_n(x) = \sum_{i=0}^{n-1} \frac{1}{i!}(x - c)^if^{(i)}(c)
+    P_n(x) = \sum_{i=0}^{n} \frac{1}{i!}(x - c)^if^{(i)}(c)
 $$
 
 ##### Lagrange remainder
 
 $$
-    R_n(x) = \frac{1}{n!}(x - c)^{n}f^{(n)}(\xi)
+    R_n(x) = \frac{1}{(n+1)!}(x - c)^{n+1}f^{(n+1)}(\xi)
 $$
 
-Where $\mu_{i-1}(t) = g_{i}(z)$ set $\xi=c+(x-c)z$ to conclude
+Where $\mu_{i}(t) = g_{i+1}(z)$ set $\xi=c+(x-c)z$ to conclude
 
 #### Taylor's theorem
 
