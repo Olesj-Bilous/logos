@@ -17,19 +17,19 @@ $$ In the light of the fundamental theorem this can also be expressed as $$
 $$ Consider $$g(x)=f(x)-f(a) - \frac {x-a}{b-a}(f(b)-f(a)).$$ Then $g(a) = g(b) = 0 = g'(x)$ for some $x$.
 ___
 We traverse $f^{(i<n)}$ for $f \in C^n$ over $[c,x]$ along parameter $t\in[0,1]$ and differentiate. $$
-\begin{aligned}
+\begin{align}
     g_i(t) &= f^{(i)}(c + (x - c)t) \\
     g'_i(t) &= (x - c)g_{i+1}(t)
-\end{aligned}
+\end{align}
 $$ By the mean value theorem there is a $\mu_{i}(t)$ such that $$
     g_{i}(t) = g_{i}(0) + t(x - c)\mu_{i}(t)
 $$ where $\mu_{i}(t) = g_{i+1}(z)$ for some $z\in[0,t]$. Starting from $$f(x) = f(c) + (x - c)\mu_0(1)$$ this provides grounds or bounds for approximation considering
 $$
-\begin{aligned}
+\begin{align}
     t\mu_{i}(t)
         &= \int_0^t g_{i+1}(s)ds\\ 
         &= f^{(i+1)}(c)t + (x-c)\int_0^tt\mu_{i+1}(t).
-\end{aligned}
+\end{align}
 $$
 
 ##### Taylor polynomial
