@@ -2,49 +2,56 @@ Given $f$ differentiable over $I = [a,b]$.
 
 #### Rolle's theorem
 
-If $f(a) = f(b)$ there is an $x\in I$ for which $f'(x)=0$.
+If $f(a) = f(b)$ there is a $\xi\in I$ for which $f'(\xi)=0$.
 
 The values of $f$ are bounded and closed over $I$. Moreover $f$ is locally extreme there.
 
 #### Mean value theorem
 
-There is an $x\in I$ such that
-$$ f'(x) = \frac{f(b)-f(a)}{b-a}. $$
+There is a $\xi\in I$ such that
+$$ f'(\xi) = \frac{f(b)-f(a)}{b-a}. $$
 In the light of the fundamental theorem this can also be expressed as
-$$ \int_a^bf'(t)dt = (b-a)f'(x). $$
+$$ \int_a^bf'(t)dt = (b-a)f'(\xi). $$
 Consider
 $$ g(x) = f(x)-f(a) - \frac{x-a}{b-a}(f(b)-f(a)). $$
-Then $g(a) = g(b) = 0 = g'(\xi)$ for some $\xi$.
+Then $g(a) = g(b) = 0 = g'(\xi)$ for some $\xi\in I$.
 ___
-We traverse $f^{(i\leq n)}$ for $f$ differentiable $n+1$ times over $[c,x]$ along parameter $t\in[0,1]$ and differentiate.
-$$g_i(t) = f^{(i)}(c + (x - c)t)$$
-$$g_i'(t) = (x - c)g_{i+1}(t)$$ 
+Consider $f$ differentiable $m+1$ times over $I = [c,x]$.
 
-By the mean value theorem there is a $z_i\in[0,t]$ such that
-$$g_{i}(t) = g_{i}(0) + tg_i'(z_i) $$
-Starting from $$f(x) = f(c) + (x - c)g_1(z_0)$$ this provides either bounds for an approximation of $f$ or grounds considering
-$$tg_{i+1}(z_i)
-        = \int_0^t g_{i+1}(s)ds$$
-       $$= f^{(i+1)}(c)t + (x-c)\int_0^tsg_{i+2}(z_{i+1})ds.
-$$
+###### Taylor term
+
+$$ T_{i\leq m+1}^c(x) = \frac 1 {i!} (x-c)^i f^{(i)}(c) $$
 
 ##### Taylor polynomial
 
-$$
-    P_n(x) = \sum_{i=0}^{n} \frac{1}{i!}(x - c)^if^{(i)}(c)
-$$
+$$ P_{n\leq m}^c(x) = \sum_{i=0}^n T_i^c(x) $$
+
+where $c$ is the workpoint and $n$ the degree of expansion.
+We can take this polynomial as a function of the workpoint.
+
+$$ 
+u_i(t) = T_i^t(x) \\
+u_{i>0}'(t) = -\frac i {x-t}u_i(t) + \frac {i+1}{x-t}u_{i+1}(t) \\
+p(t) = P_n^t(x) \\
+p'(t) = \frac{n+1}{x-t}T_{n+1}^t(x) $$
+
+Hence the remainder in function of the workpoint $r(t) = f(x) - p(t)$ differentiates to $r'(t)=-p'(t)$.
+
+$$ d(t) = r(t) - \left(\frac{x-t}{x-c}\right)^{n+1}r(c) $$
+
+Clearly $d(x)=d(c)=0=d'(\xi)$ for some $\xi\in I$. Hence
+
+$$ r(c) = -\frac 1{n+1}\frac{(x-c)^{n+1}}{(x-t)^n}r'(\xi) $$
 
 ##### Lagrange remainder
 
 $$
-    R_n(x) = \frac{1}{(n+1)!}(x - c)^{n+1}f^{(n+1)}(\xi)
+    R_n^c(x) = T_{n+1}^\xi(x)
 $$
-
-Where $\mu_{i}(t) = g_{i+1}(z)$ set $\xi=c+(x-c)z$ to conclude
 
 #### Taylor's theorem
 
-$$f=P_n+R_n.$$
+$$f(x)=P_n^c(x)+R_n^c(x).$$
 
 ___
 This may easily be extended for $f$ partially differentiable $m$ times over $I = [c,x]$ where $c - x = \mathbf v \in\mathbb R^n$ by considering $u(t) = c + t\mathbf v$ for $t \in [0,1]$.
