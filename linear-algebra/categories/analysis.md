@@ -20,20 +20,22 @@ Consider $f$ differentiable $m+1$ times over $I = [c,x]$.
 
 ###### Taylor term
 
-$$ T_{i\leq m+1}^c(x) = \frac 1 {i!} (x-c)^i f^{(i)}(c) $$
+$$ T_{i\leq m+1}^c(x,z) = \frac 1 {i!} (x-c)^i f^{(i)}(z) $$
 
 ##### Taylor polynomial
 
-$$ P_{n\leq m}^c(x) = \sum_{i=0}^n T_i^c(x) $$
+$$ P_{n\leq m}^c(x) = \sum_{i=0}^n T_i^c(x,c) $$
 
 where $c$ is the workpoint and $n$ the degree of expansion.
-We can take this polynomial as a function of the workpoint.
+We can take each term as a function of the workpoint and differentiate.
 
 $$ 
-u_i(t) = T_i^t(x) \\
-u_{i>0}'(t) = -\frac i {x-t}u_i(t) + \frac {i+1}{x-t}u_{i+1}(t) \\
+u_i(t) = T_i^t(x,t) \\
+u_{i>0}'(t) = -\frac i {x-t}u_i(t) + \frac {i+1}{x-t}u_{i+1}(t) $$
+Thus the following holds for the polynomial.
+$$
 p(t) = P_n^t(x) \\
-p'(t) = \frac{n+1}{x-t}T_{n+1}^t(x) $$
+p'(t) = \frac{n+1}{x-t}u_{n+1}(t) $$
 
 Hence the remainder in function of the workpoint $r(t) = f(x) - p(t)$ differentiates to $r'(t)=-p'(t)$.
 
@@ -41,12 +43,12 @@ $$ d(t) = r(t) - \left(\frac{x-t}{x-c}\right)^{n+1}r(c) $$
 
 Clearly $d(x)=d(c)=0=d'(\xi)$ for some $\xi\in I$. Hence
 
-$$ r(c) = -\frac 1{n+1}\frac{(x-c)^{n+1}}{(x-t)^n}r'(\xi) $$
+$$ r(c) = -\frac 1{n+1}\frac{(x-c)^{n+1}}{(x-\xi)^n}r'(\xi) $$
 
 ##### Lagrange remainder
 
 $$
-    R_n^c(x) = T_{n+1}^\xi(x)
+    R_n^c(x) = T_{n+1}^c(x,\xi)
 $$
 
 #### Taylor's theorem
@@ -54,25 +56,41 @@ $$
 $$f(x)=P_n^c(x)+R_n^c(x).$$
 
 ___
-This may easily be extended for $f$ partially differentiable $m$ times over $I = [c,x]$ where $c - x = \mathbf v \in\mathbb R^n$ by considering $u(t) = c + t\mathbf v$ for $t \in [0,1]$.
+This may easily be extended for $f$ partially differentiable $m+1$ times over $I = [c,x]$ where $x - c = \mathbf v \in\mathbb R^n$ by considering $s(\lambda) = c + \lambda\mathbf v$ for $\lambda \in [0,1]$.
 
-$$g(t) = f(u(t))$$
+$$g(\lambda) = f(s(\lambda))$$
 
-$$g'(t) = \nabla f(u(t)) \cdot \mathbf v$$
+$$g'(\lambda) = \nabla f(s(\lambda)) \cdot \mathbf v$$
 
-$$ = \sum_{i=1}^n v_i\frac{\partial f(u(t))}{\partial u_i}$$
+$$ = \sum_{i=1}^n v^i\frac{\partial f(s(\lambda))}{\partial s^i}$$
 
-Evidently $g(t)=g(0)+tg'(z)$ for some $z$, hence $tg'(z) = \int_0^tg'(s)ds$.
-Considering $N=\{i\leq n\}$ and $\mathbf i \in N^{k<m}$ we see
+We introduce $\alpha \in \mathbb N^n$ and denote $|\alpha| = \sum_{i=1}^n \alpha_i$.
+
+###### Multivariate Taylor term
+
+$$ T_\alpha^c(x, \lambda) = \left( \prod_{i=1}^n \frac 1 {{\alpha_i}!} \left( v^i \frac {\partial}{\partial s^i} \right)^{\alpha_i} \right)f(s(\lambda))$$
+
+for $|\alpha|\leq m+1$.
+
+
+##### Multivariate Taylor polynomial
+
+$$ P_{k\leq m}^c(x) = \sum_{|\alpha|\leq k} T_\alpha^c(x, 0) $$
+
+Evidently $u_\alpha(\lambda) = T_\alpha^{s(\lambda)}(x, \lambda) = (1-\lambda)^{|\alpha|}T_\alpha^c(x, \lambda)$ since $x - s(\lambda) = (1 - \lambda)\mathbf v$.
+This differentiates to $$
+    u'_\alpha(\lambda) = \sum_{i=1}^n \frac {-|\alpha|} {1-\lambda}u_\alpha(\lambda) + \frac {\alpha_i+1} {1-\lambda}u_{\partial_i\alpha}(\lambda)
+$$ where $(\partial_i \alpha)_{j\neq i} = \alpha_i$ and $(\partial_i \alpha)_i = \alpha_i+1.$
+Hence $p(\lambda) = \sum_{|\alpha|\leq k} u_\alpha(\lambda)$ differentiates to $$
+    p'(\lambda) = \sum_{|\alpha| = k + 1} \frac {k+1} {1-\lambda}u_{\alpha}(\lambda)
 $$
-    g_{\mathbf i}(t) = \frac{\partial^k f(u(t))}{\prod_{h=1}^k\partial u_{\mathbf i_h}}
+
+Taking $r(\lambda)=f(x)-p(\lambda)$ we define 
+$$d(\lambda) = r(\lambda) - (1-\lambda)^{k+1}r(0)$$
+
+##### Multivariate Lagrange remainder
+
 $$
-$$
-    g_{\mathbf i}'(t) = \mathbf g_{\partial\mathbf i}(t) \cdot \mathbf v
-$$
-noting $\mathbf g_{\partial\mathbf i}^j = g_\mathbf j(t)$ where $\mathbf j\in\partial\mathbf i = \mathbf i \times N$ such that $\mathbf j_{k+1} = j$.
-Hence there is some $z_\mathbf i$ such that
-$$g_{\mathbf i}(t) = g_{\mathbf i}(0) + t\mathbf g_{\partial\mathbf i}(z_\mathbf i) \cdot \mathbf v$$
-$$t\mathbf g^j_{\partial\mathbf i}(z^j_\mathbf i) = \int_0^t\mathbf g^j_{\partial\mathbf i}(s)ds$$
-$$=g_{\mathbf j}(0)t+\int_0^ts\mathbf g_{\partial\mathbf j}(z_\mathbf j) \cdot \mathbf vds$$
+    R_k^c(x) = \sum_{|\alpha| = k + 1} T_\alpha^c(x,\xi)
+$$ for some $\xi\in [0,1]$.
 ___
