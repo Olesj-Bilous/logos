@@ -1,10 +1,64 @@
+# Real analysis
+
+##### Upper and lower bounds
+
+A nonempty subset $R\subseteq\mathbb R$ with $a,b\in\mathbb R$ has:
+
+- a lower bound if $a \leq r$
+- an upper bound if $r \leq b$
+
+for all $r\in R$.
+
+Consider the set of bounds at each side $A,B\subseteq\mathbb R$ such that $a\in A$ and $b\in B$ for all lower bounds $a$ and upper bounds $b$ of $R$.
+
+### Completeness axiom
+##### Infimum and supremum
+
+A nonempty set of bounds at one side of a nonempty subset includes its own bound at the other side:
+
+- an infimum $inf (R) \in A$ such that $a \leq inf (R)$ for all $a\in A$
+- a supremum $sup(R) \in B$ such that $sup(R) \leq b$ for all $b\in B$.
+
+Note that $A \cup R \cup \{sup(R)\}$ is the set of lower bounds of $B$, where $sup(R) = inf(B)$.
+___
+Consider a map $u: \mathbb N \longrightarrow \mathbb R$.
+This is called a row with element $u_i=u(i)$.
+
+##### Row limit
+
+If there is an $n\in\mathbb N$ for every real $\epsilon > 0$ such that $|u_i - L| \leq \epsilon$ for all $i > n$ then $L \in \mathbb R$ is the limit of $u$. We write
+
+$$
+    \lim_{i\to\infty} u_i = L.
+$$
+
+with $L = \lim u$ a shorthand.
+
+#### Growth limit theorem
+
+If for all $j > i$ a row $u$:
+
+- increases $u_i \leq u_{j}$ then $\lim u = sup(u(\mathbb N))$
+- decreases $u_i \geq u_j$ then $\lim u = inf(u(\mathbb N))$.
+
+After all, there are $n$ for any $\epsilon > 0$ such that $sup(u(\mathbb N)) - \epsilon \lt u_n$.
+___
+A point $c \in R$ is considered a limit point of $R \subseteq \mathbb R$ if for every real $\delta \gt 0$ there is an $x \in R$ such that $0 \lt |x-c| \lt \delta$.
+
+Consider a function $f:\mathbb R \longrightarrow\mathbb R$.
+
+##### Limit at a real point
+
+If there is a real $\delta \gt 0$ such that $|x-|$
+
+___
 Given $f$ differentiable over $I = [a,b]$.
 
 #### Rolle's theorem
 
 If $f(a) = f(b)$ there is a $\xi\in I$ for which $f'(\xi)=0$.
 
-The values of $f$ are bounded and closed over $I$. Moreover $f$ is locally extreme there.
+Since $f$ is continuous over $I$ its values are bounded and closed there. Moreover equality at the boundaries implies a local extremum.
 
 #### Mean value theorem
 
@@ -27,17 +81,19 @@ $$ T_{i\leq m+1}^c(x,z) = \frac 1 {i!} (x-c)^i f^{(i)}(z) $$
 $$ P_{n\leq m}^c(x) = \sum_{i=0}^n T_i^c(x,c) $$
 
 where $c$ is the workpoint and $n$ the degree of expansion.
-We can take each term as a function of the workpoint and differentiate.
+We can take each term as a function of the workpoint $u_i(t) = T_i^t(x,t)$ and differentiate.
 
-$$ 
-u_i(t) = T_i^t(x,t) \\
-u_{i>0}'(t) = -\frac i {x-t}u_i(t) + \frac {i+1}{x-t}u_{i+1}(t) $$
-Thus the following holds for the polynomial.
 $$
-p(t) = P_n^t(x) \\
-p'(t) = \frac{n+1}{x-t}u_{n+1}(t) $$
+    u_{i}'(t) = -\frac i {x-t}u_i(t) + \frac {i+1}{x-t}u_{i+1}(t)
+$$
 
-Hence the remainder in function of the workpoint $r(t) = f(x) - p(t)$ differentiates to $r'(t)=-p'(t)$.
+Thus $p(t) = P_n^t(x)$ differentiates to
+
+$$
+    p'(t) = \frac{n+1}{x-t}u_{n+1}(t)
+$$
+
+Hence the remainder in function of the workpoint $r(t) = f(x) - p(t)$ differentiates to $r'(t)=-p'(t)$. Define
 
 $$ d(t) = r(t) - \left(\frac{x-t}{x-c}\right)^{n+1}r(c) $$
 
