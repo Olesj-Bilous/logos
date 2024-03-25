@@ -1,55 +1,81 @@
 # Real analysis
 
-##### Upper and lower bounds
+###### Upper and lower bounds
 
 A nonempty subset $R\subseteq\mathbb R$ with $a,b\in\mathbb R$ has:
 
-- a lower bound if $a \leq r$
-- an upper bound if $r \leq b$
+- a lower bound $a \in R^\geq$ if $r \geq a$
+- an upper bound $b \in R^\leq$ if $r \leq b$
 
 for all $r\in R$.
-
-Consider the set of bounds at each side $A,B\subseteq\mathbb R$ such that $a\in A$ and $b\in B$ for all lower bounds $a$ and upper bounds $b$ of $R$.
 
 ### Completeness axiom
 ##### Infimum and supremum
 
-A nonempty set of bounds at one side of a nonempty subset includes its own bound at the other side:
+A nonempty set of bounds at one side of a nonempty subset includes its own bound at the opposite side:
 
-- an infimum $inf (R) \in A$ such that $a \leq inf (R)$ for all $a\in A$
-- a supremum $sup(R) \in B$ such that $sup(R) \leq b$ for all $b\in B$.
+- an infimum $\inf_R \in A$ such that $a \leq \inf_R$ for all $a\in R^\geq$
+- a supremum $\sup_R \in B$ such that $b \geq \sup_R$ for all $b\in R^\leq$.
 
-Note that $A \cup R \cup \{sup(R)\}$ is the set of lower bounds of $B$, where $sup(R) = inf(B)$.
+Note that $A \cup R \cup \{\ \sup_R\ \}$ is the set of lower bounds of $B$, where $\sup_R = \inf_B$.
 ___
 Consider a map $u: \mathbb N \longrightarrow \mathbb R$.
 This is called a row with element $u_i=u(i)$.
 
 ##### Row limit
 
-If there is an $n\in\mathbb N$ for every real $\epsilon > 0$ such that $|u_i - L| \leq \epsilon$ for all $i > n$ then $L \in \mathbb R$ is the limit of $u$. We write
+If there is an $n\in\mathbb N$ for every real $\epsilon > 0$ such that $|u_i - L| \lt \epsilon$ for all $i > n$ then $L \in \mathbb R$ is the limit of $u$. We write
 
 $$
     \lim_{i\to\infty} u_i = L.
 $$
 
 with $L = \lim u$ a shorthand.
+A row is said to converge to its limit. If no such limit exists the row is divergent.
 
 #### Growth limit theorem
+###### Increasing and decreasing rows
 
-If for all $j > i$ a row $u$:
+If for all $j > i$:
 
-- increases $u_i \leq u_{j}$ then $\lim u = sup(u(\mathbb N))$
-- decreases $u_i \geq u_j$ then $\lim u = inf(u(\mathbb N))$.
+- $u_i \leq u_j$ then $u$ is increasing and $\lim u = \sup_{u(\mathbb N)}$
+- $u_i \geq u_j$ then $u$ is decreasing and $\lim u = \inf_{u(\mathbb N)}$.
 
-After all, there are $n$ for any $\epsilon > 0$ such that $sup(u(\mathbb N)) - \epsilon \lt u_n$.
+After all, there are $n$ for any $\epsilon > 0$ such that ${\sup_{u(\mathbb N)}} - \epsilon \lt u_n$.
+
+###### Limes inferior and superior
+
+Consider the row $u^{\sup}$ where $u_i^{\sup} = \sup_{U_i}$ for $U_i = \{\ u_j \in u\ |\ j \geq i \ \}$. Then 
+
+$$
+    \limsup u = \lim u^{\sup}.\\
+    \liminf u = \lim u^{\inf}
+$$
+
+is defined analogously.
+Evidently $u$ converges if $\limsup u = \liminf u$.
+
+#### Bolzano Weierstrass theorem
+
+Every bounded row has a convergent partial row.
+
+Finite omissions from a row do not affect its convergence. Constant rows converge trivially. Hence we need only consider rows where each element occurs uniquely.
+
+Suppose such a row $u$ is bounded by $a, b$ respectively. For any $u_i$ there is no 
 ___
-A point $c \in R$ is considered a limit point of $R \subseteq \mathbb R$ if for every real $\delta \gt 0$ there is an $x \in R$ such that $0 \lt |x-c| \lt \delta$.
+###### Limit point
 
-Consider a function $f:\mathbb R \longrightarrow\mathbb R$.
+A point $c \in D$ is considered a limit point of $D \subseteq \mathbb R$ if for every real $\delta$ there is an $x \in R$ such that $0 \lt |x-c| \lt \delta$.
+
+Consider a function $f:D \longrightarrow R$ where $D,R\subseteq\mathbb R$ and $c$ is a limit point of $D$.
 
 ##### Limit at a real point
 
-If there is a real $\delta \gt 0$ such that $|x-|$
+If there is a real $\delta \gt 0$ for every real $\epsilon \gt 0$ such that $|f(x)-L| \lt \epsilon$ whenever $|c-x| \lt \delta$ then $L\in\mathbb R$ is the limit of $f$ at $c$.
+
+$$
+    \lim_{x\to c} f(x)=L
+$$
 
 ___
 Given $f$ differentiable over $I = [a,b]$.
