@@ -15,10 +15,10 @@ The subset is considered bounded if bounds exist on both sides.
 
 A nonempty set of bounds at one side of a nonempty subset includes its own bound at the opposite side:
 
-- an infimum $\inf_R \in A$ such that $a \leq \inf_R$ for all $a\in R^\geq$
-- a supremum $\sup_R \in B$ such that $b \geq \sup_R$ for all $b\in R^\leq$.
+- an infimum $\inf_R \in R^\geq$ such that $a \leq \inf_R$ for all $a\in R^\geq$
+- a supremum $\sup_R \in R^\leq$ such that $b \geq \sup_R$ for all $b\in R^\leq$.
 
-Note that $A \cup R \cup \{\ \sup_R\ \}$ is the set of lower bounds of $B$, where $\sup_R = \inf_B$.
+Note that $R^\leq \cup R \cup \{\ \sup_R\ \}$ is the set of lower bounds of $R^\geq$, where $\sup_R = \inf_{R^\geq}$.
 ___
 Consider a map $u: \mathbb N \longrightarrow \mathbb R$.
 This is called a row with element $u_i=u(i)$.
