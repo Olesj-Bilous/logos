@@ -8,6 +8,7 @@ A nonempty subset $R\subseteq\mathbb R$ with $a,b\in\mathbb R$ has:
 - an upper bound $b \in R^\leq$ if $r \leq b$
 
 for all $r\in R$.
+The subset is considered bounded if bounds exist on both sides.
 
 ### Completeness axiom
 ##### Infimum and supremum
@@ -43,7 +44,7 @@ If for all $j > i$:
 
 After all, there are $n$ for any $\epsilon > 0$ such that ${\sup_{u(\mathbb N)}} - \epsilon \lt u_n$.
 
-###### Limes inferior and superior
+###### Limes inferior et superior
 
 Consider the row $u^{\sup}$ where $u_i^{\sup} = \sup_{U_i}$ for $U_i = \{\ u_j \in u\ |\ j \geq i \ \}$. Then 
 
@@ -55,13 +56,15 @@ $$
 is defined analogously.
 Evidently $u$ converges if $\limsup u = \liminf u$.
 
+A partial row is obtained by omitting elements from a row without affecting its ordering or cardinality.
+
 #### Bolzano Weierstrass theorem
 
 Every bounded row has a convergent partial row.
 
-Finite omissions from a row do not affect its convergence. Constant rows converge trivially. Hence we need only consider rows where each element occurs uniquely.
-
-Suppose such a row $u$ is bounded by $a, b$ respectively. For any $u_i$ there is no 
+The row has a supremum whereby $u^{\sup}$ is decreasing and bounded below hence convergent. For any $u_i \lt \limsup u$ there is some $j \gt i$ such that $u_i \lt u_j \leq \limsup u$. A similar argument for the limes inferior proceeds analogously.
+Consider $S = \{\ i \ |\  u_i \lt \limsup u \ \}$ and $T = \{\ i  \ |\  u_i \gt \liminf u \ \}$. Clearly $S^C \subseteq T \cup M$ where $M = \{\ i  \ |\ u_i = \limsup u \ \}$.
+If $|S|,|T| \in \mathbb N$ then $|M| \notin \mathbb N$ and therefore $M \nsubseteq T$.
 ___
 ###### Limit point
 
