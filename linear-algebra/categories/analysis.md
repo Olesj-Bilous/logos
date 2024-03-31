@@ -23,9 +23,11 @@ ___
 Consider a map $u: \mathbb N \longrightarrow \mathbb R$.
 This is called a row with element $u_i=u(i)$.
 
+All elements of a row beyond an appropriate index $n\in\mathbb N$ may be found within an arbitrarily small bound of proximity $\epsilon \in \mathbb R$ to a limiting value $L \in \mathbb R$.
+
 ##### Row limit
 
-If there is an $n\in\mathbb N$ for every real $\epsilon > 0$ such that $|u_i - L| \lt \epsilon$ for all $i > n$ then $L \in \mathbb R$ is the limit of $u$. We write
+If there is an $n$ for every $\epsilon > 0$ such that $|u_i - L| \lt \epsilon$ for all $i > n$ then $L$ is the limit of $u$. We write
 
 $$
     \lim_{i\to\infty} u_i = L.
@@ -34,12 +36,12 @@ $$
 with $L = \lim u$ a shorthand.
 A row is said to converge to its limit. If no such limit exists the row is divergent.
 
-#### Growth limit theorem
+#### Monotonic limit theorem
 ###### Increasing and decreasing rows
 
 If for all $j > i$:
 
-- $u_i \leq u_j$ then $u$ is increasing and $\lim u = \sup_{u(\mathbb N)}$
+- $u_j \geq u_i$ then $u$ is increasing and $\lim u = \sup_{u(\mathbb N)}$
 - $u_i \geq u_j$ then $u$ is decreasing and $\lim u = \inf_{u(\mathbb N)}$.
 
 After all, there are $n$ for any $\epsilon > 0$ such that ${\sup_{u(\mathbb N)}} - \epsilon \lt u_n$.
@@ -62,9 +64,10 @@ A partial row is obtained by omitting elements from a row without affecting its 
 
 Every bounded row has a convergent partial row.
 
-The row has a supremum whereby $u^{\sup}$ is decreasing and bounded below hence convergent. For any $u_i \lt \limsup u$ there is some $j \gt i$ such that $u_i \lt u_j \leq \limsup u$. A similar argument for the limes inferior proceeds analogously.
-Consider $S = \{\ i \ |\  u_i \lt \limsup u \ \}$ and $T = \{\ i  \ |\  u_i \gt \liminf u \ \}$. Clearly $S^C \subseteq T \cup M$ where $M = \{\ i  \ |\ u_i = \limsup u \ \}$.
-If $|S|,|T| \in \mathbb N$ then $|M| \notin \mathbb N$ and therefore $M \nsubseteq T$.
+For any $i$ consider $S_i = \{\ j \ |\ u_j \lt u_i \}$ and $L_i = \{\ j \ |\ u_j \geq u_i \}$. Then define $N_i = S_i$ if $|S_i| \notin \mathbb N$ and $N_i = L_i$ otherwise. Take $M_n = \bigcap_{j\leq n} N_j$.
+If either $|S_i|, |S_j| \in \mathbb N$ or $|S_i|, |S_j| \notin \mathbb N$ then $N_i \cap N_j \in \{\ N_i, N_j \ \} $. Should $|S_i| \in \mathbb N$ whereas $|S_j| \notin \mathbb N$ then $S_i \subset S_j$ so $L_i \cap S_j = S_j \setminus S_i$ and $|N_i \cap N_j| \notin \mathbb N$.
+Hence $M_n \notin \mathbb N$ for all $n$. 
+We may now consider $S = \{\ i \in M \ \big|\ |S_i| \notin \mathbb N \ \}$ and $L = \{\ i \in M \ \big|\ |S_i| \in \mathbb N \ \}$ where $M = \{\ i > 0 \ |\ i \in M_{i-1}\ \}$. Evidently $u(S), u(L)$ are monotonic and bounded. If $|S| \in \mathbb N$ then $|L| \notin \mathbb N$ since $|S \cup L| = |M| \notin \mathbb N$.
 ___
 ###### Limit point
 
