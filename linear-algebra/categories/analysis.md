@@ -1,5 +1,38 @@
 # Real analysis
 
+### Field axioms
+
+The real numbers $\mathbb R$ are a field over addition $+$ and multiplication $\times$ with $0$ or $1$ as identity elements respectively.
+
+### Order axioms
+
+For any $a, b \in \mathbb R$:
+
+Define $a < b$ as $a \leq b$ and $b \nleq a$.
+
+###### Totality
+- $a \leq b$ or $b \leq a$
+
+###### Antisymmetry
+- $a \leq b$ and $b \leq a$ only if $a = b$
+
+Clearly $a \lt b$ if $b \nleq a$ and $a \neq b$ only if $a \lt b$ or $b \lt a$.
+
+- $a \leq b$ only if $a - b \leq 0$
+
+Clearly $0 \leq b$ only if $-b \leq 0$.
+
+- $ab \leq 0$ if $a \leq 0$ only if $0 \leq b$
+
+If $0 \leq a$ only if $0 \leq b$ then $(-a)b \leq 0$ so $0 \leq ab = -(-a)b$.
+Should $ab \lt 0$ then $(-a)b \not\leq 0$ hence $a \lt 0$ only if $0 \leq b$. Evidently the same holds for $0 \lt ab$.
+
+Furthermore, $0 \leq 1$.
+
+Then $-1 \lt 0 \lt 1$.
+
+
+
 ###### Upper and lower bounds
 
 A nonempty subset $R\subseteq\mathbb R$ with $a,b\in\mathbb R$ has:
@@ -20,13 +53,16 @@ A nonempty set of bounds at one side of a nonempty subset includes its own bound
 
 Note that $R^\geq \cup R \cup \{\ \sup_R\ \}$ is the set of lower bounds of $R^\leq$, where $\sup_R = \inf_{R^\leq}$.
 
+We denote the ill definition of the infimum or supremum of a nonempty set with no lower or upper bounds as $\inf_R = -\infty$ and $\sup_R = \infty$ respectively. These are certainly not real numbers but devices to simplify notation.
+
 ###### Open interval
 
-Given endpoints $a, b \in \mathbb R$ and $a\neq b$ the open interval $\left]a,b\right[$ consists of all $x \in \mathbb R$ such that $a \lt x \lt b$.
+Given an endpoint $c \in \mathbb R$ the open intervals $\left]-\infty,c\right[$ and $\left]c,\infty\right[$ consist of all $x \in \mathbb R$ such that $c \lt x$ or $x \gt c$ respectively. Note that $c$ is respectively the infimum or supremum of the interval and is excluded by definition.
+The open interval $\left]a, b\right[ = \left]a,\infty\right[ \cap \left]-\infty,b\right[$ for $a \lt b$.
 
 ###### $\delta$-neighborhood of a point
 
-Given $\delta\in \mathbb R$ and $0 \lt \delta $ the $\delta$-neighborhood $D_\delta(c)$ of $c\in \mathbb R$ consists of all $x \in \mathbb R$ such that $|x-c|<\delta$.
+Given $\delta\in \mathbb R$ where $0 \lt \delta $ the $\delta$-neighborhood $D_\delta(c)$ of $c\in \mathbb R$ consists of all $x \in \mathbb R$ such that $|x-c|<\delta$.
 
 Clearly $D_\delta(c) = \left]c-\delta,c+\delta\right[$.
 ___
@@ -47,7 +83,7 @@ $$
 $$
 
 with $L = \lim u$ a shorthand.
-A row is said to converge to its limit. If no such limit exists the row is divergent.
+A row is said to converge to its limit. If no such limit exists the row is divergent. In special cases this may be denoted $\lim u \in \{\ -\infty, \infty\ \}$ to indicate that the row diverges because it grows without bound.
 
 #### Monotonic limit theorem
 ###### Increasing and decreasing rows
@@ -57,7 +93,7 @@ If for all $j > i$:
 - $u_j \geq u_i$ then $u$ is increasing and $\lim u = \sup_{u(\mathbb N)}$
 - $u_j \leq u_i$ then $u$ is decreasing and $\lim u = \inf_{u(\mathbb N)}$.
 
-After all, there are $n$ for any $\delta > 0$ such that ${\sup_{u(\mathbb N)}} - \delta \lt u_n$.
+After all, there are $n$ for any $\delta > 0$ such that ${\sup_{u(\mathbb N)}} - \delta \lt u_n$ as long as $\sup_{u(\mathbb N)} \in \mathbb R$.
 
 ###### Limes inferior et superior
 
@@ -95,6 +131,8 @@ The closure $\partial D$ of a set $D \subseteq \mathbb R$ extends it with its li
 ###### Closed interval
 
 The closure of an interval $\partial \left]a,b\right[ = [a,b]$ extends it with its endpoints.
+Evidently an ill defined infimum or supremum may not be included, e.g. $\partial \left] a,\infty \right[ = [ a,\infty [$.
+We may take advantage of this notation to include a single endpoint of an open interval even if both exist, e.g. $[a,b[$.
 
 Consider a map $f:D \longrightarrow R$ where $D,R\subseteq\mathbb R$ and $c$ is a limit point of $D$.
 
@@ -110,13 +148,13 @@ Clearly this condition is met only if $f \circ u$ converges to $L$ for all rows 
 
 ##### Continuity
 
-A function $f$ is continuous at a limit point $c$ if
+A function $f$ is continuous at a limit point $c$ of its domain if
 
 $$
     \lim_{x\to c} f(x)=f(c).
 $$
 
-If the function is continuous at every point of an interval $I$ then it is continuous on that interval.
+A function that is continuous at every point of an interval is said to be continuous over that interval.
 
 #### Weierstrass theorem
 
