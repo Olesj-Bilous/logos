@@ -18,19 +18,32 @@ A nonempty set of bounds at one side of a nonempty subset includes its own bound
 - an infimum $\inf_R \in R^\geq$ such that $a \leq \inf_R$ for all $a\in R^\geq$
 - a supremum $\sup_R \in R^\leq$ such that $b \geq \sup_R$ for all $b\in R^\leq$.
 
-Note that $R^\leq \cup R \cup \{\ \sup_R\ \}$ is the set of lower bounds of $R^\geq$, where $\sup_R = \inf_{R^\geq}$.
+Note that $R^\geq \cup R \cup \{\ \sup_R\ \}$ is the set of lower bounds of $R^\leq$, where $\sup_R = \inf_{R^\leq}$.
+
+###### Open interval
+
+Given endpoints $a, b \in \mathbb R$ and $a\neq b$ the open interval $\left]a,b\right[$ consists of all $x \in \mathbb R$ such that $a \lt x \lt b$.
+
+###### $\delta$-neighborhood of a point
+
+Given $\delta\in \mathbb R$ and $0 \lt \delta $ the $\delta$-neighborhood $D_\delta(c)$ of $c\in \mathbb R$ consists of all $x \in \mathbb R$ such that $|x-c|<\delta$.
+
+Clearly $D_\delta(c) = \left]c-\delta,c+\delta\right[$.
 ___
 Consider a map $u: \mathbb N \longrightarrow \mathbb R$.
-This is called a row with element $u_i=u(i)$.
-
-All elements of a row beyond an appropriate index $n\in\mathbb N$ may be found within an arbitrarily small bound of proximity $\epsilon \in \mathbb R$ to a limiting value $L \in \mathbb R$.
+This is called a row with element $u_i=u(i)$ at index $i$.
+We may consider all elements of the row beyond a certain index $U_i = \{\ u_j \in u\ |\ j \geq i \ \}$.
 
 ##### Row limit
 
-If there is an $n$ for every $\epsilon > 0$ such that $|u_i - L| \lt \epsilon$ for all $i > n$ then $L$ is the limit of $u$. We write
+If there is an $n$ for every $\delta \gt 0$ such that $U_n \subseteq D_\delta(L)$ then $L \in \mathbb R$ is the limit of $u$.
+
+Note that for every $0 \lt \delta_1$ there is a $0 \lt \delta_2 \lt \delta_1$ such that $D_{\delta_2}(L) \subset D_{\delta_1}(L)$. Therefore if $U_j \subseteq D_{\delta_2}(L)$ and $U_i \subseteq D_{\delta_1}(L)$ then $j \geq i$.
+
+We write
 
 $$
-    \lim_{i\to\infty} u_i = L.
+    \lim_{i\to\infty} u_i = L
 $$
 
 with $L = \lim u$ a shorthand.
@@ -42,13 +55,13 @@ A row is said to converge to its limit. If no such limit exists the row is diver
 If for all $j > i$:
 
 - $u_j \geq u_i$ then $u$ is increasing and $\lim u = \sup_{u(\mathbb N)}$
-- $u_i \geq u_j$ then $u$ is decreasing and $\lim u = \inf_{u(\mathbb N)}$.
+- $u_j \leq u_i$ then $u$ is decreasing and $\lim u = \inf_{u(\mathbb N)}$.
 
-After all, there are $n$ for any $\epsilon > 0$ such that ${\sup_{u(\mathbb N)}} - \epsilon \lt u_n$.
+After all, there are $n$ for any $\delta > 0$ such that ${\sup_{u(\mathbb N)}} - \delta \lt u_n$.
 
 ###### Limes inferior et superior
 
-Consider the row $u^{\sup}$ where $u_i^{\sup} = \sup_{U_i}$ for $U_i = \{\ u_j \in u\ |\ j \geq i \ \}$. Then 
+Consider the row $u^{\sup}$ where $u_i^{\sup} = \sup_{U_i}$. Then 
 
 $$
     \limsup u = \lim u^{\sup}.\\
@@ -71,18 +84,45 @@ We may now consider $S = \{\ i \in M \ \big|\ |S_i| \notin \mathbb N \ \}$ and $
 ___
 ###### Limit point
 
-A point $c \in D$ is considered a limit point of $D \subseteq \mathbb R$ if for every real $\delta$ there is an $x \in R$ such that $0 \lt |x-c| \lt \delta$.
+A point $c \in D$ is considered a limit point of $D \subseteq \mathbb R$ if for every $\delta \gt 0$ there is an $x \neq c$ such that $x \in D_\delta(c) \cap D$.
 
-Consider a function $f:D \longrightarrow R$ where $D,R\subseteq\mathbb R$ and $c$ is a limit point of $D$.
+Clearly this is equivalent to the existence of a row $u: \mathbb N \longrightarrow D \setminus \{c\}$ that converges to $c$.
+
+###### Closure
+
+The closure $\partial D$ of a set $D \subseteq \mathbb R$ extends it with its limit points.
+
+###### Closed interval
+
+The closure of an interval $\partial \left]a,b\right[ = [a,b]$ extends it with its endpoints.
+
+Consider a map $f:D \longrightarrow R$ where $D,R\subseteq\mathbb R$ and $c$ is a limit point of $D$.
 
 ##### Limit at a real point
 
-If there is a real $\delta \gt 0$ for every real $\epsilon \gt 0$ such that $|f(x)-L| \lt \epsilon$ whenever $|c-x| \lt \delta$ then $L\in\mathbb R$ is the limit of $f$ at $c$.
+If there is a $\delta \gt 0$ for every $\epsilon \gt 0$ such that $f(x) \in D_\epsilon(L) \cap R$ for all $x \in D_\delta(c) \cap D$ where $x \neq c$ then $L\in\mathbb R$ is the limit of $f$ at $c$.
 
 $$
     \lim_{x\to c} f(x)=L
 $$
 
+Clearly this condition is met only if $f \circ u$ converges to $L$ for all rows $u: \mathbb N \longrightarrow D \setminus \{c\}$ that converge to $c$.
+
+##### Continuity
+
+A function $f$ is continuous at a limit point $c$ if
+
+$$
+    \lim_{x\to c} f(x)=f(c).
+$$
+
+If the function is continuous at every point of an interval $I$ then it is continuous on that interval.
+
+#### Weierstrass theorem
+
+A function continuous over a bounded and closed interval is bounded and closed over that interval.
+
+Suppose it is not bounded or not closed over that interval. Then there should be a row of points in the interval for which the function grows monotonically without bound, or without attaining its limit. However, any such row has a partial row that converges to some point in the interval, for which the function must attain a defined limit in order to be continuous.
 ___
 Given $f$ differentiable over $I = [a,b]$.
 
