@@ -4,34 +4,37 @@
 
 The real numbers $\mathbb R$ are a field over addition $+$ and multiplication $\times$ with $0$ or $1$ as identity elements respectively.
 
-### Order axioms
+##### Total order
 
-For any $a, b \in \mathbb R$:
+We introduce the total order relation $a \leq b$.
 
-Define $a < b$ as $a \leq b$ and $b \nleq a$.
+Define the strict total order $a < b$ as $a \leq b$ and $b \nleq a$.
+Evidently the strict order is irreflexive $a \not\lt a$ and asymmetric: $a \not\lt b$ or $b \not\lt a$.
 
 ###### Totality
 - $a \leq b$ or $b \leq a$
 
+This is also known as strong connection. The total order is clearly reflexive $a \leq a$. Moreover $b \nleq a$ is sufficient for $a \lt b$.
+
 ###### Antisymmetry
-- $a \leq b$ and $b \leq a$ only if $a = b$
+- $a = b$ if $a \leq b$ and $b \leq a$
 
-Clearly $a \lt b$ if $b \nleq a$ and $a \neq b$ only if $a \lt b$ or $b \lt a$.
+Hence $a \lt b$ or $b \lt a$ if $a \neq b$. This is known as connection.
 
-- $a \leq b$ only if $a - b \leq 0$
+### Order axioms
 
-Clearly $0 \leq b$ only if $-b \leq 0$.
+The order over the real numbers is total. For any $a,b\in\mathbb R$ the following also holds.
 
-- $ab \leq 0$ if $a \leq 0$ only if $0 \leq b$
+###### Invariance under field operations
 
-If $0 \leq a$ only if $0 \leq b$ then $(-a)b \leq 0$ so $0 \leq ab = -(-a)b$.
-Should $ab \lt 0$ then $(-a)b \not\leq 0$ hence $a \lt 0$ only if $0 \leq b$. Evidently the same holds for $0 \lt ab$.
+- $a+c\leq b+c$ if $a\leq b$
 
-Furthermore, $0 \leq 1$.
+This implies that $-a \lt 0$ if $0 \lt a$.
 
-Then $-1 \lt 0 \lt 1$.
+- $0\leq ab$ if $0\leq a$ and $0\leq b$
 
-
+Consider first $(a-a)b = ab + (-a)b$ and $(a-a)(b-b) = -ab + (-a)(-b)$.
+For $a,b \neq 0$ we see that $ab \lt 0$ if $a \lt 0$ only if $0 \leq b$.
 
 ###### Upper and lower bounds
 
@@ -57,7 +60,8 @@ We denote the ill definition of the infimum or supremum of a nonempty set with n
 
 ###### Open interval
 
-Given an endpoint $c \in \mathbb R$ the open intervals $\left]-\infty,c\right[$ and $\left]c,\infty\right[$ consist of all $x \in \mathbb R$ such that $c \lt x$ or $x \gt c$ respectively. Note that $c$ is respectively the infimum or supremum of the interval and is excluded by definition.
+Given an endpoint $c \in \mathbb R$ the open intervals $\left]-\infty,c\right[$ and $\left]c,\infty\right[$ consist of all $x \in \mathbb R$ such that $x \lt c$ or $c \lt x$ respectively.
+Note that $c$ is respectively the supremum or infimum of the interval and is excluded by definition.
 The open interval $\left]a, b\right[ = \left]a,\infty\right[ \cap \left]-\infty,b\right[$ for $a \lt b$.
 
 ###### $\delta$-neighborhood of a point
