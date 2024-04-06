@@ -4,6 +4,7 @@
 
 The real numbers $\mathbb R$ are a field over addition $+$ and multiplication $\times$ with $0$ or $1$ as identity elements respectively.
 
+____
 ##### Total order
 
 We introduce the total order relation $a \leq b$.
@@ -21,6 +22,10 @@ This is also known as strong connection. The total order is clearly reflexive $a
 
 Hence $a \lt b$ or $b \lt a$ if $a \neq b$. This is known as connection.
 
+###### Transitivity
+
+- $a \leq c$ if $a \leq b$ and $b \leq c$
+
 ### Order axioms
 
 The order over the real numbers is total. For any $a,b\in\mathbb R$ the following also holds.
@@ -29,13 +34,14 @@ The order over the real numbers is total. For any $a,b\in\mathbb R$ the followin
 
 - $a+c\leq b+c$ if $a\leq b$
 
-This implies that $-a \lt 0$ if $0 \lt a$.
+This implies that $-a \lt 0$ only if $0 \lt a$.
 
 - $0\leq ab$ if $0\leq a$ and $0\leq b$
 
 Consider first $(a-a)b = ab + (-a)b$ and $(a-a)(b-b) = -ab + (-a)(-b)$.
-For $a,b \neq 0$ we see that $ab \lt 0$ if $a \lt 0$ only if $0 \leq b$.
+For $a,b \neq 0$ we see that $ab \lt 0$ only if $a \lt 0$ only if $0 \leq b$.
 
+____
 ###### Upper and lower bounds
 
 A nonempty subset $R\subseteq\mathbb R$ with $a,b\in\mathbb R$ has:
