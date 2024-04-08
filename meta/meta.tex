@@ -1,0 +1,120 @@
+\documentclass{amsbook}
+\usepackage{mathtools}
+
+\newcommand{\setsm}[1]{\left\{#1\right\}}
+
+\newcommand{\infers}{\mathrel\vdash}
+\newcommand{\theorem}{\mathord\vdash\medspace}
+\newcommand{\then}{\mathrel\rightarrow}
+\newcommand{\wffs}{\mathcal W}
+
+\theoremstyle{definition}
+\newenvironment{hackthm}[2][section]{
+    \newtheorem{new}{#2}[#1]
+    \begin{new}
+}{\end{new}}
+
+\newtheorem{axm}{Axiom}[section]
+\newtheorem{frule}{Rule}[section]
+\newtheorem{op}{Operator}[section]
+
+\begin{document}
+\title{Metamathema}
+\author{Olesj Bilous}
+\maketitle
+
+\chapter{Propositional logic}
+
+A proposition $P$ signifies a nondescript yet uniquely identifiable fact $P^*$ that is either the case or not.
+
+We may consider the set $\mathcal W$ of all propositions.
+
+A logical operator $o$ may join or transform a unary or binary enumeration $\mathcal E$ of propositions $\mathcal E \subseteq \mathcal W$ to form a proposition $o(\mathcal E) \in \mathcal W$.
+
+\begin{op}[Material implication]
+    For any $P, Q \in \wffs$:
+    $$
+        P \rightarrow Q \in \wffs.
+    $$
+    If $(P \rightarrow Q)^*$ is the case, then if $P^*$ (the implicans) is the case, then so is $Q^*$ (the implicandum). The implicans is said to be a sufficient condition for the implicandum.
+\end{op}
+
+\begin{op}[Negation]
+    For any $P \in \wffs$:
+    $$
+        \neg P \in \wffs.
+    $$
+    If $(\neg P)^*$ is the case then $P^*$ is not the case.
+\end{op}
+
+Such composite propositions may be distinguished from atomic propositions $a \in \mathcal W$ that contain no logical operators. There is no bound to the unique atomic propositions that we may enumerate in this logic. Therefore no finite enumeration $\mathcal E$ of propositions can contain them all $\mathcal E \subset \mathcal W$.
+
+A proposition with multiple levels of composition may use parentheses to indicate operator scope, e.g. $\neg P$ for $P = a \then b$ may be written $\neg(a \then b)$.
+
+In the alphabet formed by atomic propositions, logical operators and parentheses not every formula composed of an enumeration of symbols forms a proposition that belongs to the logic. For instance, $\then a$ and $)a \neg$ are ill formed. Therefore $\mathcal W$ is known as the set of well formed formulas.
+
+Logical operators may bestow a structure upon a finite enumeration of propositions $\mathcal E \subset \mathcal W$ that allows us to syntactically derive a proposition $P$ by a rule of inference $\mathcal E \infers P$. In that case the propositions of $\mathcal E$ are known as premises from which the conclusion $P$ follows.
+
+We need not always include a premise to infer $\theorem T$ a proposition $T \in \mathcal W$. Such propositions are known as theorems of the logic.
+
+\begin{frule}[Modus ponens]
+    For all $P, Q \in \wffs$:
+    $$\begin{aligned}P \rightarrow Q, \\ P\end{aligned} \infers Q$$
+\end{frule}
+
+\section{Inferential approach}
+
+\begin{frule}[Reflexivity] For all $P \in \wffs$:
+    $$P \infers P.$$
+\end{frule}
+
+The following special rule of inference infers over the possibility of inference itself. Consider the extension $\mathcal E \cup\setsm P$ of some premises $\mathcal E$ with a proposition $P$ known as the hypothesis.
+
+\begin{frule}[Conditional proof]
+    If $\mathcal E \cup\setsm P \infers Q$ then
+    $$\mathcal E \infers {P \then Q}$$
+    for all $\mathcal E \subset \wffs$ and $P, Q \in \wffs$.
+\end{frule}
+
+Hence it can be shown that the hypothesis is a sufficient condition for what can be inferred from the extension. This rule complements modus ponens to complete the inferential symmetry between the material implication and the inference relation.
+
+\begin{frule}[Double negation]
+    $${\neg\neg P} \infers P$$
+\end{frule}
+
+\begin{frule}[Reductio ad absurdum]
+    $$\begin{aligned}
+            P \then Q, \\ P \then \neg Q
+        \end{aligned} \infers \neg P$$
+\end{frule}
+
+\begin{frule}[Contraposition]
+    $$P \then Q \infers \neg Q \then \neg P$$
+\end{frule}
+
+For this reason the implicandum $Q$ is said to be a necessary condition for the implicans $P$.
+
+Finally, we assume that the inference relation is reflexive $P \infers P$.
+
+Including this assumption with the preceding rules and operators suffices to characterise the entire logic. This is known as the inferential approach.
+
+
+We may now show some interesting theorems that follow from the inferential approach. However, we may also characterise the logic by means of these theorems as premises while dropping the assumption of reflexivity as well as every rule except modus ponens. In that case these characterising theorems become axioms from which reflexivity and the omitted rules may be inferred.
+
+Each of the characterising theorems of the inferential approach has a characteristic logical structure in which any of the composing propositions may be substituted for any other proposition to yield another characterising theorem. Conversely, the axioms may be written in a characteristic general form where substitution of a composing proposition yields another axiom.
+
+Indeed, $P, Q \infers P$ hence $P \infers Q \then P$ so $\theorem P \then (Q \then P)$ for any $P, Q \in \mathcal W$.
+
+\begin{axm}[Materiality of implication]
+    $$P \then (Q \then P)$$
+\end{axm}
+
+This shows that $P \then (P \then P)$ is an axiom so $P \infers P$ for any $P, Q \in \mathcal W$. Hence the logic remains reflexive under the axiomatic approach. Evidently this implies that any axiom is also a theorem, which is necessary for the equivalence of the inferential and axiomatic approach.
+
+Next we see that $P \then (Q \then R), P \then Q, P \infers R$.
+
+\begin{axm}[Distributivity of implication]
+    $$(P \then (Q \then R)) \then ((P \then Q) \then (P \then R))$$
+\end{axm}
+
+\end{document}
