@@ -7,6 +7,7 @@
 \newcommand{\theorem}{\mathord\vdash\medspace}
 \newcommand{\then}{\mathrel\rightarrow}
 \newcommand{\wffs}{\mathcal W}
+\renewcommand{\and}{\mathrel\&}
 
 \theoremstyle{definition}
 \newenvironment{hackthm}[2][section]{
@@ -18,6 +19,9 @@
 \newtheorem{frule}{Rule}[section]
 \newtheorem{op}{Operator}[section]
 
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{dfn}{Definition}[section]
+
 \begin{document}
 \title{Metamathema}
 \author{Olesj Bilous}
@@ -25,11 +29,15 @@
 
 \chapter{Propositional logic}
 
-A proposition $P$ signifies a nondescript yet uniquely identifiable fact $P^*$ that is either the case or not.
+A proposition $P$ signifies a qualitatively nondescript yet uniquely identifiable fact $P^*$ that is either the case or not.
 
 We may consider the set $\mathcal W$ of all propositions.
 
-A logical operator $o$ may join or transform a unary or binary enumeration $\mathcal E$ of propositions $\mathcal E \subseteq \mathcal W$ to form a proposition $o(\mathcal E) \in \mathcal W$.
+\begin{dfn}
+    A logical operator $o$ may act on any enumeration $\mathcal E$ of a fixed number $n \in \mathbb N$ of propositions $\mathcal E \subseteq \mathcal W$ to form a new proposition $o(\mathcal E) = P \in \mathcal W$ such that $P \notin \mathcal E$. $n$ is said to be the order of the operator.
+\end{dfn}
+
+Evidently there is no bound to the successive application of logical operators $n < |\mathcal W|$ for all $n \in \mathbb N$, so no finite $|\mathcal E| \in \mathbb N$ enumeration $\mathcal E$ of propositions can contain them all: $\mathcal E \subset \mathcal W$ since $|\mathcal W| \notin \mathbb N$.
 
 \begin{op}[Material implication]
     For any $P, Q \in \wffs$:
@@ -47,54 +55,205 @@ A logical operator $o$ may join or transform a unary or binary enumeration $\mat
     If $(\neg P)^*$ is the case then $P^*$ is not the case.
 \end{op}
 
-Such composite propositions may be distinguished from atomic propositions $a \in \mathcal W$ that contain no logical operators. There is no bound to the unique atomic propositions that we may enumerate in this logic. Therefore no finite enumeration $\mathcal E$ of propositions can contain them all $\mathcal E \subset \mathcal W$.
+Repeated application of logical operators yields propositions with multiple levels of composition.
 
-A proposition with multiple levels of composition may use parentheses to indicate operator scope, e.g. $\neg P$ for $P = a \then b$ may be written $\neg(a \then b)$.
+\begin{dfn}
+    Parentheses $($, $)$ indicate the scope of a logical operator in a composite proposition.
+\end{dfn}
 
-In the alphabet formed by atomic propositions, logical operators and parentheses not every formula composed of an enumeration of symbols forms a proposition that belongs to the logic. For instance, $\then a$ and $)a \neg$ are ill formed. Therefore $\mathcal W$ is known as the set of well formed formulas.
+For instance $\neg R$ for $R = P \then Q$ may be written $\neg(P \then Q)$.
 
-Logical operators may bestow a structure upon a finite enumeration of propositions $\mathcal E \subset \mathcal W$ that allows us to syntactically derive a proposition $P$ by a rule of inference $\mathcal E \infers P$. In that case the propositions of $\mathcal E$ are known as premises from which the conclusion $P$ follows.
+Such composite propositions may be distinguished from propositions that contain no logical operators.
 
-We need not always include a premise to infer $\theorem T$ a proposition $T \in \mathcal W$. Such propositions are known as theorems of the logic.
+\begin{dfn}
+    When a proposition $a$ is atomic there is no logical operator $o$ nor any enumeration of propositions $\mathcal E \subset \wffs$ such that $a = o(\mathcal E)$.
+\end{dfn}
+
+There is no bound to the unique atomic propositions that we may enumerate.
+
+In the alphabet formed by atomic propositions, logical operators and parentheses not every expression composed of an enumeration of symbols forms a proposition that belongs to the logic. For instance, $\then a$ and $)a \neg$ are ill formed. Therefore $\mathcal W$ is known as the set of well formed formulas.
+
+For purposes of investigation we may introduce an atom symbol $a$ and a succession symbol $'$ such that an exhaustive enumeration $\mathcal E$ of atomic propositions may be denoted $\mathcal E_0 = a$ and $\mathcal E_{i+1} = (\mathcal E_i)'$ for all $i \in \mathbb N$. The alphabet $a, ', \then, \neg, (, )$ permits every expression to be encoded as a natural number in base $6$. Clearly the well formed formulas are enumerable $|\wffs| \leq |\mathbb N|$.
+
+Should we extend the alphabet with a propositional variable symbol $p$ then any expression containing this symbol is evidently ill formed. Nonetheless we may metatheoretically combine it with the succession symbol $'$ to identify variables.
+
+\begin{dfn}
+    Uniform substitution $\varphi(p / P)$ of a propositional variable $p$ with a proposition $P \in \wffs$ substitutes every instance of the variable in the expression $\varphi$ with an instance of the proposition.
+\end{dfn}
+
+\begin{dfn}
+    A formula $\varphi$ is a metatheoretical expression that becomes a well formed formula $F \in \wffs$ whenever every propositional variable $p \in \varphi$ has been substituted uniformly with some well formed formula $P \in \wffs$.
+
+    The resulting proposition is known as an instance of the formula $F = \phi(\mathcal E)$ where $\mathcal E \subset \wffs$ enumerates the substituting propositions in order of substitution.
+\end{dfn}
+
+We have used formulae before to define logical operators.
+Now we can use them to express the more complex logical structures shared by all instances of a formula.
+
+The set of all formulae shall be denoted $\Phi$.
+
+Formulae may share propositional variables across an enumeration $\Lambda \subseteq \Phi$. An instance $\Lambda(\mathcal E)$ of an enumeration of formulae follows from substitution of all propositional variables uniformly over the enumeration.
+
+\begin{dfn}
+    An enumeration of propositions $\mathcal E \subseteq \wffs$ may allow us to syntactically derive $\mathcal E \infers P$ a proposition $P$.
+\end{dfn}
+
+In that case the propositions of $\mathcal E$ are known as premises. The conclusion $P$ is said to be a syntactic consequence.
+
+Syntactic derivation is transitive such that if $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.
+
+\begin{dfn}
+    The deductive closure $\partial \mathcal E$ of an enumeration of propositions $\mathcal E \subseteq \wffs$ contains all syntactic consequences $\mathcal E \infers P$.
+\end{dfn}
+
+\begin{dfn}
+    A rule of inference $\Lambda \infers \kappa$ relates a finite enumeration of formulae $\Lambda \cup \setsm \kappa \subset \Phi$ such that $\Lambda(\mathcal E) \infers \kappa(\mathcal E)$ for every instance $(\Lambda \cup \setsm \kappa)(\mathcal E)$ of the enumeration.
+\end{dfn}
 
 \begin{frule}[Modus ponens]
-    For all $P, Q \in \wffs$:
-    $$\begin{aligned}P \rightarrow Q, \\ P\end{aligned} \infers Q$$
+    $$\begin{aligned}p \rightarrow q, \\ p\end{aligned} \infers q$$
 \end{frule}
 
 \section{Inferential approach}
 
-\begin{frule}[Reflexivity] For all $P \in \wffs$:
-    $$P \infers P.$$
-\end{frule}
-
-The following special rule of inference infers over the possibility of inference itself. Consider the extension $\mathcal E \cup\setsm P$ of some premises $\mathcal E$ with a proposition $P$ known as the hypothesis.
+The following special rules of inference allow us to infer over the possibility of inference itself. Consider the extension $\mathcal E \cup\setsm P$ of some premises $\mathcal E$ with a proposition $P$ known as the hypothesis.
 
 \begin{frule}[Conditional proof]
-    If $\mathcal E \cup\setsm P \infers Q$ then
-    $$\mathcal E \infers {P \then Q}$$
-    for all $\mathcal E \subset \wffs$ and $P, Q \in \wffs$.
+    If $\Lambda \cup\setsm p \infers q$ then
+    $$\Lambda \infers p \then q.$$
+    for all $\Lambda \subset \Phi$.
 \end{frule}
 
-Hence it can be shown that the hypothesis is a sufficient condition for what can be inferred from the extension. This rule complements modus ponens to complete the inferential symmetry between the material implication and the inference relation.
+Hence the subject of hypothesis is sufficient condition for what can be inferred from the extension.
 
-\begin{frule}[Double negation]
-    $${\neg\neg P} \infers P$$
-\end{frule}
+This entails a familiar property.
 
-\begin{frule}[Reductio ad absurdum]
+\begin{thm}[Linearity of inference]
+    If $\Lambda \infers p$ and $\Lambda \cup \setsm p \infers q$ then $\Lambda \infers q$ for all $\Lambda \subset \Phi$.
+    \begin{proof}
+        From $\Lambda \infers p \then q$ and transitivity of syntactic derivation.
+    \end{proof}
+\end{thm}
+
+Some expected properties of the implication can now follow.
+
+\begin{thm}[Transitivity of implication]
     $$\begin{aligned}
-            P \then Q, \\ P \then \neg Q
-        \end{aligned} \infers \neg P$$
+            p \then q, \\
+            q \then r
+        \end{aligned} \infers p \then r$$
+    \begin{proof}
+        From $p \then q, q \then r, p \infers r$.
+    \end{proof}
+\end{thm}
+
+\begin{thm}[Distributivity of implication]
+    $$p \then (q \then r) \infers (p \then q) \then (p \then r)$$
+\end{thm}
+
+The following rule seems all too evident.
+
+\begin{frule}[Reflection]
+    $$p \infers p$$
 \end{frule}
+
+It allows us to prove the following theorems.
+
+\begin{thm}[Reflexivity of implication]
+    $$\theorem p \then p$$
+\end{thm}
+
+\begin{thm}[Materiality of implication]
+    $$p \infers q \then p$$
+    \begin{proof}
+        $p, q \infers p$.
+    \end{proof}
+\end{thm}
+
+The preceding rules and theorems have applied exclusively to the implication. The following rules introduce the syntactic role of the negation.
 
 \begin{frule}[Contraposition]
-    $$P \then Q \infers \neg Q \then \neg P$$
+    $$p \then q \infers \neg q \then \neg p$$
 \end{frule}
 
-For this reason the implicandum $Q$ is said to be a necessary condition for the implicans $P$.
+\begin{thm}[Introduction of double negation]
+    $$p \infers \neg\neg p$$
+\end{thm}
 
-Finally, we assume that the inference relation is reflexive $P \infers P$.
+This immediately establishes some interesting theorems.
+
+\begin{thm}[Reductio ad absurdum]
+    $$\begin{aligned}
+            p \then q, \\ p \then \neg q
+        \end{aligned} \infers \neg p$$
+    \begin{proof}
+        $p, p \then q, q \then \neg p \infers \neg p$ such that $p, p \then q \infers p \then \neg(p \then \neg q)$ and $p \then q \infers \neg \neg(p \then \neg q) \then \neg p$.
+    \end{proof}
+\end{thm}
+
+\begin{thm}[Introduction of conjuction]
+    $$p, q \infers \neg(p \then \neg q)$$
+    \begin{proof}
+        $p, q, p \then \neg q \infers q, \neg q$.
+    \end{proof}
+\end{thm}
+
+The final rule completes the law of double negation.
+
+\begin{frule}[Elimination of double negation]
+    $${\neg\neg p} \infers p$$
+\end{frule}
+
+This rule has been controversial since it allows us to prove $p$ by contradiction $\neg p \then q, \neg p \then \neg q \infers p$.
+
+\begin{thm}[Ex falso quod libet]
+    $$\begin{aligned}
+            p, \\ \neg p
+        \end{aligned}\infers q$$
+    \begin{proof}
+        Evidently $p, \neg p \infers \neg q \then p, \neg q \then \neg p$.
+    \end{proof}
+\end{thm}
+
+It also completes the law of contraposition.
+
+\begin{thm}[Converse contraposition]
+    $$\neg p \then \neg q \infers p \then q$$
+\end{thm}
+
+\begin{thm}[Elimination of conjunction]
+    $$\neg(p \then \neg q) \infers p, q$$
+    \begin{proof}
+        $\neg q, \neg p \infers p \then \neg q$.
+    \end{proof}
+\end{thm}
+
+This justifies the following definition.
+
+\begin{dfn}
+    The conjunction $P \and Q$ can be defined as $\neg(P \then \neg Q)$.
+\end{dfn}
+
+The following result is a formulation of the law of the excluded middle in terms of the implication.
+
+\begin{thm}[Peirce's law]
+    $$(p \then q) \then p \infers p$$
+    \begin{proof}
+        We know that $\theorem \neg p \then (\neg q \then \neg p)$ so $\theorem \neg p \then (p \then q)$. However, in that case $\neg p \then \neg(p \then q) \infers p$.
+    \end{proof}
+\end{thm}
+
+This becomes more clear once we show the following.
+
+\begin{dfn}
+    We may define the disjunction $P \vee Q$ as $\neg P \then Q$ and $\neg Q \then P$.
+\end{dfn}
+
+The law of the excluded middle is then defined as $p \vee \neg p$. Evidently this is equivalent to reflexivity and introduction of double negation.
+
+We may rewrite Peirce's law as $p \vee (p \and \neg p) \infers p$ for the instance $(p \then \neg\neg p) \then p \infers p$.
+
+\newpage
 
 Including this assumption with the preceding rules and operators suffices to characterise the entire logic. This is known as the inferential approach.
 
@@ -102,8 +261,6 @@ Including this assumption with the preceding rules and operators suffices to cha
 We may now show some interesting theorems that follow from the inferential approach. However, we may also characterise the logic by means of these theorems as premises while dropping the assumption of reflexivity as well as every rule except modus ponens. In that case these characterising theorems become axioms from which reflexivity and the omitted rules may be inferred.
 
 Each of the characterising theorems of the inferential approach has a characteristic logical structure in which any of the composing propositions may be substituted for any other proposition to yield another characterising theorem. Conversely, the axioms may be written in a characteristic general form where substitution of a composing proposition yields another axiom.
-
-Indeed, $P, Q \infers P$ hence $P \infers Q \then P$ so $\theorem P \then (Q \then P)$ for any $P, Q \in \mathcal W$.
 
 \begin{axm}[Materiality of implication]
     $$P \then (Q \then P)$$
