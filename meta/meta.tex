@@ -2,12 +2,17 @@
 \usepackage{mathtools}
 
 \newcommand{\setsm}[1]{\left\{#1\right\}}
+\newcommand{\given}{\mathrel |}
+
+\newcommand{\wffs}{\mathcal W}
 
 \newcommand{\infers}{\mathrel\vdash}
 \newcommand{\theorem}{\mathord\vdash\medspace}
+
 \newcommand{\then}{\mathrel\rightarrow}
-\newcommand{\wffs}{\mathcal W}
-\renewcommand{\and}{\mathrel\&}
+\newcommand{\conj}{\mathrel\&}
+\newcommand{\eqv}{\mathrel\leftrightarrow}
+\newcommand{\disj}{\mathrel\vee}
 
 \theoremstyle{definition}
 \newenvironment{hackthm}[2][section]{
@@ -20,6 +25,7 @@
 \newtheorem{op}{Operator}[section]
 
 \newtheorem{thm}{Theorem}[section]
+\newtheorem{lmm}{Lemma}[section]
 \newtheorem{dfn}{Definition}[section]
 
 \begin{document}
@@ -34,10 +40,16 @@ A proposition $P$ signifies a qualitatively nondescript yet uniquely identifiabl
 We may consider the set $\mathcal W$ of all propositions.
 
 \begin{dfn}
-    A logical operator $o$ may act on any enumeration $\mathcal E$ of a fixed number $n \in \mathbb N$ of propositions $\mathcal E \subseteq \mathcal W$ to form a new proposition $o(\mathcal E) = P \in \mathcal W$ such that $P \notin \mathcal E$. $n$ is said to be the order of the operator.
+    A logical operator $o$ may act on any enumeration $\mathcal E$ of a fixed number $n \in \mathbb N$ of propositions $\mathcal E \subseteq \mathcal W$ to compose a new proposition $o(\mathcal E) = P \in \mathcal W$ where $P \notin \mathcal E$.
+
+    The fixed number $n$ is said to be the order of the operator.
+
+    Any proposition in the enumeration $\mathcal E_i \in \mathcal E$ is said to be in the scope of the operator at position $i$.
 \end{dfn}
 
-Evidently there is no bound to the successive application of logical operators $n < |\mathcal W|$ for all $n \in \mathbb N$, so no finite $|\mathcal E| \in \mathbb N$ enumeration $\mathcal E$ of propositions can contain them all: $\mathcal E \subset \mathcal W$ since $|\mathcal W| \notin \mathbb N$.
+Consider $P_{i+1} = o((\mathcal E \setminus \setsm {\mathcal E_1}) \cup \setsm {P_i})$ where $P_0 = \mathcal E_1$. Taking $\mathcal D_i = \bigcup_{j=0}^i \setsm {P_j}$ we see that $\mathcal D_i \subset \mathcal D_{i+1} \subseteq \wffs$ so $|\mathcal D_i| = i < |\mathcal W|$ for all $i \in \mathbb N$ hence $|\mathcal W| \notin \mathbb N$.
+
+Evidently there is no bound to the propositions that we may enumerate: if $|\mathcal E| \in \mathbb N$ then $\mathcal E \subset \mathcal W$.
 
 \begin{op}[Material implication]
     For any $P, Q \in \wffs$:
@@ -55,7 +67,7 @@ Evidently there is no bound to the successive application of logical operators $
     If $(\neg P)^*$ is the case then $P^*$ is not the case.
 \end{op}
 
-Repeated application of logical operators yields propositions with multiple levels of composition.
+Clearly propositions acted on by logical operators may themselves be composed of propositions. This may introduce ambiguity in the notation.
 
 \begin{dfn}
     Parentheses $($, $)$ indicate the scope of a logical operator in a composite proposition.
@@ -63,42 +75,48 @@ Repeated application of logical operators yields propositions with multiple leve
 
 For instance $\neg R$ for $R = P \then Q$ may be written $\neg(P \then Q)$.
 
-Such composite propositions may be distinguished from propositions that contain no logical operators.
+Composite propositions may be distinguished from those that contain no logical operators.
 
 \begin{dfn}
     When a proposition $a$ is atomic there is no logical operator $o$ nor any enumeration of propositions $\mathcal E \subset \wffs$ such that $a = o(\mathcal E)$.
 \end{dfn}
 
-There is no bound to the unique atomic propositions that we may enumerate.
+Atomic propositions are uniquely enumerable without bound.
 
 In the alphabet formed by atomic propositions, logical operators and parentheses not every expression composed of an enumeration of symbols forms a proposition that belongs to the logic. For instance, $\then a$ and $)a \neg$ are ill formed. Therefore $\mathcal W$ is known as the set of well formed formulas.
 
 For purposes of investigation we may introduce an atom symbol $a$ and a succession symbol $'$ such that an exhaustive enumeration $\mathcal E$ of atomic propositions may be denoted $\mathcal E_0 = a$ and $\mathcal E_{i+1} = (\mathcal E_i)'$ for all $i \in \mathbb N$. The alphabet $a, ', \then, \neg, (, )$ permits every expression to be encoded as a natural number in base $6$. Clearly the well formed formulas are enumerable $|\wffs| \leq |\mathbb N|$.
 
-Should we extend the alphabet with a propositional variable symbol $p$ then any expression containing this symbol is evidently ill formed. Nonetheless we may metatheoretically combine it with the succession symbol $'$ to identify variables.
+Should we extend the alphabet with a propositional variable symbol $p$ then any expression containing this symbol is evidently ill formed. Nonetheless we may combine it with the succession symbol $'$ to denote instances of propositional variables in a metatheoretical expression.
 
 \begin{dfn}
     Uniform substitution $\varphi(p / P)$ of a propositional variable $p$ with a proposition $P \in \wffs$ substitutes every instance of the variable in the expression $\varphi$ with an instance of the proposition.
 \end{dfn}
 
 \begin{dfn}
-    A formula $\varphi$ is a metatheoretical expression that becomes a well formed formula $F \in \wffs$ whenever every propositional variable $p \in \varphi$ has been substituted uniformly with some well formed formula $P \in \wffs$.
+    A formula $\varphi$ is a metatheoretical expression that becomes a well formed formula $F \in \wffs$ once every propositional variable $p \in \varphi$ has been substituted uniformly with some well formed formula $P \in \wffs$.
 
-    The resulting proposition is known as an instance of the formula $F = \phi(\mathcal E)$ where $\mathcal E \subset \wffs$ enumerates the substituting propositions in order of substitution.
+    The resulting proposition is known as an instance of the formula $F = \varphi(\mathcal E)$ where $\mathcal E \subset \wffs$ enumerates the substituting propositions in order of substitution.
 \end{dfn}
 
-We have used formulae before to define logical operators.
-Now we can use them to express the more complex logical structures shared by all instances of a formula.
+Note that only a formula with no instance of any propositional variable is well formed.
 
-The set of all formulae shall be denoted $\Phi$.
+We have used formulas before to define logical operators.
+Now we can use them to express the logical structure shared by all instances of a formula.
 
-Formulae may share propositional variables across an enumeration $\Lambda \subseteq \Phi$. An instance $\Lambda(\mathcal E)$ of an enumeration of formulae follows from substitution of all propositional variables uniformly over the enumeration.
+The set of all formulas shall be denoted $\Phi$.
+
+Formulas in an enumeration $\Lambda \subseteq \Phi$ may contain instances of the same propositional variable.
+\begin{dfn}
+    An instance $\Lambda(\mathcal E)$ of an enumeration of formulas follows from substitution of all propositional variables uniformly over the enumeration $\Lambda(\mathcal E)_i = \Lambda_i(\mathcal E)$.
+\end{dfn}
 
 \begin{dfn}
     An enumeration of propositions $\mathcal E \subseteq \wffs$ may allow us to syntactically derive $\mathcal E \infers P$ a proposition $P$.
+
+    In that case the propositions of $\mathcal E$ are known as premises. The conclusion $P$ is said to be a syntactic consequence.
 \end{dfn}
 
-In that case the propositions of $\mathcal E$ are known as premises. The conclusion $P$ is said to be a syntactic consequence.
 
 Syntactic derivation is transitive such that if $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.
 
@@ -107,7 +125,7 @@ Syntactic derivation is transitive such that if $\mathcal E \infers P$ for all $
 \end{dfn}
 
 \begin{dfn}
-    A rule of inference $\Lambda \infers \kappa$ relates a finite enumeration of formulae $\Lambda \cup \setsm \kappa \subset \Phi$ such that $\Lambda(\mathcal E) \infers \kappa(\mathcal E)$ for every instance $(\Lambda \cup \setsm \kappa)(\mathcal E)$ of the enumeration.
+    A rule of inference $\Lambda \infers \kappa$ relates a finite enumeration of formulas $(\Lambda \cup \setsm \kappa) \subset \Phi$ such that $\Lambda(\mathcal E) \infers \kappa(\mathcal E)$ for every instance $(\Lambda \cup \setsm \kappa)(\mathcal E)$ of the enumeration.
 \end{dfn}
 
 \begin{frule}[Modus ponens]
@@ -176,18 +194,25 @@ The preceding rules and theorems have applied exclusively to the implication. Th
     $$p \then q \infers \neg q \then \neg p$$
 \end{frule}
 
-\begin{thm}[Introduction of double negation]
+\begin{frule}[Introduction of double negation]
     $$p \infers \neg\neg p$$
-\end{thm}
+\end{frule}
 
 This immediately establishes some interesting theorems.
+
+\begin{lmm}[Contraposition with left elimination]
+    $$p \then \neg q \infers q \then \neg p$$
+    \begin{proof}
+        $q \then \neg\neg q$ is transitive with $\neg\neg q \then \neg p$.
+    \end{proof}
+\end{lmm}
 
 \begin{thm}[Reductio ad absurdum]
     $$\begin{aligned}
             p \then q, \\ p \then \neg q
         \end{aligned} \infers \neg p$$
     \begin{proof}
-        $p, p \then q, q \then \neg p \infers \neg p$ such that $p, p \then q \infers p \then \neg(p \then \neg q)$ and $p \then q \infers \neg \neg(p \then \neg q) \then \neg p$.
+        $p, p \then q, q \then \neg p \infers \neg p$ such that $p, p \then q \infers p \then \neg(p \then \neg q)$ and $p \then q \infers (p \then \neg q) \then \neg p$.
     \end{proof}
 \end{thm}
 
@@ -204,7 +229,11 @@ The final rule completes the law of double negation.
     $${\neg\neg p} \infers p$$
 \end{frule}
 
-This rule has been controversial since it allows us to prove $p$ by contradiction $\neg p \then q, \neg p \then \neg q \infers p$.
+This rule has been controversial since it allows the following.
+
+\begin{thm}[Proof by contradiction]
+    $$\neg p \then q, \neg p \then \neg q \infers p$$
+\end{thm}
 
 \begin{thm}[Ex falso quod libet]
     $$\begin{aligned}
@@ -215,7 +244,11 @@ This rule has been controversial since it allows us to prove $p$ by contradictio
     \end{proof}
 \end{thm}
 
-It also completes the law of contraposition.
+It also completes the laws of contraposition and conjunction.
+
+\begin{lmm}[Contraposition with right elimination]
+    $$\neg p \then q \infers \neg q \then p$$
+\end{lmm}
 
 \begin{thm}[Converse contraposition]
     $$\neg p \then \neg q \infers p \then q$$
@@ -228,13 +261,6 @@ It also completes the law of contraposition.
     \end{proof}
 \end{thm}
 
-This justifies the following definition.
-
-\begin{dfn}
-    The conjunction $P \and Q$ can be defined as $\neg(P \then \neg Q)$.
-\end{dfn}
-
-The following result is a formulation of the law of the excluded middle in terms of the implication.
 
 \begin{thm}[Peirce's law]
     $$(p \then q) \then p \infers p$$
@@ -243,7 +269,70 @@ The following result is a formulation of the law of the excluded middle in terms
     \end{proof}
 \end{thm}
 
-This becomes more clear once we show the following.
+\section{Alternative operators}
+
+
+\begin{op}[Conjuction]
+    We define $P \conj Q$ as $\neg(P \then \neg Q)$.
+\end{op}
+
+Clearly the law of conjuction translates to $p, q \infers p \conj q$ and $p \conj q \infers p, q$.
+
+Since $\theorem \neg\neg(p \then \neg\neg(q \then \neg\neg\neg(p \then \neg q)))$ we have $\theorem \neg(p \conj (q \conj \neg(p \conj q)))$.
+
+From $\theorem \neg\neg(\neg(q \then \neg\neg p) \then \neg p)$ we have $\neg((q \conj \neg p) \conj p) $.
+
+Since $\neg(\neg r \then \neg q) \then \neg p \infers \neg(p \then \neg q) \then \neg(p \then \neg r)$ we have $\neg((\neg q \conj r) \conj p) \infers \neg((p \conj r) \conj \neg(p \conj q))$.
+
+By contraposition $p \conj q \infers q \conj p$.
+
+Furthermore $\theorem \neg(p \conj \neg p)$ from double negation introduction.
+
+Reductio ad absurdum may be expressed $\neg(p \conj q), \neg(p \conj \neg q) \infers \neg p$.
+
+We need double negation elimination to $\neg(p \conj \neg q), p \infers q$.
+
+\begin{op}[Equivalence]
+    We define $P \eqv Q$ as $(P \then Q) \conj (Q \then P)$.
+\end{op}
+
+\begin{op}[Disjunction]
+    We define $P \disj Q$ as $\neg P \then Q$.
+\end{op}
+
+We have $p \disj q, \neg p \infers q$ modus tollens.
+
+The verum ex quod libet may be rewritten as $\theorem p \disj (q \disj \neg p)$.
+Distributivity becomes $p \disj (q \disj r) \infers (p \disj r) \disj \neg(p \disj \neg q)$.
+
+Contraposition means $p \disj q \infers q \disj \neg\neg p$.
+
+Peirce's law becomes $p \vee (p \conj q) \infers p$.
+
+
+\newpage
+
+
+This justifies the following definition.
+
+The following result is a formulation of the law of the excluded middle in terms of the implication.
+
+Clearly $(\neg p \then p) \then \neg p \infers \neg p$.
+
+We see that $\theorem p \then (\neg p \then p)$ and $\theorem (\neg p \then p) \then \neg\neg p$
+
+Since $(\neg\neg p \then p) \then p \infers (\neg\neg p \then p) \then \neg\neg p, \neg\neg p$.
+
+Furthermore $\neg\neg p \infers \neg(p \then \neg p)$ since $\theorem (p \then \neg p)\then \neg p$.
+
+This becomes more clear once we consider $\theorem (p \then \neg p) \then \neg p$.
+
+In that case $\theorem \neg p \then \neg p$ means $\theorem (p \then \neg p)\then $.
+
+Now $(\neg\neg p \then p) \then \neg p \infers p \then \neg p$
+since $\theorem p \then (\neg\neg p \then p)$.
+
+Hence $\theorem ((\neg\neg p \then p) \then \neg p) \then \neg p$.
 
 \begin{dfn}
     We may define the disjunction $P \vee Q$ as $\neg P \then Q$ and $\neg Q \then P$.
