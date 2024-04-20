@@ -188,39 +188,73 @@ It allows us to prove the following theorems.
     \end{proof}
 \end{thm}
 
-The preceding rules and theorems have applied exclusively to the implication. The following rules introduce the syntactic role of the negation.
+The preceding rules and theorems have applied exclusively to the implication. The following rule introduces the syntactic role of the negation.
 
 \begin{frule}[Contraposition]
     $$p \then q \infers \neg q \then \neg p$$
 \end{frule}
 
+This shows a property of inference.
+
+\begin{thm}[Contrapositivity]
+    If $p \infers q$ then $\neg q \infers \neg p$.
+\end{thm}
+
+\begin{lmm}[Ex falso quod libet negatione]
+    $$p, \neg p \infers \neg q$$
+    \begin{proof}
+        $p \infers q \then p$.
+    \end{proof}
+\end{lmm}
+
+Interestingly, this means $\neg q \infers q \then \neg p$ so $p \then \neg q \infers p \then (q \then \neg p)$ from which $p \then q, p \then \neg q \infers p \then \neg p$.
+
+The following rule permits a strengthening of this notion.
+
 \begin{frule}[Introduction of double negation]
     $$p \infers \neg\neg p$$
 \end{frule}
 
-This immediately establishes some interesting theorems.
+This establishes an interesting lemma.
 
-\begin{thm}[Commutativity of conjunction]
+\begin{lmm}[Contraposition with left elimination]
     $$p \then \neg q \infers q \then \neg p$$
     \begin{proof}
         $q \then \neg\neg q$ is transitive with $\neg\neg q \then \neg p$.
     \end{proof}
+\end{lmm}
+
+\begin{thm}[Negatio improbis]
+    For any formula $\tau$ such that $\theorem \tau$:
+    $$p \then \neg \tau \infers \neg p.$$
 \end{thm}
 
 \begin{thm}[Introduction of conjuction]
     $$p, q \infers \neg(p \then \neg q)$$
     \begin{proof}
-        $p \infers (p \then \neg q) \then \neg q$.
+        We can deduce $p \infers (p \then \neg q) \then \neg q$ from modus ponens.
     \end{proof}
 \end{thm}
+
+This has a special case with an interesting consequence.
+
+\begin{lmm}[Negatio reprobis]
+    $$p \then \neg p \infers \neg p$$
+    \begin{proof}
+        $p \infers \neg(p \then \neg p)$.
+    \end{proof}
+\end{lmm}
 
 \begin{thm}[Reductio ad absurdum]
     $$\begin{aligned}
             p \then q, \\ p \then \neg q
         \end{aligned} \infers \neg p$$
-    \begin{proof}
-        $p \then q, p \then \neg q \infers q \then \neg p, p \then \neg p$ such that $p, p \then q \infers (p \then \neg q) \then \neg p, p \then \neg(p \then \neg q)$ and $p \then q \infers (p \then \neg q) \then \neg p$.
-    \end{proof}
+\end{thm}
+
+By contrapositivity we also have the following.
+
+\begin{thm}[Commutativity of conjunction]
+    $$\neg(p \then \neg q) \infers \neg(q \then \neg p)$$
 \end{thm}
 
 The final rule completes the law of double negation.
@@ -235,32 +269,39 @@ This rule has been controversial since it allows the following.
     $$\neg p \then q, \neg p \then \neg q \infers p$$
 \end{thm}
 
-\begin{thm}[Ex falso quod libet]
-    $$\begin{aligned}
-            p, \\ \neg p
-        \end{aligned}\infers q$$
-    \begin{proof}
-        Evidently $p, \neg p \infers \neg q \then p, \neg q \then \neg p$.
-    \end{proof}
-\end{thm}
+It completes the law of commutativity.
 
-It also completes the laws of contraposition and conjunction.
-
-\begin{lmm}[Contraposition with right elimination]
+\begin{thm}[Commutativity of disjunction]
     $$\neg p \then q \infers \neg q \then p$$
-\end{lmm}
-
-\begin{thm}[Converse contraposition]
-    $$\neg p \then \neg q \infers p \then q$$
 \end{thm}
+
+As a result we may complete the law of conjuction and show another interesting consequence.
 
 \begin{thm}[Elimination of conjunction]
     $$\neg(p \then \neg q) \infers p, q$$
     \begin{proof}
-        $\neg q, \neg p \infers p \then \neg q$.
+        $\neg p \infers p \then \neg q$.
     \end{proof}
 \end{thm}
 
+\begin{lmm}[Introduction of disjunction]
+    $$p \infers \neg p \then q$$
+    \begin{proof}
+        $p \infers \neg q \then p$.
+    \end{proof}
+\end{lmm}
+
+\begin{thm}[Ex falso quod libet]
+    $$\begin{aligned}
+            p, \\ \neg p
+        \end{aligned}\infers q$$
+\end{thm}
+
+Furthermore the completion of the law of contraposition allows us to conclude with a remarkable result.
+
+\begin{thm}[Converse contraposition]
+    $$\neg p \then \neg q \infers q \then p$$
+\end{thm}
 
 \begin{thm}[Peirce's law]
     $$(p \then q) \then p \infers p$$
@@ -277,18 +318,48 @@ In that case $\theorem \neg(p \then \neg p) \then \neg\neg p$
 \section{Alternative operators}
 
 
+\begin{op}[Disjunction]
+    We define $P \disj Q$ as $\neg P \then Q$.
+\end{op}
+
 \begin{op}[Conjuction]
     We define $P \conj Q$ as $\neg(P \then \neg Q)$.
 \end{op}
 
-Double negation introduction shows $\theorem \neg(p \conj \neg p)$ by $\theorem \neg\neg(p \then \neg\neg p)$.
+\begin{op}[Equivalence]
+    We define $P \eqv Q$ as $(P \then Q) \conj (Q \then P)$.
+\end{op}
 
-Furthermore $p \then q$ can be expressed as $\neg(p \conj \neg q)$.
+\begin{thm}[Modus tollens]
+    $$p \disj q, \neg p \infers q$$
+\end{thm}
 
-By contraposition with left elimination we have commutativity $p \conj q \infers q \conj p$.
+\begin{thm}[Law against contradiction]
+    $$\theorem \neg(p \conj \neg p)$$
+    \begin{proof}
+        $\theorem \neg\neg(p \then \neg\neg p)$.
+    \end{proof}
+\end{thm}
 
+Hence $p \then q$ can be expressed as $\neg(p \conj \neg q)$.
 
-Clearly introduction of conjuction translates to $p, q \infers p \conj q$.
+\begin{thm}[Law of the excluded middle]
+    $$\theorem \neg p \disj p$$
+    \begin{proof}
+        $\theorem \neg\neg p \then p$.
+    \end{proof}
+\end{thm}
+
+Now $p \then q$ expresses as $\neg p \disj q$.
+
+We may also complete the law of disjunction.
+
+\begin{thm}[Introduction of disjunction]
+    $$p \infers p \disj q$$
+    \begin{proof}
+        $p \infers \neg q \then p$.
+    \end{proof}
+\end{thm}
 
 Since $\theorem p \then (q \then \neg(p \then \neg q))$, a theorem deduced from modus ponens, we have $\theorem \neg(p \conj (q \conj \neg(p \conj q)))$.
 
@@ -300,13 +371,7 @@ We need double negation elimination to introduce an inferential analogue of modu
 
 Reductio ad absurdum may be expressed $\neg(p \conj q), \neg(p \conj \neg q) \infers \neg p$.
 
-\begin{op}[Equivalence]
-    We define $P \eqv Q$ as $(P \then Q) \conj (Q \then P)$.
-\end{op}
 
-\begin{op}[Disjunction]
-    We define $P \disj Q$ as $\neg P \then Q$.
-\end{op}
 
 We have $p \disj q, \neg p \infers q$ modus tollens.
 
