@@ -200,26 +200,26 @@ The preceding rules and theorems have applied exclusively to the implication. Th
 
 This immediately establishes some interesting theorems.
 
-\begin{lmm}[Contraposition with left elimination]
+\begin{thm}[Commutativity of conjunction]
     $$p \then \neg q \infers q \then \neg p$$
     \begin{proof}
         $q \then \neg\neg q$ is transitive with $\neg\neg q \then \neg p$.
-    \end{proof}
-\end{lmm}
-
-\begin{thm}[Reductio ad absurdum]
-    $$\begin{aligned}
-            p \then q, \\ p \then \neg q
-        \end{aligned} \infers \neg p$$
-    \begin{proof}
-        $p, p \then q, q \then \neg p \infers \neg p$ such that $p, p \then q \infers p \then \neg(p \then \neg q)$ and $p \then q \infers (p \then \neg q) \then \neg p$.
     \end{proof}
 \end{thm}
 
 \begin{thm}[Introduction of conjuction]
     $$p, q \infers \neg(p \then \neg q)$$
     \begin{proof}
-        $p, q, p \then \neg q \infers q, \neg q$.
+        $p \infers (p \then \neg q) \then \neg q$.
+    \end{proof}
+\end{thm}
+
+\begin{thm}[Reductio ad absurdum]
+    $$\begin{aligned}
+            p \then q, \\ p \then \neg q
+        \end{aligned} \infers \neg p$$
+    \begin{proof}
+        $p \then q, p \then \neg q \infers q \then \neg p, p \then \neg p$ such that $p, p \then q \infers (p \then \neg q) \then \neg p, p \then \neg(p \then \neg q)$ and $p \then q \infers (p \then \neg q) \then \neg p$.
     \end{proof}
 \end{thm}
 
@@ -269,6 +269,11 @@ It also completes the laws of contraposition and conjunction.
     \end{proof}
 \end{thm}
 
+Consider now $\theorem \neg p \then (p \then \neg p)$.
+
+In that case $\theorem \neg(p \then \neg p) \then \neg\neg p$
+
+
 \section{Alternative operators}
 
 
@@ -276,21 +281,24 @@ It also completes the laws of contraposition and conjunction.
     We define $P \conj Q$ as $\neg(P \then \neg Q)$.
 \end{op}
 
-Clearly the law of conjuction translates to $p, q \infers p \conj q$ and $p \conj q \infers p, q$.
+Double negation introduction shows $\theorem \neg(p \conj \neg p)$ by $\theorem \neg\neg(p \then \neg\neg p)$.
 
-Since $\theorem \neg\neg(p \then \neg\neg(q \then \neg\neg\neg(p \then \neg q)))$ we have $\theorem \neg(p \conj (q \conj \neg(p \conj q)))$.
+Furthermore $p \then q$ can be expressed as $\neg(p \conj \neg q)$.
 
-From $\theorem \neg\neg(\neg(q \then \neg\neg p) \then \neg p)$ we have $\neg((q \conj \neg p) \conj p) $.
+By contraposition with left elimination we have commutativity $p \conj q \infers q \conj p$.
 
-Since $\neg(\neg r \then \neg q) \then \neg p \infers \neg(p \then \neg q) \then \neg(p \then \neg r)$ we have $\neg((\neg q \conj r) \conj p) \infers \neg((p \conj r) \conj \neg(p \conj q))$.
 
-By contraposition $p \conj q \infers q \conj p$.
+Clearly introduction of conjuction translates to $p, q \infers p \conj q$.
 
-Furthermore $\theorem \neg(p \conj \neg p)$ from double negation introduction.
+Since $\theorem p \then (q \then \neg(p \then \neg q))$, a theorem deduced from modus ponens, we have $\theorem \neg(p \conj (q \conj \neg(p \conj q)))$.
+
+From $\theorem p \then (q \then p)$ we have $\neg(p \conj (q \conj \neg p)) $.
+
+Since $\theorem (p \then (q \then r)) \then ((p \then q) \then (q \then r))$ we have $\neg((\neg r \conj q) \conj p) \infers \neg((p \conj q) \conj \neg(p \conj r))$.
+
+We need double negation elimination to introduce an inferential analogue of modus ponens $\neg(p \conj \neg q), p \infers q$ as well as to complete the law of conjuction $p \conj q \infers p, q$.
 
 Reductio ad absurdum may be expressed $\neg(p \conj q), \neg(p \conj \neg q) \infers \neg p$.
-
-We need double negation elimination to $\neg(p \conj \neg q), p \infers q$.
 
 \begin{op}[Equivalence]
     We define $P \eqv Q$ as $(P \then Q) \conj (Q \then P)$.
@@ -302,10 +310,15 @@ We need double negation elimination to $\neg(p \conj \neg q), p \infers q$.
 
 We have $p \disj q, \neg p \infers q$ modus tollens.
 
-The verum ex quod libet may be rewritten as $\theorem p \disj (q \disj \neg p)$.
 Distributivity becomes $p \disj (q \disj r) \infers (p \disj r) \disj \neg(p \disj \neg q)$.
 
-Contraposition means $p \disj q \infers q \disj \neg\neg p$.
+Double negation elimination translates to $\theorem p \disj \neg p$.
+
+Along with contraposition this means $p \disj q \infers q \disj p$.
+
+The verum ex quod libet may then be rewritten as $p \infers p \disj q$.
+
+Interestingly $\neg p \then \neg(q \then \neg r), \neg p \infers q, r$ hence $p \disj (q \conj r) \infers (p \disj q) \conj (p \disj r)$.
 
 Peirce's law becomes $p \vee (p \conj q) \infers p$.
 
