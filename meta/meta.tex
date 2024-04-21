@@ -21,12 +21,15 @@
 }{\end{new}}
 
 \newtheorem{axm}{Axiom}[section]
+\newtheorem{prop}{Property}[section]
 \newtheorem{frule}{Rule}[section]
 \newtheorem{op}{Operator}[section]
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lmm}{Lemma}[section]
+\newtheorem{crl}{Corollary}[section]
 \newtheorem{dfn}{Definition}[section]
+
 
 \begin{document}
 \title{Metamathema}
@@ -35,9 +38,12 @@
 
 \chapter{Propositional logic}
 
-A proposition $P$ signifies a qualitatively nondescript yet uniquely identifiable fact $P^*$ that is either the case or not.
+\begin{dfn}
+    A proposition $P$ signifies a qualitatively nondescript yet uni-quely identifiable fact $P^*$ that is either the case or not.
 
-We may consider the set $\mathcal W$ of all propositions.
+    We may consider the set $\mathcal W$ of all propositions.
+\end{dfn}
+
 
 \begin{dfn}
     A logical operator $o$ may act on any enumeration $\mathcal E$ of a fixed number $n \in \mathbb N$ of propositions $\mathcal E \subseteq \mathcal W$ to compose a new proposition $o(\mathcal E) = P \in \mathcal W$ where $P \notin \mathcal E$.
@@ -47,9 +53,15 @@ We may consider the set $\mathcal W$ of all propositions.
     Any proposition in the enumeration $\mathcal E_i \in \mathcal E$ is said to be in the scope of the operator at position $i$.
 \end{dfn}
 
-Consider $P_{i+1} = o((\mathcal E \setminus \setsm {\mathcal E_1}) \cup \setsm {P_i})$ where $P_0 = \mathcal E_1$. Taking $\mathcal D_i = \bigcup_{j=0}^i \setsm {P_j}$ we see that $\mathcal D_i \subset \mathcal D_{i+1} \subseteq \wffs$ so $|\mathcal D_i| = i < |\mathcal W|$ for all $i \in \mathbb N$ hence $|\mathcal W| \notin \mathbb N$.
+\begin{thm}
+    There is no bound to the propositions that we may enumerate: if $|\mathcal E| \in \mathbb N$ then $\mathcal E \subset \mathcal W$.
+    \begin{proof}
+        Consider $P_{i+1} = o((\mathcal E \setminus \setsm {\mathcal E_1}) \cup \setsm {P_i})$ where $P_0 = \mathcal E_1$.
 
-Evidently there is no bound to the propositions that we may enumerate: if $|\mathcal E| \in \mathbb N$ then $\mathcal E \subset \mathcal W$.
+        Taking $\mathcal D_i = \bigcup_{j=0}^i \setsm {P_j}$ we see that $\mathcal D_i \subset \mathcal D_{i+1} \subseteq \wffs$ so $|\mathcal D_i| = i < |\mathcal W|$ for all $i \in \mathbb N$ hence $|\mathcal W| \notin \mathbb N$.
+    \end{proof}
+\end{thm}
+
 
 \begin{op}[Material implication]
     For any $P, Q \in \wffs$:
@@ -79,13 +91,17 @@ Composite propositions may be distinguished from those that contain no logical o
 
 \begin{dfn}
     When a proposition $a$ is atomic there is no logical operator $o$ nor any enumeration of propositions $\mathcal E \subset \wffs$ such that $a = o(\mathcal E)$.
-\end{dfn}
 
-Atomic propositions are uniquely enumerable without bound.
+    Atomic propositions are uniquely enumerable without bound.
+\end{dfn}
 
 In the alphabet formed by atomic propositions, logical operators and parentheses not every expression composed of an enumeration of symbols forms a proposition that belongs to the logic. For instance, $\then a$ and $)a \neg$ are ill formed. Therefore $\mathcal W$ is known as the set of well formed formulas.
 
-For purposes of investigation we may introduce an atom symbol $a$ and a succession symbol $'$ such that an exhaustive enumeration $\mathcal E$ of atomic propositions may be denoted $\mathcal E_0 = a$ and $\mathcal E_{i+1} = (\mathcal E_i)'$ for all $i \in \mathbb N$. The alphabet $a, ', \then, \neg, (, )$ permits every expression to be encoded as a natural number in base $6$. Clearly the well formed formulas are enumerable $|\wffs| \leq |\mathbb N|$.
+For purposes of investigation we may introduce an atom symbol $a$ and a succession symbol $'$ such that an exhaustive enumeration $\mathcal E$ of atomic propositions may be denoted $\mathcal E_0 = a$ and $\mathcal E_{i+1} = (\mathcal E_i)'$ for all $i \in \mathbb N$. The alphabet $a, ', \then, \neg, (, )$ permits every expression to be encoded as a natural number in base $6$.
+
+\begin{thm}
+    The well formed formulas are enumerable $|\wffs| \leq |\mathbb N|$.
+\end{thm}
 
 Should we extend the alphabet with a propositional variable symbol $p$ then any expression containing this symbol is evidently ill formed. Nonetheless we may combine it with the succession symbol $'$ to denote instances of propositional variables in a metatheoretical expression.
 
@@ -106,27 +122,29 @@ Now we can use them to express the logical structure shared by all instances of 
 
 The set of all formulas shall be denoted $\Phi$.
 
-Formulas in an enumeration $\Lambda \subseteq \Phi$ may contain instances of the same propositional variable.
+Different formulas may contain instances of the same propositional variable.
+
 \begin{dfn}
-    An instance $\Lambda(\mathcal E)$ of an enumeration of formulas follows from substitution of all propositional variables uniformly over the enumeration $\Lambda(\mathcal E)_i = \Lambda_i(\mathcal E)$.
+    An instance $\varLambda(\mathcal E)$ of a set of formulas $\varLambda \in \Phi$ follows from substitution of all propositional variables uniformly over the set $\varLambda(\mathcal E)_i = \varLambda_i(\mathcal E)$.
 \end{dfn}
 
 \begin{dfn}
-    An enumeration of propositions $\mathcal E \subseteq \wffs$ may allow us to syntactically derive $\mathcal E \infers P$ a proposition $P$.
+    A set of propositions $\mathcal E \subseteq \wffs$ may allow us to infer $\mathcal E \infers P$ a proposition $P$.
 
-    In that case the propositions of $\mathcal E$ are known as premises. The conclusion $P$ is said to be a syntactic consequence.
+    In that case the propositions of $\mathcal E$ are known as premises whereas $P$ is said to be a syntactic consequence.
+
+    A rule of inference $\Lambda \infers \kappa$ relates a finite set of formulas $(\varLambda \cup \setsm \kappa) \subset \Phi$ such that $\varLambda(\mathcal E) \infers \kappa(\mathcal E)$ for every instance $(\varLambda \cup \setsm \kappa)(\mathcal E)$.
+
+    Every inference is an instance of some rule of inference. This ensures that inference is structural.
 \end{dfn}
-
-
-Syntactic derivation is transitive such that if $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.
 
 \begin{dfn}
     The deductive closure $\partial \mathcal E$ of an enumeration of propositions $\mathcal E \subseteq \wffs$ contains all syntactic consequences $\mathcal E \infers P$.
 \end{dfn}
 
-\begin{dfn}
-    A rule of inference $\Lambda \infers \kappa$ relates a finite enumeration of formulas $(\Lambda \cup \setsm \kappa) \subset \Phi$ such that $\Lambda(\mathcal E) \infers \kappa(\mathcal E)$ for every instance $(\Lambda \cup \setsm \kappa)(\mathcal E)$ of the enumeration.
-\end{dfn}
+\begin{prop}[Transitivity]
+    Inference is transitive such that if $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.
+\end{prop}
 
 \begin{frule}[Modus ponens]
     $$\begin{aligned}p \rightarrow q, \\ p\end{aligned} \infers q$$
@@ -134,22 +152,24 @@ Syntactic derivation is transitive such that if $\mathcal E \infers P$ for all $
 
 \section{Inferential approach}
 
-The following special rules of inference allow us to infer over the possibility of inference itself. Consider the extension $\mathcal E \cup\setsm P$ of some premises $\mathcal E$ with a proposition $P$ known as the hypothesis.
+The following property allows us to infer over the possibility of inference itself. Consider the extension $\mathcal E \cup\setsm P$ of some premises $\mathcal E$ with a proposition $P$ known as the hypothesis.
 
-\begin{frule}[Conditional proof]
-    If $\Lambda \cup\setsm p \infers q$ then
-    $$\Lambda \infers p \then q.$$
-    for all $\Lambda \subset \Phi$.
-\end{frule}
+\begin{prop}[Deduction]
+    If $\mathcal E \cup\setsm P \infers Q$ then
+    $$\mathcal E \infers P \then Q.$$
+    for all $\mathcal E \subset \wffs$.
+\end{prop}
 
 Hence the subject of hypothesis is sufficient condition for what can be inferred from the extension.
 
-This entails a familiar property.
+This holds a fortiori for any finite $\varLambda \subset \Phi$ such that $\varLambda \cup \setsm p \infers q$ since it holds for all instances.
+
+Furthermore this entails a familiar property.
 
 \begin{thm}[Linearity of inference]
-    If $\Lambda \infers p$ and $\Lambda \cup \setsm p \infers q$ then $\Lambda \infers q$ for all $\Lambda \subset \Phi$.
+    If $\varLambda \infers p$ and $\varLambda \cup \setsm p \infers q$ then $\varLambda \infers q$ for all $\varLambda \subset \Phi$.
     \begin{proof}
-        From $\Lambda \infers p \then q$ and transitivity of syntactic derivation.
+        From $\varLambda \infers p \then q$ and transitivity of inference.
     \end{proof}
 \end{thm}
 
@@ -165,9 +185,9 @@ Some expected properties of the implication can now follow.
     \end{proof}
 \end{thm}
 
-\begin{thm}[Distributivity of implication]
+\begin{crl}[Distributivity of implication]
     $$p \then (q \then r) \infers (p \then q) \then (p \then r)$$
-\end{thm}
+\end{crl}
 
 The following rule seems all too evident.
 
@@ -184,7 +204,7 @@ It allows us to prove the following theorems.
 \begin{thm}[Materiality of implication]
     $$p \infers q \then p$$
     \begin{proof}
-        $p, q \infers p$.
+        $p, q \infers p$, also known as ex quod libet verum.
     \end{proof}
 \end{thm}
 
@@ -200,22 +220,16 @@ This shows a property of inference.
     If $p \infers q$ then $\neg q \infers \neg p$.
 \end{thm}
 
-\begin{lmm}[Ex falso quod libet negatione]
+\begin{lmm}[Ex falso negatio quod libet]
     $$p, \neg p \infers \neg q$$
     \begin{proof}
         $p \infers q \then p$.
     \end{proof}
 \end{lmm}
 
-Interestingly, this means $\neg q \infers q \then \neg p$ so $p \then \neg q \infers p \then (q \then \neg p)$ from which $p \then q, p \then \neg q \infers p \then \neg p$.
-
-The following rule permits a strengthening of this notion.
-
 \begin{frule}[Introduction of double negation]
     $$p \infers \neg\neg p$$
 \end{frule}
-
-This establishes an interesting lemma.
 
 \begin{lmm}[Contraposition with left elimination]
     $$p \then \neg q \infers q \then \neg p$$
@@ -253,9 +267,9 @@ This has a special case with an interesting consequence.
 
 By contrapositivity we also have the following.
 
-\begin{thm}[Commutativity of conjunction]
+\begin{crl}[Commutativity of conjunction]
     $$\neg(p \then \neg q) \infers \neg(q \then \neg p)$$
-\end{thm}
+\end{crl}
 
 The final rule completes the law of double negation.
 
@@ -271,25 +285,25 @@ This rule has been controversial since it allows the following.
 
 It completes the law of commutativity.
 
-\begin{thm}[Commutativity of disjunction]
+\begin{lmm}[Commutativity of disjunction]
     $$\neg p \then q \infers \neg q \then p$$
-\end{thm}
+\end{lmm}
 
 As a result we may complete the law of conjuction and show another interesting consequence.
 
-\begin{thm}[Elimination of conjunction]
+\begin{crl}[Elimination of conjunction]
     $$\neg(p \then \neg q) \infers p, q$$
     \begin{proof}
-        $\neg p \infers p \then \neg q$.
+        $\neg p \infers q \then \neg p$.
     \end{proof}
-\end{thm}
+\end{crl}
 
-\begin{lmm}[Introduction of disjunction]
+\begin{crl}[Introduction of disjunction]
     $$p \infers \neg p \then q$$
     \begin{proof}
         $p \infers \neg q \then p$.
     \end{proof}
-\end{lmm}
+\end{crl}
 
 \begin{thm}[Ex falso quod libet]
     $$\begin{aligned}
@@ -299,9 +313,9 @@ As a result we may complete the law of conjuction and show another interesting c
 
 Furthermore the completion of the law of contraposition allows us to conclude with a remarkable result.
 
-\begin{thm}[Converse contraposition]
+\begin{lmm}[Converse contraposition]
     $$\neg p \then \neg q \infers q \then p$$
-\end{thm}
+\end{lmm}
 
 \begin{thm}[Peirce's law]
     $$(p \then q) \then p \infers p$$
@@ -309,10 +323,6 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
         We know that $\theorem \neg p \then (\neg q \then \neg p)$ so $\theorem \neg p \then (p \then q)$. However, in that case $\neg p \then \neg(p \then q) \infers p$.
     \end{proof}
 \end{thm}
-
-Consider now $\theorem \neg p \then (p \then \neg p)$.
-
-In that case $\theorem \neg(p \then \neg p) \then \neg\neg p$
 
 
 \section{Alternative operators}
@@ -322,16 +332,16 @@ In that case $\theorem \neg(p \then \neg p) \then \neg\neg p$
     We define $P \disj Q$ as $\neg P \then Q$.
 \end{op}
 
+\begin{thm}[Modus tollens]
+    $$p \disj q, \neg p \infers q$$
+\end{thm}
+
 \begin{op}[Conjuction]
     We define $P \conj Q$ as $\neg(P \then \neg Q)$.
 \end{op}
 
-\begin{op}[Equivalence]
-    We define $P \eqv Q$ as $(P \then Q) \conj (Q \then P)$.
-\end{op}
-
-\begin{thm}[Modus tollens]
-    $$p \disj q, \neg p \infers q$$
+\begin{thm}[Modus expellens]
+    $$\neg(p \conj q), p \infers \neg q$$
 \end{thm}
 
 \begin{thm}[Law against contradiction]
@@ -352,14 +362,69 @@ Hence $p \then q$ can be expressed as $\neg(p \conj \neg q)$.
 
 Now $p \then q$ expresses as $\neg p \disj q$.
 
-We may also complete the law of disjunction.
+\begin{op}[Equivalence]
+    We define $P \eqv Q$ as $(P \then Q) \conj (Q \then P)$.
+\end{op}
 
-\begin{thm}[Introduction of disjunction]
-    $$p \infers p \disj q$$
+\section{Axiomatic approach}
+
+We may disregard all properties and rules from the inferential approach. Instead we consider a special set of formulas $\Xi \subset \Phi$ known as axioms.
+
+\begin{prop}
+    If $\varLambda \cup \Xi \infers p$ then $\varLambda \infers p$.
+\end{prop}
+
+\begin{axm}
+    $p \then (q \then p)$
+\end{axm}
+
+\begin{axm}
+    $(p \then (q \then r)) \then ((p \then q) \then (p \then r))$
+\end{axm}
+
+\begin{lmm}
+    $\theorem p \then p$
     \begin{proof}
-        $p \infers \neg q \then p$.
+        Taking $\alpha = p \then ((q \then p) \then p)$ and $\beta = p \then (q \then p)$ we have $\alpha \then (\beta \then (p \then p)), \alpha, \beta \in \Xi$.
+    \end{proof}
+\end{lmm}
+
+\begin{crl}
+    $p \infers p$
+\end{crl}
+
+\begin{thm}[Deduction]
+    If $\varLambda \cup \setsm p \infers q$ then $\varLambda \infers p \then q$.
+    \begin{proof}
+        We have $\varLambda \infers p \then \alpha$ for any $\alpha \in \varLambda \cup \setsm p$.
+
+        Hence for any $\alpha \then \beta \in \varLambda \cup \setsm p$ we have $\varLambda \infers p \then (\alpha \then \beta)$.
+
+        Evidently $\varLambda \infers p \then \beta$ permits continued deduction until we show $\varLambda \infers p \then \gamma$ for any $\gamma \in \partial(\varLambda \cup \setsm p)$.
     \end{proof}
 \end{thm}
+
+\begin{axm}
+    $(\neg p \then \neg q) \then (q \then p)$
+\end{axm}
+
+\begin{thm}[Double negation elimination]
+    $\theorem \neg\neg p \then p$
+    \begin{proof}
+        $\neg\neg p \infers \neg\neg(\neg\neg p) \then \neg\neg p$.
+    \end{proof}
+\end{thm}
+
+\begin{thm}[Double negation introduction]
+    $\theorem p \then \neg\neg p$
+    \begin{proof}
+        $\theorem \neg\neg(\neg p) \then \neg p$.
+    \end{proof}
+\end{thm}
+
+Evidently the axiomatic approach allows precisely the same syntactic derivations as the inferential.
+
+\newpage
 
 Since $\theorem p \then (q \then \neg(p \then \neg q))$, a theorem deduced from modus ponens, we have $\theorem \neg(p \conj (q \conj \neg(p \conj q)))$.
 
@@ -386,9 +451,6 @@ The verum ex quod libet may then be rewritten as $p \infers p \disj q$.
 Interestingly $\neg p \then \neg(q \then \neg r), \neg p \infers q, r$ hence $p \disj (q \conj r) \infers (p \disj q) \conj (p \disj r)$.
 
 Peirce's law becomes $p \vee (p \conj q) \infers p$.
-
-
-\newpage
 
 
 This justifies the following definition.
