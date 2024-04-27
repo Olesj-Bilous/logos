@@ -204,7 +204,7 @@ It allows us to prove the following theorems.
 \begin{thm}[Materiality of implication]
     $$p \infers q \then p$$
     \begin{proof}
-        $p, q \infers p$, also known as ex quod libet verum.
+        $p, q \infers p$, also known as ex quod libet datum.
     \end{proof}
 \end{thm}
 
@@ -220,12 +220,20 @@ This shows a property of inference.
     If $p \infers q$ then $\neg q \infers \neg p$.
 \end{thm}
 
-\begin{lmm}[Ex falso negatio quod libet]
+\begin{thm}[Ex contradictio negatio quod libet]
     $$p, \neg p \infers \neg q$$
     \begin{proof}
         $p \infers q \then p$.
     \end{proof}
-\end{lmm}
+\end{thm}
+
+\begin{thm}[Ex falso negatio quod libet]
+    For any formula $\tau$ such that $\theorem \tau$:
+    $$\theorem \neg\tau \then \neg q$$
+    \begin{proof}
+        $\theorem q \then \tau$, also known as ex quod libet verum.
+    \end{proof}
+\end{thm}
 
 \begin{frule}[Introduction of double negation]
     $$p \infers \neg\neg p$$
@@ -243,7 +251,7 @@ This shows a property of inference.
     $$p \then \neg \tau \infers \neg p.$$
 \end{thm}
 
-\begin{thm}[Introduction of conjuction]
+\begin{thm}[Introduction of implicative conjuction]
     $$p, q \infers \neg(p \then \neg q)$$
     \begin{proof}
         We can deduce $p \infers (p \then \neg q) \then \neg q$ from modus ponens.
@@ -256,6 +264,7 @@ This has a special case with an interesting consequence.
     $$p \then \neg p \infers \neg p$$
     \begin{proof}
         $p \infers \neg(p \then \neg p)$.
+        Alternatively, $p \then \neg p, p \infers \neg\tau$ for any $\theorem \tau$.
     \end{proof}
 \end{lmm}
 
@@ -267,7 +276,7 @@ This has a special case with an interesting consequence.
 
 By contrapositivity we also have the following.
 
-\begin{crl}[Commutativity of conjunction]
+\begin{crl}[Commutativity of implicative conjunction]
     $$\neg(p \then \neg q) \infers \neg(q \then \neg p)$$
 \end{crl}
 
@@ -283,32 +292,37 @@ This rule has been controversial since it allows the following.
     $$\neg p \then q, \neg p \then \neg q \infers p$$
 \end{thm}
 
-It completes the law of commutativity.
+It completes the law of implicative commutativity.
 
-\begin{lmm}[Commutativity of disjunction]
+\begin{lmm}[Commutativity of implicative disjunction]
     $$\neg p \then q \infers \neg q \then p$$
 \end{lmm}
 
-As a result we may complete the law of conjuction and show another interesting consequence.
+As a result we may complete the law of implicative conjuction and show another interesting consequence.
 
-\begin{crl}[Elimination of conjunction]
+\begin{crl}[Elimination of implicative conjunction]
     $$\neg(p \then \neg q) \infers p, q$$
     \begin{proof}
-        $\neg p \infers q \then \neg p$.
+        $\neg p \infers p \then \neg q$.
     \end{proof}
 \end{crl}
 
-\begin{crl}[Introduction of disjunction]
+\begin{crl}[Introduction of implicative disjunction]
     $$p \infers \neg p \then q$$
     \begin{proof}
         $p \infers \neg q \then p$.
     \end{proof}
 \end{crl}
 
-\begin{thm}[Ex falso quod libet]
+\begin{thm}[Ex contradictio quod libet]
     $$\begin{aligned}
             p, \\ \neg p
         \end{aligned}\infers q$$
+\end{thm}
+
+\begin{thm}[Ex falso quod libet]
+    For any formula $\tau$ such that $\theorem \tau$:
+    $$\theorem \neg\tau \then q$$
 \end{thm}
 
 Furthermore the completion of the law of contraposition allows us to conclude with a remarkable result.
@@ -324,47 +338,109 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
     \end{proof}
 \end{thm}
 
+\begin{crl}[Consequentia mirabilis]
+    $$\neg p \then p \infers p$$
+    \begin{proof}
+        $\theorem (p \then \neg p) \then \neg p$ is transitive with $\neg p \then p$.
+    \end{proof}
+\end{crl}
+
 
 \section{Alternative operators}
 
+\begin{op}[Conjuction]
+    If $(P \conj Q)^*$ is the case, then $P^*$ is the case and $Q^*$ is the case.
+\end{op}
+
+\begin{frule}[Law of conjunction]
+    $p, q \infers p \conj q$ and $p \conj q \infers p, q$.
+\end{frule}
+
+\begin{lmm}
+    $p \conj q \infers \neg(p \then \neg q)$
+\end{lmm}
+
+\begin{lmm}[Modus expellens]
+    $\neg(p \conj q), p \infers \neg q$.
+    \begin{proof}
+        $p \infers q \then (p \conj q)$.
+    \end{proof}
+\end{lmm}
+
+\begin{frule}[Law against contradiction]
+    $$\theorem \neg(p \conj \neg p)$$
+\end{frule}
+
+\begin{lmm}
+    $\theorem p \then \neg\neg p$.
+\end{lmm}
 
 \begin{op}[Disjunction]
-    We define $P \disj Q$ as $\neg P \then Q$.
+    If $(P \disj Q)^*$ is the case, then $P^*$ is the case or $Q^*$ is the case.
 \end{op}
 
-\begin{thm}[Modus tollens]
+\begin{frule}[Modus tollens]
     $$p \disj q, \neg p \infers q$$
-\end{thm}
+\end{frule}
 
-\begin{op}[Conjuction]
-    We define $P \conj Q$ as $\neg(P \then \neg Q)$.
-\end{op}
+\begin{frule}[Introduction of disjunction]
+    $$p \infers p \disj q$$
+\end{frule}
 
-\begin{thm}[Modus expellens]
-    $$\neg(p \conj q), p \infers \neg q$$
-\end{thm}
-
-\begin{thm}[Law against contradiction]
-    $$\theorem \neg(p \conj \neg p)$$
-    \begin{proof}
-        $\theorem \neg\neg(p \then \neg\neg p)$.
-    \end{proof}
-\end{thm}
-
-Hence $p \then q$ can be expressed as $\neg(p \conj \neg q)$.
-
-\begin{thm}[Law of the excluded middle]
-    $$\theorem \neg p \disj p$$
-    \begin{proof}
-        $\theorem \neg\neg p \then p$.
-    \end{proof}
-\end{thm}
-
-Now $p \then q$ expresses as $\neg p \disj q$.
+\begin{frule}[Law of junctive commutativity]
+    $p \disj q \infers q \disj p$ and $p \conj q \infers q \conj p$.
+\end{frule}
 
 \begin{op}[Equivalence]
-    We define $P \eqv Q$ as $(P \then Q) \conj (Q \then P)$.
+    If $(P \eqv Q)^*$ is the case then $(P \then Q)^*$ is the case and $(Q \then P)^*$ is the case.
 \end{op}
+
+\begin{frule}[Law of equivalence]
+    \begin{align*}
+        p \then q, q \then p & \infers p \eqv q             \\
+        p \eqv q             & \infers p \then q, q \then p
+    \end{align*}
+\end{frule}
+
+\begin{thm}
+    $\theorem (p \eqv q) \eqv ((p \then q) \conj (q \then p))$
+\end{thm}
+
+\begin{thm}[De Morgan's laws I]
+    $$\theorem \neg(p \disj q) \eqv (\neg p \conj \neg q)$$
+    \begin{proof}
+        $\theorem p \then (p \disj q)$, $\theorem q \then (p \disj q)$. $\neg p \infers (p \disj q) \then q$.
+    \end{proof}
+\end{thm}
+
+\begin{thm}[De Morgan's laws IIa]
+    $$\neg p \disj \neg q \infers \neg(p \conj q)$$
+    \begin{proof}
+        $\neg p \disj \neg q, p \conj q \infers q, \neg q$.
+    \end{proof}
+\end{thm}
+
+\begin{frule}[Law of the excluded middle]
+    $$\theorem \neg p \disj p$$
+\end{frule}
+
+\begin{lmm}
+    $\theorem \neg\neg p \then p$.
+\end{lmm}
+
+\begin{thm}[De Morgan's laws IIb]
+    $$\neg(p \conj q) \infers \neg p \disj \neg q$$
+    \begin{proof}
+        $\neg(p \conj q) \infers \neg(\neg\neg p \conj \neg\neg q)$.
+    \end{proof}
+\end{thm}
+
+\begin{thm}
+    \begin{align*}
+         & \theorem & (p \conj q) &  & \eqv &  & \neg & (p \then \neg q) & \\
+         & \theorem & (p \disj q) &  & \eqv &  &      & (\neg p \then q) &
+    \end{align*}
+\end{thm}
 
 \section{Axiomatic approach}
 
