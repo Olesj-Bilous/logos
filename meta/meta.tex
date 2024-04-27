@@ -420,6 +420,23 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
     \end{proof}
 \end{thm}
 
+\begin{frule}[Weak law of excluded middle]
+    $\neg p \disj \neg\neg p$
+\end{frule}
+
+\begin{frule}[Dilemma]
+    $$p \disj q,\begin{aligned}
+            p \then r, \\ q \then r
+        \end{aligned} \infers r$$
+\end{frule}
+
+\begin{thm}[De Morgan's laws IIb]
+    $$\neg(p \conj q) \infers \neg p \disj \neg q$$
+    \begin{proof}
+        $\neg(p \conj q) \infers \neg\neg p \then (\neg p \disj \neg q)$ from $p \then \neg q \infers \neg\neg p \then \neg q$ by contraposition with left elimination.
+    \end{proof}
+\end{thm}
+
 \begin{frule}[Law of the excluded middle]
     $$\theorem \neg p \disj p$$
 \end{frule}
@@ -428,18 +445,14 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
     $\theorem \neg\neg p \then p$.
 \end{lmm}
 
-\begin{thm}[De Morgan's laws IIb]
-    $$\neg(p \conj q) \infers \neg p \disj \neg q$$
-    \begin{proof}
-        $\neg(p \conj q) \infers \neg(\neg\neg p \conj \neg\neg q)$.
-    \end{proof}
-\end{thm}
-
 \begin{thm}
     \begin{align*}
          & \theorem & (p \conj q) &  & \eqv &  & \neg & (p \then \neg q) & \\
          & \theorem & (p \disj q) &  & \eqv &  &      & (\neg p \then q) &
     \end{align*}
+    \begin{proof}
+        $\neg p \then q \infers \neg p \then (p \disj q)$.
+    \end{proof}
 \end{thm}
 
 \section{Axiomatic approach}
