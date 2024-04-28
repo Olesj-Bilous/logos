@@ -1,5 +1,7 @@
 \documentclass{amsbook}
 \usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{enumitem}
 
 \newcommand{\setsm}[1]{\left\{#1\right\}}
 \newcommand{\given}{\mathrel |}
@@ -8,6 +10,9 @@
 
 \newcommand{\infers}{\mathrel\vdash}
 \newcommand{\theorem}{\mathord\vdash\medspace}
+
+\newcommand{\valids}{\mathrel\vDash}
+
 
 \newcommand{\then}{\mathrel\rightarrow}
 \newcommand{\conj}{\mathrel\&}
@@ -20,30 +25,32 @@
     \begin{new}
 }{\end{new}}
 
-\newtheorem{axm}{Axiom}[section]
+\newtheorem{axm}{Axiom}[chapter]
 \newtheorem{prop}{Property}[section]
-\newtheorem{frule}{Rule}[section]
-\newtheorem{op}{Operator}[section]
+\newtheorem{subprop}{Property}[subsection]
+\newtheorem{frule}{Rule}[chapter]
+\newtheorem{subrule}{Rule}[subsection]
+\newtheorem{op}{Operator}[chapter]
 
 \newtheorem{thm}{Theorem}[section]
+\newtheorem{subthm}{Theorem}[subsection]
 \newtheorem{lmm}{Lemma}[section]
 \newtheorem{crl}{Corollary}[section]
 \newtheorem{dfn}{Definition}[section]
 
 
 \begin{document}
+
+
 \title{Metamathema}
 \author{Olesj Bilous}
 \maketitle
 
 \chapter{Propositional logic}
 
-\begin{dfn}
-    A proposition $P$ signifies a qualitatively nondescript yet uni-quely identifiable fact $P^*$ that is either the case or not.
+A proposition $P$ signifies a qualitatively nondescript yet uniquely identifiable fact $P^*$ that is either the case or not.
 
-    We may consider the set $\mathcal W$ of all propositions.
-\end{dfn}
-
+\section{Syntax}
 
 \begin{dfn}
     A logical operator $o$ may act on any enumeration $\mathcal E$ of a fixed number $n \in \mathbb N$ of propositions $\mathcal E \subseteq \mathcal W$ to compose a new proposition $o(\mathcal E) = P \in \mathcal W$ where $P \notin \mathcal E$.
@@ -92,7 +99,7 @@ Composite propositions may be distinguished from those that contain no logical o
 \begin{dfn}
     When a proposition $a$ is atomic there is no logical operator $o$ nor any enumeration of propositions $\mathcal E \subset \wffs$ such that $a = o(\mathcal E)$.
 
-    Atomic propositions are uniquely enumerable without bound.
+    An exhaustive enumeration of atomic propositions is possible yet has no bound.
 \end{dfn}
 
 In the alphabet formed by atomic propositions, logical operators and parentheses not every expression composed of an enumeration of symbols forms a proposition that belongs to the logic. For instance, $\then a$ and $)a \neg$ are ill formed. Therefore $\mathcal W$ is known as the set of well formed formulas.
@@ -100,7 +107,7 @@ In the alphabet formed by atomic propositions, logical operators and parentheses
 For purposes of investigation we may introduce an atom symbol $a$ and a succession symbol $'$ such that an exhaustive enumeration $\mathcal E$ of atomic propositions may be denoted $\mathcal E_0 = a$ and $\mathcal E_{i+1} = (\mathcal E_i)'$ for all $i \in \mathbb N$. The alphabet $a, ', \then, \neg, (, )$ permits every expression to be encoded as a natural number in base $6$.
 
 \begin{thm}
-    The well formed formulas are enumerable $|\wffs| \leq |\mathbb N|$.
+    The well formed formulas are exhaustively enumerable $|\wffs| \leq |\mathbb N|$.
 \end{thm}
 
 Should we extend the alphabet with a propositional variable symbol $p$ then any expression containing this symbol is evidently ill formed. Nonetheless we may combine it with the succession symbol $'$ to denote instances of propositional variables in a metatheoretical expression.
@@ -150,15 +157,15 @@ Different formulas may contain instances of the same propositional variable.
     $$\begin{aligned}p \rightarrow q, \\ p\end{aligned} \infers q$$
 \end{frule}
 
-\section{Inferential approach}
+\subsection{Inferential approach}
 
 The following property allows us to infer over the possibility of inference itself. Consider the extension $\mathcal E \cup\setsm P$ of some premises $\mathcal E$ with a proposition $P$ known as the hypothesis.
 
-\begin{prop}[Deduction]
+\begin{subprop}[Deduction]
     If $\mathcal E \cup\setsm P \infers Q$ then
     $$\mathcal E \infers P \then Q.$$
     for all $\mathcal E \subset \wffs$.
-\end{prop}
+\end{subprop}
 
 Hence the subject of hypothesis is sufficient condition for what can be inferred from the extension.
 
@@ -185,15 +192,15 @@ Some expected properties of the implication can now follow.
     \end{proof}
 \end{thm}
 
-\begin{crl}[Distributivity of implication]
+\begin{thm}[Distributivity of implication]
     $$p \then (q \then r) \infers (p \then q) \then (p \then r)$$
-\end{crl}
+\end{thm}
 
 The following rule seems all too evident.
 
-\begin{frule}[Reflection]
+\begin{subrule}[Reflection]
     $$p \infers p$$
-\end{frule}
+\end{subrule}
 
 It allows us to prove the following theorems.
 
@@ -292,7 +299,7 @@ This rule has been controversial since it allows the following.
     $$\neg p \then q, \neg p \then \neg q \infers p$$
 \end{thm}
 
-It completes the law of implicative commutativity.
+It completes the law of implicative junctive commutativity.
 
 \begin{lmm}[Commutativity of implicative disjunction]
     $$\neg p \then q \infers \neg q \then p$$
@@ -346,7 +353,7 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
 \end{crl}
 
 
-\section{Alternative operators}
+\subsection{Alternative operators}
 
 \begin{op}[Conjuction]
     If $(P \conj Q)^*$ is the case, then $P^*$ is the case and $Q^*$ is the case.
@@ -382,6 +389,10 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
 \begin{frule}[Modus tollens]
     $$p \disj q, \neg p \infers q$$
 \end{frule}
+
+\begin{lmm}
+    $\neg p \disj q \infers p \then q$
+\end{lmm}
 
 \begin{frule}[Introduction of disjunction]
     $$p \infers p \disj q$$
@@ -455,7 +466,7 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
     \end{proof}
 \end{thm}
 
-\section{Axiomatic approach}
+\subsection{Axiomatic approach}
 
 We may disregard all properties and rules from the inferential approach. Instead we consider a special set of formulas $\Xi \subset \Phi$ known as axioms.
 
@@ -512,6 +523,71 @@ We may disregard all properties and rules from the inferential approach. Instead
 \end{thm}
 
 Evidently the axiomatic approach allows precisely the same syntactic derivations as the inferential.
+
+
+\section{Semantics}
+
+A proposition $P$ is true if $P^*$ is the case. $P$ is false otherwise.
+
+This does not preclude that $P^* = Q^*$ whenever $P$ is as true as $Q$, even if $P \neq Q$.
+Hence the expressive range of a proposition is restricted to a binary distinction.
+
+We could say that the proposed world consists only of that which is the case, and that which is not.
+
+\begin{dfn}
+    A model is a valuation map $v: \wffs \longrightarrow \setsm{0,1}$ that assigns a truth value $v(P) \in \setsm{0,1}$ to each proposition $P \in \wffs$.
+
+    A model $v$ supports $(\mathcal E, P)$ only if $v(P) = 1$ if $v(E) = 1$ for all $E \in \mathcal E$. Furthermore any $v$ is:
+    \begin{description}[
+            labelindent=\parindent,
+            before={
+                    \renewcommand\makelabel[1]{(##1).}
+                }
+        ]
+        \item [inferential] If $\mathcal E \infers P$ then $v$ supports $(\mathcal E, P)$.
+        \item [regular with respect to negation] If $v(P) = v(Q)$ then $v(\neg P) = v(\neg Q)$.
+        \item [not trivial] There is at least one proposition $P$ such that $v(P) = 0$.
+    \end{description}
+    We may consider the set of all models $\mathbf M$.
+\end{dfn}
+
+\begin{dfn}
+    A proposition is a semantic consequence $\mathcal E \valids P$ of a set of premises only if all models $v \in \mathbf M$ support $(\mathcal E, P)$.
+
+    $\mathcal E$ is said to validate $P$.
+\end{dfn}
+
+\begin{lmm}
+    If $\mathcal E \infers P$ then $\mathcal E \valids P$.
+\end{lmm}
+
+\begin{prop}
+    $v(\neg P) = 1$ only if $v(P) = 0$.
+
+    \begin{proof}
+        From ex contradictio quod libet we see that $v(\neg P) = 0$ if $v(P) = 1$.
+
+        Consider now that $\theorem T$ where $T = a \then \neg\neg a$. Clearly $v(T) = 1$ so $v(\neg T) = 0$ for all models $v \in \mathbf M$. However, $\theorem \neg\neg T$ from which $v(\neg P) = 1$ if $v(P) = 0$ by negational regularity.
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    $v(P \then Q) = 1$ only if $v(Q) = 1$ if $v(P) = 1$.
+    \begin{proof}
+        From modus ponens we see that if $v(P \then Q) = 1$ then if $v(P) = 1$ then also $v(Q) = 1$.
+
+        Suppose now $v(Q) = 1$ if $v(P) = 1$. If $v(Q) = 1$ then $v(P \then Q) = 1$ given materiality of implication. Should $v(Q) = 0$ then evidently $v(P) = 0$ hence also $v(\neg P) = 1$ and therefore $v(P \then Q) = 1$ by ex contradictio quod libet.
+    \end{proof}
+\end{prop}
+
+
+
+
+
+
+
+
+
 
 \newpage
 
