@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1714311217.62511 "c:/Users/olesj/source/repos/logos/meta/meta.tex" "meta.pdf" "meta" 1714311218.18074 0
+["pdflatex"] 1714340444.78568 "c:/Users/olesj/source/repos/logos/meta/meta.tex" "meta.pdf" "meta" 1714340445.97168 0
   "C:/Users/olesj/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1714299699 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/olesj/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1709384455 24225045 41672a5eda28e3d320feb236aa748328 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -35,6 +35,7 @@
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1247596666 32716 08e384dc442464e7285e891af9f45947 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1247596673 31764 459c573c03a4949a528c2cc7f557e217 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1247596673 34694 870c211f62cb72718a00e353f14f254d ""
+  "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb" 1247596673 35309 940e81a5b9e04201a07e8b33a3ae6e64 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/00miktex/epstopdf-sys.cfg" 1616067285 584 2a1075dd71571459f59146da9f7502ad ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/amscls/amsbook.cls" 1591024572 61769 cf50fb275f4f311d6f5404c41448f7ed ""
@@ -59,9 +60,9 @@
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/mathtools/mathtools.sty" 1656514886 62269 5c1837a5bc5db4c0d255eedc225ca44b ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/mathtools/mhsetup.sty" 1656514886 5582 a43dedf8e5ec418356f1e9dfe5d29fc3 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1700599895 10214 547fd4d29642cb7c80bf54b49d447f01 ""
-  "c:/Users/olesj/source/repos/logos/meta/meta.tex" 1714311216 24488 3cec861f94f9ea05ee920752501e68c9 ""
-  "meta.aux" 1714311218 935 7926450acd52a9de8dfc5da9620aabd2 "pdflatex"
-  "meta.tex" 1714311216 24488 3cec861f94f9ea05ee920752501e68c9 ""
+  "c:/Users/olesj/source/repos/logos/meta/meta.tex" 1714340443 27024 46c28503fa0fac03ac444aa4999622f5 ""
+  "meta.aux" 1714340445 936 6d5f8f9fb4e4425c5de0541010f8fd6a "pdflatex"
+  "meta.tex" 1714340443 27024 46c28503fa0fac03ac444aa4999622f5 ""
   (generated)
   "meta.aux"
   "meta.log"

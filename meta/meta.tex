@@ -146,7 +146,15 @@ Different formulas may contain instances of the same propositional variable.
 \end{dfn}
 
 \begin{dfn}
-    The deductive closure $\partial \mathcal E$ of an enumeration of propositions $\mathcal E \subseteq \wffs$ contains all syntactic consequences $\mathcal E \infers P$.
+    The deductive closure $\partial \mathcal E$ of a set of propositions $\mathcal E \subseteq \wffs$ contains all syntactic consequences of the set such that $\mathcal E \infers P$ only if $P \in \partial\mathcal E$.
+
+    The set is deductively closed if $\mathcal E = \partial\mathcal E$.
+
+    The set is consistent if there is no $P \in \partial\mathcal E$ such that also $\neg P \in \partial\mathcal E$.
+
+    The set is trivial if $\partial\mathcal E = \wffs$.
+
+    A set which is consistent or not trivial is maximally so if its extension $\mathcal E \cup \setsm P$ with any $P \notin \mathcal E$ is inconsistent or trivial respectively.
 \end{dfn}
 
 \begin{prop}[Transitivity]
@@ -559,6 +567,8 @@ We could say that the proposed world consists only of that which is the case, an
 
 \begin{lmm}
     If $\mathcal E \infers P$ then $\mathcal E \valids P$.
+
+    The inference system is semantically sound. The semantics are adequate for the inferential system.
 \end{lmm}
 
 \begin{prop}
@@ -580,13 +590,34 @@ We could say that the proposed world consists only of that which is the case, an
     \end{proof}
 \end{prop}
 
+\begin{dfn}
+    A set of propositions $\mathcal E \subseteq \wffs$ is saturable only if there is a model $v$ such that $v(P) = 1$ if $P \in \mathcal E$.
 
+    The set determines the model only if $P \in \mathcal E$ if $v(P) = 1$.
 
+    A deductively closed set which is maximally not trivial is known as a model set.
+\end{dfn}
 
+\begin{lmm}
+    A model set determines a model.
+    \begin{proof}
+        Consider a map $v: \wffs \longrightarrow \setsm{0,1}$ such that $v(P) = 0$ only if $P \notin \mathcal E$.
+        \begin{enumerate}
+            \item If $v(P) = 1$ then $v(\neg P) = 0$ since $\mathcal E$ is not trivial. If $v(P) = 0$ then $\mathcal E \cup \setsm {\neg P}$ is not trivial so $v(\neg P) = 1$.
+            \item If $v(P \then Q) = 1$ then if $v(P) = 1$ then $v(Q) = 1$ since $\mathcal E$ is deductively closed. If $v(Q) = 1$ if $v(P) = 1$, then since $Q \in \mathcal E$ or $\neg Q, \neg P \in \mathcal E$ we have $v(P \then Q) = 1$.
+        \end{enumerate}
+    \end{proof}
+\end{lmm}
 
+\begin{lmm}
+    A set that does not prove a proposition $\mathcal E \nvdash P$ is contained in a model set $\mathcal E \subseteq \mathcal M$ that does not prove the proposition $\mathcal M \nvdash P$.
+    \begin{proof}
+        Consider $\Gamma_{i+1} = \Delta_{i+1}$ if $P \notin \Delta_{i+1}$ and $\Gamma_{i+1} = \Gamma_i$ otherwise, where $\Gamma_0 = \mathcal E$ and $\Delta_{i+1} = \partial(\Gamma_i \cup \setsm {\wffs_i})$.
+        Evidently $\Gamma = \bigcup_{i \in \mathbb N} \Gamma_i$ is deductively closed, since for any finite $\mathcal D \subset \Gamma$ also $\partial\mathcal D \subset \Gamma_i$ for some $i$.
 
-
-
+        We can see that $P \then Q \in \Gamma$ since $\wffs_i = P \then Q$ for some $i$ so lest Peirce's law come to effect $\Gamma_i \cup \setsm{P \then Q} \nvdash P$. Moreover, if $R \notin \Gamma$ then $\Gamma_i \cup \setsm R \infers P$ for some $i$ so $\Gamma \cup \setsm R$ is trivial.
+    \end{proof}
+\end{lmm}
 
 
 \newpage
