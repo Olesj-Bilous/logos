@@ -154,11 +154,17 @@ Different formulas may contain instances of the same propositional variable.
 
     The set is trivial if $\partial\mathcal E = \wffs$.
 
-    A set which is consistent or not trivial is maximally so if its extension $\mathcal E \cup \setsm P$ with any $P \notin \mathcal E$ is inconsistent or trivial respectively.
+    A set which is consistent or not trivial is maximally so if its extension $\mathcal E \cup \setsm P$ with any $P \notin \mathcal E$ is no longer so.
 \end{dfn}
 
 \begin{prop}[Transitivity]
-    Inference is transitive such that if $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.
+    If $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.
+\end{prop}
+
+The following property does not hold in adaptive inference systems.
+
+\begin{prop}[Monotony]
+    If $\mathcal E \infers P$ then $\mathcal E \cup \setsm Q \infers P$ for any $Q$.
 \end{prop}
 
 \begin{frule}[Modus ponens]
@@ -216,12 +222,14 @@ It allows us to prove the following theorems.
     $$\theorem p \then p$$
 \end{thm}
 
-\begin{thm}[Materiality of implication]
+\begin{thm}[Ex quod libet datum]
     $$p \infers q \then p$$
     \begin{proof}
-        $p, q \infers p$, also known as ex quod libet datum.
+        $p, q \infers p$ by monotony.
     \end{proof}
 \end{thm}
+
+The implication thus defined is said to be material.
 
 The preceding rules and theorems have applied exclusively to the implication. The following rule introduces the syntactic role of the negation.
 
@@ -235,12 +243,17 @@ This shows a property of inference.
     If $p \infers q$ then $\neg q \infers \neg p$.
 \end{thm}
 
-\begin{thm}[Ex contradictio negatio quod libet]
+\begin{thm}[Ex absurdum negatio quod libet]
     $$p, \neg p \infers \neg q$$
     \begin{proof}
         $p \infers q \then p$.
     \end{proof}
 \end{thm}
+
+\begin{crl}[Ex absurdo falsum]
+    For any formula $\tau$ such that $\theorem \tau$:
+    $$p, \neg p \infers \neg\tau$$
+\end{crl}
 
 \begin{thm}[Ex falso negatio quod libet]
     For any formula $\tau$ such that $\theorem \tau$:
@@ -279,7 +292,7 @@ This has a special case with an interesting consequence.
     $$p \then \neg p \infers \neg p$$
     \begin{proof}
         $p \infers \neg(p \then \neg p)$.
-        Alternatively, $p \then \neg p, p \infers \neg\tau$ for any $\theorem \tau$.
+        Alternatively by ex contradictio falsum.
     \end{proof}
 \end{lmm}
 
@@ -307,13 +320,17 @@ This rule has been controversial since it allows the following.
     $$\neg p \then q, \neg p \then \neg q \infers p$$
 \end{thm}
 
-It completes the law of implicative junctive commutativity.
+This result is rejected by intuitionists, hence they do not allow double negation to be eliminated.
+
+The following completes the implicative variety of the law of junctive commutativity.
 
 \begin{lmm}[Commutativity of implicative disjunction]
     $$\neg p \then q \infers \neg q \then p$$
 \end{lmm}
 
-As a result we may complete the law of implicative conjuction and show another interesting consequence.
+This leads to double negation elimination considering $\theorem \neg p \then \neg\neg\neg p$.
+
+Nonetheless, the following results may be preserved by intuitionists as independent rules. We complete the law of implicative conjuction and show an interesting lemma.
 
 \begin{crl}[Elimination of implicative conjunction]
     $$\neg(p \then \neg q) \infers p, q$$
@@ -322,23 +339,36 @@ As a result we may complete the law of implicative conjuction and show another i
     \end{proof}
 \end{crl}
 
-\begin{crl}[Introduction of implicative disjunction]
+\begin{lmm}[Introduction of implicative disjunction]
     $$p \infers \neg p \then q$$
     \begin{proof}
         $p \infers \neg q \then p$.
     \end{proof}
-\end{crl}
+\end{lmm}
 
-\begin{thm}[Ex contradictio quod libet]
+\begin{thm}[Ex absurdo quod libet]
     $$\begin{aligned}
             p, \\ \neg p
         \end{aligned}\infers q$$
 \end{thm}
 
+A trivial set is clearly inconsistent. Now we can also show the following.
+
+\begin{crl}
+    An inconsistent set is trivial.
+\end{crl}
+
+This is avoided in paraconsistent inferential systems.
+
+For any formula $\tau$ such that $\theorem \tau$:
+
 \begin{thm}[Ex falso quod libet]
-    For any formula $\tau$ such that $\theorem \tau$:
     $$\theorem \neg\tau \then q$$
 \end{thm}
+
+\begin{crl}[Ex falso absurdum]
+    $$\neg\tau \infers p, \neg p$$
+\end{crl}
 
 Furthermore the completion of the law of contraposition allows us to conclude with a remarkable result.
 
@@ -360,8 +390,25 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
     \end{proof}
 \end{crl}
 
+By ex absurdum quod libet we can show $\neg\neg p, \neg p \infers p$. Evidently Peirce's law is unacceptable to intuitionists.
+
+The following rule is rejected in its implicative variety for similar reasons.
+
+\begin{thm}[Implicative dilemma]
+    $$\neg p \then q, \begin{aligned}
+            p \then r \\
+            q \then r
+        \end{aligned} \infers r$$
+    \begin{proof}
+        $p \then q, \neg p \then q, \neg q \infers q$.
+    \end{proof}
+\end{thm}
+
+Since $\theorem p \then p$ this is enough to invite consequentia mirabilis.
 
 \subsection{Alternative operators}
+
+We may disregard the law of double negation and introduce some new operators.
 
 \begin{op}[Conjuction]
     If $(P \conj Q)^*$ is the case, then $P^*$ is the case and $Q^*$ is the case.
@@ -371,16 +418,12 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
     $p, q \infers p \conj q$ and $p \conj q \infers p, q$.
 \end{frule}
 
-\begin{lmm}
-    $p \conj q \infers \neg(p \then \neg q)$
-\end{lmm}
-
-\begin{lmm}[Modus expellens]
+\begin{thm}[Conjunctive syllogism]
     $\neg(p \conj q), p \infers \neg q$.
     \begin{proof}
         $p \infers q \then (p \conj q)$.
     \end{proof}
-\end{lmm}
+\end{thm}
 
 \begin{frule}[Law against contradiction]
     $$\theorem \neg(p \conj \neg p)$$
@@ -390,28 +433,42 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
     $\theorem p \then \neg\neg p$.
 \end{lmm}
 
+\begin{lmm}
+    $p \conj q \infers \neg(p \then \neg q)$
+\end{lmm}
+
+\begin{lmm}
+    $p \then q \infers \neg(p \conj \neg q)$.
+\end{lmm}
+
 \begin{op}[Disjunction]
     If $(P \disj Q)^*$ is the case, then $P^*$ is the case or $Q^*$ is the case.
 \end{op}
 
-\begin{frule}[Modus tollens]
+\begin{frule}[Disjunctive syllogism]
     $$p \disj q, \neg p \infers q$$
 \end{frule}
 
 \begin{lmm}
-    $\neg p \disj q \infers p \then q$
+    $\neg p \disj q \infers p \then q$.
 \end{lmm}
 
 \begin{frule}[Introduction of disjunction]
     $$p \infers p \disj q$$
 \end{frule}
 
+\begin{frule}[Dilemma]
+    $$p \disj q,\begin{aligned}
+            p \then r, \\ q \then r
+        \end{aligned} \infers r$$
+\end{frule}
+
 \begin{frule}[Law of junctive commutativity]
-    $p \disj q \infers q \disj p$ and $p \conj q \infers q \conj p$.
+    $p \conj q \infers q \conj p$ and $p \disj q \infers q \disj p$.
 \end{frule}
 
 \begin{op}[Equivalence]
-    If $(P \eqv Q)^*$ is the case then $(P \then Q)^*$ is the case and $(Q \then P)^*$ is the case.
+    If $(P \eqv Q)^*$ is the case then $P^*$ is the case only if $Q^*$ is the case.
 \end{op}
 
 \begin{frule}[Law of equivalence]
@@ -439,30 +496,28 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
     \end{proof}
 \end{thm}
 
-\begin{frule}[Weak law of excluded middle]
-    $\neg p \disj \neg\neg p$
-\end{frule}
-
-\begin{frule}[Dilemma]
-    $$p \disj q,\begin{aligned}
-            p \then r, \\ q \then r
-        \end{aligned} \infers r$$
-\end{frule}
-
-\begin{thm}[De Morgan's laws IIb]
-    $$\neg(p \conj q) \infers \neg p \disj \neg q$$
-    \begin{proof}
-        $\neg(p \conj q) \infers \neg\neg p \then (\neg p \disj \neg q)$ from $p \then \neg q \infers \neg\neg p \then \neg q$ by contraposition with left elimination.
-    \end{proof}
-\end{thm}
-
 \begin{frule}[Law of the excluded middle]
     $$\theorem \neg p \disj p$$
 \end{frule}
 
-\begin{lmm}
+\begin{crl}
     $\theorem \neg\neg p \then p$.
+\end{crl}
+
+This is the first offence against intuitionism in this approach.
+
+A weaker variety of the offending law suffices to complete De Morgan's laws.
+
+\begin{lmm}
+    $\theorem \neg p \disj \neg\neg p$
 \end{lmm}
+
+\begin{thm}[De Morgan's laws IIb]
+    $$\neg(p \conj q) \infers \neg p \disj \neg q$$
+    \begin{proof}
+        $\neg(p \conj q) \infers \neg\neg p \then (\neg p \disj \neg q)$ from $p \then \neg q \infers \neg\neg p \then \neg q$.
+    \end{proof}
+\end{thm}
 
 \begin{thm}
     \begin{align*}
@@ -470,9 +525,16 @@ Furthermore the completion of the law of contraposition allows us to conclude wi
          & \theorem & (p \disj q) &  & \eqv &  &      & (\neg p \then q) &
     \end{align*}
     \begin{proof}
-        $\neg p \then q \infers \neg p \then (p \disj q)$.
+        From elimination of implicative conjuction and from $\neg p \then q \infers \neg p \then (p \disj q)$ by dilemma over exclusion of the middle.
     \end{proof}
 \end{thm}
+
+\begin{crl}
+    \begin{align*}
+         & \theorem & (p \then q) &  & \eqv &  & \neg & (p \conj \neg q) & \\
+         & \theorem & (p \then q) &  & \eqv &  &      & (\neg p \disj q) &
+    \end{align*}
+\end{crl}
 
 \subsection{Axiomatic approach}
 
@@ -568,11 +630,20 @@ We could say that the proposed world consists only of that which is the case, an
 \begin{lmm}
     If $\mathcal E \infers P$ then $\mathcal E \valids P$.
 
-    The inference system is semantically sound. The semantics are adequate for the inferential system.
+    The inferential system is semantically sound. The semantics are adequate for the inferential system.
 \end{lmm}
 
 \begin{prop}
-    $v(\neg P) = 1$ only if $v(P) = 0$.
+    A model has the following properties with respect to negation.
+    \begin{description}[
+            labelindent=\parindent,
+            before={
+                    \renewcommand\makelabel[1]{(##1).}
+                }
+        ]
+        \item[consistency] $v(\neg p) = 0$ if $v(p) = 1$
+        \item[completeness] $v(\neg p) = 1$ if $v(p) = 0$
+    \end{description}
 
     \begin{proof}
         From ex contradictio quod libet we see that $v(\neg P) = 0$ if $v(P) = 1$.
@@ -612,11 +683,15 @@ We could say that the proposed world consists only of that which is the case, an
 \begin{lmm}
     A set that does not prove a proposition $\mathcal E \nvdash P$ is contained in a model set $\mathcal E \subseteq \mathcal M$ that does not prove the proposition $\mathcal M \nvdash P$.
     \begin{proof}
-        Consider $\Gamma_{i+1} = \Delta_{i+1}$ if $P \notin \Delta_{i+1}$ and $\Gamma_{i+1} = \Gamma_i$ otherwise, where $\Gamma_0 = \mathcal E$ and $\Delta_{i+1} = \partial(\Gamma_i \cup \setsm {\wffs_i})$.
+        Consider $\Gamma_{i+1} = \Delta_i$ if $P \notin \Delta_i$ and $\Gamma_{i+1} = \Gamma_i$ otherwise, where $\Gamma_0 = \mathcal E$ and $\Delta_i = \partial(\Gamma_i \cup \setsm {\wffs_i})$.
         Evidently $\Gamma = \bigcup_{i \in \mathbb N} \Gamma_i$ is deductively closed, since for any finite $\mathcal D \subset \Gamma$ also $\partial\mathcal D \subset \Gamma_i$ for some $i$.
 
         We can see that $P \then Q \in \Gamma$ since $\wffs_i = P \then Q$ for some $i$ so lest Peirce's law come to effect $\Gamma_i \cup \setsm{P \then Q} \nvdash P$. Moreover, if $R \notin \Gamma$ then $\Gamma_i \cup \setsm R \infers P$ for some $i$ so $\Gamma \cup \setsm R$ is trivial.
     \end{proof}
+\end{lmm}
+
+\begin{lmm}
+
 \end{lmm}
 
 
