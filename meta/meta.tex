@@ -604,7 +604,7 @@ We say that $P^*$ is the case only if $P^* = 1$. Only in that case is $P$ true.
 \begin{dfn}
     A model is a valuation map $v: \wffs \longrightarrow \setsm{0,1}$ that assigns a truth value $v(P) \in \setsm{0,1}$ to each proposition $P \in \wffs$.
 
-    A model $v$ supports $(\mathcal E, P)$ only if $v(P) = 1$ if $v(E) = 1$ for all $E \in \mathcal E$. Furthermore any $v$ is:
+    Support for $(\mathcal E, P)$ by a model $v$ means that if all $E \in \mathcal E$ assign to $v(E) = 1$, then $v(P) = 1$. Furthermore any $v$ is:
     \begin{description}[
             labelindent=\parindent,
             before={
@@ -618,7 +618,7 @@ We say that $P^*$ is the case only if $P^* = 1$. Only in that case is $P$ true.
     We may consider the set of all models $\mathbf M$.
 \end{dfn}
 
-The positive domain $v^{-1}(1) \subseteq \wffs$ of a valuation map $v$ contains all propositions $P$ for which $v(P) = 1$. We can see that a valuation map is inferential only if the positive domain is deductively closed. A model $v$ supports $(\mathcal E, P)$ only if $P \in v^{-1}(1)$ if $\mathcal E \subseteq v^{-1}(1)$
+The positive domain $v^{-1}(1) \subseteq \wffs$ of a valuation map $v$ contains all propositions $P$ for which $v(P) = 1$. Clearly the model is determined by the positive domain alone. A model $v$ supports $(\mathcal E, P)$ only if $P \in v^{-1}(1)$ if $\mathcal E \subseteq v^{-1}(1)$. We can see that a valuation map is inferential only if the positive domain is deductively closed.
 
 \begin{dfn}
     A proposition is a semantic consequence $\mathcal E \valids P$ of a set of premises only if all models $v \in \mathbf M$ support $(\mathcal E, P)$.
@@ -681,10 +681,8 @@ From paraconsistent inferential systems we may derive inferential maps which are
     A model set is deductively closed and maximally not trivial.
 \end{dfn}
 
-Note that each deductively closed set which is maximally consistent is a model set if our logic permits it.
-
 \begin{lmm}
-    A model set is complete and decidable.
+    A deductively closed set which is maximally not trivial is also complete and decidable.
     \begin{proof}
         Consider a map $v: \wffs \longrightarrow \setsm{0,1}$ such that $v(P) = 0$ only if $P \notin \mathcal E$ where $\mathcal E$ is a model set.
 
@@ -692,7 +690,8 @@ Note that each deductively closed set which is maximally consistent is a model s
     \end{proof}
 \end{lmm}
 
-This suggests an extension of paraconsistent semantics with a decidability clause. In any case, a model set aptly determines a model.
+
+Note that a maximally consistent set is maximally not trivial if our logic permits it. In that case decidability already follows from completeness. Nonetheless, this suggests an extension of paraconsistent semantics with a decidability clause.
 
 \begin{lmm}
     A set that does not prove a proposition $\mathcal E \nvdash P$ is a subset of a model set $\mathcal E \subseteq \Gamma$ that does not contain the proposition $P \notin \Gamma$.
@@ -709,7 +708,7 @@ This suggests an extension of paraconsistent semantics with a decidability claus
 \begin{thm}
     $\mathcal E \valids P$ only if $\mathcal E \infers P$.
 
-    The semantics are characteristic for the inferential system. The converse means that the inferential system is complete with respect to the semantics.
+    The semantics are characteristic for the inferential system. The converse means that the inferential system is semantically complete.
 \end{thm}
 
 \newpage
