@@ -352,13 +352,13 @@ Nonetheless, the following results may be preserved by intuitionists as independ
         \end{aligned}\infers q$$
 \end{thm}
 
-A trivial set is clearly inconsistent. Now we can also show the following.
+A consistent set is clearly not trivial. Now we can also show the following.
 
 \begin{crl}
     An inconsistent set is trivial.
 \end{crl}
 
-This is avoided in paraconsistent inferential systems.
+Hence a maximally consistent set is maximally not trivial. This is avoided in paraconsistent inferential systems.
 
 For any formula $\tau$ such that $\theorem \tau$:
 
@@ -597,12 +597,9 @@ Evidently the axiomatic approach allows precisely the same syntactic derivations
 
 \section{Semantics}
 
-A proposition $P$ is true if $P^*$ is the case. $P$ is false otherwise.
+The expressive range of $P$ is restricted to a binary distinction $P^* \in \setsm{0,1}$.
 
-This does not preclude that $P^* = Q^*$ whenever $P$ is as true as $Q$, even if $P \neq Q$.
-Hence the expressive range of a proposition is restricted to a binary distinction.
-
-We could say that the proposed world consists only of that which is the case, and that which is not.
+We say that $P^*$ is the case only if $P^* = 1$. Only in that case is $P$ true.
 
 \begin{dfn}
     A model is a valuation map $v: \wffs \longrightarrow \setsm{0,1}$ that assigns a truth value $v(P) \in \setsm{0,1}$ to each proposition $P \in \wffs$.
@@ -621,6 +618,8 @@ We could say that the proposed world consists only of that which is the case, an
     We may consider the set of all models $\mathbf M$.
 \end{dfn}
 
+The positive domain $v^{-1}(1) \subseteq \wffs$ of a valuation map $v$ contains all propositions $P$ for which $v(P) = 1$. We can see that a valuation map is inferential only if the positive domain is deductively closed. A model $v$ supports $(\mathcal E, P)$ only if $P \in v^{-1}(1)$ if $\mathcal E \subseteq v^{-1}(1)$
+
 \begin{dfn}
     A proposition is a semantic consequence $\mathcal E \valids P$ of a set of premises only if all models $v \in \mathbf M$ support $(\mathcal E, P)$.
 
@@ -634,30 +633,43 @@ We could say that the proposed world consists only of that which is the case, an
 \end{lmm}
 
 \begin{prop}
-    A model has the following properties with respect to negation.
+    The following properties characterise the negation.
     \begin{description}[
             labelindent=\parindent,
             before={
                     \renewcommand\makelabel[1]{(##1).}
                 }
         ]
-        \item[consistency] $v(\neg p) = 0$ if $v(p) = 1$
-        \item[completeness] $v(\neg p) = 1$ if $v(p) = 0$
+        \item[consistency] $v(\neg P) = 0$ if $v(P) = 1$
+        \item[completeness] $v(\neg P) = 1$ if $v(P) = 0$
     \end{description}
 
     \begin{proof}
-        From ex contradictio quod libet we see that $v(\neg P) = 0$ if $v(P) = 1$.
+        A model must be consistent since it may not be trivial.
 
-        Consider now that $\theorem T$ where $T = a \then \neg\neg a$. Clearly $v(T) = 1$ so $v(\neg T) = 0$ for all models $v \in \mathbf M$. However, $\theorem \neg\neg T$ from which $v(\neg P) = 1$ if $v(P) = 0$ by negational regularity.
+        Consider now that $\theorem T$ where $T = a \then \neg\neg a$. Clearly $v(T) = 1$ so $v(\neg T) = 0$ by consistency. However, $\theorem \neg\neg T$ from which $v(\neg P) = 1$ if $v(P) = 0$ by negational regularity.
     \end{proof}
 \end{prop}
 
-\begin{prop}
-    $v(P \then Q) = 1$ only if $v(Q) = 1$ if $v(P) = 1$.
-    \begin{proof}
-        From modus ponens we see that if $v(P \then Q) = 1$ then if $v(P) = 1$ then also $v(Q) = 1$.
+A consistent map $v$ is not trivial. If it is also complete, it is regular with respect to negation. Hence, an inferential valuation map is regular with respect to negation and not trivial only if it is consistent and complete.
 
-        Suppose now $v(Q) = 1$ if $v(P) = 1$. If $v(Q) = 1$ then $v(P \then Q) = 1$ given materiality of implication. Should $v(Q) = 0$ then evidently $v(P) = 0$ hence also $v(\neg P) = 1$ and therefore $v(P \then Q) = 1$ by ex contradictio quod libet.
+From paraconsistent inferential systems we may derive inferential maps which are not trivial yet inconsistent. Moreover, regularity with respect to negation implies that a single contradiction $v(P) = 1 = v(\neg P)$ of some $P$ supports the contradiction $v(\neg Q) = 1$ of each $Q$ as soon as $v(Q) = 1$. Therefore neither consistency nor regularity with respect to negation are a defining property of paraconsistent semantics. Instead a model is required to be complete and not trivial.
+
+\begin{prop}
+    The following properties characterise the implication.
+    \begin{description}[
+            labelindent=\parindent,
+            before={
+                    \renewcommand\makelabel[1]{(##1).}
+                }
+        ]
+        \item[transferrable] If $v(P \then Q) = 1$ then if $v(P) = 1$ then $v(Q) = 1$
+        \item[decidable] $v(P \then Q) = 1$ if $v(Q) = 1$ if $v(P) = 1$
+    \end{description}
+    \begin{proof}
+        By modus ponens transferribility holds for any deductively closed set.
+
+        Suppose now $v(Q) = 1$ then $v(P \then Q) = 1$ given materiality of implication. Should $v(P) = 0$ then $v(\neg P) = 1$ by completeness and therefore $v(P \then Q) = 1$ by ex contradictio quod libet.
     \end{proof}
 \end{prop}
 
@@ -666,34 +678,39 @@ We could say that the proposed world consists only of that which is the case, an
 
     The set determines the model only if $P \in \mathcal E$ if $v(P) = 1$.
 
-    A deductively closed set which is maximally not trivial is known as a model set.
+    A model set is deductively closed and maximally not trivial.
 \end{dfn}
 
+Note that each deductively closed set which is maximally consistent is a model set if our logic permits it.
+
 \begin{lmm}
-    A model set determines a model.
+    A model set is complete and decidable.
     \begin{proof}
-        Consider a map $v: \wffs \longrightarrow \setsm{0,1}$ such that $v(P) = 0$ only if $P \notin \mathcal E$.
-        \begin{enumerate}
-            \item If $v(P) = 1$ then $v(\neg P) = 0$ since $\mathcal E$ is not trivial. If $v(P) = 0$ then $\mathcal E \cup \setsm {\neg P}$ is not trivial so $v(\neg P) = 1$.
-            \item If $v(P \then Q) = 1$ then if $v(P) = 1$ then $v(Q) = 1$ since $\mathcal E$ is deductively closed. If $v(Q) = 1$ if $v(P) = 1$, then since $Q \in \mathcal E$ or $\neg Q, \neg P \in \mathcal E$ we have $v(P \then Q) = 1$.
-        \end{enumerate}
+        Consider a map $v: \wffs \longrightarrow \setsm{0,1}$ such that $v(P) = 0$ only if $P \notin \mathcal E$ where $\mathcal E$ is a model set.
+
+        If $v(P) = 0$ then $\mathcal E \cup \setsm P \infers Q, \neg Q$ by maximal triviality so $v(\neg P) = v(P \then Q) = 1$ by deductive closure.
     \end{proof}
 \end{lmm}
 
+This suggests an extension of paraconsistent semantics with a decidability clause. In any case, a model set aptly determines a model.
+
 \begin{lmm}
-    A set that does not prove a proposition $\mathcal E \nvdash P$ is contained in a model set $\mathcal E \subseteq \mathcal M$ that does not prove the proposition $\mathcal M \nvdash P$.
+    A set that does not prove a proposition $\mathcal E \nvdash P$ is a subset of a model set $\mathcal E \subseteq \Gamma$ that does not contain the proposition $P \notin \Gamma$.
     \begin{proof}
         Consider $\Gamma_{i+1} = \Delta_i$ if $P \notin \Delta_i$ and $\Gamma_{i+1} = \Gamma_i$ otherwise, where $\Gamma_0 = \mathcal E$ and $\Delta_i = \partial(\Gamma_i \cup \setsm {\wffs_i})$.
         Evidently $\Gamma = \bigcup_{i \in \mathbb N} \Gamma_i$ is deductively closed, since for any finite $\mathcal D \subset \Gamma$ also $\partial\mathcal D \subset \Gamma_i$ for some $i$.
 
         We can see that $P \then Q \in \Gamma$ since $\wffs_i = P \then Q$ for some $i$ so lest Peirce's law come to effect $\Gamma_i \cup \setsm{P \then Q} \nvdash P$. Moreover, if $R \notin \Gamma$ then $\Gamma_i \cup \setsm R \infers P$ for some $i$ so $\Gamma \cup \setsm R$ is trivial.
+
+        Alternatively, if $\Gamma_0 = \mathcal E \cup \setsm {\neg P}$ is inconsistent we have $\mathcal E \infers P$ by contradiction. Hence $\Gamma_0$ is consistent. We may take $\Gamma_{i+1} = \Delta_i$ if $\Delta_i$ is consistent. By construction $\Gamma$ is maximally consistent. This proof only works if inconsistency implies triviality. It also relies on the consistency of $P \notin \Gamma$.
     \end{proof}
 \end{lmm}
 
-\begin{lmm}
+\begin{thm}
+    $\mathcal E \valids P$ only if $\mathcal E \infers P$.
 
-\end{lmm}
-
+    The semantics are characteristic for the inferential system. The converse means that the inferential system is complete with respect to the semantics.
+\end{thm}
 
 \newpage
 
