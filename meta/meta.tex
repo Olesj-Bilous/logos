@@ -10,6 +10,8 @@
 
 \newcommand{\infers}{\mathrel\vdash}
 \newcommand{\theorem}{\mathord\vdash\medspace}
+\newcommand{\univ}[1]{\mathord\forall#1\;}
+\newcommand{\exis}[1]{\mathord\exists#1\;}
 
 \newcommand{\valids}{\mathrel\vDash}
 
@@ -31,6 +33,8 @@
 \newtheorem{frule}{Rule}[chapter]
 \newtheorem{subrule}{Rule}[subsection]
 \newtheorem{op}{Operator}[chapter]
+
+\newtheorem{quant}{Quantifier}[chapter]
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{subthm}{Theorem}[subsection]
@@ -538,11 +542,13 @@ A weaker variety of the offending law suffices to complete De Morgan's laws.
 
 \subsection{Axiomatic approach}
 
-We may disregard all properties and rules from the inferential approach. Instead we consider a special set of formulas $\Xi \subset \Phi$ known as axioms.
+We may disregard all properties and rules from the inferential approach. Instead we consider a special set of formulas $\Xi \subset \Phi$ known as axioms. We may also consider the set of all instances of axioms $\mathcal X \subset \wffs$.
 
 \begin{prop}
-    If $\varLambda \cup \Xi \infers p$ then $\varLambda \infers p$.
+    If $\mathcal E \subset \setsm {Q, Q \then P} \subset (\mathcal E \cup \mathcal X)$ then $\mathcal E \infers P$.
 \end{prop}
+
+This property is independent from standard modus ponens yet extends it. It is also independent from monotony.
 
 \begin{axm}
     $p \then (q \then p)$
@@ -691,7 +697,9 @@ From paraconsistent inferential systems we may derive inferential maps which are
 \end{lmm}
 
 
-Note that a maximally consistent set is maximally not trivial if our logic permits it. In that case decidability already follows from completeness. Nonetheless, this suggests an extension of paraconsistent semantics with a decidability clause.
+Note that a maximally consistent set is maximally not trivial if our logic permits it. In that case decidibility of a deductively closed set already follows from completeness. Evidently the preceding also holds for an extension of paraconsistent semantics with a decidibility clause.
+
+In any case, a model set determines a model.
 
 \begin{lmm}
     A set that does not prove a proposition $\mathcal E \nvdash P$ is a subset of a model set $\mathcal E \subseteq \Gamma$ that does not contain the proposition $P \notin \Gamma$.
@@ -711,83 +719,194 @@ Note that a maximally consistent set is maximally not trivial if our logic permi
     The semantics are characteristic for the inferential system. The converse means that the inferential system is semantically complete.
 \end{thm}
 
-\newpage
+\chapter{Predicate logic}
 
-Since $\theorem p \then (q \then \neg(p \then \neg q))$, a theorem deduced from modus ponens, we have $\theorem \neg(p \conj (q \conj \neg(p \conj q)))$.
+We may extend our semantics with a notion of distinct objects and distinct relations. A relation either holds for certain objects or it does not. If there can be only one object in the relation, it may be considered a property of the object.
 
-From $\theorem p \then (q \then p)$ we have $\neg(p \conj (q \conj \neg p)) $.
-
-Since $\theorem (p \then (q \then r)) \then ((p \then q) \then (q \then r))$ we have $\neg((\neg r \conj q) \conj p) \infers \neg((p \conj q) \conj \neg(p \conj r))$.
-
-We need double negation elimination to introduce an inferential analogue of modus ponens $\neg(p \conj \neg q), p \infers q$ as well as to complete the law of conjuction $p \conj q \infers p, q$.
-
-Reductio ad absurdum may be expressed $\neg(p \conj q), \neg(p \conj \neg q) \infers \neg p$.
-
-
-
-We have $p \disj q, \neg p \infers q$ modus tollens.
-
-Distributivity becomes $p \disj (q \disj r) \infers (p \disj r) \disj \neg(p \disj \neg q)$.
-
-Double negation elimination translates to $\theorem p \disj \neg p$.
-
-Along with contraposition this means $p \disj q \infers q \disj p$.
-
-The verum ex quod libet may then be rewritten as $p \infers p \disj q$.
-
-Interestingly $\neg p \then \neg(q \then \neg r), \neg p \infers q, r$ hence $p \disj (q \conj r) \infers (p \disj q) \conj (p \disj r)$.
-
-Peirce's law becomes $p \vee (p \conj q) \infers p$.
-
-
-This justifies the following definition.
-
-The following result is a formulation of the law of the excluded middle in terms of the implication.
-
-Clearly $(\neg p \then p) \then \neg p \infers \neg p$.
-
-We see that $\theorem p \then (\neg p \then p)$ and $\theorem (\neg p \then p) \then \neg\neg p$
-
-Since $(\neg\neg p \then p) \then p \infers (\neg\neg p \then p) \then \neg\neg p, \neg\neg p$.
-
-Furthermore $\neg\neg p \infers \neg(p \then \neg p)$ since $\theorem (p \then \neg p)\then \neg p$.
-
-This becomes more clear once we consider $\theorem (p \then \neg p) \then \neg p$.
-
-In that case $\theorem \neg p \then \neg p$ means $\theorem (p \then \neg p)\then $.
-
-Now $(\neg\neg p \then p) \then \neg p \infers p \then \neg p$
-since $\theorem p \then (\neg\neg p \then p)$.
-
-Hence $\theorem ((\neg\neg p \then p) \then \neg p) \then \neg p$.
+\section{Syntax}
 
 \begin{dfn}
-    We may define the disjunction $P \vee Q$ as $\neg P \then Q$ and $\neg Q \then P$.
+    An individual variable $x$ is a distinct reference to any object.
+
+    The set of all variables is $\mathbf x$.
 \end{dfn}
 
-The law of the excluded middle is then defined as $p \vee \neg p$. Evidently this is equivalent to reflexivity and introduction of double negation.
+Note that the distinction applies to the reference and not to the object. Since a variable refers to any object, it refers to no object exclusively.
 
-We may rewrite Peirce's law as $p \vee (p \and \neg p) \infers p$ for the instance $(p \then \neg\neg p) \then p \infers p$.
+In what follows we accumulatively define the notion of a formula. $\Phi$ is the set of all formulas. Henceforth we denote the set of all propositional formulas as $\Phi^0$.
+
+\begin{dfn}
+    A predicate $P$ of order $n \in \mathbb N$ applies to an $n$-tuple of variables $x_i \in x^n \subseteq \mathbf x$ to formulate $P(x^n) \in \Phi^1$.
+
+    A variable $x \in \mathbf x$ is in the scope of the formula $P(x^n)$ at position $i$ if $x_i = x$.
+
+    The set of all predicates is $\mathbf P$.  The set of all predicates of order $n$ is $\mathbf P^n$.
+\end{dfn}
+
+\begin{dfn}
+    A quantifier $q$ may act on a formula $\varphi \in \Phi$ by fixing every instance of a free variable $x \in \mathbf x$ in the scope of $\varphi$ to formulate $(qx\;\varphi(x)) \in \Phi$.
+
+    A variable is free if it has not been fixed anywhere in the scope of the formula.
+\end{dfn}
+
+\begin{quant}[Universal]
+    If $\left[\univ x \varphi(x)\right]$ holds, then $[\varphi]$ holds for all objects.
+\end{quant}
+
+\begin{dfn}
+    A formula is closed if all variables in its scope are fixed. Otherwise it is open.
+
+    We consider a formula well formed only if it is closed. In predicate logic such a formula is known as a sentence.
+
+    The set of all sentences is $\mathcal S \subset \Phi$.
+
+    If $q$ is a quantifier and $qx\;\varphi(x)$ is a sentence, $\varphi$ is known as a first order formula on account of its unique free variable. We denote this as $\varphi = \varphi(x)$.
+
+    The set of all first order formulas is $\Phi^1 \subset \Phi$.
+\end{dfn}
+
+A first order formula is clearly not a sentence $\mathcal S^1 \cap \mathcal S = \emptyset$.
+
+\begin{dfn}
+    A logical operator $o$ of order $n$ may act on any $n$-tuple of formulas $\varphi_i \in \varphi^n \subseteq \Phi$ to form a new formula $o(\varphi^n) \in \Phi$.
+\end{dfn}
+
+This permits all operators of propositional logic to act on formulas. This holds a fortiori for formulas which are well formed.
+
+No sentence is a proposition $\mathcal S \cap \wffs = \emptyset$, and no formula is a propositional formula $\Phi \cap \Phi^0 = \emptyset$. Yet a formula $\varphi \in \Phi$ may substitute uniformly $\pi(\varphi \setminus p)$ for a propositional variable $p$ in a propositional formula $\pi \in \Phi^0$ until we formulate an instance $\gamma \in \Phi$ of $\pi$.
+
+Hence a propositional formula $\pi \in \Phi^0$ does define an equivalence class over a set of formulas $\varGamma \subset \Phi$ such that every $\gamma \in \varGamma$ is an instance of $\pi$.
+
+We may consider $\Xi^p \subset \Phi$ the set of all formulas that are instances of some axiom $\xi \in \Xi^0$ of propositional logic.
+
+\begin{dfn}[Propositional axioms]
+    The set of all propositional axiomatic sentences is $\mathcal X^p = \mathcal S \cap \Xi^p$.
+
+    Note that this set may be accomplished by taking $s, t$ as sentential variables in each propositional axiom, rewriting $\Xi^0$ into what we denote $\Xi^s$.
+\end{dfn}
+
+Then $\Xi^p_1 = \Phi^1 \cap \Xi^p$ is the set of all propositional axiomatic first order formulas.
+
+\begin{dfn}[Universal axioms]
+    For every $\xi \in \Xi^p_1$ we have $\univ x \xi(x)$ as a universal axiomatic sentence. The set of all such sentences is $\mathcal X^u$.
+
+    Note that this set may be accomplished by rewriting $\Xi^0$ with first order formulaic variables $\varphi, \gamma$ and symbolically quantifying universally over a variate variable $x$ noting $\Xi^u$.
+\end{dfn}
+
+We may also substitute any $\varphi, \gamma \in \Phi^1$, any $x \in \mathbf x$ and any $s \in \mathcal S$ into the following axioms to form a sentence.
+
+\begin{axm}[Universal distribution]
+    $$\left( \univ x \varphi(x) \then \gamma(x) \right) \then \left(\left( \univ x \varphi(x) \right)  \then \left( \univ x \gamma(x) \right) \right)$$
+\end{axm}
+
+\begin{axm}[Universal generalisation]
+    $$\left( \univ x s \then \varphi(x) \right) \then \left( s \then \univ x \varphi(x) \right)$$
+\end{axm}
+
+\begin{axm}[Universal existence]
+    $$\left( \univ x \varphi(x) \right) \then \left( \neg \univ x \neg\varphi(x) \right)$$
+\end{axm}
+
+The set of all such sentences is $\mathcal X^d$. We may denote the set of these axioms $\delta$.
+
+\begin{dfn}
+    The axioms of first order logic are $\Xi = \Xi^s \cup \Xi^u \cup \delta$. The axiomatic sentences are $\mathcal X = \mathcal X^p \cup \mathcal X^u \cup \mathcal X^d$.
+\end{dfn}
+
+\begin{frule}[Modus ponens]
+    If $\mathcal M \subseteq \setsm {t \then s, t} \subset (\mathcal M \cup \mathcal X)$ then $\mathcal M \infers s$.
+\end{frule}
+
+This assures us of the following. We may denote $\infers_p$ as the rules of propositional inference.
+
+\begin{thm}[Propositional inference]
+    Given $\mathcal M, s \subseteq \mathcal S$ an instance of $\Pi, \pi \subseteq \Phi^0$. If $\Pi \infers_p \pi$ then $\mathcal M \infers s$.
+    \begin{proof}
+        This follows from modus ponens over propositional axioms.
+    \end{proof}
+\end{thm}
+
+\begin{lmm}[Universal modus ponens]
+    $\univ x \varphi(x) \then \gamma(x), \univ x \varphi(x) \infers \univ x \gamma(x)$.
+    \begin{proof}
+        Likewise over the axiom of universal distribution.
+    \end{proof}
+\end{lmm}
+
+\begin{thm}[Universal inference]
+    Given $\varGamma, \varphi \subseteq \Phi^1$ an instance of $\Pi, \pi \subseteq \Phi^0$ and $\mathcal U_i = \univ x \varGamma_i(x)$ for all $i \leq |\varGamma|$. If $\Pi \infers_p \pi$ then $\mathcal U \infers \univ x \varphi(x)$.
+    \begin{proof}
+        By universal modus ponens over the universal axioms.
+    \end{proof}
+\end{thm}
+
+We are ready to consider an alternative quantifier.
+
+\begin{quant}[Existential]
+    $$\exis x \varphi(x) \eqv \neg\univ x \neg\varphi(x)$$
+    If $\left[ \exis x \varphi(x) \right]$ holds, then there is an object for which $[\varphi]$ holds.
+\end{quant}
+
+The following lemma expresses the law of universal existence.
+
+\begin{lmm}
+    $\univ x \varphi(x) \infers \exis x \varphi(x)$.
+\end{lmm}
+
+The existence of an object satisfying the implicans of a universally quantified implication infers the implied sentence.
+
+\begin{thm}[Existential modus ponens]
+    $$\univ x \varphi(x) \then s, \exis x \varphi(x) \infers s$$
+    \begin{proof}
+        $\univ x \varphi(x) \then s \infers \univ x \neg s \then \neg\varphi(x)$.
+    \end{proof}
+\end{thm}
+
+Note that the sentence is closed and in the scope of the quantifier, but not fixed by the quantifier.
+
+\begin{crl}
+    $\univ x \varphi(x) \then s, \univ x \varphi(x) \infers s$.
+\end{crl}
+
+Now we quantify universally over both members of the implication. The following shows that we may diminish them to existential clauses.
+
+\begin{lmm}
+    $\univ x \varphi(x) \then \gamma(x) \infers \exis x \varphi(x) \then \exis x \gamma(x)$
+    \begin{proof}
+        $\univ x \varphi(x) \then \gamma(x) \infers \univ x \neg\gamma(x) \then \neg\varphi(x)$.
+    \end{proof}
+\end{lmm}
+
+The identity of the object satisfying the implicans may be preserved.
+
+\begin{lmm}
+    $\univ x \varphi(x) \then \gamma(x) \infers \univ x \varphi(x) \then \varphi(x) \conj \gamma(x)$.
+\end{lmm}
+
+\begin{thm}[Individual modus ponens]
+    $$\univ x \varphi(x) \then \gamma(x), \exis x \varphi(x) \infers \exis x \varphi(x) \conj \gamma(x)$$
+\end{thm}
+
+
+
 
 \newpage
 
-Including this assumption with the preceding rules and operators suffices to characterise the entire logic. This is known as the inferential approach.
+
+We may extend our alphabet with the predicate symbol $P$. $'$ denotes the order of the predicate. For instance, $\mathbf P^2$ may be denoted $P'$. Enclosing in parentheses permits enumeration $'$. For instance, given $P, Q, R \in \mathbf P^2$ we may write $R$ as $(P')''$.
 
 
-We may now show some interesting theorems that follow from the inferential approach. However, we may also characterise the logic by means of these theorems as premises while dropping the assumption of reflexivity as well as every rule except modus ponens. In that case these characterising theorems become axioms from which reflexivity and the omitted rules may be inferred.
+We may appreciate our notion of a formula from a different light.
 
-Each of the characterising theorems of the inferential approach has a characteristic logical structure in which any of the composing propositions may be substituted for any other proposition to yield another characterising theorem. Conversely, the axioms may be written in a characteristic general form where substitution of a composing proposition yields another axiom.
+In the study of propositional logic, formulas were a metatheoretical device that allowed us to introduce substitutional rules into our theory. As such they were not a feature of the logic itself, but of the metalogic. Admittedly, that metalogic was a predicate logic, and the substitution method was of a semantic nature.
 
-\begin{axm}[Materiality of implication]
-    $$P \then (Q \then P)$$
-\end{axm}
+In what follows, we will consider the notion of formulas in predicate logic. We conveniently retain use of the symbol $\Phi$ for the set of all formulas. Once more, formulas are a convenient metatheoretical device
 
-This shows that $P \then (P \then P)$ is an axiom so $P \infers P$ for any $P, Q \in \mathcal W$. Hence the logic remains reflexive under the axiomatic approach. Evidently this implies that any axiom is also a theorem, which is necessary for the equivalence of the inferential and axiomatic approach.
+Strictly speaking, many formulas are also ill formed in predicate logic. However, the manner in which they may become well formed is contrary to the propositional analogue.
 
-Next we see that $P \then (Q \then R), P \then Q, P \infers R$.
+Consider predicates $P$ of order $1$ and $R$ of order $2$. We may apply them to variables $x, y$ to form $P(x)$ and $R(x,y)$. We may then form $\neg P(x)$ and $\univ x R(x, y)$. These are all formulas yet none are well formed. Only $\univ y \univ x R(x,y)$ is a sentence. So is $\neg(\univ y (\univ x R(x,y)) \then \neg P(y))$. However, $\univ x \univ x R(x, x)$ is not even a formula.
 
-\begin{axm}[Distributivity of implication]
-    $$(P \then (Q \then R)) \then ((P \then Q) \then (P \then R))$$
-\end{axm}
 
 \end{document}
+
+
