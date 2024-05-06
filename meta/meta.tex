@@ -736,7 +736,7 @@ Note that the distinction applies to the reference and not to the object. Since 
 In what follows we accumulatively define the notion of a formula. $\Phi$ is the set of all formulas. Henceforth we denote the set of all propositional formulas as $\Phi^0$.
 
 \begin{dfn}
-    A predicate $P$ of order $n \in \mathbb N$ applies to an $n$-tuple of variables $x_i \in x^n \subseteq \mathbf x$ to formulate $P(x^n) \in \Phi^1$.
+    A predicate $P$ of order $n \in \mathbb N$ applies to an $n$-tuple of variables $x_i \in x^n \subseteq \mathbf x$ to formulate $P(x^n) \in \Phi$.
 
     A variable $x \in \mathbf x$ is in the scope of the formula $P(x^n)$ at position $i$ if $x_i = x$.
 
@@ -773,9 +773,7 @@ A first order formula is clearly not a sentence $\mathcal S^1 \cap \mathcal S = 
 
 This permits all operators of propositional logic to act on formulas. This holds a fortiori for formulas which are well formed.
 
-No sentence is a proposition $\mathcal S \cap \wffs = \emptyset$, and no formula is a propositional formula $\Phi \cap \Phi^0 = \emptyset$. Yet a formula $\varphi \in \Phi$ may substitute uniformly $\pi(\varphi \setminus p)$ for a propositional variable $p$ in a propositional formula $\pi \in \Phi^0$ until we formulate an instance $\gamma \in \Phi$ of $\pi$.
-
-Hence a propositional formula $\pi \in \Phi^0$ does define an equivalence class over a set of formulas $\varGamma \subset \Phi$ such that every $\gamma \in \varGamma$ is an instance of $\pi$.
+No sentence is a proposition $\mathcal S \cap \wffs = \emptyset$, and no formula is a propositional formula $\Phi \cap \Phi^0 = \emptyset$. Yet a formula $\varphi \in \Phi$ may substitute uniformly $\pi(\varphi \setminus p)$ for a propositional variable $p$ in a propositional formula $\pi \in \Phi^0$. Hence a propositional formula $\pi \in \Phi^0$ does define an equivalence class over a set of formulas $\varGamma \subset \Phi$ such that every $\gamma \in \varGamma$ is an instance of $\pi$.
 
 We may consider $\Xi^p \subset \Phi$ the set of all formulas that are instances of some axiom $\xi \in \Xi^0$ of propositional logic.
 
@@ -793,7 +791,7 @@ Then $\Xi^p_1 = \Phi^1 \cap \Xi^p$ is the set of all propositional axiomatic fir
     Note that this set may be accomplished by rewriting $\Xi^0$ with first order formulaic variables $\varphi, \gamma$ and symbolically quantifying universally over a variate variable $x$ noting $\Xi^u$.
 \end{dfn}
 
-We may also substitute any $\varphi, \gamma \in \Phi^1$, any $x \in \mathbf x$ and any $s \in \mathcal S$ into the following axioms to form a sentence.
+We may also substitute any $\varphi, \gamma \in \Phi^1$, any $x \in \mathbf x$ and any $s \in \mathcal S$ into the following axioms.
 
 \begin{axm}[Universal distribution]
     $$\left( \univ x \varphi(x) \then \gamma(x) \right) \then \left(\left( \univ x \varphi(x) \right)  \then \left( \univ x \gamma(x) \right) \right)$$
@@ -803,11 +801,13 @@ We may also substitute any $\varphi, \gamma \in \Phi^1$, any $x \in \mathbf x$ a
     $$\left( \univ x s \then \varphi(x) \right) \then \left( s \then \univ x \varphi(x) \right)$$
 \end{axm}
 
+If $x$ were somewhere in $s$ then $\univ x s \then \varphi(x)$ would not be well formed since $s$ is closed.
+
 \begin{axm}[Universal existence]
     $$\left( \univ x \varphi(x) \right) \then \left( \neg \univ x \neg\varphi(x) \right)$$
 \end{axm}
 
-The set of all such sentences is $\mathcal X^d$. We may denote the set of these axioms $\delta$.
+The set of all sentences which are instances of these axioms is $\mathcal X^d$. We may denote the set of these axioms $\delta$.
 
 \begin{dfn}
     The axioms of first order logic are $\Xi = \Xi^s \cup \Xi^u \cup \delta$. The axiomatic sentences are $\mathcal X = \mathcal X^p \cup \mathcal X^u \cup \mathcal X^d$.
@@ -853,7 +853,7 @@ The following lemma expresses the law of universal existence.
     $\univ x \varphi(x) \infers \exis x \varphi(x)$.
 \end{lmm}
 
-The existence of an object satisfying the implicans of a universally quantified implication infers the implied sentence.
+The existence of an object satisfying the implicans of a universally quantified implication infers an implied sentence.
 
 \begin{thm}[Existential modus ponens]
     $$\univ x \varphi(x) \then s, \exis x \varphi(x) \infers s$$
@@ -862,7 +862,7 @@ The existence of an object satisfying the implicans of a universally quantified 
     \end{proof}
 \end{thm}
 
-Note that the sentence is closed and in the scope of the quantifier, but not fixed by the quantifier.
+Note that $s$ is closed so it may not contain $x$ if $\univ x \varphi(x) \then s$ is to be well formed.
 
 \begin{crl}
     $\univ x \varphi(x) \then s, \univ x \varphi(x) \infers s$.
@@ -887,7 +887,77 @@ The identity of the object satisfying the implicans may be preserved.
     $$\univ x \varphi(x) \then \gamma(x), \exis x \varphi(x) \infers \exis x \varphi(x) \conj \gamma(x)$$
 \end{thm}
 
+The classical approach allows us to eliminate a universal quantifier through the introduction of a universal instance.
 
+\begin{dfn}
+    An individual constant is a distinct reference to a particular object.
+
+    A constant may not be quantified over, but may substitute uniformly for a free variable in a first order formula to form a sentence.
+
+    The set of all constants is $\mathbf c$.
+\end{dfn}
+
+\begin{frule}[Universal instantiation]
+    $$\univ x \varphi(x) \infers \varphi(c)$$
+\end{frule}
+
+Note that the instance is always universal. There is no such thing as an existential instance. Hence the particularity of the object referred to by the constant is a semantic device and not an identification with an independent object.
+
+It allows us to derive universal existence. We may even show a form which is stronger with respect to the new notation.
+
+\begin{thm}[Existential generalisation]
+    $$\varphi(c) \infers \exis x \varphi(x)$$
+    \begin{proof}
+        $\theorem \neg\varphi(c) \then \neg\univ x \varphi(c)$ and $\univ x \neg\varphi(x) \infers \neg\varphi(c)$.
+    \end{proof}
+\end{thm}
+
+Note that $x$ may not occur in $\varphi(c)$ if the conclusion is to be well formed.
+
+We may also permit universal generalisation of an instance, under conditions better understood when considering the quantified variety.
+
+\begin{frule}[Universal generalisation] If $c$ does not occur anywhere in $s$:
+    $$s \then \varphi(c) \infers \univ x \varphi(x)$$
+\end{frule}
+
+Once more $x$ is nowhere in $\varphi(c)$.
+
+This immediately implies the following by familiar reasoning.
+
+\begin{thm}[Existential modus ponens]  If $c$ does not occur anywhere in $s$:
+    $$\varphi(c) \then s, \exis x \varphi(x) \infers s$$
+\end{thm}
+
+Additionally we may affirm the following.
+
+\begin{thm}[Universal distribution]
+    $\;$
+    \begin{proof}
+        $\univ x \varphi(x) \then \gamma(x), \univ x \varphi(x) \infers (\univ x \varphi(x)) \then \gamma(c)$ where $c$ does not occur in $\univ x \varphi(x)$.
+    \end{proof}
+\end{thm}
+
+Note that this implies we may omit the universal axioms as well as all additional axioms of first order logic that are not propositional.
+
+\section{Semantics}
+
+\begin{dfn}
+    The universe $\mathrm U$ consists of all objects. Even without bound we may not be able to enumerate all objects.
+\end{dfn}
+
+\begin{dfn}
+    A model $v \in \mathbf M$ contains a set of assignment maps such that for each $n \in \mathbb N$:
+    \begin{enumerate}
+        \item $v(x^n) \in \mathrm U^n$ for each $x^n \in \mathbf x^n$
+        \item $v(P^n) \in \wp(\mathrm U^n)$ for each $P^n \in \mathbf P^n$
+    \end{enumerate}
+    Furthermore, it contains a complete, not trivial inferential map $v: \Phi \longrightarrow \setsm{0,1}$ such that:
+    \begin{enumerate}
+        \item $v(P^n(x^n)) = 1$ only if $v(x^n) \in v(P^n)$
+        \item $v(\univ x \varphi(x)) = 1$ only if $w(\varphi(x)) = 1$ for all $w \in \mathbf M$ such that $w(y) = v(y)$ for all $y \in \mathbf x$ where $y \neq x$
+    \end{enumerate}
+    Inferentiality is taken to mean deductive closure of the positive domain over all instances of some propositional inference, regardless of whether a formula in the inference is closed.
+\end{dfn}
 
 
 \newpage
