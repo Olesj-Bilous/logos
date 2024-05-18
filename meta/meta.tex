@@ -946,22 +946,41 @@ Note that this implies we may omit the universal axioms as well as all additiona
 \end{dfn}
 
 \begin{dfn}
-    A model $v \in \mathbf M$ contains a set of assignment maps such that for each $n \in \mathbb N$:
+    An assignment consists of a map $u$ and a set $p$ such that there is a map $p^n \in p$ for each $n \in \mathbb N$.
     \begin{enumerate}
-        \item $v(x^n) \in \mathrm U^n$ for each $x^n \in \mathbf x^n$
-        \item $v(P^n) \in \wp(\mathrm U^n)$ for each $P^n \in \mathbf P^n$
+        \item $u: \mathbf c \longrightarrow \mathrm U$
+        \item $p^n: \mathbf P^n \longrightarrow \wp(\mathrm U^n)$
     \end{enumerate}
-    Furthermore, it contains a complete, not trivial inferential map $v: \Phi \longrightarrow \setsm{0,1}$ such that:
-    \begin{enumerate}
-        \item $v(P^n(x^n)) = 1$ only if $v(x^n) \in v(P^n)$
-        \item $v(\univ x \varphi(x)) = 1$ only if $w(\varphi(x)) = 1$ for all $w \in \mathbf M$ such that $w(y) = v(y)$ for all $y \in \mathbf x$ where $y \neq x$
-    \end{enumerate}
-    Inferentiality is taken to mean deductive closure of the positive domain over all instances of some propositional inference, regardless of whether a formula in the inference is closed.
+\end{dfn}
+
+\begin{dfn}
+    An assignment $u$, $p$ may be interdeterminate with a valuation map $v: \mathrm P \longrightarrow \setsm{0,1}$ of constant predicative formulas $\mathrm P \subset \Phi$.
+    $$v(P^n(x^n)) = 1 \text{\;only if\;} u(x^n) \in p^n(P^n)$$
+    A structure is a model $v: \Phi \longrightarrow \setsm{0,1}$ whose predicative formulas $\mathrm P \subset \Phi$ are interdeterminate with an assignment $u$, $p$, where quantifying formulas $\mathord\forall \subset \Phi$ are evaluated by consensus over all adjacent models.
+    $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(c)) = 1$$
+    for all constants $c$ and all models $w$ such that $p_w = p$.
+\end{dfn}
+
+\begin{dfn}
+    Given an assignment $v$ and a variable $x$, consider an assignment $w$ such that $w(P^n) = v(P^n)$ for all $P^n$, $n$, and $w(y) = v(y)$ for all $y \neq x$. We say that the structures $w$, $v$ interdeterminate with the assignments $w$, $v$ respectively are $x$-adjacent to one another.
+
+    The $x$-adjacency $\partial_x v$ of a structure $v$ consists of all structures $x$-adjacent to $v$.
+\end{dfn}
+
+\begin{dfn}
+
+    Finally, a model $v$ is a structure $v$ where a formula quantifying over $x$ is evaluated by consensus about the quantified formula between all models in the $x$-adjacency of $v$.
+    $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(x)) = 1 \text{\;for all models\;} w \in \delta_x v$$
 \end{dfn}
 
 
 \newpage
 
+
+
+A model $v \in \mathbf M$ consists of assignment maps.
+Their structure is interdeterminate with a valuation map $v: \Phi \longrightarrow \setsm{0,1}$ of all formulas.
+Inferentiality is taken to mean deductive closure of the positive domain over all instances of some propositional inference, regardless of whether a formula in the inference is closed.
 
 We may extend our alphabet with the predicate symbol $P$. $'$ denotes the order of the predicate. For instance, $\mathbf P^2$ may be denoted $P'$. Enclosing in parentheses permits enumeration $'$. For instance, given $P, Q, R \in \mathbf P^2$ we may write $R$ as $(P')''$.
 
