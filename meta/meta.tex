@@ -946,20 +946,69 @@ Note that this implies we may omit the universal axioms as well as all additiona
 \end{dfn}
 
 \begin{dfn}
-    An assignment consists of a map $u$ and a set $p$ such that there is a map $p^n \in p$ for each $n \in \mathbb N$.
+    An assignment consists of a map $u$ and a set $r$ such that there is a map $r^n \in r$ for each $n \in \mathbb N$.
     \begin{enumerate}
-        \item $u: \mathbf c \longrightarrow \mathrm U$
-        \item $p^n: \mathbf P^n \longrightarrow \wp(\mathrm U^n)$
+        \item $u: \mathbf c \longrightarrow \mathrm U$.
+              Each constant $c$ is assigned an object $u(c)$.
+        \item $r^n: \mathbf P^n \longrightarrow \wp(\mathrm U^n)$.
+              Each predicate $P$ of order $n$ is assigned a set $r^n(P)$ of $n$-tuples of objects.
     \end{enumerate}
+    We may note $u(c^n)$ where $u(c^n)_i = u(c_i)$ for all $c_i \in c^n \subset \mathbf c$, and $r(P) = r^n(P)$ for $P \in \mathbf P^n$.
 \end{dfn}
 
 \begin{dfn}
-    An assignment $u$, $p$ may be interdeterminate with a valuation map $v: \mathrm P \longrightarrow \setsm{0,1}$ of constant predicative formulas $\mathrm P \subset \Phi$.
-    $$v(P^n(x^n)) = 1 \text{\;only if\;} u(x^n) \in p^n(P^n)$$
-    A structure is a model $v: \Phi \longrightarrow \setsm{0,1}$ whose predicative formulas $\mathrm P \subset \Phi$ are interdeterminate with an assignment $u$, $p$, where quantifying formulas $\mathord\forall \subset \Phi$ are evaluated by consensus over all adjacent models.
-    $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(c)) = 1$$
-    for all constants $c$ and all models $w$ such that $p_w = p$.
+    A structure $v, (u, r)$ consists of a model $v: \Phi \longrightarrow \setsm{0,1}$ and an assignment $u$, $r$.
+    \begin{enumerate}
+        \item
+              The valuation of constant predicative formulas $\mathrm P \subset \Phi$ is interdeterminate with the assignment.
+              $$v(P(c^n)) = 1 \text{\;only if\;} u(c^n) \in r(P)$$
+              We say that the $n$-tuple of objects $u(c^n)$ satisfies the formula $P$.
+        \item
+              Quantifying formulas $\mathord\forall \subset \Phi$ are evaluated by universal consensus on every constant instance of the quantified formula between all structures $w, (t, r)$ interdeterminate with the same predicative assignment $r$.
+              $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(c)) = 1 \text{\;for\;} \begin{aligned}
+                       & \text{all constants\;} c \\
+                       &
+                      \text{all structures\;}
+                      w, (t, r)
+                  \end{aligned}$$
+    \end{enumerate}
 \end{dfn}
+
+\begin{thm}
+    Denoting the set of formulas with instances of precisely $n$ distinct constants as $\Phi^n$ we see that $\Phi = \bigcup_{n \in \mathbb N} \Phi^n$.
+
+    Given an injective assignment of constants $u$ a model $v$ is interdeterminate with a total assignment $R$ of all formulas such that $r^n \subset R^n \in R$ for each $n \in \mathbb N$ where $R^n: \Phi^n \longrightarrow \wp(\mathrm U^n)$.
+    \begin{enumerate}
+        \item $R(\neg\varphi) = R(\varphi)^C$
+        \item $R^{m+n}(\varphi \then \gamma) = R^{m}(\neg\varphi) \times R^n(\gamma)$
+        \item $R^{n+1}(\varphi(c)) = R^n(\univ x \varphi(x)) \times \mathrm U$
+        \item $R^{n+1}(\neg\varphi(c)) = R^n(\neg\univ x \varphi(x)) \times \mathrm e$ where $\mathrm e \subseteq \mathrm U$ and $1 \leq |\mathrm e|$
+    \end{enumerate}
+    \begin{proof}
+        By induction over constant predicative formulas.
+        \begin{enumerate}
+            \item $v(\neg\varphi) = 1$ only if $v(\varphi) = 0$ only if $u(c^n) \notin R(\varphi)$
+            \item Similarly from implicational completeness.
+            \item By universal consensus.
+            \item By consistency $v(\univ x \varphi(x)) = 0$ so by universal consensus there must be some constant $c$ such that $t(c) \notin R(\varphi)$ in some structure $w, (t, r)$. Note that we may nonetheless have $u(c) \in R(\varphi)$ hence $v(\varphi(c)) = 1$ for any $c$.
+        \end{enumerate}
+    \end{proof}
+\end{thm}
+
+
+
+
+
+
+
+
+\newpage
+
+
+
+Given $\varphi \in \Phi^n$ containing some instance of $c$ such that $c = c_i \in c^n$ in $\varphi = \varphi(c^n)$ we may consider $R_c(\varphi)$ the set of all objects $u \in \mathrm U$ for which there is some $u^n \in R^n(\varphi)$ such that $u_i = u$.
+
+Given a quantified formula $\varphi$ we may consider $r(\varphi)$ the set of all objects that satisfy it. Note that since a model $v$ is inferential, if $v(\univ x \varphi(x)) = 1$ then for all constants $c$ we have $u(c) \in r(\varphi)$ for any interdeterminate assignment $u, r$. However, for some $u$ we may have $u(\mathbf c) \subset \mathrm U$. Structural consensus ensures that $r(\varphi) = \mathrm U$ if $v, (u, r)$ is a structure.
 
 \begin{dfn}
     Given an assignment $v$ and a variable $x$, consider an assignment $w$ such that $w(P^n) = v(P^n)$ for all $P^n$, $n$, and $w(y) = v(y)$ for all $y \neq x$. We say that the structures $w$, $v$ interdeterminate with the assignments $w$, $v$ respectively are $x$-adjacent to one another.
@@ -972,11 +1021,6 @@ Note that this implies we may omit the universal axioms as well as all additiona
     Finally, a model $v$ is a structure $v$ where a formula quantifying over $x$ is evaluated by consensus about the quantified formula between all models in the $x$-adjacency of $v$.
     $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(x)) = 1 \text{\;for all models\;} w \in \delta_x v$$
 \end{dfn}
-
-
-\newpage
-
-
 
 A model $v \in \mathbf M$ consists of assignment maps.
 Their structure is interdeterminate with a valuation map $v: \Phi \longrightarrow \setsm{0,1}$ of all formulas.
