@@ -21,6 +21,8 @@
 \newcommand{\eqv}{\mathrel\leftrightarrow}
 \newcommand{\disj}{\mathrel\vee}
 
+\DeclareMathOperator*{\amp}{\&}
+
 \theoremstyle{definition}
 \newenvironment{hackthm}[2][section]{
     \newtheorem{new}{#2}[#1]
@@ -725,6 +727,24 @@ We may extend our semantics with a notion of distinct objects and distinct relat
 
 \section{Syntax}
 
+In predicate logic a well formed formula is known as a sentence.
+
+The set of all sentences is $\mathcal S$.
+
+\begin{dfn}
+    An individual constant is a distinct reference to a particular object.
+
+    The set of all constants is $\mathbf c$.
+\end{dfn}
+
+\begin{dfn}
+    A predicate $P$ of order $n \in \mathbb N$ applies to an $n$-tuple of constants $c_i \in c^n \subseteq \mathbf c$ to formulate a sentence $P(c^n) \in \mathcal S$.
+
+    A constant $c \in \mathbf c$ is in the scope of the sentence $P(c^n)$ at position $i$ if $c_i = c$.
+
+    The set of all predicates is $\mathbf P$. The set of all predicates of order $n$ is $\mathbf P^n \subset \mathbf P$.
+\end{dfn}
+
 \begin{dfn}
     An individual variable $x$ is a distinct reference to any object.
 
@@ -733,47 +753,201 @@ We may extend our semantics with a notion of distinct objects and distinct relat
 
 Note that the distinction applies to the reference and not to the object. Since a variable refers to any object, it refers to no object exclusively.
 
-In what follows we accumulatively define the notion of a formula. $\Phi$ is the set of all formulas. Henceforth we denote the set of all propositional formulas as $\Phi^0$.
-
 \begin{dfn}
-    A predicate $P$ of order $n \in \mathbb N$ applies to an $n$-tuple of variables $x_i \in x^n \subseteq \mathbf x$ to formulate $P(x^n) \in \Phi$.
+    A quantifier $q$ may act on a sentence $s \in \mathcal S$ by uniform substitution $\varphi(x) = s(x \setminus c)$ of a constant $c \in \mathbf c$ in the scope of $s = \varphi(c)$ with a variable $x \in \mathbf x$ nowhere in the scope of $s$ to formulate $qx\;\varphi(x) \in \mathcal S$.
 
-    A variable $x \in \mathbf x$ is in the scope of the formula $P(x^n)$ at position $i$ if $x_i = x$.
+    We call $\varphi(x)$ a formula and $x$ a free variable. A formula $\varphi(x^n)$ involved in $0 < n$ levels of quantification has $n$ distinct free variables $x_i \in x^n$ in its scope. Such a formula is considered open. Only a closed formula is well formed.
 
-    The set of all predicates is $\mathbf P$.  The set of all predicates of order $n$ is $\mathbf P^n$.
+    A sentence $s \in \mathcal S$ may be an instance $s = \varphi(c^n)$ of an open formula $\varphi(x^n)$ if it follows from uniform substitution $s = \varphi(x^n)(c_i \setminus x_i)^n$ of the free variables $x^n$. The instance is strict if all $c_i$ are distinct and nowhere in the scope of $\varphi(x^n)$.
 \end{dfn}
 
-\begin{dfn}
-    A quantifier $q$ may act on a formula $\varphi \in \Phi$ by fixing every instance of a free variable $x \in \mathbf x$ in the scope of $\varphi$ to formulate $(qx\;\varphi(x)) \in \Phi$.
+Note that no such distinct $c_i$ is in the scope of $\varphi(x^n)$ only if $\varphi(x^n) = s(x_i \setminus c_i)^n$ with no $x_i$ anywhere in $s$.
 
-    A variable is free if it has not been fixed anywhere in the scope of the formula.
+\begin{dfn}
+    A logical operator $o$ of order $n$ may act on any $n$-tuple of sentences $s_i \in s^n \subset \mathcal S$ to form a new sentence $o(s^n) \in \mathcal S$.
 \end{dfn}
+
+This permits all propositional operators to act on sentences.
+
+A sentence $s \in \mathcal S$ may substitute uniformly $\pi(s \setminus p)$ for a propositional variable $p$ in a propositional formula $\pi$. Hence a propositional formula $\pi$ defines an equivalence class on a set of sentences $\mathcal M \subseteq \mathcal S$ such that every $s \in \mathcal M$ is an instance of $\pi$.
+
+We permit all propositional rules of inference to apply to sentences.
 
 \begin{quant}[Universal]
     If $\left[\univ x \varphi(x)\right]$ holds, then $[\varphi]$ holds for all objects.
 \end{quant}
 
+\begin{frule}[Universal instantiation]
+    $$\univ x \varphi(x) \infers \varphi(x)(c \setminus x)$$
+\end{frule}
+
+We introduce the following quantifier by equivalence.
+
+\begin{quant}[Existential]
+    If $\left[\exis x \varphi(x)\right]$ holds, then there is an object for which $[\varphi]$ holds.
+    $$\theorem \exis x \varphi(x) \eqv \neg\univ x \neg\varphi(x)$$
+\end{quant}
+
+\begin{thm}[Existential generalisation]
+    $$\varphi(x)(c \setminus x) \infers \exis x \varphi(x)$$
+    \begin{proof}
+        $\univ x \neg\varphi(x) \infers \neg\varphi(x)(c \setminus x)$.
+    \end{proof}
+\end{thm}
+
+The condition to the weaker universal form forbids that we assume anything about $c$.
+
+\begin{prop}[Universal generalisation]
+    Given a constant $c \in \mathbf c$ nowhere in the scope of a sentence $s \in \mathcal S$.
+    $$\text{If\;} s \infers \varphi(c) \text{\;then\;} s \infers \univ x \varphi(c)(x \setminus c)\text.$$
+\end{prop}
+
+Note that $\mathcal M \infers \varphi(c)$ does not imply $\mathcal M \infers \univ x \varphi(c)(x \setminus c)$. This does not preclude the following.
+
+\begin{lmm}
+    Given finite premises $\mathcal M \subset \mathcal S$ such that $c$ is nowhere in $\mathcal M$.
+    $$\text{If\;} \mathcal M \infers \varphi(c) \text{\;then\;} \mathcal M \infers \univ x \varphi(c)(x \setminus c)\text.$$
+    \begin{proof}
+        Consider $s = \amp_{i=1}^{|\mathcal M|} \mathcal M_i$.
+    \end{proof}
+\end{lmm}
+
+Furthermore we may contrapose into the following.
+
+\begin{thm}[Existential instantiation]
+    Given $c$ nowhere in $s$ nor in $\mathcal M$ assumed finite.
+    $$\text{If\;} \mathcal M \cup \setsm{\varphi(c)} \infers s \text{\;then\;} \mathcal M \cup \setsm{\exis x \varphi(c)(x \setminus c)} \infers s$$
+    \begin{proof}
+        Clearly $\mathcal M \cup \setsm{\neg s} \infers \neg\varphi(c)$.
+    \end{proof}
+\end{thm}
+
+This is clearly a weaker form of instantiation which avoids inferring an actual instance. This is necessary to avoid $\exis x \varphi(x) \infers \univ x \varphi(x)$.
+
+\section{Semantics}
+
 \begin{dfn}
-    A formula is closed if all variables in its scope are fixed. Otherwise it is open.
-
-    We consider a formula well formed only if it is closed. In predicate logic such a formula is known as a sentence.
-
-    The set of all sentences is $\mathcal S \subset \Phi$.
-
-    If $q$ is a quantifier and $qx\;\varphi(x)$ is a sentence, $\varphi$ is known as a first order formula on account of its unique free variable. We denote this as $\varphi = \varphi(x)$.
-
-    The set of all first order formulas is $\Phi^1 \subset \Phi$.
+    The universe $\mathrm U$ consists of all objects. Even without bound we may not be able to enumerate all objects.
 \end{dfn}
 
-A first order formula is clearly not a sentence $\mathcal S^1 \cap \mathcal S = \emptyset$.
-
 \begin{dfn}
-    A logical operator $o$ of order $n$ may act on any $n$-tuple of formulas $\varphi_i \in \varphi^n \subseteq \Phi$ to form a new formula $o(\varphi^n) \in \Phi$.
+    An assignment consists of a map $u$ and a set $r$ such that there is a map $r^n \in r$ for each $n \in \mathbb N$.
+    \begin{enumerate}
+        \item $u: \mathbf c \longrightarrow \mathrm U$.
+              Each constant $c$ is assigned an object $u(c)$.
+        \item $r^n: \mathbf P^n \longrightarrow \wp(\mathrm U^n)$.
+              Each predicate $P$ of order $n$ is assigned a set $r^n(P)$ of $n$-tuples of objects.
+    \end{enumerate}
+    We may note $u(c^n)$ where $u(c^n)_i = u(c_i)$ for all $c_i \in c^n \subset \mathbf c$, and $r(P) = r^n(P)$ for $P \in \mathbf P^n$.
 \end{dfn}
 
-This permits all operators of propositional logic to act on formulas. This holds a fortiori for formulas which are well formed.
+\begin{dfn}
+    A structure $v, (u, r)$ consists of a model $v: \Phi \longrightarrow \setsm{0,1}$ and an assignment $u$, $r$.
+    \begin{enumerate}
+        \item
+              The valuation of constant predicative formulas $\mathrm P \subset \Phi$ is interdeterminate with the assignment.
+              $$v(P(c^n)) = 1 \text{\;only if\;} u(c^n) \in r(P)$$
+              We say that the $n$-tuple of objects $u(c^n)$ satisfies the formula $P$.
+        \item
+              Quantifying formulas $\mathord\forall \subset \Phi$ are evaluated by universal consensus on the quantified formula between all structures $w, (t, r)$ interdeterminate with the same predicative assignment $r$.
+              $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(c)) = 1 \text{\;for\;} \begin{aligned}
+                       & \text{all constants\;} c \\
+                       &
+                      \text{all structures\;}
+                      w, (t, r)
+                  \end{aligned}$$
+    \end{enumerate}
+\end{dfn}
 
-No sentence is a proposition $\mathcal S \cap \wffs = \emptyset$, and no formula is a propositional formula $\Phi \cap \Phi^0 = \emptyset$. Yet a formula $\varphi \in \Phi$ may substitute uniformly $\pi(\varphi \setminus p)$ for a propositional variable $p$ in a propositional formula $\pi \in \Phi^0$. Hence a propositional formula $\pi \in \Phi^0$ does define an equivalence class over a set of formulas $\varGamma \subset \Phi$ such that every $\gamma \in \varGamma$ is an instance of $\pi$.
+\begin{dfn}
+    A sentence is a semantic consequence of a set of premises $\mathcal M \valids s$ only if all structures $v, (u, r)$ have a model $v$ that supports $(\mathcal M, s)$.
+\end{dfn}
+
+\begin{dfn}
+    We denote the set of formulas with instances of precisely $n$ distinct constants as $\Phi^n$. Note that $\Phi = \bigcup_{n \in \mathbb N} \Phi^n$.
+
+    We define $\mathrm U^0 = \setsm\emptyset$ such that $\wp(\mathrm U^0) = \setsm{\emptyset, \setsm\emptyset}$. Note that $\emptyset \times S = \emptyset$ and $\setsm\emptyset \times S = S$ for any set $S$.
+
+
+    A model $v$ may be interdeterminate with a total assignment $u, R$ such that $R^n \in R$ for each $n \in \mathbb N$ where $R^n: \Phi^n \longrightarrow \wp(\mathrm U^n)$.
+    $$v(\varphi(c^n)) = 1 \text{\;only if\;} u(c^n) \in R(\varphi)$$
+    \begin{enumerate}
+        \item $R^n(\neg\varphi) = R^n(\varphi)^C$ where the complement is over $\mathrm U^n$.
+        \item $R^{m+n-k}(\varphi \then \gamma) = \setsm{u \in \mathrm U^{m+n-k} \mathrel\bigg| \begin{aligned}
+                           & \left[ u \right]_1^m \in R^m(\neg\varphi)        \\
+                          \text{\;or\;}
+                           & \left[ u \right]_{m-k+1}^{m-k+n} \in R^n(\gamma)
+                      \end{aligned} }$ \\
+              where common constants are arranged from $m-k+1$ to $m$ if any.
+
+              We define $R^0(\univ x \varphi(x)) = \setsm\emptyset$.
+        \item If $v(\univ x \varphi(x)) = 1$ then $R^{n+1}(\varphi(c)) = R^n(\univ x \varphi(x)) \times \mathrm U$.
+        \item If $v(\univ x \varphi(x)) = 0$ then $R^{n+1}(\varphi(c)) \subset R^n(\univ x \varphi(x)) \times \mathrm U$.
+    \end{enumerate}
+\end{dfn}
+
+\begin{lmm}
+    A model determines a nonempty set of structures of which it is the model.
+    \begin{proof}
+        Given any $v$ an injective $u$ ensures that any formula in every $\Phi^n$ has $n$ distinctly assigned constants. This determines a total assignment $R$ and thus a predicative assignment $r \subset R$. We show that $v, (u, r)$ is a structure by inductively decomposing and reconstructing between $R$ and $r$ where $v$ is ever the interdeterminate model.
+        \begin{enumerate}
+            \item $v(\neg\varphi) = 1$ only if $v(\varphi) = 0$ only if $u(c^n) \notin R(\varphi)$
+            \item Similarly from implicational completeness.
+            \item Evidently all structures $w, (t, r)$ come to universal consensus on a formula $w(\varphi(c)) = 1$ for all constants $c$ only if all objects satisfy it $R(\varphi) = \mathrm U$.
+            \item There must be some object that does not satisfy the formula $q \notin R(\varphi)$ so there must be some structure $w, (t, r)$ assigning some constant $t(c) = q$ such that $w(\varphi(c)) = 0$. Conversely $t(c) \notin R(\varphi)$ if $w(\varphi(c)) = 0$.
+
+                  Note that we may nonetheless have $u(c) \in R(\varphi)$ hence $v(\varphi(c)) = 1$ for any $c$.
+        \end{enumerate}
+    \end{proof}
+\end{lmm}
+
+\begin{thm}[G\"odel]
+    First order logic is semantically complete.
+\end{thm}
+
+\begin{dfn}
+
+\end{dfn}
+
+
+
+
+\newpage
+
+
+
+Given $\varphi \in \Phi^n$ containing some instance of $c$ such that $c = c_i \in c^n$ in $\varphi = \varphi(c^n)$ we may consider $R_c(\varphi)$ the set of all objects $u \in \mathrm U$ for which there is some $u^n \in R^n(\varphi)$ such that $u_i = u$.
+
+Given a quantified formula $\varphi$ we may consider $r(\varphi)$ the set of all objects that satisfy it. Note that since a model $v$ is inferential, if $v(\univ x \varphi(x)) = 1$ then for all constants $c$ we have $u(c) \in r(\varphi)$ for any interdeterminate assignment $u, r$. However, for some $u$ we may have $u(\mathbf c) \subset \mathrm U$. Structural consensus ensures that $r(\varphi) = \mathrm U$ if $v, (u, r)$ is a structure.
+
+\begin{dfn}
+    Given an assignment $v$ and a variable $x$, consider an assignment $w$ such that $w(P^n) = v(P^n)$ for all $P^n$, $n$, and $w(y) = v(y)$ for all $y \neq x$. We say that the structures $w$, $v$ interdeterminate with the assignments $w$, $v$ respectively are $x$-adjacent to one another.
+
+    The $x$-adjacency $\partial_x v$ of a structure $v$ consists of all structures $x$-adjacent to $v$.
+\end{dfn}
+
+\begin{dfn}
+
+    Finally, a model $v$ is a structure $v$ where a formula quantifying over $x$ is evaluated by consensus about the quantified formula between all models in the $x$-adjacency of $v$.
+    $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(x)) = 1 \text{\;for all models\;} w \in \delta_x v$$
+\end{dfn}
+
+A model $v \in \mathbf M$ consists of assignment maps.
+Their structure is interdeterminate with a valuation map $v: \Phi \longrightarrow \setsm{0,1}$ of all formulas.
+Inferentiality is taken to mean deductive closure of the positive domain over all instances of some propositional inference, regardless of whether a formula in the inference is closed.
+
+We may extend our alphabet with the predicate symbol $P$. $'$ denotes the order of the predicate. For instance, $\mathbf P^2$ may be denoted $P'$. Enclosing in parentheses permits enumeration $'$. For instance, given $P, Q, R \in \mathbf P^2$ we may write $R$ as $(P')''$.
+
+
+We may appreciate our notion of a formula from a different light.
+
+In the study of propositional logic, formulas were a metatheoretical device that allowed us to introduce substitutional rules into our theory. As such they were not a feature of the logic itself, but of the metalogic. Admittedly, that metalogic was a predicate logic, and the substitution method was of a semantic nature.
+
+In what follows, we will consider the notion of formulas in predicate logic. We conveniently retain use of the symbol $\Phi$ for the set of all formulas. Once more, formulas are a convenient metatheoretical device
+
+Strictly speaking, many formulas are also ill formed in predicate logic. However, the manner in which they may become well formed is contrary to the propositional analogue.
+
+Consider predicates $P$ of order $1$ and $R$ of order $2$. We may apply them to variables $x, y$ to form $P(x)$ and $R(x,y)$. We may then form $\neg P(x)$ and $\univ x R(x, y)$. These are all formulas yet none are well formed. Only $\univ y \univ x R(x,y)$ is a sentence. So is $\neg(\univ y (\univ x R(x,y)) \then \neg P(y))$. However, $\univ x \univ x R(x, x)$ is not even a formula.
 
 We may consider $\Xi^p \subset \Phi$ the set of all formulas that are instances of some axiom $\xi \in \Xi^0$ of propositional logic.
 
@@ -938,106 +1112,6 @@ Additionally we may affirm the following.
 \end{thm}
 
 Note that this implies we may omit the universal axioms as well as all additional axioms of first order logic that are not propositional.
-
-\section{Semantics}
-
-\begin{dfn}
-    The universe $\mathrm U$ consists of all objects. Even without bound we may not be able to enumerate all objects.
-\end{dfn}
-
-\begin{dfn}
-    An assignment consists of a map $u$ and a set $r$ such that there is a map $r^n \in r$ for each $n \in \mathbb N$.
-    \begin{enumerate}
-        \item $u: \mathbf c \longrightarrow \mathrm U$.
-              Each constant $c$ is assigned an object $u(c)$.
-        \item $r^n: \mathbf P^n \longrightarrow \wp(\mathrm U^n)$.
-              Each predicate $P$ of order $n$ is assigned a set $r^n(P)$ of $n$-tuples of objects.
-    \end{enumerate}
-    We may note $u(c^n)$ where $u(c^n)_i = u(c_i)$ for all $c_i \in c^n \subset \mathbf c$, and $r(P) = r^n(P)$ for $P \in \mathbf P^n$.
-\end{dfn}
-
-\begin{dfn}
-    A structure $v, (u, r)$ consists of a model $v: \Phi \longrightarrow \setsm{0,1}$ and an assignment $u$, $r$.
-    \begin{enumerate}
-        \item
-              The valuation of constant predicative formulas $\mathrm P \subset \Phi$ is interdeterminate with the assignment.
-              $$v(P(c^n)) = 1 \text{\;only if\;} u(c^n) \in r(P)$$
-              We say that the $n$-tuple of objects $u(c^n)$ satisfies the formula $P$.
-        \item
-              Quantifying formulas $\mathord\forall \subset \Phi$ are evaluated by universal consensus on every constant instance of the quantified formula between all structures $w, (t, r)$ interdeterminate with the same predicative assignment $r$.
-              $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(c)) = 1 \text{\;for\;} \begin{aligned}
-                       & \text{all constants\;} c \\
-                       &
-                      \text{all structures\;}
-                      w, (t, r)
-                  \end{aligned}$$
-    \end{enumerate}
-\end{dfn}
-
-\begin{thm}
-    Denoting the set of formulas with instances of precisely $n$ distinct constants as $\Phi^n$ we see that $\Phi = \bigcup_{n \in \mathbb N} \Phi^n$.
-
-    Given an injective assignment of constants $u$ a model $v$ is interdeterminate with a total assignment $R$ of all formulas such that $r^n \subset R^n \in R$ for each $n \in \mathbb N$ where $R^n: \Phi^n \longrightarrow \wp(\mathrm U^n)$.
-    \begin{enumerate}
-        \item $R(\neg\varphi) = R(\varphi)^C$
-        \item $R^{m+n}(\varphi \then \gamma) = R^{m}(\neg\varphi) \times R^n(\gamma)$
-        \item $R^{n+1}(\varphi(c)) = R^n(\univ x \varphi(x)) \times \mathrm U$
-        \item $R^{n+1}(\neg\varphi(c)) = R^n(\neg\univ x \varphi(x)) \times \mathrm e$ where $\mathrm e \subseteq \mathrm U$ and $1 \leq |\mathrm e|$
-    \end{enumerate}
-    \begin{proof}
-        By induction over constant predicative formulas.
-        \begin{enumerate}
-            \item $v(\neg\varphi) = 1$ only if $v(\varphi) = 0$ only if $u(c^n) \notin R(\varphi)$
-            \item Similarly from implicational completeness.
-            \item By universal consensus.
-            \item By consistency $v(\univ x \varphi(x)) = 0$ so by universal consensus there must be some constant $c$ such that $t(c) \notin R(\varphi)$ in some structure $w, (t, r)$. Note that we may nonetheless have $u(c) \in R(\varphi)$ hence $v(\varphi(c)) = 1$ for any $c$.
-        \end{enumerate}
-    \end{proof}
-\end{thm}
-
-
-
-
-
-
-
-
-\newpage
-
-
-
-Given $\varphi \in \Phi^n$ containing some instance of $c$ such that $c = c_i \in c^n$ in $\varphi = \varphi(c^n)$ we may consider $R_c(\varphi)$ the set of all objects $u \in \mathrm U$ for which there is some $u^n \in R^n(\varphi)$ such that $u_i = u$.
-
-Given a quantified formula $\varphi$ we may consider $r(\varphi)$ the set of all objects that satisfy it. Note that since a model $v$ is inferential, if $v(\univ x \varphi(x)) = 1$ then for all constants $c$ we have $u(c) \in r(\varphi)$ for any interdeterminate assignment $u, r$. However, for some $u$ we may have $u(\mathbf c) \subset \mathrm U$. Structural consensus ensures that $r(\varphi) = \mathrm U$ if $v, (u, r)$ is a structure.
-
-\begin{dfn}
-    Given an assignment $v$ and a variable $x$, consider an assignment $w$ such that $w(P^n) = v(P^n)$ for all $P^n$, $n$, and $w(y) = v(y)$ for all $y \neq x$. We say that the structures $w$, $v$ interdeterminate with the assignments $w$, $v$ respectively are $x$-adjacent to one another.
-
-    The $x$-adjacency $\partial_x v$ of a structure $v$ consists of all structures $x$-adjacent to $v$.
-\end{dfn}
-
-\begin{dfn}
-
-    Finally, a model $v$ is a structure $v$ where a formula quantifying over $x$ is evaluated by consensus about the quantified formula between all models in the $x$-adjacency of $v$.
-    $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(x)) = 1 \text{\;for all models\;} w \in \delta_x v$$
-\end{dfn}
-
-A model $v \in \mathbf M$ consists of assignment maps.
-Their structure is interdeterminate with a valuation map $v: \Phi \longrightarrow \setsm{0,1}$ of all formulas.
-Inferentiality is taken to mean deductive closure of the positive domain over all instances of some propositional inference, regardless of whether a formula in the inference is closed.
-
-We may extend our alphabet with the predicate symbol $P$. $'$ denotes the order of the predicate. For instance, $\mathbf P^2$ may be denoted $P'$. Enclosing in parentheses permits enumeration $'$. For instance, given $P, Q, R \in \mathbf P^2$ we may write $R$ as $(P')''$.
-
-
-We may appreciate our notion of a formula from a different light.
-
-In the study of propositional logic, formulas were a metatheoretical device that allowed us to introduce substitutional rules into our theory. As such they were not a feature of the logic itself, but of the metalogic. Admittedly, that metalogic was a predicate logic, and the substitution method was of a semantic nature.
-
-In what follows, we will consider the notion of formulas in predicate logic. We conveniently retain use of the symbol $\Phi$ for the set of all formulas. Once more, formulas are a convenient metatheoretical device
-
-Strictly speaking, many formulas are also ill formed in predicate logic. However, the manner in which they may become well formed is contrary to the propositional analogue.
-
-Consider predicates $P$ of order $1$ and $R$ of order $2$. We may apply them to variables $x, y$ to form $P(x)$ and $R(x,y)$. We may then form $\neg P(x)$ and $\univ x R(x, y)$. These are all formulas yet none are well formed. Only $\univ y \univ x R(x,y)$ is a sentence. So is $\neg(\univ y (\univ x R(x,y)) \then \neg P(y))$. However, $\univ x \univ x R(x, x)$ is not even a formula.
 
 
 \end{document}
