@@ -54,29 +54,38 @@
 
 \chapter{Propositional logic}
 
-A proposition $P$ signifies a qualitatively nondescript yet uniquely identifiable fact $P^*$ that is either the case or not.
+A proposition $P$ signifies a distinct fact $P^*$ that is either the case or not.
+
+The set of all propositions is $\mathcal W$.
 
 \section{Syntax}
 
 \begin{dfn}
-    A logical operator $o$ may act on any enumeration $\mathcal E$ of a fixed number $n \in \mathbb N$ of propositions $\mathcal E \subseteq \mathcal W$ to compose a new proposition $o(\mathcal E) = P \in \mathcal W$ where $P \notin \mathcal E$.
+    A logical operator $o$ of order $n \in \mathbb N$ may act on any $n$-tuple of propositions $P^n \subseteq \mathcal W$ to compose a proposition $o(P^n) = P \in \mathcal W$.
 
-    The fixed number $n$ is said to be the order of the operator.
+    Each $P_i \in P^n$ is said to be the $i$th direct descendant of $P$.
 
-    Any proposition in the enumeration $\mathcal E_i \in \mathcal E$ is said to be in the scope of the operator at position $i$.
+    Note that each component $P^i \in P^n$ of a composite proposition $P = o(P^n)$ may itself be composite. A proposition $Q$ is said to be a descendant of $P$ if there is a succession of direct descendants that leads from $P$ to $Q$.
+
+    When a proposition $P$ is atomic there is no logical operator $o$ of any order $n$ nor any $n$-tuple $P^n \subset \wffs$ of which it is composed $P = o(P^n)$.
+\end{dfn}
+
+\begin{dfn}
+    Given any alphabet consisting of a finite set of symbols, we consider any finite enumeration of symbols from the alphabet an expression.
+
+    We use the atom symbol $\mathrm a$ and the succession symbol $'$ to denote an atomic proposition for every $n \in \mathbb N$ such that $a_0 = \mathrm a$ and $a_{n+1} = a_n'$.
+
+    We may use an operator symbol $\mathrm o$ and the succession symbol $'$ to denote any operator. Then parentheses $($, $)$ and a comma $,$ allow us to denote components in a composite proposition.
 \end{dfn}
 
 \begin{thm}
-    There is no bound to the propositions that we may enumerate: if $|\mathcal E| \in \mathbb N$ then $\mathcal E \subset \mathcal W$.
+    The set of all propositions $\mathcal W$ may be enumerated though without bound: $|\wffs| = |\mathbb N|$.
     \begin{proof}
-        Consider $P_{i+1} = o((\mathcal E \setminus \setsm {\mathcal E_1}) \cup \setsm {P_i})$ where $P_0 = \mathcal E_1$.
-
-        Taking $\mathcal D_i = \bigcup_{j=0}^i \setsm {P_j}$ we see that $\mathcal D_i \subset \mathcal D_{i+1} \subseteq \wffs$ so $|\mathcal D_i| = i < |\mathcal W|$ for all $i \in \mathbb N$ hence $|\mathcal W| \notin \mathbb N$.
+        The alphabet $\setsm{\mathrm a, \mathrm o, (, ),\,,}$ allows any proposition to be encoded in base $5$.
     \end{proof}
 \end{thm}
 
-
-\begin{op}[Material implication]
+\begin{op}[Implication]
     For any $P, Q \in \wffs$:
     $$
         P \rightarrow Q \in \wffs.
@@ -91,30 +100,6 @@ A proposition $P$ signifies a qualitatively nondescript yet uniquely identifiabl
     $$
     If $(\neg P)^*$ is the case then $P^*$ is not the case.
 \end{op}
-
-Clearly propositions acted on by logical operators may themselves be composed of propositions. This may introduce ambiguity in the notation.
-
-\begin{dfn}
-    Parentheses $($, $)$ indicate the scope of a logical operator in a composite proposition.
-\end{dfn}
-
-For instance $\neg R$ for $R = P \then Q$ may be written $\neg(P \then Q)$.
-
-Composite propositions may be distinguished from those that contain no logical operators.
-
-\begin{dfn}
-    When a proposition $a$ is atomic there is no logical operator $o$ nor any enumeration of propositions $\mathcal E \subset \wffs$ such that $a = o(\mathcal E)$.
-
-    An exhaustive enumeration of atomic propositions is possible yet has no bound.
-\end{dfn}
-
-In the alphabet formed by atomic propositions, logical operators and parentheses not every expression composed of an enumeration of symbols forms a proposition that belongs to the logic. For instance, $\then a$ and $)a \neg$ are ill formed. Therefore $\mathcal W$ is known as the set of well formed formulas.
-
-For purposes of investigation we may introduce an atom symbol $a$ and a succession symbol $'$ such that an exhaustive enumeration $\mathcal E$ of atomic propositions may be denoted $\mathcal E_0 = a$ and $\mathcal E_{i+1} = (\mathcal E_i)'$ for all $i \in \mathbb N$. The alphabet $a, ', \then, \neg, (, )$ permits every expression to be encoded as a natural number in base $6$.
-
-\begin{thm}
-    The well formed formulas are exhaustively enumerable $|\wffs| \leq |\mathbb N|$.
-\end{thm}
 
 Should we extend the alphabet with a propositional variable symbol $p$ then any expression containing this symbol is evidently ill formed. Nonetheless we may combine it with the succession symbol $'$ to denote instances of propositional variables in a metatheoretical expression.
 
