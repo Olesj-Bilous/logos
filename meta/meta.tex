@@ -61,29 +61,12 @@ The set of all propositions is $\mathcal W$.
 \section{Syntax}
 
 \begin{dfn}
-    A logical operator $o$ of order $n \in \mathbb N$ may act on any $n$-tuple of propositions $P^n \subseteq \mathcal W$ to compose a proposition $o(P^n) = P \in \mathcal W$.
+    A logical operator $o$ of order $n \in \mathbb N$ may act on any $n$-tuple of propositions $P^n \in \mathcal W^n$ to compose a proposition $o(P^n) = P \in \mathcal W$.
 
-    Each $P_i \in P^n$ is said to be the $i$th direct descendant of $P$.
+    Each $P_i \in P^n$ is said to be the $i$th direct descendant of $P$. A proposition $Q$ is said to be a descendant of $P$ if there is a succession of direct descendants that leads from $P$ to $Q$.
 
-    Note that each component $P^i \in P^n$ of a composite proposition $P = o(P^n)$ may itself be composite. A proposition $Q$ is said to be a descendant of $P$ if there is a succession of direct descendants that leads from $P$ to $Q$.
-
-    When a proposition $P$ is atomic there is no logical operator $o$ of any order $n$ nor any $n$-tuple $P^n \subset \wffs$ of which it is composed $P = o(P^n)$.
+    When a proposition $P$ is atomic it is not composed $P \neq o(P^n)$ of any $n$-tuple $P^n \in \wffs^n$ by any operator $o$ of any order $n$.
 \end{dfn}
-
-\begin{dfn}
-    Given any alphabet consisting of a finite set of symbols, we consider any finite enumeration of symbols from the alphabet an expression.
-
-    We use the atom symbol $\mathrm a$ and the succession symbol $'$ to denote an atomic proposition for every $n \in \mathbb N$ such that $a_0 = \mathrm a$ and $a_{n+1} = a_n'$.
-
-    We may use an operator symbol $\mathrm o$ and the succession symbol $'$ to denote any operator. Then parentheses $($, $)$ and a comma $,$ allow us to denote components in a composite proposition.
-\end{dfn}
-
-\begin{thm}
-    The set of all propositions $\mathcal W$ may be enumerated though without bound: $|\wffs| = |\mathbb N|$.
-    \begin{proof}
-        The alphabet $\setsm{\mathrm a, \mathrm o, (, ),\,,}$ allows any proposition to be encoded in base $5$.
-    \end{proof}
-\end{thm}
 
 \begin{op}[Implication]
     For any $P, Q \in \wffs$:
@@ -101,52 +84,82 @@ The set of all propositions is $\mathcal W$.
     If $(\neg P)^*$ is the case then $P^*$ is not the case.
 \end{op}
 
-Should we extend the alphabet with a propositional variable symbol $p$ then any expression containing this symbol is evidently ill formed. Nonetheless we may combine it with the succession symbol $'$ to denote instances of propositional variables in a metatheoretical expression.
+\begin{dfn}
+    Given an alphabet $\alpha$ consisting of a finite $|\alpha| \in \mathbb N$ set of symbols, we consider any finite $n \in \mathbb N$ string of symbols from the alphabet $e^n \in \alpha^n$ an expression. An instance $e_i \in e^n$ of a symbol $e_i = \alpha_j \in \alpha$ at position $i$ is known as a character.
+
+    The set of all expressions from the alphabet is $\alpha^\omega = \bigcup_{n \in \mathbb N} \alpha^n$.
+
+    The substring $d^m = \left[ e^n \right]_{k+1}^{k+m}$ of an expression $e^n \in \alpha^n$ at position $k + 1$ of length $m$ is its restriction to the characters $e_i \in e^n$ at positions $k < i \leq k+m$. The instance $\left[ e^n \right]_{k+1}^{k+m}$ of the expression $d^m$ is said to be in the scope of the expression $e^n$ at position $k+1$.
+
+    Uniform substitution $e(d \setminus c)$ of an expression $c \in \alpha^l$ with an expression $d \in \alpha^m$ in an expression $e \in \alpha^n$ substitutes an instance of $d$ for every instance of $c$ in the scope of $e$.
+\end{dfn}
+
+\begin{thm}
+    The alphabet $\beta = \setsm{\mathrm a, \mathrm o, ', (, ),\,,}$ expresses all propositions.
+    $$ \wffs \subset \beta^\omega $$
+    \begin{proof}
+        We use the atom symbol $\mathrm a$ and the succession symbol $'$ to denote an atomic proposition for every $n \in \mathbb N$ such that $a_0 = \mathrm a$ and $a_{n+1} = a_n'$.
+
+        We may use the operator symbol $\mathrm o$ and the succession symbol $'$ to denote any operator. Then parentheses $($, $)$ and a comma $,$ allow us to denote components in a composite proposition.
+    \end{proof}
+\end{thm}
+
+\begin{crl}
+    The set of all propositions $\mathcal W$ may be enumerated though without bound: $|\wffs| = |\mathbb N|$.
+    \begin{proof}
+        The alphabet $\beta$ allows any proposition to be encoded in base $6$.
+    \end{proof}
+\end{crl}
+
+\begin{crl}
+    A proposition is in the scope of another only if it descends from the other.
+\end{crl}
 
 \begin{dfn}
-    Uniform substitution $\varphi(p / P)$ of a propositional variable $p$ with a proposition $P \in \wffs$ substitutes every instance of the variable in the expression $\varphi$ with an instance of the proposition.
+    A propositional variable $p$ is a distinct reference to any proposition $P$. An extension $\phi = \beta \cup \setsm{\mathrm p}$ of the alphabet $\beta$ expresses all such variables.
+
+    A formula expresses the logical structure of a proposition. We define the set $\Phi$ of all formulas recursively.
+
+    If $\varphi \in \Phi$ is a formula then so is the result of uniform substitution $\varphi(p \setminus P) \in \Phi$ of any proposition $P$ in the scope of $\varphi$ with any variable $p$. Furthermore, $\wffs \subset \Phi$. Note that $\Phi \subset \phi^\omega$. A formula $\varphi \in \Phi$ is said to be well formed only if it is a proposition $\varphi \in \wffs$.
+
+    A proposition $P$ is said to be an instance of a formula $\varphi$ only if it follows from uniform substitution $P = \varphi(P_i \setminus p_i)^n$ of all propositional variables $p_{i \leq n}$ in the scope of $\varphi$ with some proposition $P_i$.
 \end{dfn}
 
 \begin{dfn}
-    A formula $\varphi$ is a metatheoretical expression that becomes a well formed formula $F \in \wffs$ once every propositional variable $p \in \varphi$ has been substituted uniformly with some well formed formula $P \in \wffs$.
+    A set of propositions $\mathcal E \subseteq \wffs$ may allow us to infer $\mathcal E \infers P$ a proposition $P \in \wffs$. The propositions of $\mathcal E$ are known as premises whereas $P$ is said to be a syntactic consequence of $\mathcal E$.
 
-    The resulting proposition is known as an instance of the formula $F = \varphi(\mathcal E)$ where $\mathcal E \subset \wffs$ enumerates the substituting propositions in order of substitution.
+    The deductive closure $\partial \mathcal E$ contains all syntactic consequences of the set such that $\mathcal E \infers P$ only if $P \in \partial\mathcal E$. The set $\mathcal E$ may have the following properties.
+    \begin{enumerate}[
+            labelindent=\parindent,
+            before={
+                    \renewcommand\makelabel[1]{(##1).}
+                }
+        ]
+        \item[deductively closed] $\mathcal E = \partial\mathcal E$
+        \item[consistent] if $P \in \partial\mathcal E$ then $\neg P \notin \partial\mathcal E$
+        \item[trivial] $\partial\mathcal E = \wffs$
+    \end{enumerate}
+
+    An extension of the propositional alphabet $\beta^{\mathord\vdash} = \beta \cup \setsm{\mathord\vdash}$ allows the inference symbol $\mathord\vdash$ to act on any finite set of propositions to compose an inferential expression $I \in \wffs^{\mathord\vdash}$.
+
+    A propositional variable may substitute uniformly $\eta = \iota(p \setminus P)$ for a proposition in an inferential formula $\iota, \eta \in \Phi^{\mathord\vdash}$ where $\wffs^{\mathord\vdash} \subset \Phi^{\mathord\vdash}$ and $\wffs^{\mathord\vdash}$ expressible from $\phi^{\mathord\vdash} = \phi \cup \setsm{\mathord\vdash} = \beta^{\mathord\vdash} \cup \setsm{\mathrm p}$.
+
+    A pure inferential formula has no atomic propositions in its scope.
+
+    An inferential expression is an instance of an inferential formula if it follows from uniform substitution of all propositional variables in its scope.
+
+    A rule of inference is a pure inferential formula such that each instance of the formula expresses a valid inference.
 \end{dfn}
 
-Note that only a formula with no instance of any propositional variable is well formed.
+Note that not every inferential expression is a valid inference, nor every inferential formula a rule of inference. However, postulating certain properties and rules of inference allows us to determine all rules of inference. Foundational properties and rules will be superscribed with a dagger $\dag$.
 
-We have used formulas before to define logical operators.
-Now we can use them to express the logical structure shared by all instances of a formula.
+The first property ensures that inference is structural, and that no set of propositions is privileged.
 
-The set of all formulas shall be denoted $\Phi$.
+\begin{prop}[Universality]
+    If $\mathcal E \infers P$ then $\mathcal E(Q \setminus a) \infers P(Q \setminus a)$ where $Q$ is any proposition and $a$ any atomic proposition.
+\end{prop}
 
-Different formulas may contain instances of the same propositional variable.
-
-\begin{dfn}
-    An instance $\varLambda(\mathcal E)$ of a set of formulas $\varLambda \in \Phi$ follows from substitution of all propositional variables uniformly over the set $\varLambda(\mathcal E)_i = \varLambda_i(\mathcal E)$.
-\end{dfn}
-
-\begin{dfn}
-    A set of propositions $\mathcal E \subseteq \wffs$ may allow us to infer $\mathcal E \infers P$ a proposition $P$.
-
-    In that case the propositions of $\mathcal E$ are known as premises whereas $P$ is said to be a syntactic consequence.
-
-    A rule of inference $\Lambda \infers \kappa$ relates a finite set of formulas $(\varLambda \cup \setsm \kappa) \subset \Phi$ such that $\varLambda(\mathcal E) \infers \kappa(\mathcal E)$ for every instance $(\varLambda \cup \setsm \kappa)(\mathcal E)$.
-
-    Every inference is an instance of some rule of inference. This ensures that inference is structural.
-\end{dfn}
-
-\begin{dfn}
-    The deductive closure $\partial \mathcal E$ of a set of propositions $\mathcal E \subseteq \wffs$ contains all syntactic consequences of the set such that $\mathcal E \infers P$ only if $P \in \partial\mathcal E$.
-
-    The set is deductively closed if $\mathcal E = \partial\mathcal E$.
-
-    The set is consistent if there is no $P \in \partial\mathcal E$ such that also $\neg P \in \partial\mathcal E$.
-
-    The set is trivial if $\partial\mathcal E = \wffs$.
-
-    A set which is consistent or not trivial is maximally so if its extension $\mathcal E \cup \setsm P$ with any $P \notin \mathcal E$ is no longer so.
-\end{dfn}
+Equivalently, every inference is an instance of some rule of inference, namely by uniform substitution of each atom in the scope of the inference with a variable such that each variable substitutes for only one atom.
 
 \begin{prop}[Transitivity]
     If $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.

@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1716848028.34516 "c:/Users/olesj/source/repos/logos/meta/meta.tex" "meta.pdf" "meta" 1716848028.89214 0
+["pdflatex"] 1717285335.81721 "c:/Users/olesj/source/repos/logos/meta/meta.tex" "meta.pdf" "meta" 1717285336.93088 0
   "C:/Users/olesj/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1714299699 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/olesj/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1709384455 24225045 41672a5eda28e3d320feb236aa748328 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -60,9 +60,9 @@
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/mathtools/mathtools.sty" 1656514886 62269 5c1837a5bc5db4c0d255eedc225ca44b ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/mathtools/mhsetup.sty" 1656514886 5582 a43dedf8e5ec418356f1e9dfe5d29fc3 ""
   "C:/Users/olesj/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1700599895 10214 547fd4d29642cb7c80bf54b49d447f01 ""
-  "c:/Users/olesj/source/repos/logos/meta/meta.tex" 1716848027 36701 e62421e5f8d227a80731f02c9e63f44e ""
-  "meta.aux" 1716848028 1328 13f6e0e2dfd904bd864964a609bbeca6 "pdflatex"
-  "meta.tex" 1716848027 36701 e62421e5f8d227a80731f02c9e63f44e ""
+  "c:/Users/olesj/source/repos/logos/meta/meta.tex" 1717285334 38519 adfdcb57ee3f76fd3b6033ca0a4e294a ""
+  "meta.aux" 1717285336 1329 499e27a92be1f95618f34cda0245e743 "pdflatex"
+  "meta.tex" 1717285334 38519 adfdcb57ee3f76fd3b6033ca0a4e294a ""
   (generated)
   "meta.aux"
   "meta.log"
