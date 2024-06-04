@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  2 JUN 2024 01:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.3.2)  4 JUN 2024 17:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -156,19 +156,17 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 )
 \c@axm=\count281
 \c@prop=\count282
-\c@subprop=\count283
-\c@frule=\count284
-\c@subrule=\count285
-\c@op=\count286
-\c@quant=\count287
-\c@thm=\count288
-\c@subthm=\count289
-\c@lmm=\count290
-\c@crl=\count291
-\c@dfn=\count292
+\c@frule=\count283
+\c@op=\count284
+\c@quant=\count285
+\c@thm=\count286
+\c@subthm=\count287
+\c@lmm=\count288
+\c@crl=\count289
+\c@dfn=\count290
  (C:\Users\olesj\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count293
+\l__color_backend_stack_int=\count291
 \l__pdf_internal_box=\box56
 ) (meta.aux)
 \openout1 = `meta.aux'.
@@ -208,16 +206,16 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
  (C:\Users\olesj\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count294
+\scratchcounter=\count292
 \scratchdimen=\dimen163
 \scratchbox=\box57
-\nofMPsegments=\count295
-\nofMParguments=\count296
+\nofMPsegments=\count293
+\nofMParguments=\count294
 \everyMPshowfont=\toks30
-\MPscratchCnt=\count297
+\MPscratchCnt=\count295
 \MPscratchDim=\dimen164
-\MPnumerator=\count298
-\makeMPintoPDFobject=\count299
+\MPnumerator=\count296
+\makeMPintoPDFobject=\count297
 \everyMPtoPDFconversion=\toks31
 ))) (C:\Users\olesj\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -235,29 +233,29 @@ Chapter 1
 [3
 
 
-] [4] [5] [6] [7] [8] [9] [10] [11] [12]
+] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14
+
+
+]
 Chapter 2
-[13
-
-
-] [14] [15] [16] (meta.aux)
+[15] [16] [17] [18] (meta.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4052 strings out of 474486
- 60344 string characters out of 5743756
+ 4046 strings out of 474486
+ 60288 string characters out of 5743756
  1942542 words of memory out of 5000000
- 26160 multiletter control sequences out of 15000+600000
+ 26154 multiletter control sequences out of 15000+600000
  564701 words of font info for 62 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 71i,11n,79p,557b,389s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 71i,11n,79p,804b,389s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/olesj/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on meta.pdf (16 pages, 211192 bytes).
+Output written on meta.pdf (18 pages, 217962 bytes).
 PDF statistics:
- 124 PDF objects out of 1000 (max. 8388607)
+ 130 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

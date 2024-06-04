@@ -31,9 +31,9 @@
 
 \newtheorem{axm}{Axiom}[chapter]
 \newtheorem{prop}{Property}[section]
-\newtheorem{subprop}{Property}[subsection]
+\newtheorem{subprop}[prop]{Property}
 \newtheorem{frule}{Rule}[chapter]
-\newtheorem{subrule}{Rule}[subsection]
+\newtheorem{subrule}[frule]{Rule}
 \newtheorem{op}{Operator}[chapter]
 
 \newtheorem{quant}{Quantifier}[chapter]
@@ -120,7 +120,7 @@ The set of all propositions is $\mathcal W$.
 
     A formula expresses the logical structure of a proposition. We define the set $\Phi$ of all formulas recursively.
 
-    If $\varphi \in \Phi$ is a formula then so is the result of uniform substitution $\varphi(p \setminus P) \in \Phi$ of any proposition $P$ in the scope of $\varphi$ with any variable $p$. Furthermore, $\wffs \subset \Phi$. Note that $\Phi \subset \phi^\omega$. A formula $\varphi \in \Phi$ is said to be well formed only if it is a proposition $\varphi \in \wffs$.
+    If $\varphi \in \Phi$ is a formula then so is the result of uniform substitution $\varphi(p \setminus P) \in \Phi$ of any proposition $P$ in the scope of $\varphi$ with a propositional variable $p$. Furthermore, $\wffs \subset \Phi$. Note that $\Phi \subset \phi^\omega$. A formula $\varphi \in \Phi$ is said to be well formed only if it is a proposition $\varphi \in \wffs$.
 
     A proposition $P$ is said to be an instance of a formula $\varphi$ only if it follows from uniform substitution $P = \varphi(P_i \setminus p_i)^n$ of all propositional variables $p_{i \leq n}$ in the scope of $\varphi$ with some proposition $P_i$.
 \end{dfn}
@@ -140,9 +140,9 @@ The set of all propositions is $\mathcal W$.
         \item[trivial] $\partial\mathcal E = \wffs$
     \end{enumerate}
 
-    An extension of the propositional alphabet $\beta^{\mathord\vdash} = \beta \cup \setsm{\mathord\vdash}$ allows the inference symbol $\mathord\vdash$ to act on any finite set of propositions to compose an inferential expression $I \in \wffs^{\mathord\vdash}$.
+    The alphabet $\beta^{\mathord\vdash} = \beta \cup \setsm{\mathord\vdash}$ allows the inference symbol $\mathord\vdash$ to act on any finite set of propositions to compose an inferential expression $I \in \wffs^{\mathord\vdash}$.
 
-    A propositional variable may substitute uniformly $\eta = \iota(p \setminus P)$ for a proposition in an inferential formula $\iota, \eta \in \Phi^{\mathord\vdash}$ where $\wffs^{\mathord\vdash} \subset \Phi^{\mathord\vdash}$ and $\wffs^{\mathord\vdash}$ expressible from $\phi^{\mathord\vdash} = \phi \cup \setsm{\mathord\vdash} = \beta^{\mathord\vdash} \cup \setsm{\mathrm p}$.
+    A propositional variable may substitute uniformly $\eta = \iota(p \setminus P)$ for a proposition in an inferential formula $\iota, \eta \in \Phi^{\mathord\vdash}$ where $\wffs^{\mathord\vdash} \subset \Phi^{\mathord\vdash}$. Note that $\Phi^{\mathord\vdash}$ is expressible from $\phi^{\mathord\vdash} = \phi \cup \setsm{\mathord\vdash} = \beta^{\mathord\vdash} \cup \setsm{\mathrm p}$.
 
     A pure inferential formula has no atomic propositions in its scope.
 
@@ -151,7 +151,7 @@ The set of all propositions is $\mathcal W$.
     A rule of inference is a pure inferential formula such that each instance of the formula expresses a valid inference.
 \end{dfn}
 
-Note that not every inferential expression is a valid inference, nor every inferential formula a rule of inference. However, postulating certain properties and rules of inference allows us to determine all rules of inference. Foundational properties and rules will be superscribed with a dagger $\dag$.
+Note that not every inferential expression is a valid inference, nor every inferential formula a rule of inference. However, postulating certain properties and rules of inference allows us to determine all rules of inference.
 
 The first property ensures that inference is structural, and that no set of propositions is privileged.
 
@@ -610,7 +610,9 @@ We say that $P^*$ is the case only if $P^* = 1$. Only in that case is $P$ true.
 \begin{dfn}
     A model is a valuation map $v: \wffs \longrightarrow \setsm{0,1}$ that assigns a truth value $v(P) \in \setsm{0,1}$ to each proposition $P \in \wffs$.
 
-    Support for $(\mathcal E, P)$ by a model $v$ means that if all $E \in \mathcal E$ assign to $v(E) = 1$, then $v(P) = 1$. Furthermore any $v$ is:
+    A model $v$ supports $(\mathcal E, P)$: if no $E \in \mathcal E$ assigns to $v(E) = 0$ then $v(P) = 1$.
+
+    Furthermore the following holds for any models $v, w$:
     \begin{description}[
             labelindent=\parindent,
             before={
@@ -618,13 +620,13 @@ We say that $P^*$ is the case only if $P^* = 1$. Only in that case is $P$ true.
                 }
         ]
         \item [inferential] If $\mathcal E \infers P$ then $v$ supports $(\mathcal E, P)$.
-        \item [regular with respect to negation] If $v(P) = v(Q)$ then $v(\neg P) = v(\neg Q)$.
+        \item [regular with respect to negation] If $v(P) = w(Q)$ then $v(\neg P) = w(\neg Q)$.
         \item [not trivial] There is at least one proposition $P$ such that $v(P) = 0$.
     \end{description}
     We may consider the set of all models $\mathbf M$.
 \end{dfn}
 
-The positive domain $v^{-1}(1) \subseteq \wffs$ of a valuation map $v$ contains all propositions $P$ for which $v(P) = 1$. Clearly the model is determined by the positive domain alone. A model $v$ supports $(\mathcal E, P)$ only if $P \in v^{-1}(1)$ if $\mathcal E \subseteq v^{-1}(1)$. We can see that a valuation map is inferential only if the positive domain is deductively closed.
+The positive domain $v^{-1}(1) \subseteq \wffs$ of a valuation map $v$ contains all propositions $P$ for which $v(P) = 1$. Clearly a model is determined by the positive domain alone. A model $v$ supports $(\mathcal E, P)$ only if $P \in v^{-1}(1)$ if $\mathcal E \subseteq v^{-1}(1)$. We can see that a valuation map is inferential only if the positive domain is deductively closed.
 
 \begin{dfn}
     A proposition is a semantic consequence $\mathcal E \valids P$ of a set of premises only if all models $v \in \mathbf M$ support $(\mathcal E, P)$.
@@ -637,6 +639,16 @@ The positive domain $v^{-1}(1) \subseteq \wffs$ of a valuation map $v$ contains 
 
     The inferential system is semantically sound. The semantics are adequate for the inferential system.
 \end{lmm}
+
+\begin{dfn}
+    A truth function $f \in F^n$ of order $n \in \mathbb N$ maps $n$-tuples of truth values to a single truth value $F^n = \left\{ f \in  \setsm{0,1}^{n+1} \,\bigg|\, f: \setsm{0,1}^n \longrightarrow \setsm{0,1} \right\}$ such that $F = \bigcup_{n \in \mathbb N} F^n$ is the set of all truth functions.
+
+    A logical operator $o$ of order $n$ may be characterised semantically $o \equiv f$ by a truth function $f \in F^n$ such that in every model $v$ the valuation of $P = o(P^n)$ is mapped from its components $v(P) = f(v(P^n))$ where $v(P^n)_i = v(P_i)$ for all $P_i \in P^n$.
+
+    A set of logical operators $O$ is functionally complete: the closure under function composition $\partial_\circ O_F$ of the truth functions that characterise its operators $O_F = \left\{ f \in F \,|\, f \equiv o \text{\;for some\;} o \in O \right\}$ is the set of all truth functions $\partial_\circ O_F = F$.
+\end{dfn}
+
+Note that regularity with respect to negation is equivalent to the characterisation of negation by a truth function.
 
 \begin{prop}
     The following properties characterise the negation.
@@ -653,31 +665,58 @@ The positive domain $v^{-1}(1) \subseteq \wffs$ of a valuation map $v$ contains 
     \begin{proof}
         A model must be consistent since it may not be trivial.
 
-        Consider now that $\theorem T$ where $T = a \then \neg\neg a$. Clearly $v(T) = 1$ so $v(\neg T) = 0$ by consistency. However, $\theorem \neg\neg T$ from which $v(\neg P) = 1$ if $v(P) = 0$ by negational regularity.
+        Consider now any theorem $\theorem T$. Clearly $v(T) = 1$ so $v(\neg T) = 0$ by consistency. However, $\theorem \neg\neg T$ from which $v(\neg P) = 1$ if $v(P) = 0$ by negational regularity.
     \end{proof}
 \end{prop}
 
-A consistent map $v$ is not trivial. If it is also complete, it is regular with respect to negation. Hence, an inferential valuation map is regular with respect to negation and not trivial only if it is consistent and complete.
+A consistent map $v$ is not trivial. If it is also complete, it is regular with respect to negation. Hence, an inferential valuation map is regular with respect to negation and not trivial if it is consistent and complete.
 
-From paraconsistent inferential systems we may derive inferential maps which are not trivial yet inconsistent. Moreover, regularity with respect to negation implies that a single contradiction $v(P) = 1 = v(\neg P)$ of some $P$ supports the contradiction $v(\neg Q) = 1$ of each $Q$ as soon as $v(Q) = 1$. Therefore neither consistency nor regularity with respect to negation are a defining property of paraconsistent semantics. Instead a model is required to be complete and not trivial.
+Note that we relied on ex falso quod libet to show the consistency of an inferential map which is not trivial. This rule does not hold in paraconsistent inferential systems. Moreover, regularity with respect to negation implies that a single contradiction $v(P) = 1 = v(\neg P)$ of some $P$ supports the contradiction $v(\neg Q) = 1$ of each $Q$ as soon as $v(Q) = 1$.
+
+Therefore neither consistency nor regularity with respect to negation are a defining property of paraconsistent semantics. Instead a model is required to be complete and not trivial.
 
 \begin{prop}
-    The following properties characterise the implication.
-    \begin{description}[
-            labelindent=\parindent,
-            before={
-                    \renewcommand\makelabel[1]{(##1).}
-                }
-        ]
-        \item[transferrable] If $v(P \then Q) = 1$ then if $v(P) = 1$ then $v(Q) = 1$
-        \item[decidable] $v(P \then Q) = 1$ if $v(Q) = 1$ if $v(P) = 1$
-    \end{description}
+    The following characterises the implication.
+    $$v(P \then Q) = 1 \text{\;only if\;} v(P) = 0\text{\;or\;}v(Q) = 1$$
     \begin{proof}
-        By modus ponens transferribility holds for any deductively closed set.
+        Suppose $v(Q) = 1$ then $v(P \then Q) = 1$ given materiality of implication. Should $v(P) = 0$ then $v(\neg P) = 1$ by completeness so $v(P \then Q) = 1$ by ex contradictio quod libet.
 
-        Suppose now $v(Q) = 1$ then $v(P \then Q) = 1$ given materiality of implication. Should $v(P) = 0$ then $v(\neg P) = 1$ by completeness and therefore $v(P \then Q) = 1$ by ex contradictio quod libet.
+        Conversely, if $v(P \then Q) = 1 = v(P)$ then $v(Q) = 1$ by modus ponens.
     \end{proof}
 \end{prop}
+
+Note that we relied on ex contradictio quod libet to show the implicational completeness of an inferential map.
+
+\begin{lmm}
+    If $F^2 \subseteq \partial_\circ O_F$ then $\partial_\circ O_F = F$.
+    \begin{proof}
+        $F^2$ contains every binary function independent of its second argument, from which we compose every unary function $F^1$ by passing the same argument twice.
+        Suppose now $F^n \subseteq \partial_\circ O_F$ where $2 \leq n$ and consider any function $f \in F^{n+1}$. For any $b^{n+1} \in \setsm{0,1}^{n+1}$ restricted to $b^n = [b^{n+1}]_1^n \in \setsm{0,1}^n$ we may find some function $s$ such that $f(\dots b^n, a) = s(a)$ depends only on $a \in \setsm{0,1}$.
+        \begin{enumerate}
+            \item $g(b^{n+1}) = 1$ only if $f(\dots b^n, 0) = f(\dots b^n, 1)$:
+
+                  $s$ is constant.
+            \item $h(b^{n+1}) = 1$ only if $f(\dots b^n, 1) = 1$:
+
+                  $s$ is veracious.
+            \item $l(g, a) = 0$ only if $g = a = 0$.
+
+                  Always transmitting $a = 1$ we transmit $a = 0$ only if $s$ depends on its argument $a$.
+            \item $k(l, h) = 1$ only if $l = h$
+
+                  We return $1$ only if $s$ is veracious and: $a = 1$ or $s$ is constant, or if $s$ is mendacious and dependent and $a = 0$.
+        \end{enumerate}
+
+        We compose $f(\dots b^n, a) = k\left( l\left( g(\dots b^n, a), a \right), h(\dots b^n, a) \right)$.
+    \end{proof}
+\end{lmm}
+
+\begin{thm}
+    The set of operators $\setsm{\mathord{\neg}, \mathord{\then}}$ is functionally complete.
+    \begin{proof}
+        We may formulate $c(p, q) = \neg(p \then \neg q)$ which is true only if both $p, q$ are. We may compose these with always true $t(p) = p \then p$ to obtain selection functions $s_1 = c(p, t(q)), s_2 = c(t(p), q)$ of the first and second argument. Either of these composed with always false $f(p) = \neg t(p)$ or with $t(p)$ in the selected argument is always false or true respectively giving $t(p,q) = s_1(t(p), q), f(p,q) = s_1(f(p), q)$. The selection functions may also be inverted by means of negation. The conjunction may now express any truth function that permits only one ordered pair of truth values, as well as its inverse which permits three such pairs. Consider now $e = c(\neg(c(p, q)), \neg(c(\neg p, \neg q)))$.
+    \end{proof}
+\end{thm}
 
 \begin{dfn}
     A set of propositions $\mathcal E \subseteq \wffs$ is saturable only if there is a model $v$ such that $v(P) = 1$ if $P \in \mathcal E$.
@@ -687,8 +726,10 @@ From paraconsistent inferential systems we may derive inferential maps which are
     A model set is deductively closed and maximally not trivial.
 \end{dfn}
 
+Note that any deductively closed set which is maximally consistent is a model set if our logic permits it.
+
 \begin{lmm}
-    A deductively closed set which is maximally not trivial is also complete and decidable.
+    A model set determines a valuation map which is complete with respect to negation and implication.
     \begin{proof}
         Consider a map $v: \wffs \longrightarrow \setsm{0,1}$ such that $v(P) = 0$ only if $P \notin \mathcal E$ where $\mathcal E$ is a model set.
 
@@ -696,15 +737,14 @@ From paraconsistent inferential systems we may derive inferential maps which are
     \end{proof}
 \end{lmm}
 
-
-Note that a maximally consistent set is maximally not trivial if our logic permits it. In that case decidibility of a deductively closed set already follows from completeness. Evidently the preceding also holds for an extension of paraconsistent semantics with a decidibility clause.
+Note that the preceding also holds for paraconsistent systems.
 
 In any case, a model set determines a model.
 
 \begin{lmm}
     A set that does not prove a proposition $\mathcal E \nvdash P$ is a subset of a model set $\mathcal E \subseteq \Gamma$ that does not contain the proposition $P \notin \Gamma$.
     \begin{proof}
-        Consider $\Gamma_{i+1} = \Delta_i$ if $P \notin \Delta_i$ and $\Gamma_{i+1} = \Gamma_i$ otherwise, where $\Gamma_0 = \mathcal E$ and $\Delta_i = \partial(\Gamma_i \cup \setsm {\wffs_i})$.
+        Consider $\Gamma_{i+1} = \Delta_i$ if $P \notin \Delta_i$ and $\Gamma_{i+1} = \Gamma_i$ otherwise, where $\Delta_i = \partial(\Gamma_i \cup \setsm {\wffs_i})$ with $\wffs_i \in \wffs$ enumerating all well formed formulas and $\Gamma_0 = \partial\mathcal E$.
         Evidently $\Gamma = \bigcup_{i \in \mathbb N} \Gamma_i$ is deductively closed, since for any finite $\mathcal D \subset \Gamma$ also $\partial\mathcal D \subset \Gamma_i$ for some $i$.
 
         We can see that $P \then Q \in \Gamma$ since $\wffs_i = P \then Q$ for some $i$ so lest Peirce's law come to effect $\Gamma_i \cup \setsm{P \then Q} \nvdash P$. Moreover, if $R \notin \Gamma$ then $\Gamma_i \cup \setsm R \infers P$ for some $i$ so $\Gamma \cup \setsm R$ is trivial.
