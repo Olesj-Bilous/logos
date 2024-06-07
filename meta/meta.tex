@@ -128,7 +128,11 @@ The set of all propositions is $\mathcal W$.
 \begin{dfn}
     A set of propositions $\mathcal E \subseteq \wffs$ may allow us to infer $\mathcal E \infers P$ a proposition $P \in \wffs$. The propositions of $\mathcal E$ are known as premises whereas $P$ is said to be a syntactic consequence of $\mathcal E$.
 
-    The deductive closure $\partial \mathcal E$ contains all syntactic consequences of the set such that $\mathcal E \infers P$ only if $P \in \partial\mathcal E$. The set $\mathcal E$ may have the following properties.
+    The deductive closure $\partial \mathcal E$ contains all syntactic consequences of the set such that $\mathcal E \infers P$ only if $P \in \partial\mathcal E$.
+
+    A system that determines all valid inferences is known as an inference system. Given a set of propositions considered axioms, an inference system suffices to produce their deductive closure, known as a theory, where each syntactic consequence is known as a theorem.
+
+    A set of propositions $\mathcal E$ may have the following properties with respect to its deductive closure $\partial\mathcal E$.
     \begin{enumerate}[
             labelindent=\parindent,
             before={
@@ -151,9 +155,9 @@ The set of all propositions is $\mathcal W$.
     A rule of inference is a pure inferential formula such that each instance of the formula expresses a valid inference.
 \end{dfn}
 
-Note that not every inferential expression is a valid inference, nor every inferential formula a rule of inference. However, postulating certain properties and rules of inference allows us to determine all rules of inference.
+Note that not every inferential expression is a valid inference, nor every inferential formula a rule of inference. However, postulating or deriving certain properties and rules of inference allows us to determine all valid inferences.
 
-The first property ensures that inference is structural, and that no set of propositions is privileged.
+The first such property ensures that inference is structural, so no set of propositions is privileged.
 
 \begin{prop}[Universality]
     If $\mathcal E \infers P$ then $\mathcal E(Q \setminus a) \infers P(Q \setminus a)$ where $Q$ is any proposition and $a$ any atomic proposition.
@@ -641,14 +645,14 @@ The positive domain $v^{-1}(1) \subseteq \wffs$ of a valuation map $v$ contains 
 \end{lmm}
 
 \begin{dfn}
-    A truth function $f \in F^n$ of order $n \in \mathbb N$ maps $n$-tuples of truth values to a single truth value $F^n = \left\{ f \in  \setsm{0,1}^{n+1} \,\bigg|\, f: \setsm{0,1}^n \longrightarrow \setsm{0,1} \right\}$ such that $F = \bigcup_{n \in \mathbb N} F^n$ is the set of all truth functions.
+    A truth function $f \in F^n$ of order $n \in \mathbb N$ maps $n$-tuples of truth values to a single truth value $F^n = \left\{ f \subset \setsm{0,1}^{n+1} \,\bigg|\, f: \setsm{0,1}^n \longrightarrow \setsm{0,1} \right\}$ such that $F = \bigcup_{n \in \mathbb N} F^n$ is the set of all truth functions.
 
     A logical operator $o$ of order $n$ may be characterised semantically $o \equiv f$ by a truth function $f \in F^n$ such that in every model $v$ the valuation of $P = o(P^n)$ is mapped from its components $v(P) = f(v(P^n))$ where $v(P^n)_i = v(P_i)$ for all $P_i \in P^n$.
-
-    A set of logical operators $O$ is functionally complete: the closure under function composition $\partial_\circ O_F$ of the truth functions that characterise its operators $O_F = \left\{ f \in F \,|\, f \equiv o \text{\;for some\;} o \in O \right\}$ is the set of all truth functions $\partial_\circ O_F = F$.
 \end{dfn}
 
 Note that regularity with respect to negation is equivalent to the characterisation of negation by a truth function.
+
+Furthermore, since the codomain of any truth function is binary, the characterisation of any operator $o$ may be defined by an equivalence that holds for all models $v$ between $v(o(P^n)) = 1$ and certain conditions on $v(P^n)$.
 
 \begin{prop}
     The following properties characterise the negation.
@@ -671,7 +675,7 @@ Note that regularity with respect to negation is equivalent to the characterisat
 
 A consistent map $v$ is not trivial. If it is also complete, it is regular with respect to negation. Hence, an inferential valuation map is regular with respect to negation and not trivial if it is consistent and complete.
 
-Note that we relied on ex falso quod libet to show the consistency of an inferential map which is not trivial. This rule does not hold in paraconsistent inferential systems. Moreover, regularity with respect to negation implies that a single contradiction $v(P) = 1 = v(\neg P)$ of some $P$ supports the contradiction $v(\neg Q) = 1$ of each $Q$ as soon as $v(Q) = 1$.
+Note that we relied on ex falso quod libet to show the consistency of an inferential map which is not trivial. This rule does not hold in paraconsistent inferential systems. Nonetheless, regularity with respect to negation requires that if some model $w$ supports some contradiction $w(Q) = 1 = w(\neg Q)$ then $v(P) = 1$ immediately implies $v(\neg P) = 1$ for any proposition $P$ in all models $v$.
 
 Therefore neither consistency nor regularity with respect to negation are a defining property of paraconsistent semantics. Instead a model is required to be complete and not trivial.
 
@@ -687,34 +691,44 @@ Therefore neither consistency nor regularity with respect to negation are a defi
 
 Note that we relied on ex contradictio quod libet to show the implicational completeness of an inferential map.
 
+\begin{dfn}
+    A set of logical operators $O$ is functionally complete: the closure under function composition $\partial_\circ O_F$ of the truth functions that characterise its operators $O_F = \left\{ f \in F \,|\, f \equiv o \text{\;for some\;} o \in O \right\}$ is the set of all truth functions $\partial_\circ O_F = F$.
+\end{dfn}
+
 \begin{lmm}
     If $F^2 \subseteq \partial_\circ O_F$ then $\partial_\circ O_F = F$.
     \begin{proof}
         $F^2$ contains every binary function independent of its second argument, from which we compose every unary function $F^1$ by passing the same argument twice.
         Suppose now $F^n \subseteq \partial_\circ O_F$ where $2 \leq n$ and consider any function $f \in F^{n+1}$. For any $b^{n+1} \in \setsm{0,1}^{n+1}$ restricted to $b^n = [b^{n+1}]_1^n \in \setsm{0,1}^n$ we may find some function $s$ such that $f(\dots b^n, a) = s(a)$ depends only on $a \in \setsm{0,1}$.
         \begin{enumerate}
-            \item $g(b^{n+1}) = 1$ only if $f(\dots b^n, 0) = f(\dots b^n, 1)$:
+            \item $g(b^n) = 1$ only if $f(\dots b^n, 0) = f(\dots b^n, 1)$:
 
                   $s$ is constant.
-            \item $h(b^{n+1}) = 1$ only if $f(\dots b^n, 1) = 1$:
+            \item $h(b^n) = 1$ only if $f(\dots b^n, 1) = 1$:
 
                   $s$ is veracious.
             \item $l(g, a) = 0$ only if $g = a = 0$.
 
-                  Always transmitting $a = 1$ we transmit $a = 0$ only if $s$ depends on its argument $a$.
+                  We transmit $0$ only if $a = 0$ and $s$ depends on its argument $a$.
             \item $k(l, h) = 1$ only if $l = h$
 
-                  We return $1$ only if $s$ is veracious and: $a = 1$ or $s$ is constant, or if $s$ is mendacious and dependent and $a = 0$.
+                  We return $1$ only if the veracity of $s$ is equivalent to the constancy of $s$ or the positivity of $a = 1$.
         \end{enumerate}
 
-        We compose $f(\dots b^n, a) = k\left( l\left( g(\dots b^n, a), a \right), h(\dots b^n, a) \right)$.
+        We compose $k\left( l\left( g(b^n), a \right), h(b^n) \right) = f(\dots b^n, a)$.
     \end{proof}
 \end{lmm}
 
 \begin{thm}
     The set of operators $\setsm{\mathord{\neg}, \mathord{\then}}$ is functionally complete.
     \begin{proof}
-        We may formulate $c(p, q) = \neg(p \then \neg q)$ which is true only if both $p, q$ are. We may compose these with always true $t(p) = p \then p$ to obtain selection functions $s_1 = c(p, t(q)), s_2 = c(t(p), q)$ of the first and second argument. Either of these composed with always false $f(p) = \neg t(p)$ or with $t(p)$ in the selected argument is always false or true respectively giving $t(p,q) = s_1(t(p), q), f(p,q) = s_1(f(p), q)$. The selection functions may also be inverted by means of negation. The conjunction may now express any truth function that permits only one ordered pair of truth values, as well as its inverse which permits three such pairs. Consider now $e = c(\neg(c(p, q)), \neg(c(\neg p, \neg q)))$.
+        Any $f \in F^2$ has a positive domain which permits at most $|f^{-1}(1)| \leq 4$ pairs of binary values.
+
+        The function characterising the implication $m(p,q) \equiv p \then q$ permits three such pairs, yet both of its arguments, each of which it depends on, may be inverted independently by means of the negation $n(p) \equiv \neg p$ to compose any fully dependent function $g \in F^2$ of positive order $|g^{-1}(1)| = 3$, of which there are $4$.
+
+        Any such function may then be inverted to obtain the fully dependent functions of positive order $1$, among which the conjunction $c(p, q) = n(m(p, n(q))) \equiv \neg(p \then \neg q)$. Conjugating converses $e = c(m(p, q), m(q, p)) \equiv \neg((p \then q) \then \neg(q \then p))$ we may complete the fully dependent functions of positive order $2$ by singular inversion $n(e(p,q))$.
+
+        Passing constant functions $t(p) = m(p, p) = 1 \equiv p \then p$ or $l(p) = n(t(p)) = 0 \equiv \neg(p\then p)$ to any argument eliminates the dependency on the argument. Note that the positive order of a partially independent function must be divisible by $2$, lest there be some value for which the function depends on the eliminated variable. Passing $t$ to either argument of $e$ gives $2$ selection functions, both of which are distinctly invertible, counting the expected total of $16 = |F^2| = |\setsm{0,1}|^{|\setsm{0,1}|^2}$.
     \end{proof}
 \end{thm}
 
@@ -729,7 +743,7 @@ Note that we relied on ex contradictio quod libet to show the implicational comp
 Note that any deductively closed set which is maximally consistent is a model set if our logic permits it.
 
 \begin{lmm}
-    A model set determines a valuation map which is complete with respect to negation and implication.
+    A model set determines an inferential map which is complete with respect to negation and implication.
     \begin{proof}
         Consider a map $v: \wffs \longrightarrow \setsm{0,1}$ such that $v(P) = 0$ only if $P \notin \mathcal E$ where $\mathcal E$ is a model set.
 
@@ -747,9 +761,9 @@ In any case, a model set determines a model.
         Consider $\Gamma_{i+1} = \Delta_i$ if $P \notin \Delta_i$ and $\Gamma_{i+1} = \Gamma_i$ otherwise, where $\Delta_i = \partial(\Gamma_i \cup \setsm {\wffs_i})$ with $\wffs_i \in \wffs$ enumerating all well formed formulas and $\Gamma_0 = \partial\mathcal E$.
         Evidently $\Gamma = \bigcup_{i \in \mathbb N} \Gamma_i$ is deductively closed, since for any finite $\mathcal D \subset \Gamma$ also $\partial\mathcal D \subset \Gamma_i$ for some $i$.
 
-        We can see that $P \then Q \in \Gamma$ since $\wffs_i = P \then Q$ for some $i$ so lest Peirce's law come to effect $\Gamma_i \cup \setsm{P \then Q} \nvdash P$. Moreover, if $R \notin \Gamma$ then $\Gamma_i \cup \setsm R \infers P$ for some $i$ so $\Gamma \cup \setsm R$ is trivial.
+        We can see that $P \then Q \in \Gamma$ for any $Q$ since $\wffs_i = P \then Q$ for some $i$ so lest Peirce's law come to effect $\Gamma_i \cup \setsm{P \then Q} \nvdash P$. Moreover, if $R \notin \Gamma$ then $\Gamma_i \cup \setsm R \infers P$ for some $i$ so $\Gamma \cup \setsm R$ is trivial.
 
-        Alternatively, if $\Gamma_0 = \mathcal E \cup \setsm {\neg P}$ is inconsistent we have $\mathcal E \infers P$ by contradiction. Hence $\Gamma_0$ is consistent. We may take $\Gamma_{i+1} = \Delta_i$ if $\Delta_i$ is consistent. By construction $\Gamma$ is maximally consistent. This proof only works if inconsistency implies triviality. It also relies on the consistency of $P \notin \Gamma$.
+        Alternatively, if $\Gamma_0 = \mathcal E \cup \setsm {\neg P}$ is inconsistent we have $\mathcal E \infers P$ by contradiction. Hence $\Gamma_0$ is consistent. We may take $\Gamma_{i+1} = \Delta_i$ only if $\Delta_i$ is consistent. By construction $\Gamma$ is maximally consistent. This proof only works if inconsistency implies triviality. It also relies on the consistency of $P \notin \Gamma$.
     \end{proof}
 \end{lmm}
 
@@ -876,7 +890,12 @@ This is clearly a weaker form of instantiation which avoids inferring an actual 
         \item $r^n: \mathbf P^n \longrightarrow \wp(\mathrm U^n)$.
               Each predicate $P$ of order $n$ is assigned a set $r^n(P)$ of $n$-tuples of objects.
     \end{enumerate}
-    We may note $u(c^n)$ where $u(c^n)_i = u(c_i)$ for all $c_i \in c^n \subset \mathbf c$, and $r(P) = r^n(P)$ for $P \in \mathbf P^n$.
+
+    The constant codomain $u(\mathbf c) \subseteq \mathrm U$ is the set of all objects $\mathrm o \in \mathrm U$ which were assigned $\mathrm o = u(c) \in u(\mathbf c)$ from some constant $c \in \mathbf c$.
+
+    Each constant $c_i \in c^n$ in an $n$-tuple $c^n \in \mathbf c^n$ may be assigned $u(c_i) = u(c^n)_i$ to form an $n$-tuple $u(c^n) \in u(\mathbf c)^n$ from the constant codomain. We agree that $u(\mathbf c)^0 = \setsm{\emptyset}$. Note that $\emptyset \times S = \emptyset$ and $\setsm\emptyset \times S = S$ for any set $S$.
+
+    We may suffice with $r(P) = r^n(P)$ to denote the assignment of a predicate $P \in \mathbf P^n$ of order $n$.
 \end{dfn}
 
 \begin{dfn}
@@ -902,15 +921,12 @@ This is clearly a weaker form of instantiation which avoids inferring an actual 
 \end{dfn}
 
 \begin{dfn}
-    We denote the set of formulas with instances of precisely $n$ distinct constants as $\Phi^n$. Note that $\Phi = \bigcup_{n \in \mathbb N} \Phi^n$.
+    We denote the set of sentences with instances of precisely $n$ distinct constants as $\Phi^n$. Note that $\mathcal S = \bigcup_{n \in \mathbb N} \Phi^n$.
 
-    We define $\mathrm U^0 = \setsm\emptyset$ such that $\wp(\mathrm U^0) = \setsm{\emptyset, \setsm\emptyset}$. Note that $\emptyset \times S = \emptyset$ and $\setsm\emptyset \times S = S$ for any set $S$.
-
-
-    A model $v$ may be interdeterminate with a total assignment $u, R$ such that $R^n \in R$ for each $n \in \mathbb N$ where $R^n: \Phi^n \longrightarrow \wp(\mathrm U^n)$.
+    A model $v$ may be interdeterminate with a total assignment $u, R$ such that $R^n \in R$ for each $n \in \mathbb N$ where $R^n: \Phi^n \longrightarrow \wp(u(\mathbf c)^n)$.
     $$v(\varphi(c^n)) = 1 \text{\;only if\;} u(c^n) \in R(\varphi)$$
     \begin{enumerate}
-        \item $R^n(\neg\varphi) = R^n(\varphi)^C$ where the complement is over $\mathrm U^n$.
+        \item $R^n(\neg\varphi) = R^n(\varphi)^C$ where the complement is over $u(\mathbf c)^n$.
         \item $R^{m+n-k}(\varphi \then \gamma) = \setsm{u \in \mathrm U^{m+n-k} \mathrel\bigg| \begin{aligned}
                            & \left[ u \right]_1^m \in R^m(\neg\varphi)        \\
                           \text{\;or\;}
@@ -919,8 +935,7 @@ This is clearly a weaker form of instantiation which avoids inferring an actual 
               where common constants are arranged from $m-k+1$ to $m$ if any.
 
               We define $R^0(\univ x \varphi(x)) = \setsm\emptyset$.
-        \item If $v(\univ x \varphi(x)) = 1$ then $R^{n+1}(\varphi(c)) = R^n(\univ x \varphi(x)) \times \mathrm U$.
-        \item If $v(\univ x \varphi(x)) = 0$ then $R^{n+1}(\varphi(c)) \subset R^n(\univ x \varphi(x)) \times \mathrm U$.
+        \item $R^n(\univ x \varphi(\dots c^n, x))\\ = \left\{ u^n \in u(\mathbf c)^n \bigg| \text{\;all\;} u\in\mathrm U : (\dots u^n, u) \in R^{n+1}(\varphi(\dots c^n, c)) \right\}$
     \end{enumerate}
 \end{dfn}
 
@@ -931,10 +946,9 @@ This is clearly a weaker form of instantiation which avoids inferring an actual 
         \begin{enumerate}
             \item $v(\neg\varphi) = 1$ only if $v(\varphi) = 0$ only if $u(c^n) \notin R(\varphi)$
             \item Similarly from implicational completeness.
-            \item Evidently all structures $w, (t, r)$ come to universal consensus on a formula $w(\varphi(c)) = 1$ for all constants $c$ only if all objects satisfy it $R(\varphi) = \mathrm U$.
-            \item There must be some object that does not satisfy the formula $q \notin R(\varphi)$ so there must be some structure $w, (t, r)$ assigning some constant $t(c) = q$ such that $w(\varphi(c)) = 0$. Conversely $t(c) \notin R(\varphi)$ if $w(\varphi(c)) = 0$.
+            \item Evidently all structures $w, (t, r)$ come to universal consensus on a formula $w(\varphi(c)) = 1$ for all constants $c$ if all objects satisfy it $R(\varphi) = \mathrm U$.
 
-                  Note that we may nonetheless have $u(c) \in R(\varphi)$ hence $v(\varphi(c)) = 1$ for any $c$.
+                  Conversely, there must be some object $q \in \mathrm U$ that does not satisfy the formula $q \notin R(\varphi)$ so there must be some structure $w, (t, r)$ assigning $t(c) = q$ some constant $c$ such that $w(\varphi(c)) = 0$. This does not preclude $R(\varphi) = u(\mathbf c)$ so nonetheless $v(\varphi(c)) = 1$ for any $c$.
         \end{enumerate}
     \end{proof}
 \end{lmm}
