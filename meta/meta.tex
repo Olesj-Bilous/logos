@@ -100,7 +100,7 @@ The set of all propositions is $\mathcal W$.
     \begin{proof}
         We use the atom symbol $\mathrm a$ and the succession symbol $'$ to denote an atomic proposition for every $n \in \mathbb N$ such that $a_0 = \mathrm a$ and $a_{n+1} = a_n'$.
 
-        We may use the operator symbol $\mathrm o$ and the succession symbol $'$ to denote any operator. Then parentheses $($, $)$ and a comma $,$ allow us to denote components in a composite proposition.
+        We may use the operator symbol $\mathrm o$ and the succession symbol $'$ to denote any operator. Then parentheses $($, $)$ and a comma $,$ allow us to enumerate components in a composite proposition.
     \end{proof}
 \end{thm}
 
@@ -128,9 +128,7 @@ The set of all propositions is $\mathcal W$.
 \begin{dfn}
     A set of propositions $\mathcal E \subseteq \wffs$ may allow us to infer $\mathcal E \infers P$ a proposition $P \in \wffs$. The propositions of $\mathcal E$ are known as premises whereas $P$ is said to be a syntactic consequence of $\mathcal E$.
 
-    The deductive closure $\partial \mathcal E$ contains all syntactic consequences of the set such that $\mathcal E \infers P$ only if $P \in \partial\mathcal E$.
-
-    A system that determines all valid inferences is known as an inference system. Given a set of propositions considered axioms, an inference system suffices to produce their deductive closure, known as a theory, where each syntactic consequence is known as a theorem.
+    The deductive closure $\partial \mathcal E$ of a set $\mathcal E$ contains all syntactic consequences of the set such that $\mathcal E \infers P$ only if $P \in \partial\mathcal E$.
 
     A set of propositions $\mathcal E$ may have the following properties with respect to its deductive closure $\partial\mathcal E$.
     \begin{enumerate}[
@@ -141,33 +139,42 @@ The set of all propositions is $\mathcal W$.
         ]
         \item[deductively closed] $\mathcal E = \partial\mathcal E$
         \item[consistent] if $P \in \partial\mathcal E$ then $\neg P \notin \partial\mathcal E$
+        \item[complete] if $P \notin \partial\mathcal E$ then $\neg P \in \partial\mathcal E$
         \item[trivial] $\partial\mathcal E = \wffs$
     \end{enumerate}
 
-    The alphabet $\beta^{\mathord\vdash} = \beta \cup \setsm{\mathord\vdash}$ allows the inference symbol $\mathord\vdash$ to act on any finite set of propositions to compose an inferential expression $I \in \wffs^{\mathord\vdash}$.
+    A system that determines all valid inferences is known as an inference system. Given a preferred set of propositions considered axioms, an inference system suffices to produce their deductive closure, known as a theory, where each syntactic consequence is known as a theorem.
+
+    Any proposition $T$ that we may infer from the empty set $\theorem T$ is known as a logical theorem.
+\end{dfn}
+
+\begin{dfn}
+    The alphabet $\beta^{\mathord\vdash} = \beta \cup \setsm{\mathord\vdash}$ allows the inference symbol $\mathord\vdash$ to act on any finite set of propositions to compose an inferential expression $I \in \wffs^{\mathord\vdash}$ denoting a potential inference.
 
     A propositional variable may substitute uniformly $\eta = \iota(p \setminus P)$ for a proposition in an inferential formula $\iota, \eta \in \Phi^{\mathord\vdash}$ where $\wffs^{\mathord\vdash} \subset \Phi^{\mathord\vdash}$. Note that $\Phi^{\mathord\vdash}$ is expressible from $\phi^{\mathord\vdash} = \phi \cup \setsm{\mathord\vdash} = \beta^{\mathord\vdash} \cup \setsm{\mathrm p}$.
 
     A pure inferential formula has no atomic propositions in its scope.
 
     An inferential expression is an instance of an inferential formula if it follows from uniform substitution of all propositional variables in its scope.
-
-    A rule of inference is a pure inferential formula such that each instance of the formula expresses a valid inference.
 \end{dfn}
 
-Note that not every inferential expression is a valid inference, nor every inferential formula a rule of inference. However, postulating or deriving certain properties and rules of inference allows us to determine all valid inferences.
+\begin{dfn}
+    A rule of inference is a pure inferential formula of which every instance expresses a valid inference.
+\end{dfn}
 
-The first such property ensures that inference is structural, so no set of propositions is privileged.
+Note that the premises in any rule of inference are finite.
 
-\begin{prop}[Universality]
-    If $\mathcal E \infers P$ then $\mathcal E(Q \setminus a) \infers P(Q \setminus a)$ where $Q$ is any proposition and $a$ any atomic proposition.
+Note that not every inferential expression is a valid inference, nor every pure inferential formula a rule of inference. However, postulating certain primitive rules and properties of inference allows us to determine all valid inferences.
+
+\begin{frule}[Modus ponens]
+    $$\begin{aligned}p \rightarrow q, \\ p\end{aligned} \infers q$$
+\end{frule}
+
+\begin{prop}[Finite foundation]
+    A set $\mathcal E$ infers a proposition $\mathcal E \infers P$ only if some finite subset $\mathcal D \subseteq \mathcal E$ infers the proposition $\mathcal D \infers P$ such that all finite subsets $\mathcal G \subseteq \mathcal E$ containing the subset $\mathcal D \subseteq \mathcal G$ also infer the proposition $\mathcal G \infers P$.
 \end{prop}
 
-Equivalently, every inference is an instance of some rule of inference, namely by uniform substitution of each atom in the scope of the inference with a variable such that each variable substitutes for only one atom.
-
-\begin{prop}[Transitivity]
-    If $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.
-\end{prop}
+Note that this allows us to infer from infinite sets.
 
 The following property does not hold in adaptive inference systems.
 
@@ -175,9 +182,25 @@ The following property does not hold in adaptive inference systems.
     If $\mathcal E \infers P$ then $\mathcal E \cup \setsm Q \infers P$ for any $Q$.
 \end{prop}
 
-\begin{frule}[Modus ponens]
-    $$\begin{aligned}p \rightarrow q, \\ p\end{aligned} \infers q$$
-\end{frule}
+This means that a finite subset inferring the proposition suffices to infer a proposition from the total set.
+
+The following property allows us to incrementally expand the deductive closure of a set by applying primitive rules of inference to propositions already inferred.
+
+\begin{prop}[Transitivity]
+    If $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.
+\end{prop}
+
+\begin{thm}
+    The deductive closure of a set is deductively closed $\partial\partial\mathcal E = \partial\mathcal E$.
+\end{thm}
+
+This allows us to derive rules of inference. The following property ensures that every rule of inference is derived from a finite set of primitive rules.
+
+\begin{prop}[Finite transition]
+    A set infers a proposition only through a finite succession of instances of primitive rules of inference.
+\end{prop}
+
+It also ensures that every inference is an instance of some rule of inference such that inference is structural, so no set of propositions is privileged.
 
 \subsection{Inferential approach}
 
@@ -191,14 +214,12 @@ The following property allows us to infer over the possibility of inference itse
 
 Hence the subject of hypothesis is sufficient condition for what can be inferred from the extension.
 
-This holds a fortiori for any finite $\varLambda \subset \Phi$ such that $\varLambda \cup \setsm p \infers q$ since it holds for all instances.
-
 Furthermore this entails a familiar property.
 
 \begin{thm}[Linearity of inference]
-    If $\varLambda \infers p$ and $\varLambda \cup \setsm p \infers q$ then $\varLambda \infers q$ for all $\varLambda \subset \Phi$.
+    If $\mathcal E \infers P$ and $\mathcal E \cup \setsm P \infers Q$ then $\mathcal E \infers Q$.
     \begin{proof}
-        From $\varLambda \infers p \then q$ and transitivity of inference.
+        From $\mathcal E \infers P \then Q$ and transitivity of inference.
     \end{proof}
 \end{thm}
 
@@ -225,6 +246,10 @@ The following rule seems all too evident.
 \end{subrule}
 
 It allows us to prove the following theorems.
+
+\begin{thm}
+    $\mathcal E \subseteq \partial\mathcal E$
+\end{thm}
 
 \begin{thm}[Reflexivity of implication]
     $$\theorem p \then p$$
@@ -849,12 +874,10 @@ We introduce the following quantifier by equivalence.
 
 The condition to the weaker universal form forbids that we assume anything about $c$.
 
-\begin{prop}[Universal generalisation]
+\begin{frule}[Universal generalisation]
     Given a constant $c \in \mathbf c$ nowhere in the scope of a sentence $s \in \mathcal S$.
     $$\text{If\;} s \infers \varphi(c) \text{\;then\;} s \infers \univ x \varphi(c)(x \setminus c)\text.$$
-\end{prop}
-
-Note that $\mathcal M \infers \varphi(c)$ does not imply $\mathcal M \infers \univ x \varphi(c)(x \setminus c)$. This does not preclude the following.
+\end{frule}
 
 \begin{lmm}
     Given finite premises $\mathcal M \subset \mathcal S$ such that $c$ is nowhere in $\mathcal M$.
@@ -864,8 +887,6 @@ Note that $\mathcal M \infers \varphi(c)$ does not imply $\mathcal M \infers \un
     \end{proof}
 \end{lmm}
 
-Furthermore we may contrapose into the following.
-
 \begin{thm}[Existential instantiation]
     Given $c$ nowhere in $s$ nor in $\mathcal M$ assumed finite.
     $$\text{If\;} \mathcal M \cup \setsm{\varphi(c)} \infers s \text{\;then\;} \mathcal M \cup \setsm{\exis x \varphi(c)(x \setminus c)} \infers s$$
@@ -874,7 +895,74 @@ Furthermore we may contrapose into the following.
     \end{proof}
 \end{thm}
 
-This is clearly a weaker form of instantiation which avoids inferring an actual instance. This is necessary to avoid $\exis x \varphi(x) \infers \univ x \varphi(x)$.
+This is clearly a weaker form of instantiation which avoids inferring an actual instance. This ensures $\exis x \varphi(x) \nvdash \univ x \varphi(x)$.
+
+\begin{dfn}[Bound quantifiers]
+    \begin{align}
+         & \theorem \left( \univ{\varphi(x)} \gamma(x) \right)  \eqv \left( \univ x \varphi(x) \then \gamma(x) \right) \\
+         & \theorem \left( \exis{\varphi(x)} \gamma(x) \right)  \eqv \left( \exis x \varphi(x) \conj \gamma(x) \right)
+    \end{align}
+\end{dfn}
+
+\begin{crl}
+    $\univ{\varphi(x)}\gamma(x), \exis x \varphi(x) \infers \exis{\varphi(x)} \gamma(x)$
+\end{crl}
+
+\begin{crl}
+    $\neg\univ{\varphi(x)}\gamma(x) \infers \exis{\varphi(x)}\neg\gamma(x)$
+\end{crl}
+
+\begin{thm}[Universal hypothesis]
+    Given $c$ nowhere in $\mathcal M$ finite.
+    $$\text{If\;}\mathcal M \cup \setsm{\varphi(c)} \infers \gamma(c) \text{\;then\;} \mathcal M \infers \univ{\varphi(x)} \gamma(x)\text{.}$$
+\end{thm}
+
+The ubiquitous equality predicate is often introduced as a rule of inference inherent to the logic.
+
+\begin{frule}[Equality]
+    $$a = b \infers \varphi(a) \eqv \varphi(b)$$
+\end{frule}
+
+This allows us to introduce a special form of existence.
+
+\begin{dfn}[Unique existence]
+    $$\begin{aligned}
+            \exis{!x} \varphi(x)         & \equiv \exis{\varphi(x)} \univ{\varphi(y)} y = x \\
+            \exis{!\varphi(x)} \gamma(x) & \equiv \exis{!x} \varphi(x) \conj \gamma(x)
+        \end{aligned}$$
+\end{dfn}
+
+We may also embed the notion of a function into the logic.
+
+\begin{dfn}
+    A binary relation $\rho_f$ may define a dependent variable $y$ as a function $f$ of an independent variable $x$.
+
+    The domain of the function $f$ is restricted by property $\delta$, the codomain by property $\kappa$.
+    If $\delta$ is $\kappa$, the function is known as an algebraic operation.
+    $$\begin{aligned}
+            f: \delta \longrightarrow \kappa & \equiv \univ x \univ y f(x) = y\; \then \;\univ {y'} f(x) = y' \;\then\; y' = y \\
+            \varphi(f(a))                    & \equiv \delta(a) \then \exis{\kappa(y)} \rho_f(a,y) \conj \varphi(y)
+        \end{aligned}$$
+
+
+    A map $f: \delta \longmapsto \kappa \equiv f: \delta \longrightarrow \kappa \conj \univ x \exis y f(x) = y$ is a function defined over its entire domain. Note that this is equivalent to $f: \delta \longmapsto \kappa \equiv \univ x \exis{!y} f(x) = y$.
+
+    A function is surjective: any variable in the codomain depends on some domain variable $\univ{\kappa(y)}\exis{\delta(x)} y = f(x)$.
+
+    A function is injective $f: \delta \longleftrightarrow \kappa \equiv f: \delta \longrightarrow \kappa \conj f^{-1}: \kappa \longrightarrow \delta$ where the inverse $f^{-1}(b) = a \equiv b = f(a)$. Note $\univ x \univ{x'} f(x) = f(x') \then x' = x$ suffices.
+
+    Note that an injective function is surjective if the inverse is a map $f^{-1}: \kappa \longmapsto \delta$. An injective map is said to be bijective only if it is surjective.
+\end{dfn}
+
+The reflection property $\iota \equiv x = x$ lifts a restriction on the domain or codomain by unbinding the respective quantifier. In particular, there are algebraic operations that do not restrict their domain $f: \iota \longrightarrow \iota \equiv \univ x \exis{!y} \rho_f(x, y)$. Note that the identity function $f_{\mathord=}$ defined by the identity relation $y = x$ is such a universal operation $\theorem f_{\mathord=}: \iota \longrightarrow \iota$.
+
+\begin{dfn}
+    A multivariate function $f$ of $n \in \mathbb N$ variables $x_i \in x^n$, each from a domain defined by property $\delta_i \in \delta^n$, is defined by a relation $\rho_f$ of order $n+1$.
+    $$\begin{aligned}
+            f: \delta^n \longrightarrow \kappa & \equiv \forall_{i=1}^n{\delta_i(x_i)}\; \exis{!\kappa(y)} \rho_f(\dots x^n, y) \\
+            \varphi(f(c^n))                    & \equiv \univ{\kappa(y)} \rho_f(\dots c^n, y) \then \varphi(y)
+        \end{aligned}$$
+\end{dfn}
 
 \section{Semantics}
 
@@ -893,20 +981,20 @@ This is clearly a weaker form of instantiation which avoids inferring an actual 
 
     The constant codomain $u(\mathbf c) \subseteq \mathrm U$ is the set of all objects $\mathrm o \in \mathrm U$ which were assigned $\mathrm o = u(c) \in u(\mathbf c)$ from some constant $c \in \mathbf c$.
 
-    Each constant $c_i \in c^n$ in an $n$-tuple $c^n \in \mathbf c^n$ may be assigned $u(c_i) = u(c^n)_i$ to form an $n$-tuple $u(c^n) \in u(\mathbf c)^n$ from the constant codomain. We agree that $u(\mathbf c)^0 = \setsm{\emptyset}$. Note that $\emptyset \times S = \emptyset$ and $\setsm\emptyset \times S = S$ for any set $S$.
+    Each constant $c_i \in c^n$ in an $n$-tuple $c^n \in \mathbf c^n$ may be assigned $u(c_i) = u(c^n)_i$ to form an $n$-tuple $u(c^n) \in u(\mathbf c)^n \subseteq \mathrm U^n$ of objects from the constant codomain. We agree that $u(\mathbf c)^0 = \mathrm U^0 = \setsm{\emptyset}$ such that $u^0 = \emptyset$.
 
     We may suffice with $r(P) = r^n(P)$ to denote the assignment of a predicate $P \in \mathbf P^n$ of order $n$.
 \end{dfn}
 
 \begin{dfn}
-    A structure $v, (u, r)$ consists of a model $v: \Phi \longrightarrow \setsm{0,1}$ and an assignment $u$, $r$.
+    A structure $v, (u, r)$ consists of a model $v: \mathcal S \longrightarrow \setsm{0,1}$ and an assignment $u$, $r$.
     \begin{enumerate}
         \item
-              The valuation of constant predicative formulas $\mathrm P \subset \Phi$ is interdeterminate with the assignment.
+              The valuation of predicative sentences $\mathrm P \subset \Phi$ is interdeterminate with the assignment.
               $$v(P(c^n)) = 1 \text{\;only if\;} u(c^n) \in r(P)$$
-              We say that the $n$-tuple of objects $u(c^n)$ satisfies the formula $P$.
+              We say that the $n$-tuple of objects $u(c^n)$ satisfies the predicate $P$.
         \item
-              Quantifying formulas $\mathord\forall \subset \Phi$ are evaluated by universal consensus on the quantified formula between all structures $w, (t, r)$ interdeterminate with the same predicative assignment $r$.
+              Quantifying sentences $\mathord\forall \subset \Phi$ are evaluated by universal consensus on each instance of the quantified formula between all structures $w, (t, r)$ interdeterminate with the same predicative assignment $r$.
               $$v(\univ x \varphi(x)) = 1 \text{\;only if\;} w(\varphi(c)) = 1 \text{\;for\;} \begin{aligned}
                        & \text{all constants\;} c \\
                        &
@@ -921,12 +1009,12 @@ This is clearly a weaker form of instantiation which avoids inferring an actual 
 \end{dfn}
 
 \begin{dfn}
-    We denote the set of sentences with instances of precisely $n$ distinct constants as $\Phi^n$. Note that $\mathcal S = \bigcup_{n \in \mathbb N} \Phi^n$.
-
-    A model $v$ may be interdeterminate with a total assignment $u, R$ such that $R^n \in R$ for each $n \in \mathbb N$ where $R^n: \Phi^n \longrightarrow \wp(u(\mathbf c)^n)$.
-    $$v(\varphi(c^n)) = 1 \text{\;only if\;} u(c^n) \in R(\varphi)$$
+    A model $v$ may be interdeterminate with a total assignment $u, R$ such that $R^n \in R$ for each $n \in \mathbb N$ where $R^n: \Phi^n \longrightarrow \wp(\mathrm U^n)$ assigns a set of $n$-tuples of objects to each sentence $s \in \Phi^n \subset \mathcal S$ with precisely $n$ distinct constants in its scope $s = \varphi(c^n)$ where $c_i \neq c_j$ for all $c_i, c_j \in c^n$.
+    $$v(\varphi(c^n)) = 1 \text{\;only if\;} u(c^n) \in R^n(\varphi)$$
+    Note that $R^n(\varphi(a^n)) = R^n(\varphi(b^n))$ for any $a^n$, $b^n \in u(\mathbf c)^n$ such that $R^n(\varphi)$ defines a set of $n$-tuples of objects that satisfy the formula $\varphi$. Furthermore, $\bigcup_{n \in \mathbb N} \Phi^n = \mathcal S$.
     \begin{enumerate}
-        \item $R^n(\neg\varphi) = R^n(\varphi)^C$ where the complement is over $u(\mathbf c)^n$.
+        \item $R^n(\neg\varphi) = R^n(\varphi)^C$ where the complement is over $\mathrm U^n$.
+
         \item $R^{m+n-k}(\varphi \then \gamma) = \setsm{u \in \mathrm U^{m+n-k} \mathrel\bigg| \begin{aligned}
                            & \left[ u \right]_1^m \in R^m(\neg\varphi)        \\
                           \text{\;or\;}
@@ -934,13 +1022,17 @@ This is clearly a weaker form of instantiation which avoids inferring an actual 
                       \end{aligned} }$ \\
               where common constants are arranged from $m-k+1$ to $m$ if any.
 
-              We define $R^0(\univ x \varphi(x)) = \setsm\emptyset$.
-        \item $R^n(\univ x \varphi(\dots c^n, x))\\ = \left\{ u^n \in u(\mathbf c)^n \bigg| \text{\;all\;} u\in\mathrm U : (\dots u^n, u) \in R^{n+1}(\varphi(\dots c^n, c)) \right\}$
+        \item $R^n(\univ x \varphi(\dots c^n, x)) = \left\{ u^n \in \mathrm U^n \mathrel\bigg| \begin{aligned}
+                       & \text{\;all\;} u \in \mathrm U : \\ &(\dots u^n, u) \in R^{n+1}(\varphi(\dots c^n, c))
+                  \end{aligned}  \right\}$ \\
+              where $(\dots \emptyset, u) = u$ so $v(\univ x \varphi(x)) = 1$ only if $\emptyset = u^0 \in R^0(\univ x \varphi(x)) \subseteq \mathrm U^0 = \setsm\emptyset$ such that $R^1(\varphi(c)) = \mathrm U$.
     \end{enumerate}
 \end{dfn}
 
+
 \begin{lmm}
     A model determines a nonempty set of structures of which it is the model.
+
     \begin{proof}
         Given any $v$ an injective $u$ ensures that any formula in every $\Phi^n$ has $n$ distinctly assigned constants. This determines a total assignment $R$ and thus a predicative assignment $r \subset R$. We show that $v, (u, r)$ is a structure by inductively decomposing and reconstructing between $R$ and $r$ where $v$ is ever the interdeterminate model.
         \begin{enumerate}
@@ -948,7 +1040,7 @@ This is clearly a weaker form of instantiation which avoids inferring an actual 
             \item Similarly from implicational completeness.
             \item Evidently all structures $w, (t, r)$ come to universal consensus on a formula $w(\varphi(c)) = 1$ for all constants $c$ if all objects satisfy it $R(\varphi) = \mathrm U$.
 
-                  Conversely, there must be some object $q \in \mathrm U$ that does not satisfy the formula $q \notin R(\varphi)$ so there must be some structure $w, (t, r)$ assigning $t(c) = q$ some constant $c$ such that $w(\varphi(c)) = 0$. This does not preclude $R(\varphi) = u(\mathbf c)$ so nonetheless $v(\varphi(c)) = 1$ for any $c$.
+                  Conversely, there must be some object $q \in \mathrm U$ that does not satisfy the formula $q \notin R(\varphi)$ so there must be some structure $w, (t, r)$ assigning $t(c) = q$ some constant $c$ such that $w(\varphi(c)) = 0$. This does not preclude $u(\mathbf c) \subseteq R(\varphi)$ so $v(\varphi(c)) = 1$ nonetheless for any $c$.
         \end{enumerate}
     \end{proof}
 \end{lmm}
@@ -958,13 +1050,48 @@ This is clearly a weaker form of instantiation which avoids inferring an actual 
 \end{thm}
 
 \begin{dfn}
+    A theory $\mathcal T \subseteq \mathcal S$ may be:
+    \begin{description}[
+            labelindent=\parindent,
+            before={
+                    \renewcommand\makelabel[1]{(##1).}
+                }
+        ]
+        \item[$\omega$-consistent] If $\exis x \varphi(x) \in \partial\mathcal T$, then $\varphi(c) \in \partial\mathcal T$ for some $c$.
+        \item[$\omega$-complete] If $\varphi(c) \in \partial\mathcal T$ for all $c$, then $\univ x \varphi(x) \in \partial\mathcal T$.
+    \end{description}
 
 \end{dfn}
 
+Note that consistency follows from $\omega$-consistency if it follows from any theory that is not trivial.
 
+\begin{lmm}
+    A consistent $\omega$-consistent theory $\mathcal T$ which is $\omega$-incomplete: $\varphi(c) \in \partial\mathcal T$ for all $c$ yet $\univ x \varphi(x) \notin \partial\mathcal T$, is incomplete: $\neg\univ x \varphi(x) \notin \partial\mathcal T$.
 
+    \begin{proof}
+        By consistency $\neg\varphi(c) \notin \partial\mathcal T$ for any $c$, so $\exis x \neg\varphi(x) \notin \partial\mathcal T$ by $\omega$-consistency.
+    \end{proof}
+\end{lmm}
 
-\newpage
+\begin{crl}
+    A model is $\omega$-complete only if it is $\omega$-consistent.
+    \begin{proof}
+        Suppose $v$ is $\omega$-inconsistent. Then $v(\exis x \varphi(x)) = 1$ and $v(\varphi(c)) = 0$ so by completeness $v(\neg\varphi(c)) = 1$ for all $c$ yet by consistency $v(\neg\exis x \varphi(x)) = 0$.
+    \end{proof}
+\end{crl}
+
+\begin{crl}
+    A consistent, $\omega$-consistent yet $\omega$-incomplete theory $\mathcal T$ is saturated by a distinct pair of models, one of which is $\omega$-incomplete and thus $\omega$-inconsistent.
+    \begin{proof}
+        Any consistent theory may be saturated by some model, yet by completeness and consistency of any model there must be a saturating pair of models $v, w$ such that $v(\univ x \varphi(x)) = 0 = w(\neg\univ x \varphi(x))$ and $v(\neg\univ x \varphi(x)) = 1 = w(\univ x \varphi(x))$.
+
+        Since $\varphi(c) \in \mathcal T$ so $v(\varphi(c)) = 1$ for all $c$, $v$ is $\omega$-incomplete. We may show its $\omega$-inconsistency independently since $v(\exis x \neg\varphi(x)) = 1$ whereas by consistency $v(\neg\varphi(c)) = 0$ for all $c$.
+    \end{proof}
+\end{crl}
+
+\appendix
+
+\chapter{Arithmetic}
 
 
 \end{document}
