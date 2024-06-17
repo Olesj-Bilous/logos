@@ -184,7 +184,7 @@ The following property does not hold in adaptive inference systems.
 
 This means that a finite subset inferring the proposition suffices to infer a proposition from the total set.
 
-The following property allows us to incrementally expand the deductive closure of a set by applying primitive rules of inference to propositions already inferred.
+The following property allows us to apply rules of inference to propositions already inferred.
 
 \begin{prop}[Transitivity]
     If $\mathcal E \infers P$ for all $P \in \mathcal D$ and $\mathcal D \infers Q$ then $\mathcal E \infers Q$.
@@ -194,13 +194,15 @@ The following property allows us to incrementally expand the deductive closure o
     The deductive closure of a set is deductively closed $\partial\partial\mathcal E = \partial\mathcal E$.
 \end{thm}
 
-This allows us to derive rules of inference. The following property ensures that every rule of inference is derived from a finite set of primitive rules.
+Note that every meaningful application of a rule of inference is marked by the extension of a set of inferred propositions.
+
+This allows us to derive rules of inference by showing that the inference is valid for every instance of the rule. The following property ensures that every rule of inference is derived from a finite succession of primitive rules.
 
 \begin{prop}[Finite transition]
     A set infers a proposition only through a finite succession of instances of primitive rules of inference.
 \end{prop}
 
-It also ensures that every inference is an instance of some rule of inference such that inference is structural, so no set of propositions is privileged.
+It also ensures that every inference is an instance of some rule of inference.
 
 \subsection{Inferential approach}
 
