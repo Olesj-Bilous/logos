@@ -3,6 +3,8 @@
 \usepackage{amssymb}
 \usepackage{enumitem}
 
+\DeclareMathOperator{\plus}{+}
+
 \newcommand{\setsm}[1]{\left\{#1\right\}}
 \newcommand{\given}{\mathrel |}
 
@@ -923,6 +925,10 @@ The ubiquitous equality predicate is often introduced as a rule of inference inh
     $$a = b \infers \varphi(a) \eqv \varphi(b)$$
 \end{frule}
 
+\begin{frule}[Reflexivity of equality]
+    $\theorem c = c$
+\end{frule}
+
 This allows us to introduce a special form of existence.
 
 \begin{dfn}[Unique existence]
@@ -937,31 +943,30 @@ We may also embed the notion of a function into the logic.
 \begin{dfn}
     A binary relation $\rho_f$ may define a dependent variable $y$ as a function $f$ of an independent variable $x$.
 
-    The domain of the function $f$ is restricted by property $\delta$, the codomain by property $\kappa$.
-    If $\delta$ is $\kappa$, the function is known as an algebraic operation.
+    The domain of $f$ is defined by formula $\delta$, the codomain by formula $\kappa$. They consist of all constants $c$ which we may substitute for the variable $x, y$ respectively in the respective formula $\delta(x),\kappa(y)$ to prove the resulting sentence.
     $$\begin{aligned}
             f: \delta \longrightarrow \kappa & \equiv \univ x \univ y f(x) = y\; \then \;\univ {y'} f(x) = y' \;\then\; y' = y \\
             \varphi(f(a))                    & \equiv \delta(a) \then \exis{\kappa(y)} \rho_f(a,y) \conj \varphi(y)
         \end{aligned}$$
 
-
     A map $f: \delta \longmapsto \kappa \equiv f: \delta \longrightarrow \kappa \conj \univ x \exis y f(x) = y$ is a function defined over its entire domain. Note that this is equivalent to $f: \delta \longmapsto \kappa \equiv \univ x \exis{!y} f(x) = y$.
 
-    A function is surjective: any variable in the codomain depends on some domain variable $\univ{\kappa(y)}\exis{\delta(x)} y = f(x)$.
+    A function is surjective $\mathrm{sur}(f)$: any variable in the codomain depends on some domain variable $\univ{\kappa(y)}\exis{\delta(x)} y = f(x)$.
 
     A function is injective $f: \delta \longleftrightarrow \kappa \equiv f: \delta \longrightarrow \kappa \conj f^{-1}: \kappa \longrightarrow \delta$ where the inverse $f^{-1}(b) = a \equiv b = f(a)$. Note $\univ x \univ{x'} f(x) = f(x') \then x' = x$ suffices.
 
-    Note that an injective function is surjective if the inverse is a map $f^{-1}: \kappa \longmapsto \delta$. An injective map is said to be bijective only if it is surjective.
+    Note that an injective function is surjective if the inverse is a map $f^{-1}: \kappa \longmapsto \delta$. An injective map is said to be bijective $\mathrm{bi}(f)$ only if it is surjective.
 \end{dfn}
 
-The reflection property $\iota \equiv x = x$ lifts a restriction on the domain or codomain by unbinding the respective quantifier. In particular, there are algebraic operations that do not restrict their domain $f: \iota \longrightarrow \iota \equiv \univ x \exis{!y} \rho_f(x, y)$. Note that the identity function $f_{\mathord=}$ defined by the identity relation $y = x$ is such a universal operation $\theorem f_{\mathord=}: \iota \longrightarrow \iota$.
+Reflecting equality $\mathrm X \equiv x = x$ lifts any restriction on the domain by unbinding the respective quantifier $\theorem \univ{\mathrm X(x)}\varphi(x) \eqv \univ x \varphi(x)$. Note that the identity function $f_{\mathord=}$ defined by the identity relation $y = x$ is a bijection that restricts neither domain nor codomain $\theorem f_{\mathord=}: \mathrm X \longleftrightarrow \mathrm X$.
 
 \begin{dfn}
-    A multivariate function $f$ of $n \in \mathbb N$ variables $x_i \in x^n$, each from a domain defined by property $\delta_i \in \delta^n$, is defined by a relation $\rho_f$ of order $n+1$.
+    A multivariate map $f$ of $n \in \mathbb N$ variables $x_i \in x^n$, each from a subdomain defined by property $\delta_i \in \delta^n$, is defined by a relation $\rho_f$ of order $n+1$.
     $$\begin{aligned}
-            f: \delta^n \longrightarrow \kappa & \equiv \forall_{i=1}^n{\delta_i(x_i)}\; \exis{!\kappa(y)} \rho_f(\dots x^n, y) \\
-            \varphi(f(c^n))                    & \equiv \univ{\kappa(y)} \rho_f(\dots c^n, y) \then \varphi(y)
+            f: \delta^n \longrightarrow \kappa & \equiv \forall_{i=1}^n{x_i}\; \exis{!y} f(x^n) = y                                           \\
+            \varphi(f(c^n))                    & \equiv \&_{i=1}^n \delta_i(c_i) \then \exis{\kappa(y)} \rho_f(\dots c^n, y) \conj \varphi(y)
         \end{aligned}$$
+    A binary map where both subdomains are equal to the codomain is known as an algebraic operation $f: \kappa^2 \longmapsto \kappa$.
 \end{dfn}
 
 \section{Semantics}
@@ -1093,6 +1098,60 @@ Note that consistency follows from $\omega$-consistency if it follows from any t
 
 \chapter{Arithmetic}
 
+\newcommand{\suc}{\mathrm S}
+
+
+\begin{axm}[Succession]
+    $$\mathrm S: \mathbb N \longmapsto \mathbb N$$
+\end{axm}
+
+\begin{axm}[Addition]
+    $$+: \mathbb N^2 \longmapsto \mathbb N$$
+\end{axm}
+
+\begin{axm}[Term succession]
+    $$m + \mathrm S(n) = \mathrm S(m + n)$$
+\end{axm}
+
+\begin{axm}[Identity element of addition]
+    $$n + 0 = n$$
+\end{axm}
+
+\begin{thm}
+    Standard addition is correct.
+    $$\suc^m(0) + \suc^n(0) = \suc^{m+n}(0)$$
+    \begin{proof}
+        $\suc^m(0) + \suc^n(0) = \suc^{k \leq n}(\suc^m(0) + \suc^{n-k}(0))$.
+    \end{proof}
+\end{thm}
+
+\begin{axm}[Multiplication]
+    $$\times: \mathbb N^2 \longmapsto \mathbb N$$
+\end{axm}
+
+\begin{axm}[Factor succession]
+    $$m \times \mathrm S(n) = m \times n + m$$
+\end{axm}
+
+\begin{axm}[Null element of multiplication]
+    $$n \times 0 = 0$$
+\end{axm}
+
+\begin{thm}
+    Standard multiplication is correct.
+    $$\suc^m(0) \times \suc^n(0) = \suc^{m \times n}(0)$$
+    \begin{proof}
+        $\suc^m(0) \times \suc^n(0) = \suc^m(0) \times \suc^{n-k}(0) + \suc^{\sum_{i=1}^{k} m}(0)$
+    \end{proof}
+\end{thm}
+
+\begin{axm}[Originality]
+    $$0 \neq \suc(n)$$
+\end{axm}
+
+\begin{axm}[Precedence]
+    $$\mathrm S^{-1}: n \neq 0 \longmapsto \mathbb N$$
+\end{axm}
 
 \end{document}
 
