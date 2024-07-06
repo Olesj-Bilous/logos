@@ -1101,24 +1101,46 @@ Note that consistency follows from $\omega$-consistency if it follows from any t
 \newcommand{\suc}{\mathrm S}
 
 
-\begin{axm}[Succession]
+\begin{axm}[Succession] Each number has a single successor.
     $$\mathrm S: \mathbb N \longmapsto \mathbb N$$
 \end{axm}
 
-\begin{axm}[Addition]
-    $$+: \mathbb N^2 \longmapsto \mathbb N$$
+\begin{axm}[Origin] 0 has no predecessor.
+    $$0 \neq \suc(n)$$
 \end{axm}
 
-\begin{axm}[Term succession]
-    $$m + \mathrm S(n) = \mathrm S(m + n)$$
+\begin{axm}[Predecession] Each number except 0 has a single predecessor.
+    $$\mathrm S^{-1}: n \neq 0 \longmapsto \mathbb N$$
+\end{axm}
+
+\begin{dfn}
+    A number $c$ is standard: $c = \suc^n(0)$ for some $n \in \mathbb N$.
+
+    An operation is correct: $o(\suc^m(0), \suc^n(0)) = \suc^{o(m, n)}(0)$.
+\end{dfn}
+
+\begin{thm}
+    None of the numbers preceding the successor of a standard number are its successor.
+    $$\suc^{n}(0) \neq \suc^{i < n}(0)$$
+    \begin{proof}
+        Should $\suc^{n}(0) = \suc^{i < n}(0)$ then $\suc^{n-k}(0) = \suc^{i-k}(0)$. Yet $\suc^{n-i}(0) \neq 0$.
+    \end{proof}
+\end{thm}
+
+\begin{axm}[Addition]
+    $$+: \mathbb N^2 \longmapsto \mathbb N$$
 \end{axm}
 
 \begin{axm}[Identity element of addition]
     $$n + 0 = n$$
 \end{axm}
 
+\begin{axm}[Term succession]
+    $$m + \mathrm S(n) = \mathrm S(m + n)$$
+\end{axm}
+
 \begin{thm}
-    Standard addition is correct.
+    Addition is correct.
     $$\suc^m(0) + \suc^n(0) = \suc^{m+n}(0)$$
     \begin{proof}
         $\suc^m(0) + \suc^n(0) = \suc^{k \leq n}(\suc^m(0) + \suc^{n-k}(0))$.
@@ -1129,29 +1151,161 @@ Note that consistency follows from $\omega$-consistency if it follows from any t
     $$\times: \mathbb N^2 \longmapsto \mathbb N$$
 \end{axm}
 
-\begin{axm}[Factor succession]
-    $$m \times \mathrm S(n) = m \times n + m$$
-\end{axm}
-
 \begin{axm}[Null element of multiplication]
     $$n \times 0 = 0$$
 \end{axm}
 
+\begin{axm}[Factor succession]
+    $$m \times \mathrm S(n) = m \times n + m$$
+\end{axm}
+
 \begin{thm}
-    Standard multiplication is correct.
+    Multiplication is correct.
     $$\suc^m(0) \times \suc^n(0) = \suc^{m \times n}(0)$$
     \begin{proof}
-        $\suc^m(0) \times \suc^n(0) = \suc^m(0) \times \suc^{n-k}(0) + \suc^{\sum_{i=1}^{k} m}(0)$
+        $\suc^m(0) \times \suc^n(0) = \suc^m(0) \times \suc^{n-k}(0) + \suc^{\sum_{i=1}^{k} m}(0)$.
     \end{proof}
 \end{thm}
 
-\begin{axm}[Originality]
-    $$0 \neq \suc(n)$$
+\begin{axm}[Order]
+    $$m \leq n \eqv m = n \disj \suc(m) \leq n$$
 \end{axm}
 
-\begin{axm}[Precedence]
-    $$\mathrm S^{-1}: n \neq 0 \longmapsto \mathbb N$$
-\end{axm}
+\newcommand{\power}{\mathrel\mathrm{power}}
+\newcommand{\fuck}{\mathrel\mathrm{starts}}
+\newcommand{\cunt}{\mathrel\mathrm{ends}}
+\newcommand{\subs}{\mathrel\mathrm{subs}}
+\newcommand{\monos}{\mathrel\mathrm{monos}}
+\newcommand{\const}{\mathrm{const}}
+
+\newcommand{\ord}[1]{\ulcorner#1\urcorner}
+\newcommand{\pred}{\mathrm{pred}}
+\newcommand{\preseq}{\mathrel\mathrm{preseq}}
+\newcommand{\inseq}{\mathrel\mathrm{inseq}}
+\newcommand{\prim}{\mathrm{prime}}
+\newcommand{\divs}{\mathrel|}
+
+\begin{dfn}
+    A sentence in the language of arithmetic is $\sum_0$: all quantifiers in the scope of the sentence are bound such that the binding condition can only be proven for a finite set of standard numbers.
+\end{dfn}
+
+\begin{dfn}
+    All numbers $n$ strictly bounded $n < a$ by a number $a$ may be considered symbols of an alphabet with $a$ symbols.
+    We construct the notion of a string of numbers from any such alphabet, taking $0$ as the empty string representing any string whose only character is $0$.
+    \begin{description}[
+            labelindent=\parindent,
+            before={
+                    \renewcommand\makelabel[1]{(##1).}
+                }
+        ]
+        \item[strict order] $m < n \equiv m \leq n \conj m \neq n$
+        \item[division] $m \divs n \equiv \exis{i \leq n} m \times i = n$
+        \item[prime] $\prim(n) \equiv 1 < n \conj \neg\exis{m < n} 1 < m \conj m \divs n$
+        \item[prime power] $n \power p \equiv 1 < p \conj \univ{m \leq n}(1 < m \conj m \mathrel| n) \then p \mathrel| m$
+        \item[concatenation] $i *_p j = n \equiv \exis{k \leq n} i \times k + j = n \\
+                  \conj k \power p \conj j < k \conj \univ{h < k} h\power p \then h \leq j$
+        \item[endstring] $j \cunt_p n \equiv (j = 0 \then (n = 0 \disj p \mathrel| n)) \conj \exis{i \leq n} i *_p j = n$
+        \item[startstring] $i \fuck_p n \equiv i = n \disj \exis{j < n} i *_p j = n$
+        \item[substring] $m \subs_p n \equiv \exis{i \leq n} i \fuck_p n \conj m \cunt_p i$
+        \item[monostring] $n \monos_p i \equiv \univ{m \leq n} m \subs_p n \then i \subs_p m$
+        \item[string] $\mathrm{string}_p^a(n) \equiv \prim(p) \conj a \leq p \conj \univ{q < p} \prim(q) \then q < a\\
+                  \conj \univ{i < p} i \subs_p n \then i < a$
+    \end{description}
+\end{dfn}
+
+Note that $i * 0 = 0 * i = i$ yet $0 \cunt i * 0$ only if $0 \cunt i$ and $0 \fuck 0 * i$ only if $i = 0$.
+The alphabet with no symbols has no strings, the alphabet with only the $0$ symbol has only the empty string.
+
+
+\begin{dfn}
+    We may designate a certain symbol $\sigma \in \alpha$ from any finite alphabet $\alpha$ as sequence delimiter to construct the notion of sequences nested evenly to any depth $\delta \in \mathbb N$.
+    \begin{description}[
+            labelindent=\parindent,
+            before={
+                    \renewcommand\makelabel[1]{(##1).}
+                }
+        ]
+        \item[sequence] $\mathrm{seq}^{\sigma,\delta}(n) \equiv \neg (\ord\sigma^{\delta + 1} \subs n) \conj \exis{m \leq n} \ord\sigma^\delta * m * \ord\sigma^\delta = n$
+        \item[occurrence] $i \mathrel\mathrm{inseq}^{\sigma,\delta} n \equiv \neg(\ord\sigma^\delta \subs i) \conj \ord\sigma^\delta * i * \ord\sigma^\delta \subs n$
+        \item[precedence] $i \preseq_n j \equiv i \inseq n \conj j \inseq n \conj \exis{m \leq n} m \fuck n \conj j \inseq m \conj \neg(i \inseq m)$
+    \end{description}
+\end{dfn}
+
+Clearly the sequence symbol does not occur in any element of a sequence.
+
+\newcommand{\base}{\mathrm{base}}
+\newcommand{\condition}{\mathrm{condition}}
+\newcommand{\final}{\mathrm{final}}
+
+\begin{dfn}
+    A formation sequence $s$ shows recursively that a relation holds between a $\nu$-tuple of strings $n^\nu$ from an alphabet of $a \leq p$ symbols.
+    $$
+        \varphi(n^\nu) \equiv \begin{aligned}
+             & \final(\sigma, p, f, n^\nu),       \\
+             & \base(\sigma, p, h, n^\nu),        \\
+             & \condition(\sigma, p, h, n^\nu, s)
+        \end{aligned}
+    $$
+    We ensure that the sequence symbol does not belong to the alphabet.
+    \begin{gather*}
+        [\varphi(n^\nu)]_s^a \equiv \exis{p < s} \prim(p) \conj a < \suc^{-1}(p) \conj \mathrm{seq}^{\suc^{-1}(p), 2}(s) \\
+        \conj \exis{f < s} \final(\suc^{-1}(p), p, f, n^\nu) \conj f \inseq s \conj \univ{h < s} h \inseq s                                                                    \\
+        \then \base(\suc^{-1}(p), p, h, n^\nu) \disj \condition(\suc^{-1}(p), p, h, n^\nu, s)
+    \end{gather*}
+
+    The condition may be decomposed into $\kappa$ cases, each of which $\mathrm{case}_{\iota\leq\kappa}$ may cache $\Sigma_\iota$ values to justify its formation against $\Pi_\iota$ precedents.
+    \begin{gather*}
+        \condition(\sigma, p, h, n^\nu, s) \equiv \mathord\vee_{\iota=1}^{\kappa} \forall_{\lambda = 1}^{\Sigma_\iota} h_\lambda < s \then (\mathrm{case}_\iota(\sigma, p, h, n^\nu, h^{\Sigma_\iota})\\
+        \then \exists_{\lambda = 1}^{\Pi_\iota}{g_\lambda < s} \conj g_\lambda \preseq_s h\\
+        \conj \mathrm{formation}_\iota(\sigma, p, h, n^\nu, h^{\Sigma_\iota}, g^{\Pi_\iota}))
+    \end{gather*}
+\end{dfn}
+
+\begin{dfn}
+    We may construct uniform substitution $n = m(j \setminus i)$ by means of a formation sequence.
+    \begin{align*}
+        \mathrm{final}(f, m) \equiv\;           & f = m                       \\
+        \mathrm{base}(h, n, i) \equiv\;         & h = n \conj \neg(i \subs h) \\
+        \mathrm{case}(h, i, k, l) \equiv\;      & h = k * i * l               \\
+        \mathrm{formation}(j, k, l, t) \equiv\; & t = k * j * l
+    \end{align*}
+\end{dfn}
+
+Note the order of formation whereby $n$ is base and $m$ final. This permits $j$ to occur in $m$ and ensures the unbroken chain of substitution from $m$ to $n$.
+
+\begin{dfn}
+    We may represent constants as well as any predicate $\rho$ of order $\delta$.
+    \begin{description}[
+            labelindent=\parindent,
+            before={
+                    \renewcommand\makelabel[1]{(##1).}
+                }
+        ]
+        \item[zero constant] $\mathrm{zero}(n) \equiv n = \ord{\mathrm c}$
+        \item[constant] $\const(n) \equiv \mathrm{zero}(n) \disj \exis{m < n} n = \ord {\mathrm c} * m \conj m \monos \ord'$
+        \item[variable] $\mathrm{var}(n) \equiv n = \ord{\mathrm x} \disj \exis{m < n} n = \ord {\mathrm x} * m \conj m \monos \ord'$
+        \item[predicative formula] $\pred^{\rho, \delta}(n) \equiv \mathord\exists_{\iota = 1}^\delta i_\iota \leq n\; \&_{\iota = 1}^\delta (\const(i_\iota) \disj \mathrm{var}(i_\iota))
+                  \\\conj n = \ord\rho * \ord( * (*_{\iota = 1}^\delta i_\iota * (\iota \neq \delta \mathrel{\&\&} \ord{,})) * \ord)$
+    \end{description}
+    Then there is a formation sequence for well formed formulas.
+    \begin{align*}
+        \mathrm{base}(h) \equiv\;               & \mathord\vee_{\iota=1}^{|\pi|} \pred^{\pi_\iota, \mathrm{order}(\pi_\iota)}(h) \\
+        \mathrm{case}_1(h, i, j) \equiv\;       & h = \ord{\rightarrow} * \ord( * i * \ord, * j * \ord)                          \\
+        \mathrm{case}_2(h, i) \equiv\;          & h = \ord{\neg} * \ord( * i * \ord)                                             \\
+        \mathrm{case}_3(h, m, c, x, n) \equiv\; & \const(c) \conj c \subs m \conj \mathrm{var}(x) \conj \neg(x \subs m)          \\
+                                                & \conj n = m(x \setminus c) \conj h = \ord{\forall} * x * \ord( * n * \ord)
+    \end{align*}
+\end{dfn}
+
+\begin{dfn}
+    We may construct exponentiation by means of a formation sequence.
+    \begin{align*}
+        \mathrm{final}(\sigma, p)     \equiv\;          & m *_p \sigma *_p n                                                  \\
+        \mathrm{base}(\sigma, p, h)            \equiv\; & h = 0 *_p \sigma *_p \suc(0)                                        \\
+        \mathrm{case}(h, i, l)\equiv\;                  & h = i *_p \sigma *_p l                                              \\
+        \mathrm{formation}(i, l, g) \equiv\;            & \exis{k < g} g = \suc^{-1}(i) *_p \sigma *_p l \conj l = k \times b
+    \end{align*}
+\end{dfn}
 
 \end{document}
 
