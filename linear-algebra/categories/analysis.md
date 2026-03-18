@@ -183,11 +183,11 @@ Since $f$ is continuous over $I$ its values are bounded and closed there. Moreov
 #### Mean value theorem
 
 There is a $\xi\in I$ such that
-$$ f'(\xi) = \frac{f(b)-f(a)}{b-a}. $$
+$$ f'(\xi) = \frac{f(b)-f(a)}{b-a} $$.
 In the light of the fundamental theorem this can also be expressed as
-$$ \int_a^bf'(t)dt = (b-a)f'(\xi). $$
+$$ \int_a^bf'(t)dt = (b-a)f'(\xi) $$.
 Consider
-$$ g(x) = f(x)-f(a) - \frac{x-a}{b-a}(f(b)-f(a)). $$
+$$ g(x) = f(x)-f(a) - \frac{x-a}{b-a}(f(b)-f(a)) $$.
 Then $g(a) = g(b) = 0 = g'(\xi)$ for some $\xi\in I$.
 ___
 Consider $f$ differentiable $m+1$ times over $I = [c,x]$.
@@ -256,7 +256,7 @@ $$ P_{k\leq m}^c(x) = \sum_{|\alpha|\leq k} T_\alpha^c(x, 0) $$
 Evidently $u_\alpha(\lambda) = T_\alpha^{s(\lambda)}(x, \lambda) = (1-\lambda)^{|\alpha|}T_\alpha^c(x, \lambda)$ since $x - s(\lambda) = (1 - \lambda)\mathbf v$.
 This differentiates to $$
     u'_\alpha(\lambda) = \sum_{i=1}^n \frac {-|\alpha|} {1-\lambda}u_\alpha(\lambda) + \frac {\alpha_i+1} {1-\lambda}u_{\partial_i\alpha}(\lambda)
-$$ where $(\partial_i \alpha)_{j\neq i} = \alpha_i$ and $(\partial_i \alpha)_i = \alpha_i+1.$
+$$ where $(\partial_i \alpha)_{j\neq i} = \alpha_i$ and $(\partial_i \alpha)_i = \alpha_i+1$.
 Hence $p(\lambda) = \sum_{|\alpha|\leq k} u_\alpha(\lambda)$ differentiates to $$
     p'(\lambda) = \sum_{|\alpha| = k + 1} \frac {k+1} {1-\lambda}u_{\alpha}(\lambda)
 $$
