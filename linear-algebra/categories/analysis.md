@@ -240,7 +240,11 @@ $$g'(\lambda) = \nabla f(s(\lambda)) \cdot \mathbf v$$
 
 $$ = \sum_{i=1}^n v^i\frac{\partial f(s(\lambda))}{\partial s^i}$$
 
-We introduce $\alpha \in \mathbb N^n$ and denote $|\alpha| = \sum_{i=1}^n \alpha_i$.
+Then we may consider $B^k = \set{\beta \in \mathbb N^k |1 \leq \beta_i \leq n \text{\ for all\ }i \leq k}$  where $k \leq m + 1$.
+
+$$ g^{(k)}(\lambda) = \sum_{\beta \in B^k} \left(\prod_{i=1}^k v^{\beta_i} \frac{\partial}{\partial s^{\beta_i}}\right)f(s(\lambda))$$
+
+If the partial derivatives commute we may simplify. We introduce $\alpha \in \mathbb N^n$ and denote $|\alpha| = \sum_{i=1}^n \alpha_i$.
 
 ###### Multivariate Taylor term
 

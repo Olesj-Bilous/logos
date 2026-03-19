@@ -1262,7 +1262,7 @@ Clearly the sequence symbol does not occur in any element of a sequence.
 \end{dfn}
 
 \begin{dfn}
-    We may construct uniform substitution $n = m(j \setminus i)$ by means of a formation sequence.
+    We may construct uniform substitution $[n = m(j \setminus i)]_s$ by means of a formation sequence.
     \begin{align*}
         \mathrm{final}(f, m) \equiv\;           & f = m                       \\
         \mathrm{base}(h, n, i) \equiv\;         & h = n \conj \neg(i \subs h) \\
@@ -1271,7 +1271,7 @@ Clearly the sequence symbol does not occur in any element of a sequence.
     \end{align*}
 \end{dfn}
 
-Note the order of formation whereby $n$ is base and $m$ final. This permits $j$ to occur in $m$ and ensures the unbroken chain of substitution from $m$ to $n$.
+Note the peculiar order of formation whereby $n$ is base and $m$ final.
 
 \begin{dfn}
     We may represent constants as well as any predicate $\rho$ of order $\delta$.
@@ -1284,10 +1284,10 @@ Note the order of formation whereby $n$ is base and $m$ final. This permits $j$ 
         \item[zero constant] $\mathrm{zero}(n) \equiv n = \ord{\mathrm c}$
         \item[constant] $\const(n) \equiv \mathrm{zero}(n) \disj \exis{m < n} n = \ord {\mathrm c} * m \conj m \monos \ord'$
         \item[variable] $\mathrm{var}(n) \equiv n = \ord{\mathrm x} \disj \exis{m < n} n = \ord {\mathrm x} * m \conj m \monos \ord'$
-        \item[predicative formula] $\pred^{\rho, \delta}(n) \equiv \mathord\exists_{\iota = 1}^\delta i_\iota \leq n\; \&_{\iota = 1}^\delta (\const(i_\iota) \disj \mathrm{var}(i_\iota))
+        \item[predicative formula] $\pred^{\rho, \delta}(n) \equiv \mathord\exists_{\iota = 1}^\delta i_\iota \leq n\; \&_{\iota = 1}^\delta \const(i_\iota)
                   \\\conj n = \ord\rho * \ord( * (*_{\iota = 1}^\delta i_\iota * (\iota \neq \delta \mathrel{\&\&} \ord{,})) * \ord)$
     \end{description}
-    Then there is a formation sequence for well formed formulas.
+    Then there is a formation sequence for well formed formulas $[\mathrm{wff}(n)]_s$.
     \begin{align*}
         \mathrm{base}(h) \equiv\;               & \mathord\vee_{\iota=1}^{|\pi|} \pred^{\pi_\iota, \mathrm{order}(\pi_\iota)}(h) \\
         \mathrm{case}_1(h, i, j) \equiv\;       & h = \ord{\rightarrow} * \ord( * i * \ord, * j * \ord)                          \\
@@ -1298,14 +1298,68 @@ Note the order of formation whereby $n$ is base and $m$ final. This permits $j$ 
 \end{dfn}
 
 \begin{dfn}
-    We may construct exponentiation by means of a formation sequence.
+    We may construct exponentiation by means of a formation sequence $[b^m = n]_s^n$.
     \begin{align*}
-        \mathrm{final}(\sigma, p)     \equiv\;          & m *_p \sigma *_p n                                                  \\
+        \mathrm{final}(\sigma, p, f)     \equiv\;       & f = m *_p \sigma *_p n                                              \\
         \mathrm{base}(\sigma, p, h)            \equiv\; & h = 0 *_p \sigma *_p \suc(0)                                        \\
         \mathrm{case}(h, i, l)\equiv\;                  & h = i *_p \sigma *_p l                                              \\
         \mathrm{formation}(i, l, g) \equiv\;            & \exis{k < g} g = \suc^{-1}(i) *_p \sigma *_p l \conj l = k \times b
     \end{align*}
 \end{dfn}
+
+\newcommand{\diag}{\mathrel{\mathrm{diag}}}
+
+\begin{dfn}
+    Ordinal.
+
+    $[\varphi(\overline n)]_s \equiv \exis{m < s}\exis{k < m}\exis{i < k} [k = p^n]_s \conj i \monos \ord{'}\\
+        \conj m = \ord{\mathrm c} \times k + i \conj \varphi(m)$
+
+    Diagonal.
+    $$[d \mathrel{\mathrm{diag}} n]_s \equiv [d = n(\overline n \setminus x)]_s$$
+
+    Any expression from the numerised logical alphabet corresponds to a  number $\nu$.
+    $$\ord{d \diag x} \equiv \suc^\nu(0)$$
+\end{dfn}
+
+\begin{lmm}
+    $$d = \ord{d \diag \ord{d \diag x}} \eqv d \diag \ord{d \diag x}$$
+    $$d = \ord{\neg(d \diag \ord{\neg(d \diag x)})} \eqv d \diag \ord{\neg(d \diag x)}$$
+\end{lmm}
+
+\begin{dfn}
+    $[\mathrm{pinstance}(n)]_s$
+    \begin{align*}
+        \mathrm{final}(f) \equiv\;              & \mathrm{paxiom}(f)                                                              \\
+        \mathrm{base}(h, n) \equiv\;            & h = n \conj \univ{i \leq h} i \subs h \then \neg(\ord{\mathrm p} \fuck i)       \\
+        \mathrm{case}(h, i, k, l) \equiv\;      & h = k * \ord {\mathrm p} * i * l \conj i \monos \ord' \conj \neg(\ord' \fuck l) \\
+        \mathrm{formation}(i, k, l, g) \equiv\; & \exis{f < g} \mathrm{wff}(f) \conj g = h(f \setminus \ord {\mathrm p} * i)
+    \end{align*}
+    \begin{align*}
+        [\mathrm{axiom}(n)]_s \equiv\; &
+    \end{align*}
+    $[\mathrm{theorem}(n)]_s$
+    \begin{align*}
+        \mathrm{case}(q)                            \equiv\; & q = q                                                 \\
+        \mathrm{formation}(p, r) \equiv\;                    & r = \ord{\rightarrow} * \ord( * p * \ord, * q * \ord)
+    \end{align*}
+\end{dfn}
+
+\begin{thm}
+    \begin{equation*}
+        \mathcal Q \infers S \text{\;only if\;} \mathcal Q \infers \mathrm{theorem}(\ord{S})
+    \end{equation*}
+\end{thm}
+
+\begin{dfn}
+    $$
+        G(x) \equiv \exis g  g \diag x \conj \neg \mathrm{theorem}(g)
+    $$
+\end{dfn}
+
+\begin{thm}
+    $$G(\ord{G(x)}) \eqv $$
+\end{thm}
 
 \end{document}
 

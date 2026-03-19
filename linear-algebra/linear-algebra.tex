@@ -61,7 +61,7 @@
 \newcommand{\rveci}[1][i]{\rvecr[#1]{a}}
 
 % coordinate vectors
-\newcommand{\cvec}[2]{{#1}^{#2}}
+\newcommand{\cvec}[2]{{#1}_{#2}}
 
 \newcommand{\cveca}[2][a]{\cvec{#2}{\vecrow[#1]}}
 
@@ -71,7 +71,7 @@
 \newcommand{\cvecvv}[1][v]{\cvecc{#1}}
 
 % coordinates
-\newcommand{\vcord}[3]{{#1}_{#2}^{#3}}
+\newcommand{\vcord}[3]{{#1}^{#2}_{#3}}
 
 \newcommand{\vcorda}[3][a]{\vcord{#2}{#3}{\vecrow[#1]}}
 \newcommand{\vcordai}[2][i]{\vcorda{#2}{#1}}
@@ -268,67 +268,67 @@
 \end{csq}
 
 \begin{dfn}
-    De lineaire combinatie van een rij vectoren $\rveci \in \vecrow \in \vecspacen$ volgens een kolom coëfficiënten $\vcordvia \in \cvecva \in \mathbb{R}^n$
-    schaalt elke vector in de rij met de respectieve coëfficiënt in de kolom en somt over deze schalen.
+    De lineaire combinatie van een rij vectoren $\rveci \in \vecrow \in \vecspacen$ volgens een kolom coëfficiënten $\Lambda^i \in \Lambda \in \mathbb{R}^n$
+    schaalt elke vector in de rij met de respectieve coëfficiënt uit de kolom en somt over de geschaalde vectoren.
     \begin{align*}
-        \vecrow \cvecva
+        \vecrow \Lambda
          & =
         \begin{pmatrix}
             \rveci[1], \ldots, \rveci[n]
         \end{pmatrix}
         \begin{pmatrix}
-            \vcordvia[1] \\
+            \Lambda^1 \\
             \vdots       \\
-            \vcordvia[n]
+            \Lambda^n
         \end{pmatrix}
-        \\ & = \sum_i^n \vcordvia \rveci
-        \\ & = \vcordvia[1] \rveci[1] + \ldots + \vcordvia[n] \rveci[n]
+        \\ & = \sum_i^n \Lambda^i \rveci
+        \\ & = \Lambda^1 \rveci[1] + \ldots + \Lambda^n \rveci[n]
     \end{align*}
 \end{dfn}
 
 \begin{csq}
-    Zo is elke lineaire combinatie van vectoren $\rveci \in \vecspace$ ook een vector $\vecrow \cvecva = \vvec \in \vecspace$.
+    Zo is elke lineaire combinatie van vectoren $\rveci \in \vecspace$ ook een vector $\vecrow \Lambda = \vvec \in \vecspace$.
 \end{csq}
 
 \begin{dfn}
-    De schaal van een kolom coëfficiënten $v_i \in \vvec \in \realn$ is de kolom $\vvec[w] \in \realn$ met de schalen van de respectieve coëfficiënten ${w}_i = \lambda {v}_i$.
+    De schaal van een kolom coëfficiënten $v^i \in \vvec \in \realn$ is de kolom $\vvec[w] \in \realn$ met de schalen van de respectieve coëfficiënten ${w}^i = \lambda {v}^i$.
     \begin{align*}
         \lambda \vvec =
         \lambda
         \begin{pmatrix}
-            v_1    \\
+            v^1    \\
             \vdots \\
-            v_n
+            v^n
         \end{pmatrix}
         =
         \begin{pmatrix}
-            \lambda v_1 \\
+            \lambda v^1 \\
             \vdots      \\
-            \lambda v_n
+            \lambda v^n
         \end{pmatrix}
     \end{align*}
 \end{dfn}
 
 \begin{dfn}
-    De som van coëfficiëntkolommen $\vvec[u], \vvec \in \realn$ is de kolom $\vvec[w] \in \realn$ met de sommen van de respectieve coëfficiënten ${w}_i = {u}_i + {v}_i$.
+    De som van coëfficiëntkolommen $\vvec[u], \vvec \in \realn$ is de kolom $\vvec[w] \in \realn$ met de sommen van de respectieve coëfficiënten ${w}^i = {u}^i + {v}^i$.
     \begin{align*}
         \vvec[u] + \vvec =
         \begin{pmatrix}
-            u_1    \\
+            u^1    \\
             \vdots \\
-            u_n
+            u^n
         \end{pmatrix}
         +
         \begin{pmatrix}
-            v_1    \\
+            v^1    \\
             \vdots \\
-            v_n
+            v^n
         \end{pmatrix}
         =
         \begin{pmatrix}
-            u_1 + v_1 \\
+            u^1 + v^1 \\
             \vdots    \\
-            u_1 + v_n
+            u^n + v^n
         \end{pmatrix}
     \end{align*}
 \end{dfn}
@@ -340,47 +340,46 @@
 Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. De coëfficiënten heten dan componenten.
 
 \begin{dfn}
-    De vectorrij $A \in \realn[m \times n]$ met $n$ kolomvectoren $A_{j} \in \realn[m]$ noemt men een matrix.
+    De vectorrij $A \in \realn[m \times n]$ met $n$ kolomvectoren $A_{i} \in \realn[m \times 1]$ noemt men een matrix.
 
-    Evenwel vormt de matrix $A$ ook een vectorkolom met $m$ rijvectoren $A^i \in \realn$.
+    Evenwel vormt de matrix $A$ ook een vectorkolom met $m$ rijvectoren $A^j \in \realn[1 \times n]$.
 
-    De gemene component tussen $A_j$ en $A^i$ noemt men een element van de matrix, geschreven $a_{ij}$.
+    De gemene component tussen $A_i$ en $A^j$ noemt men een element van de matrix, geschreven $A_i^j$.
 \end{dfn}
 
 \begin{dfn}
-    Transpositie $A^T \in \realmx[m]{n}$ spiegelt een matrix $A \in \realmxn$ om de diagonaal $a^T_{ij} = a_{ji}$ zodat rijen kolommen worden $(A^T)_j = (A^j)^T$ en vice versa.
+    Transpositie $A^T \in \realmx[m]{n}$ spiegelt een matrix $A \in \realmxn$ om de diagonaal $(A^T)_i^j = A_j^i$ zodat rijen kolommen worden $(A^T)_i = (A^i)^T$ en vice versa.
 \end{dfn}
 
 \begin{csq}
-    Herhaalde lineaire combinaties van een vectorrij $\vecrow \in \vecspacen[m]$ volgens de kolomvectoren $B_i$ van een matrix $B \in \realmxn$ vormen een vectorrij $\vecrow[b] \in \vecspacen$.
+    Herhaalde lineaire combinaties van een vectorrij $\vecrow \in \vecspacen[m]$ volgens de kolomvectoren $B_i \in \realn[m \times 1]$ van een matrix $B \in \realmxn$ vormen een vectorrij $\vecrow[b] \in \vecspacen$.
 \end{csq}
 
 \begin{dfn}
-    Bovenstaande operatie noemen we de lineaire transformatie van $\vecrow$ volgens $B$.
-    \begin{equation*}
-        \vecrow B = \vecrow[b]
-    \end{equation*}
-\end{dfn}
-
-\begin{dfn}
-    De matrix die een vectorrij op zichzelf afbeeldt noemen we de identiteitsmatrix $I_n \in \realnxn$ zodat $\vecrow I_n = \vecrow$.
-
-    Een kolom van deze matrix $s_j: \{i \in \mathbb N|i\leq n\}\longrightarrow\{0,1\}$ selecteert de respectieve vector uit de rij $\rveci[j]$ omdat het element $s_j(i) = 1$ enkel als $i = j$.
+    Bovenstaande operatie noemen we de (vector)rijtransformatie van $\vecrow$ volgens $B$.
+    \begin{align*}
+        \vecrow B &= \vecrow[b]\\
+        \sum_{j}^{m} \rveci[j] B_i^j &= \rvecr{b}
+    \end{align*}
 \end{dfn}
 
 \begin{csq}
-    De lineaire transformatie van de $m$ kolomvectoren $A_i \in \realn[k]$ van de matrix $A \in \realmx[m]{k}$ volgens de matrix $B \in \realmxn$ bestaat uit de $n$ kolomvectoren $C_j \in \realn[k]$ van de matrix $C \in \realmx[n]{k}$.
+    De rijtransformatie van de matrix $A \in \realmx[m]{k}$ met $m$ kolomvectoren $A_j \in \realn[k \times 1]$ volgens de kolomvectoren $B_i \in \realn[m \times 1]$ van de matrix $B \in \realmxn$ bestaat uit de matrix $C \in \realmx[n]{k}$ met $n$ kolomvectoren $C_i \in \realn[k \times 1]$.
 \end{csq}
 
 \begin{dfn}
     Dit staat ook simpelweg als het matrixproduct bekend.
-    \begin{equation*}
-        AB = C
-    \end{equation*}
+    \begin{align*}
+        AB &= C\\
+        \sum_{j}^{m} A_j B_i^j &= C_i
+    \end{align*}
 \end{dfn}
 
 \begin{csq}
-    Elk van de $k$ rijvectoren $C^h \in \realn$ bestaat anderzijds uit een lineaire combinatie van $m$ rijvectoren $B^i \in \realn$ volgens de rijvector $A^h \in \realn[m]$, oftewel $(AB)^T = B^TA^T$.
+    Elk van de $k$ rijvectoren $C^h \in \realn[1 \times n]$ bestaat anderzijds uit een lineaire combinatie van $m$ rijvectoren $B^j \in \realn[1 \times n]$ volgens de rijvector $A^h \in \realn[1 \times m]$, oftewel $(AB)^T = B^TA^T$.
+    \begin{bewijs}
+        $\sum_{j}^{m} A_j^h B_i^j = C_i^h$ dus $\sum_{j}^{m} A_j^h B^j = C^h$ ofwel $\sum_{j}^{m} (B^T)_j (A^T)_h^j = (C^T)_h$.
+    \end{bewijs}
 \end{csq}
 
 \begin{csq}
@@ -391,12 +390,11 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
     \end{bewijs}
 \end{csq}
 
-\begin{csq}
-    Inverteerbare vierkante matrices $A \in \realnxn$ zijn commutatief inverteerbaar.
-    \begin{bewijs}
-        Weze $AA^{-1}_r = I_n$ in $(AA^{-1}_r)A = A(A^{-1}_rA)$. Hierbij moet $A^{-1}_rA$ echter ook dezelfde identiteitsmatrix $I_n$ zijn.
-    \end{bewijs}
-\end{csq}
+\begin{dfn}
+    De matrix die elke vectorrij op zichzelf afbeeldt noemen we de identiteitsmatrix $I_n \in \realnxn$ zodat $\vecrow I_n = \vecrow$ voor alle $\vecrow \in \vecspacen$.
+
+    Een kolom van deze matrix $(I_n)_i \in \setsm{0,1}^n$ selecteert de respectieve vector $\rveci$ uit de rij omdat het element $(I_n)_i^j = 1$ enkel als $j=i$.
+\end{dfn}
 
 \begin{dfn}
     De spanruimte $span(\vecrow)$ van een vectorrij $\vecrow$ bevat alle linaire combinaties van $\vecrow$.
@@ -404,13 +402,13 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \end{dfn}
 
 \begin{dfn}
-    De spanruimte van de kolomvectoren $A_j$ in een matrix $A$ noemt men de kolomruimte van de matrix.
+    De spanruimte van de kolomvectoren $A_j$ van een matrix $A$ noemt men de kolomruimte van de matrix.
     De spanruimte van de rijvectoren $A^i$ heet de rijruimte.
 \end{dfn}
 
 \begin{csq}
-    Een matrix $A \in \realmxn$ met kolomruimte $\realn[m]$ is rechts inverteerbaar.
-    Met rijruimte $\realn$ is ze links inverteerbaar.
+    Een matrix $A \in \realmxn$ met kolomruimte $\realn[m \times 1]$ is rechts inverteerbaar.
+    Met rijruimte $\realn[1 \times n]$ is ze links inverteerbaar.
     \begin{bewijs}
         De identiteitsmatrices bestaan uit vectoren in de respectieve ruimtes.
     \end{bewijs}
@@ -419,66 +417,71 @@ Vandaar dat men een kolom coëfficiënten doorgaans een kolomvector zal noemen. 
 \begin{thm}
     De spanruimte van een vectorrij is een vectorruimte.
     \begin{bewijs}
-        Uit $\vecrow B = \vecrow[b]$ en $\vecrow[b] \cvecva[b]= \vvec$ volgt $\vecrow B \cvecva[b] = \vvec$.
+        Uit $\vecrow B = \vecrow[b]$ en $\vecrow[b] \Lambda= \vvec$ volgt $\vecrow B \Lambda = \vvec$.
         Hieruit mag blijken dat herhaalde lineaire combinaties de spanruimte niet verlaten.
     \end{bewijs}
 \end{thm}
 
 \section{Vrije delen}
 
-Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \vecspace$ een lineaire combinatie van elke vectorrij $\vecrow \in \vecspacen$ is.
+Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \vecspace$ een lineaire combinatie van elke vectorrij $\vecrow \in \vecspacen$.
 
 \begin{dfn}
     Een vectorrij $\vecrow$ is lineair onafhankelijk of vrij als geen enkele van de vectoren $\vecrow_i \in \vecrow$ een lineaire combinatie is van de overige $\vecrow_{j\neq i} \in \vecrow$.
-    Een dergelijke rij staat ook gekend als een vrij deel.
+
+    Een dergelijke rij staat ook gekend als een vrij deel van de vectorruimte $\vecspace$ als $span(\vecrow) \subseteq \vecspace$.
 \end{dfn}
 
 \begin{lmm}
-    De lineaire combinatie van een vrij deel volgens een kolomvector is enkel de nulvector $\vecrow \cvecvv = \zerovec$ als de kolomvector dat ook is in zijn respectieve ruimte $\cvecvv = 0_n$.
+    De lineaire combinatie van een vrij deel volgens een kolomvector is enkel de nulvector $\vecrow \Lambda = \zerovec$ als de kolomvector dat ook is in zijn respectieve ruimte $\Lambda = 0_n$.
     \begin{bewijs}
-        $-\vcordvia \vecrow_i = \left(\vecrow \without{\rveci}\right)\left(\cvecvv \without{\vcordvia}\right)$.
+        $-\Lambda^i \vecrow_i = \left(\vecrow \without{\rveci}\right)\left(\Lambda \without{\Lambda^i}\right)$.
     \end{bewijs}
 \end{lmm}
 
 \begin{csq}
-    De transformatie van een vrije vectorrij volgens een matrix is vrij als de kolommen van de matrix dat ook zijn. Als de transformatie van een willekeurige vectorrij volgens een matrix vrij is, zijn de kolommen van de matrix dat ook.
+    De transformatie van een vrije vectorrij volgens een matrix is vrij als de kolommen van de matrix dat ook zijn. Sterker nog dan het converse, als de transformatie van een willekeurige vectorrij volgens een matrix vrij is, zijn de kolommen van de matrix dat ook.
     \begin{bewijs}
-        Stel dat $\vecrow[b] = \vecrow B$ lineair afhankelijk is waar $B \in \realmxn$ en $\vecrow \in \vecspacen[m]$ vrij.
-        Dan is er een $\cvecc[b]{0} \neq 0_n$ waaruit $B \cvecc[b]{0} = 0_n$ gezien de vrijheid van $\vecrow$, zodat ook $B$ lineair afhankelijk blijkt.
-        Anderzijds is voor $D\vvec = 0_k$ elke $\vecrow[c] D\vvec = \zerovec$.
+        Stel dat $\vecrow[b] = \vecrow B$ lineair afhankelijk is waar $\vecrow \in \vecspacen[m]$ vrij.
+        Dan is er een $\Lambda \neq 0_n$ waarvoor $\vecrow[b] \Lambda = \zerovec$ waaruit $B \Lambda = 0_m$ gezien de vrijheid van $\vecrow$, zodat ook $B$ lineair afhankelijk blijkt.
+        Anderzijds geldt voor elke $\vecrow[c] \in \vecspacen[k]$ dat $\vecrow[c] D\Gamma = \zerovec$ voor $\Gamma \neq 0_h$ als $D\Gamma = 0_k$.
     \end{bewijs}
 \end{csq}
 
 \begin{csq}
-    Het product van matrices met vrije kolommen heeft vrije kolommen. Als het product van willekeurige matrices vrije kolommen heeft, heeft de rechtermatrix dat ook.
+    De vectorrij van het product van matrices met vrije vectorrijen is vrij. Als de vectorrij van het product van willekeurige matrices vrij is, is de vectorrij van de rechtermatrix in het matrixproduct vrij.
 \end{csq}
 
 \begin{csq}
     Een vrije vectorrij heeft voor elke vector in zijn spanruimte slechts één kolom coëfficiënten.
     \begin{bewijs}
         \begin{align*}
-            \vecrow \vvec              & = \vecrow \vvec[w] \\
-            \vecrow (\vvec - \vvec[w]) & = \zerovec
+            \vecrow \Lambda              & = \vecrow \Gamma \\
+            \vecrow (\Lambda - \Gamma) & = \zerovec
         \end{align*}
     \end{bewijs}
 \end{csq}
 
 \begin{dfn}
-    Vanwege het unieke karakter van deze coëfficiënten noemen we ze de coördinaten van een vector in de spanruimte met betrekking tot de vrije vectorrij.
+    Vanwege het unieke karakter van deze coëfficiënten noemen we ze de coördinaten $\cvecva$ van een vector $\vvec = \vecrow \cvecva = \sum_{i}^{n} \vcordvia \rveci$ met betrekking tot de vrije vectorrij $\vecrow$.
 \end{dfn}
 
 \begin{dfn}
-    Een vrije vectorrij staat gekend als een basis van haar spanruimte.
+    Een vrij deel $\vecrow$ dat voortbrengend is $span(\vecrow) = \vecspace$ staat gekend als een basis voor de vectorruimte $\vecspace$.
+
+    De coördinaten van een alternatieve basis $span(\vecrow[b]) = \vecspace$ ten aanzien van de oorspronkelijke $\vecrow[b] = \vecrow B$ vormen een matrix $B$ gekend als een basistransformatie.
 \end{dfn}
 
-\begin{dfn}
-    De coördinaten van een alternatieve basis ten aanzien van een oorspronkelijke vormen een matrix.
-    Deze heet een basistransformatie.
-\end{dfn}
+\begin{lmm}
+    Basistransformaties zijn commutatief inverteerbaar.
+    \begin{bewijs}
+        Opdat $span(\vecrow) = span(\vecrow[b])$ waar $\vecrow B = \vecrow[b]$ en $\vecrow = \vecrow[b] A$ moet $\vecrow = \vecrow BA$ waar $BA = I_n$ de unieke coördinaten zijn van $\vecrow$ met betrekking tot zichzelf, waar $\abs{\vecrow} = n$. Hetzelfde geldt voor $\vecrow[b] AB = \vecrow[b]$ zodat $AB = I_m$ waar $\abs{\vecrow[B]} = m$.
+    \end{bewijs}
+\end{lmm}
 
-\begin{thm}
+\begin{lmm}
     Als $\vecrow[b]$ vrij wordt voortgebracht $span(\vecrow[b]) \subseteq span(\vecrow)$ uit $\vecrow$ dan bevat $\vecrow[b]$ ten hoogste een gelijk aantal vectoren $\abs{\vecrow[b]} \leq \abs\vecrow$.
-    Als $\abs{\vecrow[b]} = \abs\vecrow$ dan is $\vecrow[b]$ voortbrengend $span(\vecrow[b]) = span(\vecrow)$ en $\vecrow$ vrij.
+    Als $\abs{\vecrow[b]} = \abs\vecrow$ dan is $\vecrow[b]$ voortbrengend $span(\vecrow) \subseteq span(\vecrow[b])$ en $\vecrow$ vrij.
     \begin{bewijs}
         Elke $\vecrow[b]_j$ heeft minstens één definiete coëfficiënt $b_{ij} \in B$ voor een zekere $\vecrow_i$.
         \begin{align*}
@@ -497,14 +500,14 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
         Ware $\vecrow$ nu niet vrij, dan kon ze ingeperkt worden zonder aan de voortbrengendheid te schaden.
         We toonden evenwel juist aan dat een voortbrengend deel niet kleiner kan zijn dan het vrij voortgebrachte.
     \end{bewijs}
-\end{thm}
+\end{lmm}
 
 \begin{csq}
-    Een vectorrij $\vecrow$ van lagere orde $\abs\vecrow < \abs{\vecrow[b]}$ dan een basis $\vecrow[b]$ die haar voortbrengt $span(\vecrow) \subseteq span(\vecrow[b])$ is niet voortbrengend voor de spanruimte van de basis $span(\vecrow) \subset span(\vecrow[b])$.
+    Een vectorrij $\vecrow$ van lagere orde $\abs\vecrow < \abs{\vecrow[b]}$ dan een basis $\vecrow[b]$ is niet voortbrengend voor de spanruimte van de basis $span(\vecrow) \subset span(\vecrow[b])$.
 \end{csq}
 
 \begin{csq}
-    Elk basispaar dat dezelfde vectorruimte voortbrengt $span(\vecrow) = span(\vecrow[b])$ heeft gelijke orde $\abs\vecrow = \abs{\vecrow[b]}$.
+    Elk basispaar voor dezelfde vectorruimte $span(\vecrow) = span(\vecrow[b])$ heeft gelijke orde $\abs\vecrow = \abs{\vecrow[b]}$.
 \end{csq}
 
 \begin{dfn}
@@ -512,33 +515,54 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
 \end{dfn}
 
 \begin{csq}
-    Enkel vierkante matrices kunnen commutatief inverteerbaar zijn.
+    Assymetrische matrices zijn niet commutatief inverteerbaar. Indien rechts inverteerbaar zijn de kolommen korter dan de rijen.
     \begin{bewijs}
         Weze $A \in \realmxn$ met $m < n$ doch $\realn[m]$ voortbrengend.
-        Dan kan $B \in \realmx[m]{n}$ weliswaar $I_m$ vormen uit $A$, maar $A$ kan $\realn$ niet voortbrengen uit $B$ om tot $I_n$ te komen.
+        Dan kan een $B \in \realmx[m]{n}$ weliswaar $AB = I_m$ vormen uit $A$, maar geen enkele $C \in \realmx[m]{n}$ kan $\realn$ voortbrengen uit $A$ zodat $CA \neq I_n$ voor alle $C$.
     \end{bewijs}
 \end{csq}
 
 \begin{csq}
+    Inverteerbare vierkante matrices $A \in \realnxn$ zijn commutatief inverteerbaar.
+    \begin{bewijs}
+        Weze $AB = I_n$ in $(AB)A = A(BA)$. Gelet op $span(I_n) \subseteq span(A)$ en $\abs{I_n} = \abs A$ is $A$ een vrij deel met unieke coördinaten $BA = I_n$ ten aanzien van zichzelf.
+    \end{bewijs}
+\end{csq}
+
+Voor assymetrische matrices is $m = \abs{I_m} < \abs A = n$ zodat $A(BA) = A$ ondanks $BA \neq I_n$.
+
+\begin{csq}
     De volgende zijn gelijkwaardig voor vierkante matrices $A \in \realnxn$:
 
-    - vrijheid van de kolomvectoren
+    - vrijheid van de vectorrij
 
-    - vrijheid van de rijvectoren
+    - vrijheid van de vectorkolom
 
     - de kolomruimte is $\realn$
 
     - de rijruimte is $\realn$
 
-    - inverteerbaarheid
+    - rechts inverteerbaar
+
+    - links inverteerbaar
 \end{csq}
 
 \begin{thm}
-    Basistransformaties vormen een groep over de matrixvermenigvuldiging met de identiteitsmatrix als identiteit: $AA^{-1} = I_n = A^{-1}A$.
+    Inverteerbare vierkante matrices vormen een groep over de matrixvermenigvuldiging met de identiteitsmatrix als identiteit: $AA^{-1} = I_n = A^{-1}A$.
 \end{thm}
 
 \begin{dfn}
     Men noemt deze de algemene lineaire groep $GL_n(\realnums)$ met dimensie $n$ over het reële veld.
+\end{dfn}
+
+\begin{thm}
+    Een matrix is een basistransformatie enkel als de matrix vierkant en inverteerbaar is.
+\end{thm}
+
+\begin{dfn}
+    Een object is invariant indien het niet verandert onder coördinatentransformaties.
+    
+    In eerste instantie eisen we dat vectoren invariant zijn $\vvec = \vecrow \cvecva = \vecrow[b] \cvecva[b]$.
 \end{dfn}
 
 \begin{csq}
@@ -547,8 +571,6 @@ Evenwel bestaan er vectorruimtes $\vecspace$ waar niet elke vector $\vvec \in \v
         Uit $\vecrow B = \vecrow[b]$ en $\vecrow \cvecva= \vvec$ volgt $\vecrow[b] B^{-1} \cvecva = \vvec$ zodat $B^{-1} \cvecva = \cvecva[b]$.
     \end{bewijs}
 \end{csq}
-
-Anderzijds kan een lineaire transformatie bekomen worden door de matrix in te laten werken op de coördinaten.
 
 \section{Genormeerde ruimtes}
 
@@ -673,11 +695,11 @@ Evenwel kunnen wij zonder het normbegrip geen terugkerende projecties uitbouwen,
 \end{csq}
 
 \begin{csq}
-    De vector rechthoekig aan het projectiedoel kan als volgt bepaald worden.
+    De component $\vvec[v]_\perp$ van $v$ rechthoekig $\vvec[v]_\perp \cdot w = 0$ aan $w$ kan als volgt bepaald worden.
     \begin{equation*}
-        \vvec[w]_\perp = \vvec - \frac{\vvec\cdot\vvec[w]}{\vnorm w^2}\vvec[w]
+        \vvec[v]_\perp = \vvec - \frac{\vvec\cdot\vvec[w]}{\vnorm w^2}\vvec[w]
     \end{equation*}
-    Dit volgt uit eerdere theoretische overwegingen doch kan ook rekentechnisch nagegaan worden uit $\vvec[w]_\perp\cdot\vvec[w]$.
+    Dit volgt uit eerdere theoretische overwegingen doch kan ook rekentechnisch nagegaan worden uit $\vvec[v]_\perp\cdot\vvec[w]$.
     Merk op dat men hier desgewenst over een coördinatenrepresentatie beschikt.
 \end{csq}
 
