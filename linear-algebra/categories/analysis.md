@@ -254,19 +254,29 @@ for $|\alpha|\leq m+1$.
 $$ P_{k\leq m}^c(x) = \sum_{|\alpha|\leq k} T_\alpha^c(x, 0) $$
 
 Evidently $u_\alpha(\lambda) = T_\alpha^{s(\lambda)}(x, \lambda) = (1-\lambda)^{|\alpha|}T_\alpha^c(x, \lambda)$ since $x - s(\lambda) = (1 - \lambda)\mathbf v$.
-This differentiates to $$
+This differentiates to 
+
+$$
     u'_\alpha(\lambda) = \sum_{i=1}^n \frac {-|\alpha|} {1-\lambda}u_\alpha(\lambda) + \frac {\alpha_i+1} {1-\lambda}u_{\partial_i\alpha}(\lambda)
-$$ where $(\partial_i \alpha)_{j\neq i} = \alpha_i$ and $(\partial_i \alpha)_i = \alpha_i+1$.
-Hence $p(\lambda) = \sum_{|\alpha|\leq k} u_\alpha(\lambda)$ differentiates to $$
+$$ 
+
+where $(\partial_i \alpha)_{j\neq i} = \alpha_i$ and $(\partial_i \alpha)_i = \alpha_i+1$.
+
+Hence $p(\lambda) = \sum_{|\alpha|\leq k} u_\alpha(\lambda)$ differentiates to 
+
+$$
     p'(\lambda) = \sum_{|\alpha| = k + 1} \frac {k+1} {1-\lambda}u_{\alpha}(\lambda)
 $$
 
-Taking $r(\lambda)=f(x)-p(\lambda)$ we define 
+Taking $r(\lambda)=f(x)-p(\lambda)$ we define
+
 $$d(\lambda) = r(\lambda) - (1-\lambda)^{k+1}r(0)$$
 
 ##### Multivariate Lagrange remainder
 
 $$
     R_k^c(x) = \sum_{|\alpha| = k + 1} T_\alpha^c(x,\xi)
-$$ for some $\xi\in [0,1]$.
+$$ 
+
+for some $\xi\in [0,1]$.
 ___
