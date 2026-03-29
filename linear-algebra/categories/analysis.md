@@ -9,7 +9,7 @@ ____
 
 We introduce the total order relation $a \leq b$.
 
-Define the strict total order $a < b$ as $a \leq b$ and $b \nleq a$.
+Define the strict total order $a \lt b$ as $a \leq b$ and $b \nleq a$.
 Evidently the strict order is irreflexive $a \not\lt a$ and asymmetric: $a \not\lt b$ or $b \not\lt a$.
 
 ###### Totality
@@ -38,15 +38,20 @@ This implies that $-a \lt 0$ only if $0 \lt a$.
 
 - $0\leq ab$ if $0\leq a$ and $0\leq b$
 
-Consider first $(a-a)b = ab + (-a)b$ and $(a-a)(b-b) = -ab + (-a)(-b)$.
-For $a,b \neq 0$ we see that $ab \lt 0$ only if $a \lt 0$ only if $0 \leq b$.
+Consider first $(a-a)b = ab + (-a)b$ and likewise for $a(b-b)$.
+This shows $-ab = (-a)b = a(-b)$.
+Hence $ab \lt 0$  if $0 \lt -a$ and $0 \lt b$ since $0 \lt -ab$. Likewise if $0 \lt a$ and $0 \lt -b$.
+Then consider $-a(b-b) = -ab + (-a)(-b)$. Clearly $ab = (-a)(-b)$.
+Hence $0 \leq ab$ if $a \leq 0$ and $b \leq 0$.
+For $a,b \neq 0$ we see that $0\leq ab$ only if $0\leq a$ only if $0\leq b$. Alternatively, $ab \leq 0$ only if $a \leq 0$ only if $0 \leq b$.
+Should $a \lt b$ then $a - b \lt 0$ hence $ac \leq bc$ only if $0 \leq c$.
 
 ____
 ###### Upper and lower bounds
 
 A nonempty subset $R\subseteq\mathbb R$ with $a,b\in\mathbb R$ has:
 
-- a lower bound $a \in R^\geq$ if $r \geq a$
+- a lower bound $a \in R^\geq$ if $a \leq r$
 - an upper bound $b \in R^\leq$ if $r \leq b$
 
 for all $r\in R$.
@@ -58,7 +63,7 @@ The subset is considered bounded if bounds exist on both sides.
 A nonempty set of bounds at one side of a nonempty subset includes its own bound at the opposite side:
 
 - an infimum $\inf_R \in R^\geq$ such that $a \leq \inf_R$ for all $a\in R^\geq$
-- a supremum $\sup_R \in R^\leq$ such that $b \geq \sup_R$ for all $b\in R^\leq$.
+- a supremum $\sup_R \in R^\leq$ such that $\sup_R \leq b$ for all $b\in R^\leq$.
 
 Note that $R^\geq \cup R \cup \{\ \sup_R\ \}$ is the set of lower bounds of $R^\leq$, where $\sup_R = \inf_{R^\leq}$.
 
@@ -72,7 +77,7 @@ The open interval $\left]a, b\right[ = \left]a,\infty\right[ \cap \left]-\infty,
 
 ###### $\delta$-neighborhood of a point
 
-Given $\delta\in \mathbb R$ where $0 \lt \delta $ the $\delta$-neighborhood $D_\delta(c)$ of $c\in \mathbb R$ consists of all $x \in \mathbb R$ such that $|x-c|<\delta$.
+Given $\delta\in \mathbb R$ where $0 \lt \delta $ the $\delta$-neighborhood $D_\delta(c)$ of $c\in \mathbb R$ consists of all $x \in \mathbb R$ such that $|x-c|\lt\delta$.
 
 Clearly $D_\delta(c) = \left]c-\delta,c+\delta\right[$.
 ___
@@ -117,16 +122,24 @@ $$
 is defined analogously.
 Evidently $u$ converges if $\limsup u = \liminf u$.
 
-A partial row is obtained by omitting elements from a row without affecting its ordering or cardinality.
+A partial row is obtained by omitting elements from a row without affecting its cardinality. Such a row provides elements beyond any index, hence it may converge under suitable conditions.
 
 #### Bolzano Weierstrass theorem
 
 Every bounded row has a convergent partial row.
 
-For any $i$ consider $S_i = \{\ j \ |\ u_j \lt u_i \}$ and $L_i = \{\ j \ |\ u_j \geq u_i \}$. Then define $N_i = S_i$ if $|S_i| \notin \mathbb N$ and $N_i = L_i$ otherwise. Take $M_n = \bigcap_{j\leq n} N_j$.
+For any index $i$ we investigate whether the row element $u_i$ may serve as an upper bound for a partial row $u(S_i)$ where $S_i = \{\ k \ |\ u_k \lt u_i \}$. If not, it may serve as a lower bound for partial row $u(L_i)$ where $L_i = \{\ k \ |\ u_k \geq u_i \}$. Define $N_i = S_i$ if $|S_i| \notin \mathbb N$ and $N_i = L_i$ otherwise. Then take $M_n = \bigcap_{j\leq n} N_j$. We show that $u(M_n)$ the row between the strictest upper and lower bounds up until index $n$ is a partial row.
+
 If either $|S_i|, |S_j| \in \mathbb N$ or $|S_i|, |S_j| \notin \mathbb N$ then $N_i \cap N_j \in \{\ N_i, N_j \ \} $. Should $|S_i| \in \mathbb N$ whereas $|S_j| \notin \mathbb N$ then $S_i \subset S_j$ so $L_i \cap S_j = S_j \setminus S_i$ and $|N_i \cap N_j| \notin \mathbb N$.
-Hence $M_n \notin \mathbb N$ for all $n$. 
-We may now consider $S = \{\ i \in M \ \big|\ |S_i| \notin \mathbb N \ \}$ and $L = \{\ i \in M \ \big|\ |S_i| \in \mathbb N \ \}$ where $M = \{\ i > 0 \ |\ i \in M_{i-1}\ \}$. Evidently $u(S), u(L)$ are monotonic and bounded. If $|S| \in \mathbb N$ then $|L| \notin \mathbb N$ since $|S \cup L| = |M| \notin \mathbb N$.
+Hence $M_n \notin \mathbb N$ for all $n$.
+
+We may now select the index $i$ of those elements $u_i$ which are contained within the strictest upper and lower bounds so far $M = \{\ i > 0 \ |\ i \in M_{i-1}\ \}$. We distinguish between elements that serve as upper bounds $S = \{\ i \in M \ \big|\ |S_i| \notin \mathbb N \ \}$ and those that serve as lower bounds $L = \{\ i \in M \ \big|\ |S_i| \in \mathbb N \ \}$. Evidently $u(S), u(L)$ are monotonic and bounded. If $|S| \in \mathbb N$ then $|L| \notin \mathbb N$ since $|S \cup L| = |M| \notin \mathbb N$.
+
+##### Corrolary
+
+A monotonic row with a convergent partial row is bounded.
+
+The partial row may not grow beyond its limit. Neither may the original row, since it must provide elements to the partial row beyond any finite index.
 ___
 ###### Limit point
 
@@ -170,7 +183,7 @@ A function that is continuous at every point of an interval is said to be contin
 
 A function continuous over a bounded and closed interval is bounded and closed over that interval.
 
-Suppose it is not bounded or not closed over that interval. Then there should be a row of points in the interval for which the function grows monotonically without bound, or without attaining its limit. However, any such row has a partial row that converges to some point in the interval, for which the function must attain a defined limit in order to be continuous.
+Suppose it is not bounded or not closed over that interval. Then there should be a row of points in the interval for which the function grows monotonically without bound, or does not attain its limit. However, any such row has a partial row that converges to some point in the interval, for which the function must attain a defined limit in order to be continuous.
 ___
 Given $f$ differentiable over $I = [a,b]$.
 
@@ -244,7 +257,7 @@ Then we may consider $B^k = \set{\beta \in \mathbb N^k |1 \leq \beta_i \leq n \t
 
 $$ g^{(k)}(\lambda) = \sum_{\beta \in B^k} \left(\prod_{i=1}^k v^{\beta_i} \frac{\partial}{\partial s^{\beta_i}}\right)f(s(\lambda))$$
 
-If the partial derivatives commute we may simplify. We introduce $\alpha \in \mathbb N^n$ and denote $|\alpha| = \sum_{i=1}^n \alpha_i$.
+If the order of partial derivation is irrelevant we may simplify. We introduce $\alpha \in \mathbb N^n$ and denote $|\alpha| = \sum_{i=1}^n \alpha_i$.
 
 ###### Multivariate Taylor term
 
